@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>sydnmc | gds</title>
+    <link rel="stylesheet" type="text/css" href="mainstyle.css">
+    <link rel="icon" href="favicon.ico">
+    <script type="module" src="./js/gds.js" async></script>
+  </head>
+
+  <body>
+    <header>
+      <div class="header">
+        <a class="top-img" href="index-ja_jp.html">
+          <img class="header" src="images/lilacpfp.png" alt="らいらっくのきゅうくらりんリンプロフィール画像">
+        </a>
+        <h1 class="header">yuiyamu</h1>
+        <div class="dropdown" style="margin-left: 1%;">
+          <a class="button-link">
+            <button class="drop-button" id="gds-but" style="cursor: default;">osu!</button>
+          </a>
+          <div class="dropdown-content">
+            <a style="cursor: default; background-color: rgb(142, 142, 148); border-radius: 5px;">自分のgd</a>
+          </div>
+        </div>
+        <a class="translate-button" href="gds-ja_jp.html">&#127760;</a>
+      </div>
+    </header>
+      <p><span style="font-size: 24px">以下はあたしが作った <strong id="num-gds"></strong>のGDSと<strong id="num-wip-gds"></strong>の進行中のgdsのリストです。</span>&#13;
+        <br>注：いくつかのGDはリンクがない場合がある（削除されたから）。<br>
+        最終更新日：2024年10月23日</p>
+      <div class="gd-table-container">
+        <table id="gdtab-kvEUP" class="gdtab">
+            <colgroup>
+                <col style="width: 8%;"/>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="gdtab-top" style="font-size: 13px;">バックグラウンド</th>
+                    <th class="gdtab-top">タイトル - 曲名</th>
+                    <th class="gdtab-top">作者</th>
+                    <th class="gdtab-top">自分のdiff</th>
+                    <th class="gdtab-top">sr</th>
+                    <th class="gdtab-top">終了日</th>
+                    <th class="gdtab-top">bn第1</th>
+                    <th class="gdtab-top">bn第2</th>
+                    <th class="gdtab-top">現状</th>
+                    <th class="gdtab-top"style="font-size: 12px;">東方</th>
+                </tr>
+            </thead>
+            <tbody id="gdtab-start"></tbody>
+        </table>
+    </div>
+    <div id="jp-page"></div>
+  </body>
+</html>

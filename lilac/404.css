@@ -1,0 +1,41 @@
+@font-face { font-family: Kyokasho; src: url('fonts/Kyokasho.ttc')}
+@font-face { font-family: Kyokasho; font-weight: bold; src: url('fonts/KyokashoBold.ttc')}
+@font-face { font-family: YuGothic; src: url('fonts/YuGothic.ttc')}
+@font-face { font-family: OpenSans; src: url('fonts/OpenSans.ttf')}
+
+body {
+    background-color: rgb(40 40 40);
+    font-family: YuGothic, sans-serif;
+}
+
+.header-wrapper {
+    padding: 15px 15px;
+    text-align: center;
+    background-color: rgb(222, 224, 237);
+    border-radius: 10px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 35px;
+}
+
+#image {
+    border-radius: 50%;
+    width: 10%;
+}
+
+h1 {
+    font-family: Kyokasho, sans-serif;
+    font-weight: normal;
+    color: rgb(40 40 40);
+    font-size: 58px;
+    margin-top: 10px;
+}
+
+span {
+    color: rgb(40 40 40);
+}
+
+.dark-text {
+    color: rgb(100, 101, 112);
+}
+
