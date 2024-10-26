@@ -90,7 +90,7 @@ function dateParser(time, isCurrent, fronterTime, isJapanese) {
             timeDisplay = `意識時間は${hours}時間${minutes}分でした`;
             console.log('the fuck');
         } else {
-            timeDisplay = `last awake for ${hours} hours, ${minutes} minutes`;
+            timeDisplay = `last fronted for ${hours} hours, ${minutes} minutes`;
         }
     }
     return timeDisplay;

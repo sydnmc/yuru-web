@@ -80,24 +80,24 @@ span {
 
 .person {
     display: flex;
-    flex: 1;
     border-width: 3px;
     border-style: solid;
     border-color: rgb(65, 54, 75);
     border-radius: 5px;
+    width: 100%;
 }
 
 .person-shine {
     display: flex;
-    flex: 1;
     position: relative;
+    width: 100%;
 }
 .person-shine::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: 5px; 
-    padding: 3px; 
+    padding: 2.5px;
     background: linear-gradient(
         to right,
         #FF498C 20%,
@@ -123,6 +123,10 @@ span {
     }
 }
 
+.person-shine .person-img {
+    margin: 2.5px;
+}
+
 a.person {
     text-decoration: none;
 }
@@ -131,39 +135,49 @@ a.person-shine {
     text-decoration: none;
 }
 
-img.fronter {
-    max-width: 80px;
-    border-radius: 10px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent;
+.person-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2.5px;
+    justify-content: center;
+    margin-bottom: 6px;
 }
 
-img.cur-fronter {
-    max-width: 80px;
-    border-radius: 13px;
-    border-width: 8px;
-    border-style: solid;
-    border-color: transparent;
+.person-img {
+    object-fit: contain;
+    padding: 3px 3px 3px 3px;
 }
 
-span.fronter {
+.person-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.person-text span {
     font-family: Kyokasho, sans-serif;
     font-size: 38px;
     color: white;
     align-self: flex-start;
     padding-top: 5px;
     text-decoration: none;
+    margin-bottom: -25px;
 }
 
-p.fronter {
+.person-text p {
     font-family: YuGothic, sans-serif;
-    position: absolute;
+    align-self: flex-start;
     font-size: 16px;
     color:rgb(180 181 191);
-    text-align: left;
-    padding-left: 90px;
-    margin-top: 50px;
+    margin: 0px;
+}
+
+#time-0 {
+    padding-left: 1px;
+}
+
+#time-1 {
+    padding-left: 5px;
 }
 
 .front-divider {
