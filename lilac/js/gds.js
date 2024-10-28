@@ -1,4 +1,5 @@
 import { colorate } from './osucolorator.js';
+import { generatePageHeader } from './header.js';
 
 function createRows(num) {
     const container = document.getElementById('gdtab-start');
@@ -228,6 +229,8 @@ async function populateRow(i, mapStatus) { //i = row number
         document.getElementById('jp-page').innerHTML = "";
         jp = true;
     } catch { }
+
+    generatePageHeader(jp, "gds");
 
     var curMapStatus = await getMapStatus(jp);
     var wipCount = 0;

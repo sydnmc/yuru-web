@@ -1,11 +1,12 @@
 import { colorate } from './osucolorator.js';
+import { generatePageHeader } from './header.js';
 
 function createRows(num) {
     const container = document.getElementById('gdtab-start');
     var rowElement = "";
 
     for (let i = 0; i < num; i++) {
-        var rowElement = rowElement+`<tr id=gdtab-element-${i}>
+        rowElement = rowElement+`<tr id=gdtab-element-${i}>
             <td id="gdtab-element-img-${i}"></td>
             <td class="gdtab-element"><a id="tab-title-${i}"></a></td>
             <td class="gdtab-element" id="tab-mapper-${i}"></td>
@@ -228,6 +229,8 @@ async function populateRow(i, mapStatus) { //i = row number
         document.getElementById('jp-page').innerHTML = "";
         jp = true;
     } catch { }
+
+    generatePageHeader(jp, "gds");
 
     var curMapStatus = await getMapStatus(jp);
     var wipCount = 0;

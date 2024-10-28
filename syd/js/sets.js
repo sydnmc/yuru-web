@@ -1,3 +1,5 @@
+import { generatePageHeader } from './header.js';
+
 function createSetRows(num) {
     const container = document.getElementById('set-container');
     var rowElement = "";
@@ -100,6 +102,7 @@ function populateRows(setInfo, incomplete, offsetNum) {
 }
 
 (async () => {
+    generatePageHeader(false, "sets");
     var setInfo = await getSetInfo();
 
     var completeSetsList = [];
