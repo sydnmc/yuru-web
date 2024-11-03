@@ -7,6 +7,11 @@ function createRows(num) {
 
     for (let i = 0; i < num; i++) {
         rowElement = rowElement+`<tr id=gdtab-element-${i}>
+            <td class="gdtab-element" style="padding: 0px">
+                <div class="play-button-wrapper">
+                    <span class="play-button" id="tab-player-${i}">&#9654;</span>
+                </div>
+            </td>
             <td id="gdtab-element-img-${i}"></td>
             <td class="gdtab-element"><a id="tab-title-${i}"></a></td>
             <td class="gdtab-element" id="tab-mapper-${i}"></td>
@@ -232,6 +237,7 @@ async function populateRow(i, mapStatus) { //i = row number
 
     generatePageHeader(jp, "gds");
 
+    /* populating rows */
     var curMapStatus = await getMapStatus(jp);
     var wipCount = 0;
     var additionalPluralMaps = 0;
@@ -251,4 +257,50 @@ async function populateRow(i, mapStatus) { //i = row number
 
     document.getElementById('num-gds').textContent = curMapStatus.length - wipCount + additionalPluralMaps;
     document.getElementById('num-wip-gds').textContent = wipCount;
+
+    /* preview buttons */
+    var audio = document.getElementById('tab-player-source');
+    var setIDs = [];
+
+    for (let i = 0; i < curMapStatus.length; i++) {
+        var curSongUrl = curMapStatus[i].songURLs[0];
+        var setID = curSongUrl.substr(curSongUrl.indexOf("/beatmapsets/")+13, curSongUrl.length); //gets the beatmap id
+        if (setID.includes("#osu")) { //again, will only work for std so be careful
+            setID = setID.substring(0, setID.indexOf("#osu"));
+        }
+        setIDs.push(setID);
+    }
+
+    var mapIsPlaying = new Array(setIDs.length).fill(false);
+
+    for (let i = 0; i < curMapStatus.length; i++) {
+        var curButton = document.getElementById('tab-player-'+i);
+
+        curButton.addEventListener("click", () => {
+            var clickedButton = document.getElementById('tab-player-'+i);
+            audio.src = `https://b.ppy.sh/preview/${setIDs[i]}.mp3`;
+            audio.volume = 0.2; //doesnt make your ears DIE
+
+            if (!mapIsPlaying[i]) {
+                audio.play();
+                clickedButton.innerHTML = `<i class="fa fa-pause"></i>`; //pause button
+                mapIsPlaying[i] = true;
+            } else {
+                audio.pause();
+            }
+
+            if (audio.paused || audio.ended) {
+                mapIsPlaying[i] = false;
+                clickedButton.innerHTML = "&#9654;"; //makes it a play button again if paused
+            }
+            if (mapIsPlaying.filter(Boolean).length > 1) { //checks for if it's paused or ended, but also if more than 1 value is true (if another button is clicked instead)
+                for (let check = 0; check < mapIsPlaying.length; check++) {
+                    if (mapIsPlaying[check] && check != i) {
+                        mapIsPlaying[check] = false;
+                        document.getElementById('tab-player-'+check).innerHTML = "&#9654;"; //makes it a play button again if paused
+                    }
+                }
+            }
+        })
+    }
 })();

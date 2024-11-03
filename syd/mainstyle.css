@@ -157,7 +157,7 @@ button:hover {
 }
 
 .gdtab .gdtab-element {
-    height: 55px;
+    height: 60px;
     color: rgb(222, 224, 237);
     font-family: OpenSans, sans-serif;
     text-align: left;
@@ -265,6 +265,27 @@ button:hover {
     100% {
         background-position: 100% 50%;
     }
+}
+
+audio {
+    width: 0%;
+}
+
+.play-button-wrapper {
+    display: flex; 
+    align-items: center; 
+    background-color: rgb(40 40 40);
+    height: 100%;
+}
+
+.play-button {
+    color: rgb(134, 107, 158);
+    padding-right: 10px;
+}
+
+.play-button:hover {
+    color: rgb(90, 73, 105);
+    cursor: pointer;
 }
 
 .set {
