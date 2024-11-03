@@ -265,6 +265,27 @@ button:hover {
     }
 }
 
+audio {
+    width: 0%;
+}
+
+.play-button-wrapper {
+    display: flex; 
+    align-items: center; 
+    background-color: rgb(40 40 40);
+    height: 100%;
+}
+
+.play-button {
+    color: rgb(222, 224, 237);
+    padding-right: 10px;
+}
+
+.play-button:hover {
+    color: rgb(147, 147, 151);
+    cursor: pointer;
+}
+
 footer {
     position: fixed;
     left: 0;
