@@ -57,6 +57,15 @@ span {
     right: 7.5px;
 }
 
+#github-link {
+    position: absolute;
+    top: 9.5px;
+    right: 37.5px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
 #page {
     display: block;
     margin: auto;
@@ -146,8 +155,8 @@ a.person-shine {
 .person-img {
     object-fit: contain;
     padding: 3px;
-    width: 84px;
-    height: 84px;
+    width: 78px;
+    height: 78px;
 }
 
 .person-img img {
@@ -223,11 +232,10 @@ img.socials-bar-big {
 }
 
 footer {
-    position: fixed;
+    position: absolute;
+    bottom: 5px;
     font-size: 11px;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    width: 99%;
     text-align: center;
     color: rgb(100, 101, 112);
 }
