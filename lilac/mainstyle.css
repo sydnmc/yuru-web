@@ -21,7 +21,19 @@ a.normal-text {
     text-decoration: underline;
 }
 
+span {
+    color: rgb(180 181 191);
+}
+
 p {
+    color: rgb(180 181 191);
+}
+
+ul {
+    margin-top: 2px;
+}
+
+li {
     color: rgb(180 181 191);
 }
 
@@ -120,6 +132,46 @@ button:hover {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.page-top-text {
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 0;
+}
+
+.socials-bar {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+}
+
+a.socials-bar {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+img.socials-bar {
+    max-width: 2.25%;
+}
+
+.smaller-button {
+    font-size: 26px;
+    padding: 15px 40px;
+}
+
+.button-text {
+    color: white;
+}
+
+.sya-my-beloved {
+    float: right;
+    height: 200px;
+    width: 200px;
+    margin-top: -165px;
+    margin-right: 20px;
+    padding: 5px;
 }
 
 .gdtab {
@@ -284,6 +336,12 @@ audio {
 .play-button:hover {
     color: rgb(147, 147, 151);
     cursor: pointer;
+}
+
+.bottom-footnote {
+    color: rgb(126, 126, 129);
+    font-size: 14px;
+    width: 60%;
 }
 
 footer {
