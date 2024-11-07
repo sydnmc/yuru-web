@@ -1,6 +1,6 @@
-@font-face { font-family: Kyokasho; src: url('Kyokasho.ttc')}
-@font-face { font-family: Kyokasho; font-weight: bold; src: url('Kyokasho.ttc')}
-@font-face { font-family: YuGothic; src: url('YuGothic.ttc')}
+@font-face { font-family: Kyokasho; src: url('Kyokasho.ttf')}
+@font-face { font-family: Kyokasho; font-weight: bold; src: url('Kyokasho.ttf')}
+@font-face { font-family: YuGothic; src: url('YuGothic.ttf')}
 
 /*
 * main color: rgb(90, 73, 105)
@@ -114,6 +114,9 @@ span {
         #FF4953 70%,
         #FF4482 80%
     );
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
     -webkit-mask: 
        linear-gradient(#fff 0 0) content-box, 
        linear-gradient(#fff 0 0);
@@ -172,7 +175,6 @@ a.person-shine {
     align-self: flex-start;
     padding-top: 5px;
     text-decoration: none;
-    margin-bottom: -25px;
 }
 
 .person-text p {

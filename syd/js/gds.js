@@ -9,7 +9,7 @@ function createRows(num) {
         rowElement = rowElement+`<tr id=gdtab-element-${i}>
             <td class="gdtab-element" style="padding: 0px">
                 <div class="play-button-wrapper">
-                    <span class="play-button" id="tab-player-${i}">&#9654;</span>
+                    <span class="play-button" id="tab-player-${i}"><i class="fa fa-play"></i></span>
                 </div>
             </td>
             <td id="gdtab-element-img-${i}"></td>
