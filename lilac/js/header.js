@@ -48,6 +48,11 @@ export function generatePageHeader(isJapanese, currentPage) {
                 gdsButton.style = currentlyOnPage;
                 gdsButton.removeAttribute('href');
                 translateButton.setAttribute('href', 'gds-ja_jp.html');
+                document.getElementsByClassName('top-img')[0].setAttribute('href', 'index.html');
+                break;
+            case "whoami":
+                document.getElementsByClassName('top-img')[0].setAttribute('href', 'index.html');
+                translateButton.setAttribute('href', '404translate.html');
                 break;
         }
     }

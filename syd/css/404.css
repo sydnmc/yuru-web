@@ -42,6 +42,10 @@ span {
     color: rgb(180 181 191);
 }
 
+a {
+    color: rgb(100, 101, 112);
+}
+
 .white-text {
     color: rgb(222, 224, 237);
 }

@@ -35,6 +35,10 @@ span {
     color: rgb(40 40 40);
 }
 
+a {
+    color: rgb(100, 101, 112);
+}
+
 .dark-text {
     color: rgb(100, 101, 112);
 }
