@@ -291,13 +291,13 @@ async function populateRow(i, mapStatus) { //i = row number
 
             if (audio.paused || audio.ended) {
                 mapIsPlaying[i] = false;
-                clickedButton.innerHTML = "&#9654;"; //makes it a play button again if paused
+                clickedButton.innerHTML = `<i class="fa fa-play"></i>`; //makes it a play button again if paused
             }
             if (mapIsPlaying.filter(Boolean).length > 1) { //checks for if it's paused or ended, but also if more than 1 value is true (if another button is clicked instead)
                 for (let check = 0; check < mapIsPlaying.length; check++) {
                     if (mapIsPlaying[check] && check != i) {
                         mapIsPlaying[check] = false;
-                        document.getElementById('tab-player-'+check).innerHTML = "&#9654;"; //makes it a play button again if paused
+                        document.getElementById('tab-player-'+check).innerHTML = `<i class="fa fa-play"></i>`; //makes it a play button again if paused
                     }
                 }
             }
