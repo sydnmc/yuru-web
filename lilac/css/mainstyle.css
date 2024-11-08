@@ -67,6 +67,10 @@ h1 {
     display: none;
 }
 
+.borgar-menu {
+    display: none;
+}
+
 button {
     border: none;
     font-family: Kyokasho, sans-serif;

@@ -29,6 +29,7 @@
     }
 
     .borgar-menu {
+        display: block;
         height: 100%; 
         width: 0;
         position: fixed;
@@ -39,6 +40,7 @@
         overflow-x: hidden;
         text-align: center;
         border-radius: 5px;
+        transition: .25s ease;
       }
 
       .borgar-text-wrapper {

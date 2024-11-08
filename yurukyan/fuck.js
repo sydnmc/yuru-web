@@ -5,6 +5,7 @@
 * Kode
 *
 * it totally isnt me hating on js. i would never. */
+//FUCK also includes code for updating the currently/last playing song displayed
 
 const systemURL = "https://api.pluralkit.me/v2/"; //ytcvss is my AWESOME SYSTEM YAY
 const lastFmURL = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=bnmc_&api_key=f2eed0b71c94d900942a954c37a0d0ec&format=json&limit=1";

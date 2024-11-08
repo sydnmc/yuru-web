@@ -1,0 +1,41 @@
+/* dictates all changes to be made when viewing on mobile/smaller screens */
+
+@media only screen and (max-device-width: 1000px)
+{
+    #page {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .front-divider {
+        display: none;
+    }
+
+    .plural {
+        flex-direction: column;
+    }
+
+    .person {
+        margin-bottom: 20px;
+    }
+
+    img.socials-bar {
+        max-width: 4%;
+    }
+
+    img.socials-bar-big {
+        max-width: 5%;
+    }
+
+    .socials-bar-big {
+        font-size: 23px;
+    }
+
+    .person-text p {
+        font-size: 14px;
+    }
+
+    #bottom-translate-text {
+        display: none;
+    }
+}
