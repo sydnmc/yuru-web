@@ -1,6 +1,6 @@
-@font-face { font-family: Kyokasho; src: url('fonts/Kyokasho.ttc')}
-@font-face { font-family: Kyokasho; font-weight: bold; src: url('fonts/KyokashoBold.ttc')}
-@font-face { font-family: YuGothic; src: url('fonts/YuGothic.ttc')}
+@font-face { font-family: Kyokasho; src: url('fonts/Kyokasho.ttf')}
+@font-face { font-family: Kyokasho; font-weight: bold; src: url('fonts/KyokashoBold.ttf')}
+@font-face { font-family: YuGothic; src: url('fonts/YuGothic.ttf')}
 @font-face { font-family: OpenSans; src: url('fonts/OpenSans.ttf')}
 
 body {
