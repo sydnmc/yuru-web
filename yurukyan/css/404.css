@@ -1,0 +1,51 @@
+@font-face { font-family: Kyokasho; src: url('Kyokasho.ttf')}
+@font-face { font-family: Kyokasho; font-weight: bold; src: url('KyokashoBold.ttf')}
+@font-face { font-family: YuGothic; src: url('YuGothic.ttf')}
+
+/*
+* main color: rgb(90, 73, 105)
+* accent color: rgb(65, 54, 75)
+* grey text color: rgb(180 181 191)
+* darker grey: rgb(100, 101, 112);
+*/
+
+body {
+    background-color: rgb(40 40 40);
+    font-family: YuGothic, sans-serif;
+}
+
+.header-wrapper {
+    padding: 15px 15px;
+    text-align: center;
+    background-color: rgb(90, 73, 105);
+    border-radius: 10px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 35px;
+}
+
+#image {
+    border-radius: 50%;
+    width: 10%;
+}
+
+h1 {
+    font-family: Kyokasho, sans-serif;
+    font-weight: normal;
+    color: white;
+    font-size: 58px;
+    margin-top: 10px;
+}
+
+span {
+    color: rgb(180 181 191);
+}
+
+a {
+    color: rgb(100, 101, 112);
+}
+
+.white-text {
+    color: rgb(222, 224, 237);
+}
+
