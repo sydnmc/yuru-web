@@ -6,8 +6,8 @@ li {
     color: rgb(180 181 191);
 }
 
-img {
-    width: 40%;
+.thinkpad-img {
+    max-width: 60%;
 }
 
 .big-text {
@@ -53,4 +53,11 @@ img {
     padding-right: 15px;
     text-align: right;
     padding-bottom: 40px;
+}
+
+@media only screen and (max-device-width: 1000px)
+{ 
+    .sya-my-beloved {
+        display: none;
+    }
 }

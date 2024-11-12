@@ -1,35 +1,5 @@
 [
   {
-    "bgLink": "images/map-thumbnails/2214531.jpg",
-    "songName": "Hanasaka Yui (CV: M.A.O) - Harumachi Clover (TV Size)",
-    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2214531#osu/4692263" ],
-    "mapper": "sydnmc",
-    "difficulties": [ "yuiyamu's Insane" ],
-    "starRatings": [ 5.40 ],
-    "datesFinished": [ "7/14/2024" ],
-    "bns": [
-      "",
-      ""
-    ],
-    "mapStatus": "deadge (meme set)",
-    "touhou": false
-  },
-  {
-    "bgLink": "images/map-thumbnails/2219976.png",
-    "songName": "inabakumori - Mochi",
-    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2219976#osu/4765540" ],
-    "mapper": "sydnmc",
-    "difficulties": [ "light insane w/yuiyamu" ],
-    "starRatings": [ 3.41 ],
-    "datesFinished": [ "9/04/2024" ],
-    "bns": [
-      "",
-      ""
-    ],
-    "mapStatus": "set wip",
-    "touhou": false
-  },
-  {
     "bgLink": "images/map-thumbnails/2240022.jpg",
     "songName": "midijunki - game with wuffians",
     "songURLs": [ "https://osu.ppy.sh/beatmapsets/2240022#osu/4773108" ],
@@ -72,6 +42,36 @@
       ""
     ],
     "mapStatus": "set wip",
+    "touhou": false
+  },
+  {
+    "bgLink": "images/map-thumbnails/2278092.jpg",
+    "songName": "LamazeP - Ai no Uta feat. Hatsune Miku (Ringtone ver.)",
+    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2278092#osu/4855947" ],
+    "mapper": "Yumenexa",
+    "difficulties": [ "yuiyamu's Sparkling Endearment II" ],
+    "starRatings": [ 5.78 ],
+    "datesFinished": [ "11/10/2024" ],
+    "bns": [
+      "",
+      ""
+    ],
+    "mapStatus": "set wip",
+    "touhou": false
+  },
+  {
+    "bgLink": "images/map-thumbnails/2278715.jpg",
+    "songName": "Masatoshi Ono - departure! -second ver.- (TV Size)",
+    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2278715#osu/4857358" ],
+    "mapper": "midorijeon",
+    "difficulties": [ "yuiyamu's Another" ],
+    "starRatings": [ 4.49 ],
+    "datesFinished": [ "11/11/2024" ],
+    "bns": [
+      "",
+      ""
+    ],
+    "mapStatus": "pending",
     "touhou": false
   }
 ]

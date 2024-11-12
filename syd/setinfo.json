@@ -313,6 +313,13 @@
     },
     {
         "incomplete": true,
+        "setBackgroundLink":"images/set-thumbnails/2214531.jpg",
+        "setTitle":"Hanasaka Yui (CV: M.A.O) - Harumachi Clover (TV Size)",
+        "setUrl":"https://osu.ppy.sh/beatmapsets/2214531",
+        "setYapping":"lilac here!! this is the first map i made, on the day that i think i came into existence. no, i do not want to talk about it."
+    },
+    {
+        "incomplete": true,
         "setBackgroundLink":"images/set-thumbnails/2217654.jpg",
         "setTitle":"inabakumori - radar",
         "setUrl":"https://osu.ppy.sh/beatmapsets/2217654",
@@ -369,5 +376,12 @@
         "setTitle":"irohaRingo - Ibutsu na Wake, Oshiete Ageru",
         "setUrl":"https://osu.ppy.sh/beatmapsets/2265479",
         "setYapping":"no.<br><br>gd for aika, it's really funny seeing people try to play this one lmfao"
+    },
+    {
+        "incomplete": true,
+        "setBackgroundLink":"images/set-thumbnails/2275783.jpg",
+        "setTitle":"Oresama - Gimmme! (TV Size)",
+        "setUrl":"https://osu.ppy.sh/beatmapsets/2275783",
+        "setYapping":"omg hi lilac here!! i made this set!!<br><br>i remember sydney first being convinced to watch this show because of doremy, but it was i who finished off most of it and loved it~ our friend kuuti also mapped this for his first rank, so i figured 'hey, why not make my own set? :O' and here we are."
     }
 ]

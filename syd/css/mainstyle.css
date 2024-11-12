@@ -95,15 +95,32 @@ button:hover {
     right: 7.5px;
 }
 
+.dropdown {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
+    top: 68px;
     background-color: rgb(65, 54, 75);
     border-radius: 5px;
     width: 252px;
     box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.5);
     z-index: 1;
-  }
+}
+
+.borgar {
+    display: none;
+}
+
+.borgar-menu {
+    display: none;
+}
 
 .dropdown-content a {
     color: white;

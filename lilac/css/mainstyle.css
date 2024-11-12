@@ -108,12 +108,17 @@ button:hover {
 }
 
 .dropdown {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
     margin-bottom: 0px;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
+    top: 68px;
     background-color: rgb(181, 182, 190);
     border-radius: 5px;
     width: 252px;
