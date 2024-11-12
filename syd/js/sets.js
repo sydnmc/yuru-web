@@ -66,7 +66,6 @@ function populateRows(setInfo, incomplete, offsetNum) {
         if (setInfo[i].setBackgroundLink == "") { //if bg doesn't exist, tamatize it.
             setImg.src = "images/tamate.jpg";
         } else {
-            console.log(statusIcon);
             setImg.src = setInfo[i].setBackgroundLink;
         }
 
@@ -95,7 +94,10 @@ function populateRows(setInfo, incomplete, offsetNum) {
         content.innerHTML = setInfo[i].setYapping;
 
         try { //if there exists urls to fill, fill them~ otherwise, don't do anything
-            content.querySelector("a").setAttribute('href', setInfo[i].urls[i]);
+            for (let j = 0; j < setInfo[j].urls.length; j++) {
+                content.querySelector("a").setAttribute('href', setInfo[i].urls[j]);
+            }
+            console.log("found urls! :O");
             content.querySelector("a").classList.add("normal-text");
         } catch { }
     }

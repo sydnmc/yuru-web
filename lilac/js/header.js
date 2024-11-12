@@ -9,6 +9,7 @@ export function generatePageHeader(isJapanese, currentPage) {
             <button class="drop-button" style="cursor: default;">osu!</button>
           </a>
           <div class="dropdown-content">
+            <a href="http://syd.yuru.ca/sets.html" id="sets-but">my sets</a>
             <a href="gds.html" id="gds-but">my gds</a>
           </div>
         </div>
@@ -33,13 +34,16 @@ export function generatePageHeader(isJapanese, currentPage) {
     var currentlyOnPage = "cursor: default; background-color: rgb(142, 142, 148); border-radius: 5px;";
 
     var gdsButton = document.getElementById('gds-but');
+    var setsButton = document.getElementById('sets-but');
     var translateButton = document.getElementsByClassName('translate-button')[0];
 
     if (isJapanese) {
         gdsButton.textContent = "自分のgd";
+        setsButton.textContent = "自分の譜面";
         document.getElementById('profile-pic-image').setAttribute('alt', 'らいらっくのきゅうくらりんリンプロフィール画像');
 
         gdsButton.setAttribute('href', 'gds-ja_jp.html');
+        setsButton.setAttribute('href', '404translate.html');
         switch (currentPage) {
             case "index":
                 document.getElementsByClassName('top-img')[0].setAttribute('href', 'https://yuru.ca/index-ja_jp');

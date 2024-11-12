@@ -16,7 +16,23 @@ export function generatePageHeader(isJapanese, currentPage) {
         <a class="button-link" id="music-link" href="music.html">
           <button id="music-but">music</button>
         </a>
+        <button class="borgar" id="hamburger"><span id="borgar-text">&#9776;</span></button>
         <a class="translate-button" href="index-ja_jp.html">&#127760;</a>
+
+        <div class="borgar-menu" id="popout-menu">
+          <div class="borgar-text-wrapper" id="close-button">
+            <a class="borgar-menu-text" id="close-button-text">&times;</a>
+          </div>
+          <div class="borgar-text-wrapper">
+            <a class="borgar-menu-text" href="gds.html">osu! | gds</a>
+          </div>
+          <div class="borgar-text-wrapper">
+            <a class="borgar-menu-text" href="sets.html">osu! | sets</a>
+          </div>
+          <div class="borgar-text-wrapper">
+            <a class="borgar-menu-text" href="music.html">music</a>
+          </div>
+        </div>
       </div>`;
 
     document.getElementById('page-header').innerHTML = header;
@@ -84,4 +100,11 @@ export function generatePageHeader(isJapanese, currentPage) {
                 break;
         }
     }
+  document.getElementById('hamburger').addEventListener('click', function() {
+      document.getElementById('popout-menu').style = "width: 250px;"
+  });
+  
+  document.getElementById('close-button').addEventListener('click', function() {
+      document.getElementById('popout-menu').style = "width: 0px;"
+  });
 }
