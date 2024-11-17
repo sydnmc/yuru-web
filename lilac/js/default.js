@@ -10,8 +10,6 @@ try {
 var filename = location.href.split("/").slice(-1)[0];
 filename = filename.substring(0, filename.indexOf("."));
 
-console.log(filename);
-
 if (filename == "") { //if in the index of the page
     filename = "index";
 }
@@ -19,5 +17,7 @@ if (filename == "") { //if in the index of the page
 if (jp) {
     filename = filename.substring(0, filename.indexOf("-"));
 }
+
+console.log(filename);
 
 generatePageHeader(jp, filename);

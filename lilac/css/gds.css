@@ -142,7 +142,7 @@
 }
 
 audio {
-    width: 0%;
+    display: none;
 }
 
 .play-button-wrapper {

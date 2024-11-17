@@ -1,2 +1,0 @@
-node mapupdator.js
-pause
