@@ -68,10 +68,11 @@
     "starRatings": [ 4.49 ],
     "datesFinished": [ "11/11/2024" ],
     "bns": [
-      "",
+      "Aeril",
       ""
     ],
     "mapStatus": "pending",
     "touhou": false
-  }
+  },
+  {"bgLink":"images/gd-thumbnails/2235132.jpg","songName":"DenkiQujira - Kuu Neru Andgazer","songURLs":["https://osu.ppy.sh/beatmapsets/2235132"],"mapper":"Phten02","difficulties":["sydnmc & yuiyamu's Insane"],"starRatings":["~4.9"],"datesFinished":["N/A"],"bns":["",""],"mapStatus":"wip","touhou":false}
 ]

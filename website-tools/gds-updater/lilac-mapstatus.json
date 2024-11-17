@@ -1,36 +1,6 @@
 [
   {
-    "bgLink": "",
-    "songName": "Hanasaka Yui (CV: M.A.O) - Harumachi Clover (TV Size)",
-    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2214531#osu/4692263" ],
-    "mapper": "sydnmc",
-    "difficulties": [ "yuiyamu's Insane" ],
-    "starRatings": [ 5.40 ],
-    "datesFinished": [ "7/14/2024" ],
-    "bns": [
-      "",
-      ""
-    ],
-    "mapStatus": "deadge (meme set)",
-    "touhou": false
-  },
-  {
-    "bgLink": "",
-    "songName": "inabakumori - Mochi",
-    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2219976#osu/4765540" ],
-    "mapper": "sydnmc",
-    "difficulties": [ "light insane w/yuiyamu" ],
-    "starRatings": [ 3.41 ],
-    "datesFinished": [ "9/04/2024" ],
-    "bns": [
-      "",
-      ""
-    ],
-    "mapStatus": "set wip",
-    "touhou": false
-  },
-  {
-    "bgLink": "",
+    "bgLink": "images/map-thumbnails/2240022.jpg",
     "songName": "midijunki - game with wuffians",
     "songURLs": [ "https://osu.ppy.sh/beatmapsets/2240022#osu/4773108" ],
     "mapper": "Kimmy-",
@@ -45,7 +15,7 @@
     "touhou": false
   },
   {
-    "bgLink": "",
+    "bgLink": "images/map-thumbnails/2261336.jpg",
     "songName": "DJ SHARPNEL - Mmmmmmm",
     "songURLs": [ "https://osu.ppy.sh/beatmapsets/2261336#osu/4813082" ],
     "mapper": "sydnmc",
@@ -60,7 +30,7 @@
     "touhou": false
   },
   {
-    "bgLink": "",
+    "bgLink": "images/map-thumbnails/2228253.jpg",
     "songName": "Kido Ibuki & Yamazaki Erii - pupa (TV Size)",
     "songURLs": [ "https://osu.ppy.sh/beatmapsets/2228253#osu/4807671" ],
     "mapper": "enri",
@@ -73,5 +43,36 @@
     ],
     "mapStatus": "set wip",
     "touhou": false
-  }
+  },
+  {
+    "bgLink": "images/map-thumbnails/2278092.jpg",
+    "songName": "LamazeP - Ai no Uta feat. Hatsune Miku (Ringtone ver.)",
+    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2278092#osu/4855947" ],
+    "mapper": "Yumenexa",
+    "difficulties": [ "yuiyamu's Sparkling Endearment II" ],
+    "starRatings": [ 5.78 ],
+    "datesFinished": [ "11/10/2024" ],
+    "bns": [
+      "",
+      ""
+    ],
+    "mapStatus": "set wip",
+    "touhou": false
+  },
+  {
+    "bgLink": "images/map-thumbnails/2278715.jpg",
+    "songName": "Masatoshi Ono - departure! -second ver.- (TV Size)",
+    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2278715#osu/4857358" ],
+    "mapper": "midorijeon",
+    "difficulties": [ "yuiyamu's Another" ],
+    "starRatings": [ 4.49 ],
+    "datesFinished": [ "11/11/2024" ],
+    "bns": [
+      "Aeril",
+      ""
+    ],
+    "mapStatus": "pending",
+    "touhou": false
+  },
+  {"bgLink":"images/gd-thumbnails/2235132.jpg","songName":"DenkiQujira - Kuu Neru Andgazer","songURLs":["https://osu.ppy.sh/beatmapsets/2235132"],"mapper":"Phten02","difficulties":["sydnmc & yuiyamu's Insane"],"starRatings":["~4.9"],"datesFinished":["N/A"],"bns":["",""],"mapStatus":"wip","touhou":false}
 ]
