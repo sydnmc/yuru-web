@@ -1,0 +1,44 @@
+.set {
+    display: flex;
+    background-color: rgb(55, 55, 55);
+    min-height: 85px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 3px solid rgb(90, 73, 105);
+}
+
+img.set-content {
+    max-width: 19%;
+    object-fit: cover;
+}
+
+.text-container {
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+a.set-content {
+    font-family: Kyokasho, sans-serif;
+    font-size: 32px;
+    color: white;
+}
+
+.status-icon {
+    width: 1%;
+    padding-right: 5px;
+}
+
+.incomplete-warning {
+    margin-top: 20px;
+    color: #DEE0ED;
+    text-align: center;
+}
+
+#warning {
+    font-size: 22px;
+    background-color: #f26376;
+    border-radius: 5px;
+}

@@ -19,6 +19,10 @@
         margin-bottom: 20px;
     }
 
+    .person-shine {
+        margin-bottom: 20px;
+    }
+
     img.socials-bar {
         max-width: 4%;
     }
@@ -32,10 +36,14 @@
     }
 
     .person-text p {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     #bottom-translate-text {
+        display: none;
+    }
+
+    footer {
         display: none;
     }
 }

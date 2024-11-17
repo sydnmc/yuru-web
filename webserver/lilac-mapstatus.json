@@ -1,0 +1,78 @@
+[
+  {
+    "bgLink": "images/map-thumbnails/2240022.jpg",
+    "songName": "midijunki - game with wuffians",
+    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2240022#osu/4773108" ],
+    "mapper": "Kimmy-",
+    "difficulties": [ "yuiyamu's needy fuwamoco overdose" ],
+    "starRatings": [ 5.11 ],
+    "datesFinished": [ "9/06/2024" ],
+    "bns": [
+      "",
+      ""
+    ],
+    "mapStatus": "deadge (meme set)",
+    "touhou": false
+  },
+  {
+    "bgLink": "images/map-thumbnails/2261336.jpg",
+    "songName": "DJ SHARPNEL - Mmmmmmm",
+    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2261336#osu/4813082" ],
+    "mapper": "sydnmc",
+    "difficulties": [ "kimmy's extra w/yuiyamu" ],
+    "starRatings": [ 5.77 ],
+    "datesFinished": [ "10/01/2024" ],
+    "bns": [
+      "",
+      ""
+    ],
+    "mapStatus": "set wip",
+    "touhou": false
+  },
+  {
+    "bgLink": "images/map-thumbnails/2228253.jpg",
+    "songName": "Kido Ibuki & Yamazaki Erii - pupa (TV Size)",
+    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2228253#osu/4807671" ],
+    "mapper": "enri",
+    "difficulties": [ "sydnmc's normal with yuiyamu" ],
+    "starRatings": [ 2.60 ],
+    "datesFinished": [ "10/01/2024" ],
+    "bns": [
+      "",
+      ""
+    ],
+    "mapStatus": "set wip",
+    "touhou": false
+  },
+  {
+    "bgLink": "images/map-thumbnails/2278092.jpg",
+    "songName": "LamazeP - Ai no Uta feat. Hatsune Miku (Ringtone ver.)",
+    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2278092#osu/4855947" ],
+    "mapper": "Yumenexa",
+    "difficulties": [ "yuiyamu's Sparkling Endearment II" ],
+    "starRatings": [ 5.78 ],
+    "datesFinished": [ "11/10/2024" ],
+    "bns": [
+      "",
+      ""
+    ],
+    "mapStatus": "set wip",
+    "touhou": false
+  },
+  {
+    "bgLink": "images/map-thumbnails/2278715.jpg",
+    "songName": "Masatoshi Ono - departure! -second ver.- (TV Size)",
+    "songURLs": [ "https://osu.ppy.sh/beatmapsets/2278715#osu/4857358" ],
+    "mapper": "midorijeon",
+    "difficulties": [ "yuiyamu's Another" ],
+    "starRatings": [ 4.49 ],
+    "datesFinished": [ "11/11/2024" ],
+    "bns": [
+      "Aeril",
+      ""
+    ],
+    "mapStatus": "pending",
+    "touhou": false
+  },
+  {"bgLink":"images/gd-thumbnails/2235132.jpg","songName":"DenkiQujira - Kuu Neru Andgazer","songURLs":["https://osu.ppy.sh/beatmapsets/2235132"],"mapper":"Phten02","difficulties":["sydnmc & yuiyamu's Insane"],"starRatings":["~4.9"],"datesFinished":["N/A"],"bns":["",""],"mapStatus":"wip","touhou":false}
+]
