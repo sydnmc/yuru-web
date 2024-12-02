@@ -7,7 +7,7 @@ function createRows(num) {
 
     for (let i = 0; i < num; i++) {
         rowElement = rowElement+`<tr id=gdtab-element-${i}>
-            <td class="gdtab-element" style="padding: 0px">
+            <td class="gdtab-element" style="padding: 0px; display: flex; justify-content: center;">
                 <div class="play-button-wrapper">
                     <span class="play-button" id="tab-player-${i}"><i class="fa fa-play"></i></span>
                 </div>
