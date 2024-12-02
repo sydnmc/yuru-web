@@ -59,7 +59,7 @@ span {
 
 #github-link {
     position: absolute;
-    top: 9.5px;
+    top: 8.75px;
     right: 37.5px;
     color: white;
     text-decoration: none;
@@ -92,6 +92,7 @@ span {
     border-style: solid;
     border-color: rgb(65, 54, 75);
     border-radius: 5px;
+    height: 85px;
     width: 100%;
 }
 
@@ -99,6 +100,7 @@ span {
     display: flex;
     position: relative;
     width: 102%;
+    height: 90px;
 }
 .person-shine::before {
     content: "";

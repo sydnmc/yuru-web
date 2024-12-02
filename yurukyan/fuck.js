@@ -30,7 +30,7 @@ async function getFrontList() {
     var systemSwitches;
 
     try {
-        const response = await fetch(systemURL+"systems/ytcvss/switches");
+        const response = await fetch(systemURL+"systems/ytcvss/switches?limit=2");
         if (!response.ok) {
             throw new Error(`Response: ${response.status}`);
         }
@@ -42,8 +42,8 @@ async function getFrontList() {
     return await systemSwitches;
 }
 
-async function getUser(front) {
-    var systemSwitches = await getFrontList();
+async function getUser(front, frontList) {
+    var systemSwitches = frontList;
     var systemMember;
     var userID;
 
@@ -130,8 +130,8 @@ function dateParser(time, isCurrent, fronterTime, isJapanese) {
     /* fronter */
 
     const frontList = await getFrontList();
-    const p1 = await getUser(true); //true = fronter
-    const p2 = await getUser(false);
+    const p1 = await getUser(true, frontList); //true = fronter
+    const p2 = await getUser(false, frontList);
     var members = [p1, p2]; //hardcoded 2 members bc im not gonna have more than lilac in me. if so shit
 
     if (members[0].name != "sydney") { //whenever lilac is fronting

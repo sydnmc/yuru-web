@@ -149,7 +149,6 @@ audio {
     display: flex; 
     align-items: center; 
     background-color: rgb(40 40 40);
-    height: 100%;
 }
 
 .play-button {
