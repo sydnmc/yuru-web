@@ -97,7 +97,6 @@ function populateRows(setInfo, incomplete, offsetNum) {
             for (let j = 0; j < setInfo[j].urls.length; j++) {
                 content.querySelector("a").setAttribute('href', setInfo[i].urls[j]);
             }
-            console.log("found urls! :O");
             content.querySelector("a").classList.add("normal-text");
         } catch { }
     }

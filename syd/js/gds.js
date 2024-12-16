@@ -64,8 +64,6 @@ async function populateRow(i, mapStatus) { //i = row number
         plural = true;
         plurality = mapStatus[i].difficulties.length;
     }
-    var pluralPercent = parseInt(100/plurality);
-
     var wrapper = document.getElementById("gdtab-element-"+i);
 
     var img = document.getElementById('gdtab-element-img-'+i);
@@ -94,12 +92,15 @@ async function populateRow(i, mapStatus) { //i = row number
     var beatmapsetUrl = mapStatus[i].songURLs[0].substr(0, mapStatus[i].songURLs[0].indexOf("#osu/")); //KILLS the beatmap url and makes it the set
 
     if (plural) { //writing text for pluralized beatmaps
+        diffnameWrapper.style = "padding: 0";
+        srWrapper.style = "padding: 0"; //removes padding, since for plural beatmaps we'll handle that ourselves
+        
         var additionalDiffText = "";
         var additionalSrText = "";
         for (let j = 0; j < plurality; j++) {
-            additionalDiffText = additionalDiffText+`<a id="tab-diffname-${i}-${j}" style='padding-bottom: 10px;'></a><br>
-            `; //top applies the lost spacing around the element
-            additionalSrText = additionalSrText+`<span id="tab-sr-${i}-${j}"></span><br>
+            additionalDiffText = additionalDiffText+`<div id="tab-plural-diff-${i}-${j}" class="diff-plural"><a id="tab-diffname-${i}-${j}"></a></div>
+            `;
+            additionalSrText = additionalSrText+`<div id="tab-plural-sr-${i}-${j}" class="sr-plural"><span id="tab-sr-${i}-${j}"></span></div>
             `;
         }
         diffnameWrapper.innerHTML = additionalDiffText; //writing the additional text inputs needed
@@ -109,9 +110,6 @@ async function populateRow(i, mapStatus) { //i = row number
             document.getElementById(`tab-diffname-${i}-${j}`).textContent = mapStatus[i].difficulties[j];
             document.getElementById(`tab-sr-${i}-${j}`).textContent = mapStatus[i].starRatings[j];
             document.getElementById(`tab-diffname-${i}-${j}`).setAttribute('href', mapStatus[i].songURLs[j]); //assuming that plural diffs will always have a link
-            
-            document.getElementById(`tab-diffname-${i}-${j}`).style = 'padding-bottom: 10px;';
-            document.getElementById(`tab-sr-${i}-${j}`).style = ``;
         }
     } else {
         if (beatmapsetUrl != "") {
@@ -173,19 +171,11 @@ async function populateRow(i, mapStatus) { //i = row number
 
     //adding difficulty colors
     if (plural) {
-        var gradient = `linear-gradient(to bottom, `
         for (let j = 0; j < plurality; j++) {
-            if (j == 0) {
-                gradient = gradient+colorate(mapStatus[i].starRatings[j])+' 0%,';
-                gradient = gradient+colorate(mapStatus[i].starRatings[j])+' '+pluralPercent+'%,';
-            }
-            gradient = gradient+colorate(mapStatus[i].starRatings[j])+' '+pluralPercent*(j)+'%,';
-            gradient = gradient+colorate(mapStatus[i].starRatings[j])+' '+pluralPercent*(j+1)+'%,';
+            let bgColor = colorate(mapStatus[i].starRatings[j]);
+            document.getElementById(`tab-plural-diff-${i}-${j}`).style = `background-color: ${bgColor}`;
+            document.getElementById(`tab-plural-sr-${i}-${j}`).style = `background-color: ${bgColor}`;
         }
-
-        gradient = gradient.substring(0, gradient.length-1)+")"; //formatting things
-        diffnameWrapper.style.backgroundImage = gradient;
-        srWrapper.style.backgroundImage = gradient;
     } else {
         diffnameWrapper.style.backgroundColor = colorate(mapStatus[i].starRatings[0]);
         srWrapper.style.backgroundColor = colorate(mapStatus[i].starRatings[0]);

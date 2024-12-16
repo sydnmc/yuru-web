@@ -30,12 +30,26 @@ h2 {
     color: white;
 }
 
+.clickable-image-text {
+    width: 20px;
+    height: 20px;
+    padding-right: 10px;
+}
+
+.translated-text {
+    margin-top: 0;
+}
+
+.translate-title {
+    margin-bottom: 0;
+}
+
 .links-container {
-    /* display: flex; */
+    display: flex;
     align-items: center;
 }
 
 .socials-image {
-    width: 5%;
-    padding-right: 10px;
+    width: 100%;
+    margin: 0;
 }
