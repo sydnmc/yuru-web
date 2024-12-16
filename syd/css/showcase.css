@@ -1,0 +1,117 @@
+h2 {
+    color: white;
+    text-align: center;
+}
+
+h3 {
+    color: white;
+    text-align: center;
+}
+
+.meow {
+    color: rgb(100, 101, 112);
+    text-decoration: underline;
+}
+
+.centered {
+    text-align: center;
+}
+
+#showcase {
+    position: relative;
+}
+
+#osu-showcase-wrapper {
+    border: 4px solid #5a4969;
+    border-radius: 15px;
+    padding: 0px 10px 10px 10px;
+    width: 60%;
+}
+
+#right-side {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 37.5%;
+}
+
+#songs-preview {
+    border: 4px solid #5a4969;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+#gd-display-wrapper {
+    display: flex;
+    position: relative;
+}
+
+#maps-showcase-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.gd-thumb {
+    display: flex;
+    flex-direction: column;
+    height: 135px;
+    overflow: hidden;
+    text-overflow: hidden;
+    text-wrap: nowrap;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.set-thumb {
+    display: flex;
+    flex-direction: column;
+    min-height: 94px;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.gd-title {
+    text-align: inherit;
+    color: white;
+    font-weight: normal;
+    font-size: 28px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
+
+.gd-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.gd-artist {
+    font-size: 16px;
+    margin: 0
+}
+
+.gd-text {
+    font-family: OpenSans, sans-serif;
+    margin-top: 10px;
+}
+
+#divider {
+    border-left: 4px solid rgb(90, 73, 105);
+    height: inherit;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.upper-ranked-text {
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    top: 130px;
+    left: 105px;
+}
