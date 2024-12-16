@@ -4,11 +4,13 @@
     table-layout: auto; 
     width: 100%;
 }
+
 .gdtab td {
     border-color: rgb(100, 101, 112);
     padding: 10px 5px;
     word-break: normal;
 }
+
 .gdtab th {
     border-color: rgb(100, 101, 112);
     border-bottom: 1px solid;
@@ -139,10 +141,6 @@
     100% {
         background-position: 100% 50%;
     }
-}
-
-audio {
-    display: none;
 }
 
 .play-button-wrapper {

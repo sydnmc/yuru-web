@@ -7,7 +7,7 @@ function createRows(num) {
 
     for (let i = 0; i < num; i++) {
         rowElement = rowElement+`<tr id=gdtab-element-${i}>
-            <td class="gdtab-element" style="padding: 0px">
+            <td class="gdtab-element" style="background-color: rgb(40 40 40)">
                 <div class="play-button-wrapper">
                     <span class="play-button" id="tab-player-${i}"><i class="fa fa-play"></i></span>
                 </div>
@@ -88,8 +88,7 @@ async function populateRow(i, mapStatus) { //i = row number
     img.style = `background-image: url('${bgLink}');
     style: padding: 0px 0px; 
     background-size: cover;
-    background-position: center;
-    image-rendering: pixelated;`;
+    background-position: center;`;
     title.textContent = mapStatus[i].songName;
 
     var beatmapsetUrl = mapStatus[i].songURLs[0].substr(0, mapStatus[i].songURLs[0].indexOf("#osu/")); //KILLS the beatmap url and makes it the set

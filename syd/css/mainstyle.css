@@ -20,6 +20,10 @@ a {
     text-decoration: none;
 }
 
+audio {
+    display: none;
+}
+
 a.normal-text {
     font-family: YuGothic, sans-serif;
     font-size: 16px;

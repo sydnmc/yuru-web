@@ -1,0 +1,41 @@
+.centered {
+    text-align: center;
+}
+
+#music-container {
+    display: flex;
+}
+
+.song-element {
+    border-radius: 15px;
+    border: 3px solid #5a4969;
+    height: 55vh;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-size: cover;
+    background-position: 100%;
+}
+
+.song-padding {
+    margin-right: 30px;
+}
+
+.song-link {
+    text-decoration: none;
+    color: white;
+}
+
+h2 {
+    color: white;
+}
+
+.links-container {
+    /* display: flex; */
+    align-items: center;
+}
+
+.socials-image {
+    width: 5%;
+    padding-right: 10px;
+}
