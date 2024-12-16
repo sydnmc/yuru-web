@@ -1,6 +1,7 @@
 h2 {
     color: white;
     text-align: center;
+    margin-bottom: 0px;
 }
 
 h3 {
@@ -8,13 +9,18 @@ h3 {
     text-align: center;
 }
 
-.meow {
+.link {
     color: rgb(100, 101, 112);
     text-decoration: underline;
 }
 
 .centered {
     text-align: center;
+}
+
+.under-title-text {
+    text-align: center;
+    margin-top: 5px;
 }
 
 #showcase {
@@ -41,6 +47,12 @@ h3 {
     padding: 10px;
 }
 
+#songs-image {
+    width: 100%; 
+    cursor: pointer;
+    margin-top: 15px;
+}
+
 #gd-display-wrapper {
     display: flex;
     position: relative;
@@ -63,6 +75,7 @@ h3 {
     background-size: cover;
     background-position: center center;
     text-align: right;
+    justify-content: center;
     padding-right: 10px;
 }
 
@@ -74,7 +87,8 @@ h3 {
     background-size: cover;
     background-position: center center;
     text-align: right;
-    padding-right: 10px;
+    justify-content: center;
+    margin-right: 10px;
 }
 
 .gd-title {
@@ -83,7 +97,7 @@ h3 {
     font-weight: normal;
     font-size: 28px;
     margin-bottom: 0px;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .gd-link {
@@ -98,7 +112,13 @@ h3 {
 
 .gd-text {
     font-family: OpenSans, sans-serif;
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    text-shadow: black 1px 0 5px;
+}
+
+.push-text {
+    margin-right: 10px;
 }
 
 #divider {
@@ -114,4 +134,8 @@ h3 {
     font-size: 14px;
     top: 130px;
     left: 105px;
+}
+
+#osugds-logo {
+    width: 1.75%;
 }

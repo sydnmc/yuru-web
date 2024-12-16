@@ -143,6 +143,15 @@
     }
 }
 
+.diff-plural {
+    padding: 7.5px 0 7.5px 5px;
+}
+
+.sr-plural {
+    padding: 7.5px 0px 7.5px 5px;
+    height: 100%;
+}
+
 .play-button-wrapper {
     display: flex; 
     align-items: center; 
