@@ -136,6 +136,53 @@ h3 {
     left: 105px;
 }
 
+.larger-text {
+    font-size: 16px;
+}
+
 #osugds-logo {
     width: 1.75%;
+}
+
+/* mobile */
+@media only screen and (max-device-width: 1000px)
+{  
+    #right-side {
+        position: relative;
+        width: 100%;
+    }
+
+    #osu-showcase-wrapper {
+        width: calc(100% - 30px); /* apparently this gets the spacing right, not sure why at all :sob: */
+        margin-bottom: 15px;
+    }
+
+    #gd-display-wrapper {
+        flex-direction: column;
+    }
+
+    #osugds-logo {
+        width: 2.5%;
+    }
+
+    .gd-title {
+        margin-right: 10px;
+    }
+
+    .gd-artist {
+        margin-right: 10px;
+    }
+
+    .gd-text {
+        margin-right: 10px;
+    }
+
+    .gd-thumb {
+        margin-right: 10px;
+        padding-right: 0px;
+    }
+
+    .larger-text {
+        font-size: 14px;
+    }
 }

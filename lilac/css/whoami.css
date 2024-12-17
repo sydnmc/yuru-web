@@ -55,9 +55,29 @@ li {
     padding-bottom: 40px;
 }
 
+/* mobile */
 @media only screen and (max-device-width: 1000px)
 { 
     .sya-my-beloved {
         display: none;
+    }
+
+    .image-area {
+        flex-direction: column-reverse;
+    }
+
+    .image-area-text {
+        text-align: center;
+        font-size: 12px;
+        padding-right: 0px;
+    }
+
+    .thinkpad-img {
+        max-width: 100%;
+    }
+
+    .bottom-footnote {
+        font-size: 12px;
+        width: 100%;
     }
 }

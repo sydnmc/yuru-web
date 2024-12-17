@@ -53,3 +53,16 @@ h2 {
     width: 100%;
     margin: 0;
 }
+
+/* mobile */
+@media only screen and (max-device-width: 1000px)
+{  
+    #music-container {
+        flex-direction: column;
+    }
+
+    .song-element {
+        width: calc(100% - 30px);
+        margin-bottom: 15px;
+    }
+}
