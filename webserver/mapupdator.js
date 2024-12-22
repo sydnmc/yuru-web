@@ -161,7 +161,7 @@ async function initialize() {
                     break;
                 case "3":
                     mapStatus = mapStatusSydney;
-                    addDiff();
+                    addDiff(sydneys);
                     break;
                 case "4":
                     mapStatus = mapStatusLilac;
