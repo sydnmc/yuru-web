@@ -91,7 +91,7 @@ export function generatePageHeader(isJapanese, currentPage) {
             case "gds":
                 gdsButton.style = currentlyOnPage;
                 gdsButton.removeAttribute('href');
-                translateButton.setAttribute('href', 'gds-ja_jp.html');
+                translateButton.setAttribute('href', '404translate.html');
                 break;
             case "music":
                 musicButton.style = currentlyOnPage;

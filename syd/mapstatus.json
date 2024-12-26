@@ -9,6 +9,9 @@
     "difficulties": [
       "BNMC'S 1NS4N3"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       4.73
     ],
@@ -19,8 +22,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (pretty bad)",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge (pretty bad)"
   },
   {
     "bgLink": "",
@@ -32,6 +35,9 @@
     "difficulties": [
       "bnmc's Insane"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       4.44
     ],
@@ -42,8 +48,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (pretty bad)",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge (pretty bad)"
   },
   {
     "bgLink": "images/gd-thumbnails/1292691.jpg",
@@ -57,6 +63,9 @@
       "bnmc's Gungainted Classic Extra",
       "bnmc's a Big Fan of Muffins and Get Real Extra"
     ],
+    "amountsMapped": [
+      "all", "all"
+    ],
     "starRatings": [
       5.2,
       5.74
@@ -69,8 +78,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (meme set)",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge (meme set)"
   },
   {
     "bgLink": "images/gd-thumbnails/1328582.jpg",
@@ -82,6 +91,9 @@
     "difficulties": [
       "bnmc's Light Insane"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       4.05
     ],
@@ -92,8 +104,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (pretty bad)",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge (pretty bad)"
   },
   {
     "bgLink": "images/gd-thumbnails/1387603.jpg",
@@ -105,6 +117,9 @@
     "difficulties": [
       "bnmc's Insane"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       4.86
     ],
@@ -115,8 +130,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (pretty bad)",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge (pretty bad)"
   },
   {
     "bgLink": "images/gd-thumbnails/1448786.jpg",
@@ -128,6 +143,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.07
     ],
@@ -138,20 +156,21 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (pretty bad)",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge (pretty bad)"
   },
   {
     "bgLink": "images/gd-thumbnails/1507633.jpg",
     "songName": "I Love Egg - I Love Egg",
     "songURLs": [
-      "https://osu.ppy.sh/beatmapsets/1507633#osu/3093524",
-      "https://osu.ppy.sh/beatmapsets/1588931#osu/3246054",
-      "https://osu.ppy.sh/beatmapsets/1588931#osu/3254166"
+      "https://osu.ppy.sh/beatmapsets/1507633#osu/3093524"
     ],
     "mapper": "I Love Egg",
     "difficulties": [
       "bnmc's Tragic Egg Normal"
+    ],
+    "amountsMapped": [
+      "all"
     ],
     "starRatings": [
       1.94
@@ -163,8 +182,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (pretty bad)",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge (pretty bad)"
   },
   {
     "bgLink": "images/gd-thumbnails/1557348.jpg",
@@ -176,6 +195,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.32
     ],
@@ -186,20 +208,51 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (pretty bad)",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge (pretty bad)"
+  },
+  {
+    "bgLink": "images/gd-thumbnails/1492448.jpg",
+    "songName": "Thirty Seconds To Mars - The Kill (Bury Me)",
+    "songURLs": [
+      "https://osu.ppy.sh/beatmapsets/1492448#osu/3059267"
+    ],
+    "mapper": "I Love Egg",
+    "difficulties": [
+      "Break"
+    ],
+    "amountsMapped": [
+      "00:53:457 - 01:56:325"
+    ],
+    "starRatings": [
+      6.17
+    ],
+    "datesFinished": [
+      "8/28/2021"
+    ],
+    "bns": [
+      "",
+      ""
+    ],
+    "isUnserious": true,
+    "mapStatus": "deadge (meme set)"
   },
   {
     "bgLink": "images/gd-thumbnails/1588931.jpg",
     "songName": "samfree - Chicken's Theme",
     "songURLs": [
-      "https://osu.ppy.sh/beatmapsets/1588931#osu/3254956"
+      "https://osu.ppy.sh/beatmapsets/1588931#osu/3254956",
+      "https://osu.ppy.sh/beatmapsets/1588931#osu/3246054",
+      "https://osu.ppy.sh/beatmapsets/1588931#osu/3254166"
     ],
     "mapper": "I Love Egg",
     "difficulties": [
       "bnmc's Casual",
       "bnmc's Advanced",
       "bnmc's Hi-Speed Scrambled Eggsane"
+    ],
+    "amountsMapped": [
+      "all", "all", "all"
     ],
     "starRatings": [
       1.79,
@@ -213,8 +266,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1642825.jpg",
@@ -226,6 +279,9 @@
     "difficulties": [
       "bnmc's normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.2
     ],
@@ -236,8 +292,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (meme set)",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge (meme set)"
   },
   {
     "bgLink": "images/gd-thumbnails/1658734.jpg",
@@ -249,6 +305,9 @@
     "difficulties": [
       "bnmc's Green Light Easy"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       1.49
     ],
@@ -259,8 +318,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "",
@@ -272,6 +331,9 @@
     "difficulties": [
       "bnmc's Lunatic"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       4.72
     ],
@@ -282,8 +344,8 @@
       "",
       ""
     ],
-    "mapStatus": "deleted",
-    "touhou": true
+    "isUnserious": false,
+    "mapStatus": "deleted"
   },
   {
     "bgLink": "images/gd-thumbnails/1615177.jpg",
@@ -295,6 +357,9 @@
     "difficulties": [
       "bnmc's Easy"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       1.46
     ],
@@ -305,8 +370,8 @@
       "AJT",
       "Aistre"
     ],
-    "mapStatus": "ranked",
-    "touhou": true
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1693281.jpg",
@@ -318,6 +383,9 @@
     "difficulties": [
       "bnmc's normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.36
     ],
@@ -328,8 +396,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (pretty bad)",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge (pretty bad)"
   },
   {
     "bgLink": "images/gd-thumbnails/1709457.jpg",
@@ -341,6 +409,9 @@
     "difficulties": [
       "bnmc's Light Insane"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.71
     ],
@@ -351,8 +422,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (meme set)",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge (meme set)"
   },
   {
     "bgLink": "images/gd-thumbnails/1679635.jpg",
@@ -364,6 +435,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.38
     ],
@@ -374,8 +448,8 @@
       "NeKroMan4iK",
       "Uberfazz"
     ],
-    "mapStatus": "ranked",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1711579.jpg",
@@ -387,6 +461,9 @@
     "difficulties": [
       "bnmc's Advanced"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.64
     ],
@@ -397,8 +474,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": true
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1780401.jpg",
@@ -410,6 +487,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       1.94
     ],
@@ -420,8 +500,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (unfinished spread)",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge (unfinished spread)"
   },
   {
     "bgLink": "images/gd-thumbnails/1714273.jpg",
@@ -433,6 +513,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.35
     ],
@@ -443,8 +526,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1714809.jpg",
@@ -456,6 +539,9 @@
     "difficulties": [
       "bnmc's Lunatic"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       5.05
     ],
@@ -466,8 +552,8 @@
       "Dada",
       "riffy"
     ],
-    "mapStatus": "ranked",
-    "touhou": true
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1745440.jpg",
@@ -479,6 +565,9 @@
     "difficulties": [
       ":bnmc's_basic:"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       1.83
     ],
@@ -489,8 +578,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1234122.jpg",
@@ -502,6 +591,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.2
     ],
@@ -512,8 +604,60 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (unfinished spread)",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge (unfinished spread)"
+  },
+  {
+    "bgLink": "images/gd-thumbnails/1753993.png",
+    "songName": "DJ Sharpnel - IVALTEK (Cut Ver.)",
+    "songURLs": [
+      "https://osu.ppy.sh/beatmapsets/1753993#osu/3589511"
+    ],
+    "mapper": "I Love Egg",
+    "difficulties": [
+      "I LOVE EGG X BNMC'S MORTALITY"
+    ],
+    "amountsMapped": [
+      "00:00:895 - 01:12:978"
+    ],
+    "starRatings": [
+      7.38
+    ],
+    "datesFinished": [
+      "4/30/2022"
+    ],
+    "bns": [
+      "",
+      ""
+    ],
+    "isUnserious": true,
+    "mapStatus": "deadge (unfinished spread)"
+  },
+  {
+    "bgLink": "images/gd-thumbnails/1757984.jpg",
+    "songName": "TJ Hill - The Owl House Theme Song (TV Size)",
+    "songURLs": [
+      "https://osu.ppy.sh/beatmapsets/1757984#osu/3599044"
+    ],
+    "mapper": "Videos",
+    "difficulties": [
+      "bnmc, Leomine & Video's Advanced"
+    ],
+    "amountsMapped": [
+      "00:17:997 - 00:27:542"
+    ],
+    "starRatings": [
+      2.46
+    ],
+    "datesFinished": [
+      "5/6/2022"
+    ],
+    "bns": [
+      "Awfulness",
+      "riffy"
+    ],
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1760063.jpg",
@@ -525,6 +669,9 @@
     "difficulties": [
       "bnmc's easy"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       1.82
     ],
@@ -535,8 +682,34 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (meme set)",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge (meme set)"
+  },
+  {
+    "bgLink": "images/gd-thumbnails/1706957.png",
+    "songName": "yanaginagi - Songs Compilation",
+    "songURLs": [
+      "https://osu.ppy.sh/beatmapsets/1706957#osu/3487908"
+    ],
+    "mapper": "Rentai",
+    "difficulties": [
+      "Serenity"
+    ],
+    "amountsMapped": [
+      "17:17:607 - 18:40:912 (Fall in the Dark)"
+    ],
+    "starRatings": [
+      6.04
+    ],
+    "datesFinished": [
+      "5/14/2022"
+    ],
+    "bns": [
+      "",
+      ""
+    ],
+    "isUnserious": false,
+    "mapStatus": "deadge (unfinished spread)"
   },
   {
     "bgLink": "",
@@ -548,6 +721,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.34
     ],
@@ -558,8 +734,8 @@
       "",
       ""
     ],
-    "mapStatus": "deleted",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deleted"
   },
   {
     "bgLink": "images/gd-thumbnails/1767943.jpg",
@@ -571,6 +747,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.34
     ],
@@ -581,8 +760,8 @@
       "",
       ""
     ],
-    "mapStatus": "deleted",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deleted"
   },
   {
     "bgLink": "images/gd-thumbnails/1638844.jpg",
@@ -594,6 +773,9 @@
     "difficulties": [
       "bnmc's LUNATIC JAPANESE GOBLIN!"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       4.8
     ],
@@ -604,8 +786,8 @@
       "Luscent",
       "Zelq"
     ],
-    "mapStatus": "ranked",
-    "touhou": true
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1521327.jpg",
@@ -617,6 +799,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.4
     ],
@@ -627,8 +812,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1789595.jpg",
@@ -640,6 +825,9 @@
     "difficulties": [
       "bnmc's Hard"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       3.78
     ],
@@ -650,8 +838,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1787722.jpg",
@@ -663,6 +851,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.46
     ],
@@ -673,8 +864,8 @@
       "riffy",
       "Luscent"
     ],
-    "mapStatus": "ranked",
-    "touhou": true
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1806488.jpg",
@@ -686,6 +877,9 @@
     "difficulties": [
       "bnmc's N.O.R.M.A.L"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.65
     ],
@@ -696,8 +890,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1811880.jpg",
@@ -709,6 +903,9 @@
     "difficulties": [
       "bnmc's ~May be hard?~"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       3.85
     ],
@@ -719,8 +916,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1849967.jpg",
@@ -732,6 +929,9 @@
     "difficulties": [
       "bnmc's Hard"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       3.45
     ],
@@ -742,8 +942,8 @@
       "Okoratu",
       "neonat"
     ],
-    "mapStatus": "ranked",
-    "touhou": true
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1827366.jpg",
@@ -755,6 +955,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.46
     ],
@@ -765,8 +968,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/2192691.jpg",
@@ -778,6 +981,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.46
     ],
@@ -788,8 +994,8 @@
       "enneya",
       ""
     ],
-    "mapStatus": "ranked",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1838808.jpg",
@@ -801,6 +1007,9 @@
     "difficulties": [
       "bnmc's Gensokyo Easy!"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       1.8
     ],
@@ -811,8 +1020,8 @@
       "riffy",
       "Okoratu"
     ],
-    "mapStatus": "ranked",
-    "touhou": true
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1878416.jpg",
@@ -824,6 +1033,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.32
     ],
@@ -834,8 +1046,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1884211.jpg",
@@ -847,6 +1059,9 @@
     "difficulties": [
       "bnmc's Insane"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       4.74
     ],
@@ -857,8 +1072,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1772635.jpg",
@@ -870,6 +1085,9 @@
     "difficulties": [
       "bnmc's Normal!"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.11
     ],
@@ -880,8 +1098,34 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
+  },
+  {
+    "bgLink": "images/gd-thumbnails/1839634.jpg",
+    "songName": "Ayane - FaV -F*** and Vanguard-",
+    "songURLs": [
+      "https://osu.ppy.sh/beatmapsets/1839634#osu/3816927"
+    ],
+    "mapper": "tilda",
+    "difficulties": [
+      "shimarin gaming Collab Insane"
+    ],
+    "amountsMapped": [
+      "odds"
+    ],
+    "starRatings": [
+      4.97
+    ],
+    "datesFinished": [
+      "11/24/2022"
+    ],
+    "bns": [
+      "",
+      ""
+    ],
+    "isUnserious": false,
+    "mapStatus": "deadge (unfinished spread)"
   },
   {
     "bgLink": "images/gd-thumbnails/1900616.jpg",
@@ -893,6 +1137,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       1.95
     ],
@@ -903,8 +1150,8 @@
       "Mirash",
       "Zekk"
     ],
-    "mapStatus": "ranked",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1901652.jpg",
@@ -916,6 +1163,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.06
     ],
@@ -926,8 +1176,8 @@
       "Okoratu",
       "fieryrage"
     ],
-    "mapStatus": "ranked",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1981096.jpg",
@@ -939,6 +1189,9 @@
     "difficulties": [
       "bnmc's amaimono tabetai"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       5.62
     ],
@@ -949,8 +1202,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1983135.jpg",
@@ -962,6 +1215,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       1.74
     ],
@@ -972,8 +1228,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/2032219.jpg",
@@ -985,6 +1241,9 @@
     "difficulties": [
       "bnmc's Insane"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       4.37
     ],
@@ -995,8 +1254,8 @@
       "Local Hero",
       "Dakiwii"
     ],
-    "mapStatus": "qualified",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "qualified"
   },
   {
     "bgLink": "images/gd-thumbnails/2035390.jpg",
@@ -1008,6 +1267,9 @@
     "difficulties": [
       "bnmc's Easy"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       1.8
     ],
@@ -1018,8 +1280,8 @@
       "Dakiwii",
       "Annabel"
     ],
-    "mapStatus": "ranked",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1997064.jpg",
@@ -1031,6 +1293,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.43
     ],
@@ -1041,8 +1306,34 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
+  },
+  {
+    "bgLink": "images/gd-thumbnails/2053748.jpg",
+    "songName": "Harry-P - Dream to the Future",
+    "songURLs": [
+      "https://osu.ppy.sh/beatmapsets/2053748#osu/4290063"
+    ],
+    "mapper": "Kuroise",
+    "difficulties": [
+      "VAT's Anniversary"
+    ],
+    "amountsMapped": [
+      "08:21:780 - 08:45:780"
+    ],
+    "starRatings": [
+      4.6
+    ],
+    "datesFinished": [
+      "8/31/2023"
+    ],
+    "bns": [
+      "",
+      ""
+    ],
+    "isUnserious": true,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/1876060.jpg",
@@ -1054,6 +1345,9 @@
     "difficulties": [
       "bnmc's Sober Lunatic"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       4.56
     ],
@@ -1064,8 +1358,8 @@
       "Luscent",
       "AJT"
     ],
-    "mapStatus": "ranked",
-    "touhou": true
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/2070906.jpg",
@@ -1077,6 +1371,9 @@
     "difficulties": [
       "bnmc's Normal"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.33
     ],
@@ -1087,8 +1384,8 @@
       "Pile",
       "-Hitomi"
     ],
-    "mapStatus": "ranked",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/2136811.jpg",
@@ -1100,6 +1397,9 @@
     "difficulties": [
       "bnmc's Socially Anxious Strawberry"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       3.79
     ],
@@ -1110,8 +1410,8 @@
       "Nevo",
       "Noffy"
     ],
-    "mapStatus": "ranked",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/2144419.jpg",
@@ -1123,6 +1423,9 @@
     "difficulties": [
       "Nymphomania (bnmc's Normal)"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       2.4
     ],
@@ -1133,8 +1436,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/2167008.jpg",
@@ -1146,6 +1449,9 @@
     "difficulties": [
       "bnmc's Insanother"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       5.25
     ],
@@ -1156,8 +1462,8 @@
       "KaedeharaKazuha",
       "Daycore"
     ],
-    "mapStatus": "ranked",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/1863602.jpg",
@@ -1169,6 +1475,9 @@
     "difficulties": [
       "bnmc's Hard"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       4.03
     ],
@@ -1179,8 +1488,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "pending"
   },
   {
     "bgLink": "images/gd-thumbnails/2195974.jpg",
@@ -1192,6 +1501,9 @@
     "difficulties": [
       "bnmc's Arms Feel Like Home"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       3.06
     ],
@@ -1202,8 +1514,8 @@
       "Kataryn",
       ""
     ],
-    "mapStatus": "deleted",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/2216274.jpg",
@@ -1215,6 +1527,9 @@
     "difficulties": [
       "bnmc's Insane"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       4.78
     ],
@@ -1225,22 +1540,27 @@
       "Saggin",
       "Joshywaboo"
     ],
-    "mapStatus": "ranked",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/2042450.jpg",
     "songName": "KOTOKO - BLAZE (TV Size)",
     "songURLs": [
-      "https://osu.ppy.sh/beatmapsets/2042450#osu/4770562", "https://osu.ppy.sh/beatmapsets/2042450#osu/4771167"
+      "https://osu.ppy.sh/beatmapsets/2042450#osu/4770562",
+      "https://osu.ppy.sh/beatmapsets/2042450#osu/4771167"
     ],
     "mapper": "Lurumic",
     "difficulties": [
       "luru & sydnmc's Advanced",
       "sydnmc's Hard"
     ],
+    "amountsMapped": [
+      "00:45:494 - 01:29:790", "all"
+    ],
     "starRatings": [
-      2.99, 3.49
+      2.99,
+      3.49
     ],
     "datesFinished": [
       "9/4/2024"
@@ -1249,8 +1569,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/2134600.jpg",
@@ -1263,8 +1583,12 @@
       "muya- & sydnmc's hard lesbian life...",
       "muya- & sydnmc's insane lesbian life..."
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
-      3.99, "~4.7"
+      3.99,
+      "~4.7"
     ],
     "datesFinished": [
       "9/28/2024"
@@ -1273,8 +1597,8 @@
       "",
       ""
     ],
-    "mapStatus": "deadge",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "deadge"
   },
   {
     "bgLink": "images/gd-thumbnails/2263303.jpg",
@@ -1286,6 +1610,9 @@
     "difficulties": [
       "sydnmc's kuyashimagire//Ultra"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       7.75
     ],
@@ -1296,11 +1623,11 @@
       "Riana",
       "Iceluin"
     ],
-    "mapStatus": "ranked",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "ranked"
   },
   {
-    "bgLink": "images/gd-thumbnails/2253683.jpg",
+    "bgLink": "images/gd-thumbnails/2287261.jpg",
     "songName": "lucky - Konata and Friends' Paffendorf (Lucky Star MIX) (Cut Ver.)",
     "songURLs": [
       "https://osu.ppy.sh/beatmapsets/2287261#osu/4899116"
@@ -1308,6 +1635,9 @@
     "mapper": "huu",
     "difficulties": [
       "sydnmc's konakaga #himejoshiLOVE #LoveIsLove"
+    ],
+    "amountsMapped": [
+      "all"
     ],
     "starRatings": [
       5.98
@@ -1319,21 +1649,28 @@
       "",
       ""
     ],
-    "mapStatus": "deadge (meme set)",
-    "touhou": false
+    "isUnserious": true,
+    "mapStatus": "deadge (meme set)"
   },
   {
-    "bgLink": "images/gd-thumbnails/2253683.jpg",
+    "bgLink": "images/gd-thumbnails/2293960.jpg",
     "songName": "Aiobahn - Angel Falling",
     "songURLs": [
-      "https://osu.ppy.sh/beatmapsets/2293960#osu/4903627", "https://osu.ppy.sh/beatmapsets/2293960#osu/4902386"
+      "https://osu.ppy.sh/beatmapsets/2293960#osu/4903627",
+      "https://osu.ppy.sh/beatmapsets/2293960#osu/4902386"
     ],
     "mapper": "Gorou",
     "difficulties": [
-      "MUYA-'S INSANE AME-CHAN OVERDOSE FEAT. SYDNMC", "SYDNMC'S AME COSPLAY EXTRA FEAT. PIEN CAT MUYA-"
+      "MUYA-'S INSANE AME-CHAN OVERDOSE FEAT. SYDNMC",
+      "SYDNMC'S AME COSPLAY EXTRA FEAT. PIEN CAT MUYA-"
+    ],
+    "amountsMapped": [
+      "final object",
+      "all but final object"
     ],
     "starRatings": [
-      4.6, 5.65
+      4.6,
+      5.65
     ],
     "datesFinished": [
       "12/18/2024"
@@ -1342,8 +1679,8 @@
       "",
       ""
     ],
-    "mapStatus": "set wip",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "set wip"
   },
   {
     "bgLink": "images/gd-thumbnails/2138390.jpg",
@@ -1355,6 +1692,9 @@
     "difficulties": [
       "underneath the sheets w/sydnmc"
     ],
+    "amountsMapped": [
+      "evens"
+    ],
     "starRatings": [
       3.55
     ],
@@ -1362,11 +1702,11 @@
       "12/22/2024"
     ],
     "bns": [
-      "",
-      ""
+      "fllecc",
+      "Aakki"
     ],
-    "mapStatus": "pending",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "pending"
   },
   {
     "bgLink": "images/gd-thumbnails/2253683.jpg",
@@ -1378,6 +1718,9 @@
     "difficulties": [
       "sydnmc's Hard"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       "~3.1"
     ],
@@ -1388,8 +1731,8 @@
       "",
       ""
     ],
-    "mapStatus": "wip",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "wip"
   },
   {
     "bgLink": "images/gd-thumbnails/2179971.jpg",
@@ -1401,6 +1744,9 @@
     "difficulties": [
       "sydnmc's 4MIX LITE"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       "~3.3"
     ],
@@ -1411,8 +1757,8 @@
       "",
       ""
     ],
-    "mapStatus": "wip",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "wip"
   },
   {
     "bgLink": "images/gd-thumbnails/2256857.jpg",
@@ -1424,6 +1770,9 @@
     "difficulties": [
       "sydnmc's Lunatic Fairy Crew vs. Scarlet Keisatsu"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       "~5.2"
     ],
@@ -1434,8 +1783,8 @@
       "",
       ""
     ],
-    "mapStatus": "wip",
-    "touhou": true
+    "isUnserious": false,
+    "mapStatus": "wip"
   },
   {
     "bgLink": "images/gd-thumbnails/2235132.jpg",
@@ -1447,6 +1796,9 @@
     "difficulties": [
       "sydnmc & yuiyamu's Insane"
     ],
+    "amountsMapped": [
+      "all"
+    ],
     "starRatings": [
       "~4.9"
     ],
@@ -1457,7 +1809,7 @@
       "",
       ""
     ],
-    "mapStatus": "wip",
-    "touhou": false
+    "isUnserious": false,
+    "mapStatus": "wip"
   }
 ]
