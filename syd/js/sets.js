@@ -1,4 +1,5 @@
 import { generatePageHeader } from './header.js';
+import { createHovers } from './osuhover.js';
 
 function createSetRows(num) {
     const container = document.getElementById('set-container');
@@ -115,4 +116,6 @@ function populateRows(setInfo, incomplete, offsetNum) {
     
     populateRows(completeSetsList, false, 0);
     populateRows(incompleteSetsList, true, completeSetsList.length);
+
+    createHovers();
 })();
