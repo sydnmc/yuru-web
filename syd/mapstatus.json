@@ -618,7 +618,7 @@
       "I LOVE EGG X BNMC'S MORTALITY"
     ],
     "amountsMapped": [
-      "00:00:895 - 01:12:978"
+      "start - 01:12:978"
     ],
     "starRatings": [
       7.38
@@ -1556,7 +1556,7 @@
       "sydnmc's Hard"
     ],
     "amountsMapped": [
-      "00:45:494 - 01:29:790", "all"
+      "00:45:494 - end", "all"
     ],
     "starRatings": [
       2.99,
@@ -1584,7 +1584,7 @@
       "muya- & sydnmc's insane lesbian life..."
     ],
     "amountsMapped": [
-      "all"
+      "evens", "evens"
     ],
     "starRatings": [
       3.99,
@@ -1665,7 +1665,7 @@
       "SYDNMC'S AME COSPLAY EXTRA FEAT. PIEN CAT MUYA-"
     ],
     "amountsMapped": [
-      "final object",
+      "just final object",
       "all but final object"
     ],
     "starRatings": [

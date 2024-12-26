@@ -92,13 +92,6 @@ function populateRows(setInfo, incomplete, offsetNum) {
         title.textContent = setInfo[i].setTitle;
         title.setAttribute('href', setInfo[i].setUrl);
         content.innerHTML = setInfo[i].setYapping;
-
-        try { //if there exists urls to fill, fill them~ otherwise, don't do anything
-            for (let j = 0; j < setInfo[j].urls.length; j++) {
-                content.querySelector("a").setAttribute('href', setInfo[i].urls[j]);
-            }
-            content.querySelector("a").classList.add("normal-text");
-        } catch { }
     }
 }
 
