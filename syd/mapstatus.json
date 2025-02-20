@@ -1710,6 +1710,32 @@
     "mapStatus": "ranked"
   },
   {
+    "bgLink": "images/gd-thumbnails/2326272.png",
+    "songName": "Juufuutei Raden - Maitake Dance",
+    "songURLs": [
+      "https://osu.ppy.sh/beatmapsets/2326272"
+    ],
+    "mapper": "iRedi",
+    "difficulties": [
+      "sydnmc's Gungatake Extra"
+    ],
+    "amountsMapped": [
+      "all"
+    ],
+    "starRatings": [
+      5.71
+    ],
+    "datesFinished": [
+      "2/20/2025"
+    ],
+    "bns": [
+      "",
+      ""
+    ],
+    "isUnserious": false,
+    "mapStatus": "ranked"
+  },
+  {
     "bgLink": "images/gd-thumbnails/2253683.jpg",
     "songName": "Alma Gov - Ma La'asot Im Haze'ev",
     "songURLs": [
@@ -1776,6 +1802,32 @@
     ],
     "starRatings": [
       "~5.2"
+    ],
+    "datesFinished": [
+      "N/A"
+    ],
+    "bns": [
+      "",
+      ""
+    ],
+    "isUnserious": false,
+    "mapStatus": "wip"
+  },
+  {
+    "bgLink": "images/gd-thumbnails/2300800.png",
+    "songName": "Halozy feat. Nanahira - Monosugoi Kuruttoru Flan-chan ga Monosugoi Uta",
+    "songURLs": [
+      "https://osu.ppy.sh/beatmapsets/2300800"
+    ],
+    "mapper": "Pyo",
+    "difficulties": [
+      "sydnmc@flandre's Lunatic"
+    ],
+    "amountsMapped": [
+      "all"
+    ],
+    "starRatings": [
+      "~5.5"
     ],
     "datesFinished": [
       "N/A"
