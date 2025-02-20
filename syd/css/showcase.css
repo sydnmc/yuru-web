@@ -185,4 +185,8 @@ h3 {
     .larger-text {
         font-size: 14px;
     }
+
+    .upper-ranked-text {
+        top: -37.5px;
+    }
 }

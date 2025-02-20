@@ -1576,7 +1576,8 @@
     "bgLink": "images/gd-thumbnails/2134600.jpg",
     "songName": "minato feat. Hatsune Miku, Megurine Luka - magnet",
     "songURLs": [
-      "https://osu.ppy.sh/beatmapsets/2134600#osu/4812592"
+      "https://osu.ppy.sh/beatmapsets/2134600#osu/4812592",
+      "https://osu.ppy.sh/beatmapsets/2134600#osu/4944665"
     ],
     "mapper": "muya-",
     "difficulties": [
@@ -1588,7 +1589,7 @@
     ],
     "starRatings": [
       3.99,
-      "~4.7"
+      4.91
     ],
     "datesFinished": [
       "9/28/2024"
@@ -1598,7 +1599,7 @@
       ""
     ],
     "isUnserious": false,
-    "mapStatus": "deadge"
+    "mapStatus": "pending"
   },
   {
     "bgLink": "images/gd-thumbnails/2263303.jpg",
@@ -1706,7 +1707,7 @@
       "Aakki"
     ],
     "isUnserious": false,
-    "mapStatus": "pending"
+    "mapStatus": "ranked"
   },
   {
     "bgLink": "images/gd-thumbnails/2253683.jpg",
@@ -1735,58 +1736,6 @@
     "mapStatus": "wip"
   },
   {
-    "bgLink": "images/gd-thumbnails/2179971.jpg",
-    "songName": "765 MILLION ALLSTARS - Brand New Theater!",
-    "songURLs": [
-      "https://osu.ppy.sh/beatmapsets/2179971"
-    ],
-    "mapper": "TsumugiP",
-    "difficulties": [
-      "sydnmc's 4MIX LITE"
-    ],
-    "amountsMapped": [
-      "all"
-    ],
-    "starRatings": [
-      "~3.3"
-    ],
-    "datesFinished": [
-      "N/A"
-    ],
-    "bns": [
-      "",
-      ""
-    ],
-    "isUnserious": false,
-    "mapStatus": "wip"
-  },
-  {
-    "bgLink": "images/gd-thumbnails/2256857.jpg",
-    "songName": "IOSYS - Scarlet Keisatsu no Ghetto Patrol 24-ji",
-    "songURLs": [
-      "https://osu.ppy.sh/beatmapsets/2256857"
-    ],
-    "mapper": "Bloxi",
-    "difficulties": [
-      "sydnmc's Lunatic Fairy Crew vs. Scarlet Keisatsu"
-    ],
-    "amountsMapped": [
-      "all"
-    ],
-    "starRatings": [
-      "~5.2"
-    ],
-    "datesFinished": [
-      "N/A"
-    ],
-    "bns": [
-      "",
-      ""
-    ],
-    "isUnserious": false,
-    "mapStatus": "wip"
-  },
-  {
     "bgLink": "images/gd-thumbnails/2235132.jpg",
     "songName": "DenkiQujira - Kuu Neru Andgazer",
     "songURLs": [
@@ -1801,6 +1750,32 @@
     ],
     "starRatings": [
       "~4.9"
+    ],
+    "datesFinished": [
+      "N/A"
+    ],
+    "bns": [
+      "",
+      ""
+    ],
+    "isUnserious": false,
+    "mapStatus": "wip"
+  },
+  {
+    "bgLink": "images/gd-thumbnails/2313117.jpg",
+    "songName": "Kessoku Band - Karakara",
+    "songURLs": [
+      "https://osu.ppy.sh/beatmapsets/2313117"
+    ],
+    "mapper": "I Love Egg",
+    "difficulties": [
+      "sydnmc's nonverbal insane"
+    ],
+    "amountsMapped": [
+      "all"
+    ],
+    "starRatings": [
+      "~5.2"
     ],
     "datesFinished": [
       "N/A"

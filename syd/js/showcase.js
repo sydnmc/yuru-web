@@ -65,7 +65,7 @@ function generateDisplay(mapDb, isGd) {
         }
 
         for (let i = 0; i < mapDb.length; i++) { //searching for these maps
-            if (mapDb[i].songName == "U2 - Saigetsu (Koko & Satsuki ga Tenkomori's Sagyou Bougai Remix)" || mapDb[i].songName == "Snail's House - Sunday") { 
+            if (mapDb[i].songName == "U2 - Saigetsu (Koko & Satsuki ga Tenkomori's Sagyou Bougai Remix)" || mapDb[i].songName == "irohaRingo feat. flower - Why I hate you") { 
                 notableGds.push(mapDb[i]);
             }
         }
