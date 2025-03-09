@@ -1,7 +1,7 @@
 import { colorate } from './osucolorator.js';
 import { generatePageHeader } from './header.js';
 
-const endpoint = "http://localhost:3333"; //endpoint (backend)
+const endpoint = "https://yuru-web.twmarshall19.workers.dev/"; //endpoint (backend)
 
 function createRows(num) {
     const container = document.getElementById('gdtab-start');
