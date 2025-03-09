@@ -1,6 +1,8 @@
 import { colorate } from './osucolorator.js';
 import { generatePageHeader } from './header.js';
 
+const endpoint = "http://localhost:3333"; //endpoint (backend)
+
 function createRows(num) {
     const container = document.getElementById('gdtab-start');
     var rowElement = "";
@@ -26,16 +28,11 @@ function createRows(num) {
     }
 }
 
-async function getMapStatus(isJapanese) {
+async function getMapStatus() {
     var mapStatus;
-
     try {
-        var response
-        if (isJapanese) {
-            response = await fetch("mapstatus-jp.json");
-        } else {
-            response = await fetch("mapstatus.json");
-        }
+        var response;
+        response = await fetch(`${endpoint}/gds?person=sydney`);
         if (!response.ok) {
             throw new Error(`Response: ${response.status}`);
         }
@@ -47,7 +44,7 @@ async function getMapStatus(isJapanese) {
     return await mapStatus;
 }
 
-async function populateRow(i, mapStatus) { //i = row number
+async function populateRow(i, mapStatus, isJapanese) { //i = row number
     var bgLink;
     var imgSheetLink = mapStatus[i].bgLink;
     if (imgSheetLink == "") {
@@ -89,7 +86,11 @@ async function populateRow(i, mapStatus) { //i = row number
     padding: 0px 0px; 
     background-size: cover;
     background-position: center;`;
-    title.textContent = mapStatus[i].songName;
+    if (!isJapanese) {
+        title.textContent = mapStatus[i].songName;
+    } else {
+        title.textContent = mapStatus[i].songNameUnicode;
+    }
 
     var beatmapsetUrl = mapStatus[i].songURLs[0].substr(0, mapStatus[i].songURLs[0].indexOf("#osu/")); //KILLS the beatmap url and makes it the set
 
@@ -262,7 +263,7 @@ async function populateRow(i, mapStatus) { //i = row number
     document.body.onload = createRows(curMapStatus.length);
 
     for (let i = 0; i < curMapStatus.length; i++) {
-        await populateRow(i, curMapStatus);
+        await populateRow(i, curMapStatus, jp);
         if (curMapStatus[i].mapStatus == "wip") {
             wipCount++;
         }

@@ -8,13 +8,13 @@
 //FUCK also includes code for updating the currently/last playing song displayed
 
 const systemURL = "https://api.pluralkit.me/v2/"; //ytcvss is my AWESOME SYSTEM YAY
-const lastFmURL = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=bnmc_&api_key=f2eed0b71c94d900942a954c37a0d0ec&format=json&limit=1";
+const endpoint = "http://localhost:3333"; //endpoint (backend)
 
 async function getLastSong() {
     var songInfo;
 
     try {
-        const response = await fetch(lastFmURL);
+        const response = await fetch(`${endpoint}/songInfo`);
         if (!response.ok) {
             throw new Error(`Response: ${response.status}`);
         }
