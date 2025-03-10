@@ -8,7 +8,7 @@
 //FUCK also includes code for updating the currently/last playing song displayed
 
 const systemURL = "https://api.pluralkit.me/v2/"; //ytcvss is my AWESOME SYSTEM YAY
-const endpoint = "http://api.yuru.ca"; //endpoint (backend)
+const endpoint = "https://api.yuru.ca"; //endpoint (backend)
 
 async function getLastSong() {
     var songInfo;

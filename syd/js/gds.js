@@ -1,7 +1,7 @@
 import { colorate } from './osucolorator.js';
 import { generatePageHeader } from './header.js';
 
-const endpoint = "http://api.yuru.ca"; //endpoint (backend)
+const endpoint = "https://api.yuru.ca"; //endpoint (backend)
 
 function createRows(num) {
     const container = document.getElementById('gdtab-start');
