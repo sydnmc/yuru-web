@@ -8,6 +8,10 @@ body {
     font-family: YuGothic, sans-serif;
 }
 
+audio {
+    display: none;
+}
+
 a {
     color: rgb(180 181 191);
     text-decoration: none;

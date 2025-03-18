@@ -1,6 +1,6 @@
 [
   {
-    "bgLink": "images/map-thumbnails/2240022.jpg",
+    "bgLink": "https://assets.ppy.sh/beatmaps/2289999/covers/cover@2x.jpg",
     "songName": "midijunki - game with wuffians",
     "songURLs": [
       "https://osu.ppy.sh/beatmapsets/2289999#osu/4887364"
@@ -8,6 +8,9 @@
     "mapper": "huu",
     "difficulties": [
       "yuiyamu's needy fuwamoco overdose"
+    ],
+    "amountsMapped": [
+      "all"
     ],
     "starRatings": [
       5.12
@@ -24,7 +27,7 @@
     "songNameUnicode": "midijunki - game with wuffians"
   },
   {
-    "bgLink": "images/map-thumbnails/2261336.jpg",
+    "bgLink": "https://assets.ppy.sh/beatmaps/2261336/covers/cover@2x.jpg",
     "songName": "DJ SHARPNEL - Mmmmmmm",
     "songURLs": [
       "https://osu.ppy.sh/beatmapsets/2261336#osu/4813082"
@@ -32,6 +35,9 @@
     "mapper": "sydnmc",
     "difficulties": [
       "kimmy's extra w/yuiyamu"
+    ],
+    "amountsMapped": [
+      "01:38:300 - 02:51:706"
     ],
     "starRatings": [
       5.77
@@ -47,14 +53,17 @@
     "touhou": false
   },
   {
-    "bgLink": "images/map-thumbnails/2228253.jpg",
+    "bgLink": "https://assets.ppy.sh/beatmaps/2228253/covers/cover@2x.jpg",
     "songName": "Kido Ibuki & Yamazaki Erii - pupa (TV Size)",
     "songURLs": [
       "https://osu.ppy.sh/beatmapsets/2228253#osu/4807671"
     ],
     "mapper": "enri",
     "difficulties": [
-      "sydnmc's normal with yuiyamu"
+      "sydnmc's normal w/yuiyamu"
+    ],
+    "amountsMapped": [
+      "00:22:507 - 00:30:569"
     ],
     "starRatings": [
       2.6
@@ -70,7 +79,7 @@
     "touhou": false
   },
   {
-    "bgLink": "images/map-thumbnails/2278092.jpg",
+    "bgLink": "https://assets.ppy.sh/beatmaps/2278092/covers/cover@2x.jpg",
     "songName": "LamazeP - Ai no Uta feat. Hatsune Miku (Ringtone ver.)",
     "songURLs": [
       "https://osu.ppy.sh/beatmapsets/2278092#osu/4855947"
@@ -78,6 +87,9 @@
     "mapper": "Yumenexa",
     "difficulties": [
       "yuiyamu's Sparkling Endearment II"
+    ],
+    "amountsMapped": [
+      "all"
     ],
     "starRatings": [
       5.79
@@ -94,7 +106,7 @@
     "songNameUnicode": "ラマーズP - 愛の詩 feat. 初音ミク (Ringtone ver.)"
   },
   {
-    "bgLink": "images/map-thumbnails/2278715.jpg",
+    "bgLink": "https://assets.ppy.sh/beatmaps/2278715/covers/cover@2x.jpg",
     "songName": "Masatoshi Ono - departure! -second version- (TV Size)",
     "songURLs": [
       "https://osu.ppy.sh/beatmapsets/2278715#osu/4857358"
@@ -102,6 +114,9 @@
     "mapper": "midorijeon",
     "difficulties": [
       "yuiyamu's Another"
+    ],
+    "amountsMapped": [
+      "all"
     ],
     "starRatings": [
       4.49
@@ -118,7 +133,7 @@
     "songNameUnicode": "小野正利 - departure! -second version- (TV Size)"
   },
   {
-    "bgLink": "images/gd-thumbnails/2235132.jpg",
+    "bgLink": "https://assets.ppy.sh/beatmaps/2235132/covers/cover@2x.jpg",
     "songName": "DenkiQujira - Kuu Neru Andgazer",
     "songURLs": [
       "https://osu.ppy.sh/beatmapsets/2235132"
@@ -126,6 +141,9 @@
     "mapper": "Phten02",
     "difficulties": [
       "sydnmc & yuiyamu's Insane"
+    ],
+    "amountsMapped": [
+      "random, for now~"
     ],
     "starRatings": [
       "~4.9"

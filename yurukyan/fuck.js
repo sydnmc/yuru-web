@@ -7,63 +7,28 @@
 * it totally isnt me hating on js. i would never. */
 //FUCK also includes code for updating the currently/last playing song displayed
 
-const systemURL = "https://api.pluralkit.me/v2/"; //ytcvss is my AWESOME SYSTEM YAY
 const endpoint = "https://api.yuru.ca"; //endpoint (backend)
 
-async function getLastSong() {
-    var songInfo;
-
+async function fetchFromApi(apiEndpoint) {
+    let response;
     try {
-        const response = await fetch(`${endpoint}/songInfo`);
-        if (!response.ok) {
-            throw new Error(`Response: ${response.status}`);
-        }
-        songInfo = await response.json();
-    } catch (error) {
-        console.log(error.message);
+        response = await fetch(`${endpoint}/${apiEndpoint}`);
+    } catch (err) {
+        console.log(`Failed to fetch from yuru.ca API: ${err.message}`);
     }
-
-    return await songInfo;
-}
-
-async function getFrontList() {
-    var systemSwitches;
-
-    try {
-        const response = await fetch(systemURL+"systems/ytcvss/switches?limit=2");
-        if (!response.ok) {
-            throw new Error(`Response: ${response.status}`);
-        }
-        systemSwitches = await response.json();
-    } catch (error) {
-        console.log(error.message);
-    }
-
-    return await systemSwitches;
+    return await response.json();
 }
 
 async function getUser(front, frontList) {
-    var systemSwitches = frontList;
-    var systemMember;
-    var userID;
+    let userID;
 
     if (front) {
-        var userID = systemSwitches[0].members[0];
+        userID = frontList[0].members[0];
     } else {
-        var userID = systemSwitches[1].members[0];
+        userID = frontList[1].members[0];
     }
 
-    try {
-        const response = await fetch(systemURL+"members/"+userID);
-        if (!response.ok) {
-            throw new Error(`Response: ${response.status}`);
-        }
-        systemMember = await response.json();
-    } catch (error) {
-        console.log(error.message);
-    }
-
-    return await systemMember;
+    return await fetchFromApi(`pkInfo?user=${userID}`);
 }
 
 function dateParser(time, isCurrent, fronterTime, isJapanese) { 
@@ -106,7 +71,7 @@ function dateParser(time, isCurrent, fronterTime, isJapanese) {
     } catch { }
 
     /* last.fm */
-    var curSongInfo = await getLastSong();
+    var curSongInfo = await fetchFromApi('songInfo');
     var curSongName = curSongInfo.recenttracks.track[0].name;
     var curSongArtist = curSongInfo.recenttracks.track[0].artist['#text'];
     var songURL = curSongInfo.recenttracks.track[0].url;
@@ -128,21 +93,20 @@ function dateParser(time, isCurrent, fronterTime, isJapanese) {
     }
 
     /* fronter */
-
-    const frontList = await getFrontList();
+    const frontList = await fetchFromApi(`pkInfo?frontList=true`);
     const p1 = await getUser(true, frontList); //true = fronter
     const p2 = await getUser(false, frontList);
     var members = [p1, p2]; //hardcoded 2 members bc im not gonna have more than lilac in me. if so shit
 
     if (members[0].name != "sydney") { //whenever lilac is fronting
-        var lilac = p1;
-        var sydney = p2;
+        let lilac = p1;
+        let sydney = p2;
         members = [sydney, lilac];
     }
 
     for (let i = 0; i < members.length; i++) {
-        var personTime;
-        var personName = members[i].name;
+        let personTime;
+        let personName = members[i].name;
 
         if (frontList[0].members[0] == members[i].id) { //long way to check if current user is fronting or not
             personTime = dateParser(frontList[0].timestamp, true, null, jp);

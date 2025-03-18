@@ -1,14 +1,28 @@
+#top-gd-text {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.below-text {
+    text-align: center;
+    margin: 3px;
+    color: rgb(180 181 191);
+}
+
 .gdtab {
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: auto; 
     width: 100%;
 }
+
 .gdtab td {
     border-color: rgb(100, 101, 112);
     padding: 10px 5px;
     word-break: normal;
 }
+
 .gdtab th {
     border-color: rgb(100, 101, 112);
     border-bottom: 1px solid;
@@ -31,7 +45,7 @@
 }
 
 .gdtab .gdtab-element {
-    height: 55px;
+    height: 80px;
     color: rgb(222, 224, 237);
     font-family: OpenSans, sans-serif;
     text-align: left;
@@ -54,10 +68,6 @@
     padding-top: 10px;
     font-family: OpenSans, sans-serif;
     color: rgb(222, 224, 237);
-    -webkit-flex-direction: column; 
-    flex-direction: column;
-    align-items: stretch;
-    align-items: baseline;
 }
 
 .gdtab-sort-header::-moz-selection {
@@ -141,23 +151,30 @@
     }
 }
 
-audio {
-    display: none;
+.plural-padding {
+    padding: 7.5px 0 7.5px 5px;
+    min-height: 35px;
 }
 
-.play-button-wrapper {
+.play-button-container {
     display: flex; 
-    align-items: center; 
-    height: 100%;
-    background-color: rgb(40 40 40);
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+    background: radial-gradient(circle, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.75) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.play-button-container:hover {
+    opacity: 1; /* triggers fadein */
 }
 
 .play-button {
     color: rgb(222, 224, 237);
-    padding-right: 10px;
 }
 
 .play-button:hover {
-    color: rgb(147, 147, 151);
+    color: rgb(222, 224, 237);
     cursor: pointer;
 }

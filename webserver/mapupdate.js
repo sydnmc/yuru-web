@@ -4,7 +4,7 @@
 const fs = require('fs'); 
 const express = require('express');
 const cors = require('cors');
-var options = JSON.parse(fs.readFileSync('servoptions.json', 'utf8'));
+const options = JSON.parse(fs.readFileSync('servoptions.json', 'utf8'));
 
 const readline = require("readline");
 const rl = readline.createInterface({
@@ -26,10 +26,21 @@ app.use(express.urlencoded({ extended: true }));
 var mapStatusSydney = JSON.parse(fs.readFileSync('syd-mapstatus.json', 'utf8'));
 var mapStatusLilac = JSON.parse(fs.readFileSync('lilac-mapstatus.json', 'utf8'));
 
+function findWipCount(mapStatus) {
+    let wipCount = 0;
+
+    for (let i = 0; i < mapStatus.length; i++) {
+        if (mapStatus[i].mapStatus == "wip") {
+            wipCount++;
+        }
+    }
+
+    return wipCount;
+}
+
 async function grabSongInfo(beatmap_id) {
-    console.log(beatmap_id);
-    var apiResponse;
-    var mapInfo = [{
+    let apiResponse;
+    let mapInfo = [{
         "title":"",
         "title_unicode":"",
         "artist":"",
@@ -37,8 +48,7 @@ async function grabSongInfo(beatmap_id) {
         "diffname":"",
         "mapper":"",
         "sr":"",
-        "status":"",
-        "touhou":"",
+        "status":""
     }];
 
     try {
@@ -50,8 +60,6 @@ async function grabSongInfo(beatmap_id) {
     } catch (error) {
         console.log(error.message);
     }
-
-    console.log(apiResponse)
 
     switch (apiResponse[0].approved) {
         case "-2":
@@ -82,36 +90,23 @@ async function grabSongInfo(beatmap_id) {
     mapInfo[0].diffname = apiResponse[0].version;
     mapInfo[0].mapper = apiResponse[0].creator;
     mapInfo[0].sr = Math.round(apiResponse[0].difficultyrating*100) / 100;
-    
-    if (apiResponse[0].tags.includes("touhou")) {
-        mapInfo[0].touhou = true;
-    } else {
-        mapInfo[0].touhou = false;
-    }
 
     return await mapInfo;
 }
 
 async function updateAllMaps(sydney, mapStatus) {
-    let wipCount = 0;
-
-    for (let i = 0; i < mapStatus.length; i++) {
-        if (mapStatus[i].mapStatus == "wip") {
-            wipCount++;
-        }
-    }
+    let wipCount = findWipCount(mapStatus);
     console.log(`\x1b[32mThere are currently \x1b[33m${wipCount}\x1b[0m\x1b[32m wip maps, excluding those from update.\x1b[0m`);
 
     if (options.onlyUpdateLast != -1) {
         for (let i = mapStatus.length-options.onlyUpdateLast-wipCount; i < mapStatus.length-wipCount; i++) { //only updating the last n number of rows, excluding wip maps
-            console.log(mapStatus[i]);
             if (mapStatus[i].songURLs[0] == "") { //if there is no song url
                 console.log(`-- no song url associated with #${i+1}, skipping`);
                 i++; //skip the current entry
             }
             console.log(`Updating map \x1b[36m${mapStatus[i].songName}\x1b[0m - ${i+1} of ${mapStatus.length-wipCount+1}`);
-            var beatmapID = mapStatus[i].songURLs[0].substr(mapStatus[i].songURLs[0].indexOf("#osu/")+5); //only works in std
-            var curSongInfo = await grabSongInfo(beatmapID);
+            let beatmapID = mapStatus[i].songURLs[0].substr(mapStatus[i].songURLs[0].indexOf("#osu/")+5); //only works in std
+            let curSongInfo = await grabSongInfo(beatmapID);
 
             //writing to local mapStatus json
             mapStatus[i].songName = `${curSongInfo[0].artist} - ${curSongInfo[0].title}`;
@@ -120,9 +115,6 @@ async function updateAllMaps(sydney, mapStatus) {
             mapStatus[i].mapper = curSongInfo[0].mapper;
             mapStatus[i].starRatings[0] = curSongInfo[0].sr;
             mapStatus[i].mapStatus = curSongInfo[0].status;
-            mapStatus[i].touhou = curSongInfo[0].touhou;
-
-            console.log(mapStatus[i]);
         }
 
         if (sydney) {
@@ -138,7 +130,7 @@ async function updateAllMaps(sydney, mapStatus) {
 }
 
 async function initialize() {
-    var sydney = true;
+    let sydney = true;
 
     rl.question(`\x1b[35m-- \x1b[0m\x1b[45myuru.ca server\x1b[0m \x1b[35mmap manager --\x1b[0m
         as currently set, this server will automatically update maps every \x1b[32m${options.autoupdateEvery} hours.\x1b[0m
@@ -156,7 +148,7 @@ async function initialize() {
                     updateAllMaps(sydney, mapStatusSydney);
                     break;
                 case "2":
-                    addDiff(sydneys);
+                    addDiff(sydney, mapStatusSydney);
                     break;
                 case "3":
                     mapStatus = mapStatusLilac;
@@ -165,8 +157,7 @@ async function initialize() {
                     break;
                 case "4":
                     sydney = false
-                    mapStatus = mapStatusLilac;
-                    addDiff(sydney);
+                    addDiff(sydney, mapStatusLilac);
                     break;
                 case "5":
                     rl.close();
@@ -181,17 +172,51 @@ async function initialize() {
     }, options.autoupdateEvery*1000*60*60); //autoupdateEvery is in hours, so we're converting to ms for setInterval to be happy
 }
 
-function addDiff(sydney) {
-    var title;
-    var diffname;
-    var mapper;
-    var link ;
-    var status = "wip";
-    var sr;
-    var dateFinished;
-    var touhou = false;
-    var bn1 = "";
-    var bn2 = "";
+function addAdditionalDiffs(diffname, link, sr, dateFinished, oldDiffs) {
+    let diffStructure = {
+        "diffname": [diffname],
+        "sr": [sr],
+        "mapLink": [link],
+        "date": [dateFinished]
+    }
+
+    if (oldDiffs) {
+        diffStructure = oldDiffs;
+    }
+    
+    rl.question(`diffname: `, function(input) {
+        diffStructure.diffname.push(input);
+        rl.question(`star rating (can be an estimate if wip): `, function(input) {
+            diffStructure.sr.push(input);
+            rl.question(`map link? (if none, leave blank): `, function(input) {
+                diffStructure.mapLink.push(input);
+                rl.question(`date finished? (if none, leave blank): `, function(input) {
+                    diffStructure.date.push(input);
+                    rl.question(`any other maps to add? y/n: `, function(input) {
+                        if (input == "y") {
+                            addAdditionalDiffs(null, null, null, null, diffStructure);
+                        } else {
+                            callback();
+                        }
+                    });
+                });
+            });
+        });
+    });
+
+    return 
+}
+
+function addDiff(sydney, curMapStatus) {
+    let title;
+    let diffname;
+    let mapper;
+    let link ;
+    let status = "wip";
+    let sr;
+    let dateFinished;
+    let bn1 = "";
+    let bn2 = "";
 
     rl.question(`song name (artist - title): `, function(input) { 
         title = input;
@@ -207,49 +232,50 @@ function addDiff(sydney) {
                             status = input;
                             rl.question(`date finished? (if none, leave blank): `, function(input) { 
                                 dateFinished = input;
-                                rl.question(`touhou (y/n): `, function(input) { 
+                                rl.question(`any other maps to add? y/n: `, function(input) {
                                     if (input == "y") {
-                                        touhou = true;
+                                        let additionalInfo = addAdditionalDiffs(diffname, link, sr, dateFinished);
                                     }
                                     rl.question(`bn #1 (if none, leave blank): `, function(input) {
                                         bn1 = input;
                                         rl.question(`bn #2 (if none, leave blank): `, function(input) {
                                             bn2 = input;
 
-                                            var newDiff = {
-                                                "bgLink": "",
+                                            let newDiff = {
                                                 "songName": title,
                                                 "songURLs": [ link ],
                                                 "mapper": mapper,
                                                 "difficulties": [ diffname ],
                                                 "starRatings": [ sr ],
                                                 "datesFinished": [ dateFinished ],
-                                                "bns": [
-                                                bn1,
-                                                bn2
-                                                ],
-                                                "mapStatus": status,
-                                                "touhou": touhou
+                                                "bns": [ bn1, bn2 ],
+                                                "mapStatus": status
                                             }
-                                            mapStatus.push(newDiff);
 
-                                            var filename = 'syd-updated.json'
-                                            console.log();
+                                            if (status == "wip") {
+                                                curMapStatus.push(newDiff);
+                                            } else { //if it's not wip, we want it to appear at the bottom of the non-wip sets
+                                                curMapStatus = curMapStatus.toSpliced(curMapStatus.length-findWipCount(curMapStatus), 0, newDiff);
+                                            }
+
+                                            let filename = 'syd-mapstatus.json'
+                                            console.log(); //blank space (intetional, for style)
 
                                             if (!sydney) {
-                                                filename = 'lilac-updated.json'
+                                                filename = 'lilac-mapstatus.json'
                                             }
-                                            fs.writeFileSync(filename, JSON.stringify(mapStatus, null, 2));
+                                            fs.writeFileSync(filename, JSON.stringify(curMapStatus, null, 2));
                                             console.log(`Succesfully wrote to ${filename}!`);
                                             rl.question(`
-                                                1 - return to \x1b[35mhome\x1b[0m
-                                                2 - exit `, function(input) {
+1 - return to \x1b[35mhome\x1b[0m
+2 - exit `,                                     function(input) {
                                                     if (input == "1") {
                                                         initialize();
                                                     } else {
                                                         rl.close();
                                                     }
-                                            });
+                                                }
+                                            );
                                         });
                                     });
                                 });
@@ -261,6 +287,10 @@ function addDiff(sydney) {
         });
     });
 }
+
+app.get('/', (req, res) => {
+    res.send(JSON.parse(`{"response":"meow~"}`));
+});
 
 app.get('/gds', (req, res) => {
     let serverResponse;
@@ -278,18 +308,33 @@ app.get('/gds', (req, res) => {
 });
 
 app.get('/songInfo', async(req, res) => {
-    const lastFmURL = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=yurukyan&api_key=${options.lastFmKey}&format=json&limit=1`;
+    const lastFmURL = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${options.lastFmUsername}&api_key=${options.lastFmKey}&format=json&limit=1`;
     let songInfo;
     
     try {
-        let response = await fetch(lastFmURL);
-        if (!response.ok) {
-            throw new Error(`Response: ${response.status}`);
-        }
-        songInfo = await response.json();
-    } catch (error) {
-        console.log(error.message);
+        songInfo = await fetch(lastFmURL);
+        res.send(await songInfo.json());
+    } catch (err) {
+        console.log(err.message);
     }
-    
-    res.send(songInfo);
+});
+
+app.get('/pkInfo', async(req, res) => {
+    const systemURL = "https://api.pluralkit.me/v2";
+    const systemId = "ytcvss"
+    let user = req.query.user;
+    let frontList = req.query.frontList;
+    let apiResp;
+
+    try {
+        if (frontList) {
+            apiResp = await fetch(`${systemURL}/systems/${systemId}/switches?limit=2`);
+            res.send(await apiResp.json());
+        } else {
+            apiResp = await fetch(`${systemURL}/members/${user}`);
+            res.send(await apiResp.json());
+        }
+    } catch (err) {
+        console.log(err.message)
+    }
 });
