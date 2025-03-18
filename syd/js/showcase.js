@@ -3,6 +3,8 @@
 import { generatePageHeader } from './header.js';
 import { colorate } from './osucolorator.js';
 
+const endpoint = "https://api.yuru.ca"; //endpoint (backend)
+
 /* checking for page language */
 var jp = false;
 try {
@@ -10,25 +12,14 @@ try {
     jp = true;
 } catch { }
 
-async function getMapStatus(isJapanese) {
-    var mapStatus;
-
+async function fetchFromApi(apiEndpoint) {
+    let response;
     try {
-        var response
-        if (isJapanese) {
-            response = await fetch("mapstatus-jp.json");
-        } else {
-            response = await fetch("mapstatus.json");
-        }
-        if (!response.ok) {
-            throw new Error(`Response: ${response.status}`);
-        }
-        mapStatus = await response.json();
-    } catch (error) {
-        console.log(error.message);
+        response = await fetch(`${endpoint}/${apiEndpoint}`);
+    } catch (err) {
+        console.log(`Failed to fetch from yuru.ca API: ${err.message}`);
     }
-
-    return await mapStatus;
+    return await response.json();
 }
 
 async function getSetInfo() {
@@ -112,7 +103,7 @@ function generateDisplay(mapDb, isGd) {
 (async () => {
     generatePageHeader(jp, "index");
 
-    var mapDb = await getMapStatus(jp);
+    var mapDb = await fetchFromApi(`gds?person=sydney`);
     generateDisplay(mapDb, true);
 
     var setDb = await getSetInfo();

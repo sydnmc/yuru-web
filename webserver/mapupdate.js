@@ -113,9 +113,11 @@ async function updateAllMaps(sydney, mapStatus) {
             }
             console.log(`Updating map \x1b[36m${mapStatus[i].songName}\x1b[0m - ${i+1} of ${mapStatus.length-wipCount+1}`);
             let beatmapID = mapStatus[i].songURLs[0].substr(mapStatus[i].songURLs[0].indexOf("#osu/")+5); //only works in std
+            let beatmapsetId = diffStructure.songURLs[0].substring(diffStructure.songURLs[0].indexOf('beatmapsets/')+12, diffStructure.songURLs[0].indexOf("#osu/")); //terrible abomination
             let curSongInfo = await grabSongInfo(beatmapID);
 
             //writing to local mapStatus json
+            mapStatus[i].bgLink = `https://assets.ppy.sh/beatmaps/${beatmapsetId}/covers/raw.jpg`;
             mapStatus[i].songName = `${curSongInfo[0].artist} - ${curSongInfo[0].title}`;
             mapStatus[i].songNameUnicode = `${curSongInfo[0].artist_unicode} - ${curSongInfo[0].title_unicode}`;
             mapStatus[i].difficulties[0] = curSongInfo[0].diffname;
@@ -183,7 +185,7 @@ function addAdditionalDiffs(diffStructure, callback) {
                 diffStructure.songURLs.push(input);
                 rl.question(`date finished? (if none, leave blank): `, function(input) {
                     diffStructure.datesFinished.push(input);
-                    rl.question(`how much of this diff did you map? (if all, leave blank) `, function(input) {
+                    rl.question(`how much of this diff did you map? (if all, leave blank): `, function(input) {
                         if (input) {
                             diffStructure.amountsMapped.push(input);
                         } else {
@@ -234,7 +236,7 @@ function addDiff(sydney, curMapStatus) {
                             diffStructure.mapStatus = input;
                             rl.question(`date finished? (if none, leave blank): `, function(input) { 
                                 diffStructure.datesFinished[0] = input;
-                                rl.question(`how much of this diff did you map? (if all, leave blank) `, function(input) {
+                                rl.question(`how much of this diff did you map? (if all, leave blank): `, function(input) {
                                     diffStructure.amountsMapped[0] = input;
                                     rl.question(`any other maps to add? y/n: `, function(input) {
                                         if (input == "y") {
@@ -267,8 +269,8 @@ function completeDiffQuestions(diffStructure, sydney, curMapStatus) {
                 curMapStatus = curMapStatus.toSpliced(curMapStatus.length-findWipCount(curMapStatus), 0, diffStructure);
             }
 
-            let beatmapID = diffStructure.songURLs[0].substr(diffStructure.songURLs[0].indexOf("#osu/")+5); //only works in std
-            diffStructure.bgLink = `https://assets.ppy.sh/beatmaps/${beatmapID}/covers/cover@2x.jpg`;
+            let beatmapsetId = diffStructure.songURLs[0].substring(diffStructure.songURLs[0].indexOf('beatmapsets/')+12, diffStructure.songURLs[0].indexOf("#osu/"));
+            diffStructure.bgLink = `https://assets.ppy.sh/beatmaps/${beatmapsetId}/covers/raw.jpg`;
 
             let filename = 'syd-mapstatus.json'
             console.log(); //blank space (intetional, for style)
