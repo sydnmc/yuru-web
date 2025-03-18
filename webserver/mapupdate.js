@@ -23,8 +23,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-var mapStatusSydney = JSON.parse(fs.readFileSync('syd-mapstatus.json', 'utf8'));
-var mapStatusLilac = JSON.parse(fs.readFileSync('lilac-mapstatus.json', 'utf8'));
+var mapStatusSydney;
+var mapStatusLilac;
+
+function refreshMapStatuses() {
+    mapStatusSydney = JSON.parse(fs.readFileSync('syd-mapstatus.json', 'utf8'));
+    mapStatusLilac = JSON.parse(fs.readFileSync('lilac-mapstatus.json', 'utf8'));
+}
+
+refreshMapStatuses();
 
 function findWipCount(mapStatus) {
     let wipCount = 0;
@@ -140,8 +147,6 @@ async function initialize() {
 
         3 - \x1b[90mlilac\x1b[0m update all maps
         4 - \x1b[90mlilac\x1b[0m add new difficulty
-
-        5 - shutdown
         `, function(input) { 
             switch (input) {
                 case "1":
@@ -159,9 +164,6 @@ async function initialize() {
                     sydney = false
                     addDiff(sydney, mapStatusLilac);
                     break;
-                case "5":
-                    rl.close();
-                    break;
             }
     });
 
@@ -172,118 +174,117 @@ async function initialize() {
     }, options.autoupdateEvery*1000*60*60); //autoupdateEvery is in hours, so we're converting to ms for setInterval to be happy
 }
 
-function addAdditionalDiffs(diffname, link, sr, dateFinished, oldDiffs) {
-    let diffStructure = {
-        "diffname": [diffname],
-        "sr": [sr],
-        "mapLink": [link],
-        "date": [dateFinished]
-    }
-
-    if (oldDiffs) {
-        diffStructure = oldDiffs;
-    }
-    
+function addAdditionalDiffs(diffStructure, callback) {  
     rl.question(`diffname: `, function(input) {
-        diffStructure.diffname.push(input);
+        diffStructure.difficulties.push(input);
         rl.question(`star rating (can be an estimate if wip): `, function(input) {
-            diffStructure.sr.push(input);
+            diffStructure.starRatings.push(input);
             rl.question(`map link? (if none, leave blank): `, function(input) {
-                diffStructure.mapLink.push(input);
+                diffStructure.songURLs.push(input);
                 rl.question(`date finished? (if none, leave blank): `, function(input) {
-                    diffStructure.date.push(input);
-                    rl.question(`any other maps to add? y/n: `, function(input) {
-                        if (input == "y") {
-                            addAdditionalDiffs(null, null, null, null, diffStructure);
+                    diffStructure.datesFinished.push(input);
+                    rl.question(`how much of this diff did you map? (if all, leave blank) `, function(input) {
+                        if (input) {
+                            diffStructure.amountsMapped.push(input);
                         } else {
-                            callback();
+                            diffStructure.amountsMapped.push("all");
                         }
+                        rl.question(`any other maps to add? y/n: `, function(input) {
+                            if (input == "y") {
+                                addAdditionalDiffs(diffStructure, callbakc);
+                            } else {
+                                callback();
+                            }
+                        });
                     });
                 });
             });
         });
     });
 
-    return 
+    return diffStructure;
 }
 
 function addDiff(sydney, curMapStatus) {
-    let title;
-    let diffname;
-    let mapper;
-    let link ;
-    let status = "wip";
-    let sr;
-    let dateFinished;
-    let bn1 = "";
-    let bn2 = "";
+    let diffStructure = {
+        "bgLink": null,
+        "songName": null,
+        "songNameUnicode": null,
+        "songURLs": [],
+        "mapper": null,
+        "difficulties": [],
+        "amountsMapped": ["all"],
+        "starRatings": [],
+        "datesFinished": [],
+        "bns": [],
+        "mapStatus": "wip",
+    }
 
     rl.question(`song name (artist - title): `, function(input) { 
-        title = input;
+        diffStructure.songName = input;
         rl.question(`mapper: `, function(input) { 
-            mapper = input;
+            diffStructure.mapper = input;
             rl.question(`diffname: `, function(input) { 
-                diffname = input;
+                diffStructure.difficulties[0] = input;
                 rl.question(`star rating (can be an estimate if wip): `, function(input) { 
-                    sr = input;
+                    diffStructure.starRatings[0] = input;
                     rl.question(`map link? (if none, leave blank): `, function(input) { 
-                        link = input;
+                        diffStructure.songURLs[0] = input;
                         rl.question(`current status? (if wip, leave blank): `, function(input) { 
-                            status = input;
+                            diffStructure.mapStatus = input;
                             rl.question(`date finished? (if none, leave blank): `, function(input) { 
-                                dateFinished = input;
-                                rl.question(`any other maps to add? y/n: `, function(input) {
-                                    if (input == "y") {
-                                        let additionalInfo = addAdditionalDiffs(diffname, link, sr, dateFinished);
-                                    }
-                                    rl.question(`bn #1 (if none, leave blank): `, function(input) {
-                                        bn1 = input;
-                                        rl.question(`bn #2 (if none, leave blank): `, function(input) {
-                                            bn2 = input;
-
-                                            let newDiff = {
-                                                "songName": title,
-                                                "songURLs": [ link ],
-                                                "mapper": mapper,
-                                                "difficulties": [ diffname ],
-                                                "starRatings": [ sr ],
-                                                "datesFinished": [ dateFinished ],
-                                                "bns": [ bn1, bn2 ],
-                                                "mapStatus": status
-                                            }
-
-                                            if (status == "wip") {
-                                                curMapStatus.push(newDiff);
-                                            } else { //if it's not wip, we want it to appear at the bottom of the non-wip sets
-                                                curMapStatus = curMapStatus.toSpliced(curMapStatus.length-findWipCount(curMapStatus), 0, newDiff);
-                                            }
-
-                                            let filename = 'syd-mapstatus.json'
-                                            console.log(); //blank space (intetional, for style)
-
-                                            if (!sydney) {
-                                                filename = 'lilac-mapstatus.json'
-                                            }
-                                            fs.writeFileSync(filename, JSON.stringify(curMapStatus, null, 2));
-                                            console.log(`Succesfully wrote to ${filename}!`);
-                                            rl.question(`
-1 - return to \x1b[35mhome\x1b[0m
-2 - exit `,                                     function(input) {
-                                                    if (input == "1") {
-                                                        initialize();
-                                                    } else {
-                                                        rl.close();
-                                                    }
-                                                }
-                                            );
-                                        });
+                                diffStructure.datesFinished[0] = input;
+                                rl.question(`how much of this diff did you map? (if all, leave blank) `, function(input) {
+                                    diffStructure.amountsMapped[0] = input;
+                                    rl.question(`any other maps to add? y/n: `, function(input) {
+                                        if (input == "y") {
+                                            addAdditionalDiffs(diffStructure, () => {
+                                                completeDiffQuestions(diffStructure, sydney, curMapStatus);
+                                            });
+                                        } else {
+                                            completeDiffQuestions(diffStructure, sydney, curMapStatus);
+                                        }
                                     });
-                                });
+                                })
                             });
                         });
                     });
                 });
             });
+        });
+    });
+}
+
+function completeDiffQuestions(diffStructure, sydney, curMapStatus) {
+    rl.question(`bn #1 (if none, leave blank): `, function(input) {
+        diffStructure.bns[0] = input;
+        rl.question(`bn #2 (if none, leave blank): `, function(input) {
+            diffStructure.bns[1] = input;
+
+            if (diffStructure.status == "wip") {
+                curMapStatus.push(diffStructure);
+            } else { //if it's not wip, we want it to appear at the bottom of the non-wip sets
+                curMapStatus = curMapStatus.toSpliced(curMapStatus.length-findWipCount(curMapStatus), 0, diffStructure);
+            }
+
+            let beatmapID = diffStructure.songURLs[0].substr(diffStructure.songURLs[0].indexOf("#osu/")+5); //only works in std
+            diffStructure.bgLink = `https://assets.ppy.sh/beatmaps/${beatmapID}/covers/cover@2x.jpg`;
+
+            let filename = 'syd-mapstatus.json'
+            console.log(); //blank space (intetional, for style)
+
+            if (!sydney) {
+                filename = 'lilac-mapstatus.json'
+            }
+            fs.writeFileSync(filename, JSON.stringify(curMapStatus, null, 2));
+            console.log(`Succesfully wrote to ${filename}!`);
+            rl.question(`1 - return to \x1b[35mhome\x1b[0m `, function(input) {
+                    if (input == "1") {
+                        refreshMapStatuses();
+                        initialize();
+                    }
+                }
+            );
         });
     });
 }
