@@ -1,6 +1,6 @@
 import { createHovers } from './osuhover.js';
 
-const endpoint = "http://localhost:3333"; //endpoint (backend)
+const endpoint = "https://api.yuru.ca"; //endpoint (backend)
 
 function createSetRows(num) {
     const container = document.getElementById('set-container');

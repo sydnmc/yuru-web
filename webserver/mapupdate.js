@@ -31,7 +31,7 @@ function refreshMapStatuses() {
     mapStatusLilac = JSON.parse(fs.readFileSync('lilac-mapstatus.json', 'utf8'));
 }
 
-//refreshMapStatuses();
+refreshMapStatuses();
 
 function findWipCount(mapStatus) {
     let wipCount = 0;
