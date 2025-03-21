@@ -22,23 +22,6 @@ async function fetchFromApi(apiEndpoint) {
     return await response.json();
 }
 
-async function getSetInfo() {
-    var mapStatus;
-
-    try {
-        var response
-        response = await fetch("setinfo.json");
-        if (!response.ok) {
-            throw new Error(`Response: ${response.status}`);
-        }
-        mapStatus = await response.json();
-    } catch (error) {
-        console.log(error.message);
-    }
-
-    return await mapStatus;
-}
-
 function generateDisplay(mapDb, isGd) {
     var latestRanked = new Object();
     var notableGds = [];
@@ -106,7 +89,7 @@ function generateDisplay(mapDb, isGd) {
     var mapDb = await fetchFromApi(`gds?person=sydney`);
     generateDisplay(mapDb, true);
 
-    var setDb = await getSetInfo();
+    var setDb = await fetchFromApi(`sets`);
     generateDisplay(setDb, false);
 
     document.getElementById('gd-display-wrapper').addEventListener("click", () => {

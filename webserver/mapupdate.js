@@ -31,7 +31,7 @@ function refreshMapStatuses() {
     mapStatusLilac = JSON.parse(fs.readFileSync('lilac-mapstatus.json', 'utf8'));
 }
 
-refreshMapStatuses();
+//refreshMapStatuses();
 
 function findWipCount(mapStatus) {
     let wipCount = 0;
@@ -113,7 +113,7 @@ async function updateAllMaps(sydney, mapStatus) {
             }
             console.log(`Updating map \x1b[36m${mapStatus[i].songName}\x1b[0m - ${i+1} of ${mapStatus.length-wipCount+1}`);
             let beatmapID = mapStatus[i].songURLs[0].substr(mapStatus[i].songURLs[0].indexOf("#osu/")+5); //only works in std
-            let beatmapsetId = diffStructure.songURLs[0].substring(diffStructure.songURLs[0].indexOf('beatmapsets/')+12, diffStructure.songURLs[0].indexOf("#osu/")); //terrible abomination
+            let beatmapsetId = mapStatus[i].songURLs[0].substring(mapStatus[i].songURLs[0].indexOf('beatmapsets/')+12, mapStatus[i].songURLs[0].indexOf("#osu/")); //terrible abomination
             let curSongInfo = await grabSongInfo(beatmapID);
 
             //writing to local mapStatus json
@@ -308,6 +308,11 @@ app.get('/gds', (req, res) => {
     }
     
     res.send(serverResponse);
+});
+
+app.get('/sets', (req, res) => {
+    let setInfo = JSON.parse(fs.readFileSync('setinfo.json', 'utf8'));
+    res.send(setInfo);
 });
 
 app.get('/songInfo', async(req, res) => {

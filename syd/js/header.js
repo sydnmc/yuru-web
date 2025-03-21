@@ -9,7 +9,7 @@ export function generatePageHeader(isJapanese, currentPage) {
             <button class="drop-button" style="cursor: default;">osu!</button>
           </a>
           <div class="dropdown-content">
-            <a href="sets.html" id="sets-but">my sets</a>
+            <a href="../yurukyan/sets.html" id="sets-but">our sets</a>
             <a href="gds.html" id="gds-but">my gds</a>
           </div>
         </div>
@@ -27,7 +27,7 @@ export function generatePageHeader(isJapanese, currentPage) {
             <a class="borgar-menu-text" href="gds.html">osu! | gds</a>
           </div>
           <div class="borgar-text-wrapper">
-            <a class="borgar-menu-text" href="sets.html">osu! | sets</a>
+            <a class="borgar-menu-text" href="../yurukyan/sets.html">osu! | sets</a>
           </div>
           <div class="borgar-text-wrapper">
             <a class="borgar-menu-text" href="music.html">music</a>
@@ -46,7 +46,7 @@ export function generatePageHeader(isJapanese, currentPage) {
 
     if (isJapanese) {
         setsButton.textContent = "自分の譜面";
-        gdsButton.textContent = "自分のgd";
+        gdsButton.textContent = "あたしたちのgds";
         musicButton.textContent = "音楽"
         document.getElementById('profile-pic-image').setAttribute('alt', 'シドニーの志摩リンプロフィール画像');
 

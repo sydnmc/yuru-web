@@ -27,7 +27,6 @@ export function createHovers() {
         });
 
         users[i].addEventListener("mouseleave", () => {
-            console.log("heyyy");
             hoverContainer.style.display = "none";
         });
 

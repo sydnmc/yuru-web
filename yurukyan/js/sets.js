@@ -1,5 +1,6 @@
-import { generatePageHeader } from './header.js';
 import { createHovers } from './osuhover.js';
+
+const endpoint = "http://localhost:3333"; //endpoint (backend)
 
 function createSetRows(num) {
     const container = document.getElementById('set-container');
@@ -34,21 +35,14 @@ function createIncompleteSetRows(num, offsetNum) {
     }
 }
 
-async function getSetInfo() {
-    var mapStatus;
-
+async function fetchFromApi(apiEndpoint) {
+    let response;
     try {
-        var response
-        response = await fetch("setinfo.json");
-        if (!response.ok) {
-            throw new Error(`Response: ${response.status}`);
-        }
-        mapStatus = await response.json();
-    } catch (error) {
-        console.log(error.message);
+        response = await fetch(`${endpoint}/${apiEndpoint}`);
+    } catch (err) {
+        console.log(`Failed to fetch from yuru.ca API: ${err.message}`);
     }
-
-    return await mapStatus;
+    return await response.json();
 }
 
 function populateRows(setInfo, incomplete, offsetNum) {
@@ -97,8 +91,7 @@ function populateRows(setInfo, incomplete, offsetNum) {
 }
 
 (async () => {
-    generatePageHeader(false, "sets");
-    var setInfo = await getSetInfo();
+    var setInfo = await fetchFromApi(`sets`);
 
     var completeSetsList = [];
     var incompleteSetsList = [];

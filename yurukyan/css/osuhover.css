@@ -1,0 +1,41 @@
+.osu-user {
+    position: relative;
+}
+
+.osu-hover {
+    display: none;
+    position: absolute;
+    height: 80px;
+    width: 300px;
+    border-radius: 15px;
+}
+
+.hover-pfp {
+    height: 70px;
+    border-radius: 15px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.osu-hover-flagtext-container {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.hover-username {
+    font-family: OpenSans, sans-serif;
+    color: white;
+    font-size: 26px;
+    text-decoration: none;
+}
+
+.flaguser-container {
+    display: flex;
+    align-items: center;
+}
+
+.osu-flag {
+    height: 35px;
+    margin-right: 5px;
+}
+

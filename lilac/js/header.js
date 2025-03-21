@@ -9,7 +9,7 @@ export function generatePageHeader(isJapanese, currentPage) {
             <button class="drop-button" style="cursor: default;">osu!</button>
           </a>
           <div class="dropdown-content">
-            <a href="http://syd.yuru.ca/sets.html" id="sets-but">my sets</a>
+            <a href="http://yuru.ca/sets.html" id="sets-but">our sets</a>
             <a href="gds.html" id="gds-but">my gds</a>
           </div>
         </div>
@@ -38,7 +38,7 @@ export function generatePageHeader(isJapanese, currentPage) {
     var translateButton = document.getElementsByClassName('translate-button')[0];
 
     if (isJapanese) {
-        gdsButton.textContent = "自分のgd";
+        gdsButton.textContent = "あたしたちのgds";
         setsButton.textContent = "自分の譜面";
         document.getElementById('profile-pic-image').setAttribute('alt', 'らいらっくのきゅうくらりんリンプロフィール画像');
 
