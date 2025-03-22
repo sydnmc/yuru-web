@@ -7,7 +7,7 @@
 * it totally isnt me hating on js. i would never. */
 //FUCK also includes code for updating the currently/last playing song displayed
 
-const endpoint = "http://localhost:3333"; //endpoint (backend)
+const endpoint = "https://api.yuru.ca"; //endpoint (backend)
 
 async function fetchFromApi(apiEndpoint) {
     let response;
