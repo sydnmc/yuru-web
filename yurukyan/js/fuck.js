@@ -7,7 +7,7 @@
 * it totally isnt me hating on js. i would never. */
 //FUCK also includes code for updating the currently/last playing song displayed
 
-const endpoint = "https://api.yuru.ca"; //endpoint (backend)
+const endpoint = "http://localhost:3333"; //endpoint (backend)
 
 async function fetchFromApi(apiEndpoint) {
     let response;
@@ -94,8 +94,8 @@ function dateParser(time, isCurrent, fronterTime, isJapanese) {
 
     /* fronter */
     const frontList = await fetchFromApi(`pkInfo?frontList=true`);
-    const p1 = await getUser(true, frontList); //true = fronter
-    const p2 = await getUser(false, frontList);
+    const p1 = await getUser(true, frontList.frontHistory); //true = fronter
+    const p2 = await getUser(false, frontList.frontHistory);
     var members = [p1, p2]; //hardcoded 2 members bc im not gonna have more than lilac in me. if so shit
 
     if (members[0].name != "sydney") { //whenever lilac is fronting
@@ -104,12 +104,15 @@ function dateParser(time, isCurrent, fronterTime, isJapanese) {
         members = [sydney, lilac];
     }
 
+    document.getElementById('sydney-percent').style = `width: ${frontList.sydneyPercent}%`;
+    document.getElementById('lilac-percent').style = `width: ${frontList.lilacPercent}%`;
+
     for (let i = 0; i < members.length; i++) {
         let personTime;
         let personName = members[i].name;
 
-        if (frontList[0].members[0] == members[i].id) { //long way to check if current user is fronting or not
-            personTime = dateParser(frontList[0].timestamp, true, null, jp);
+        if (frontList.frontHistory[0].members[0] == members[i].id) { //long way to check if current user is fronting or not
+            personTime = dateParser(frontList.frontHistory[0].timestamp, true, null, jp);
             document.getElementById(`p${i+1}-wrapper`).classList = "person-shine";
             document.getElementById(`img-${i}`).classList = "cur-fronter";
 
@@ -119,7 +122,7 @@ function dateParser(time, isCurrent, fronterTime, isJapanese) {
                 document.getElementById('discord').href = "discord://-/users/245588170903781377";
             }
         } else {
-            personTime = dateParser(frontList[0].timestamp, false, frontList[1].timestamp, jp);
+            personTime = dateParser(frontList.frontHistory[0].timestamp, false, frontList.frontHistory[1].timestamp, jp);
         }
         document.getElementById("time-"+i).textContent = personTime;
     }

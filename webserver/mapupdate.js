@@ -334,15 +334,66 @@ app.get('/pkInfo', async(req, res) => {
     let frontList = req.query.frontList;
     let apiResp;
 
+    let thirtyAgoAmount = 1000*60*60*24*30; //30 days in ms
+    let thirtyAgoDate = new Date();
+
+    if (req.query.before) {
+        thirtyAgoDate = req.query.before;
+    } else {
+        thirtyAgoDate = thirtyAgoDate.getTime() - thirtyAgoAmount; //minus 30 days ago
+    }
+
     try {
         if (frontList) {
-            apiResp = await fetch(`${systemURL}/systems/${systemId}/switches?limit=2`);
-            res.send(await apiResp.json());
+            apiResp = await fetch(`${systemURL}/systems/${systemId}/switches`); //unfortunately can't access after= with api, have to get all 100 switches from the past however long ago
+            let parsedResp = await apiResp.json();
+
+            let dateCounter = 0;
+            let foundBreakDate = false;
+            let trimmedResp = [];
+            while (dateCounter < parsedResp.length && !foundBreakDate) {
+                let switchDate = new Date(parsedResp[dateCounter].timestamp);
+                if (switchDate > new Date(thirtyAgoDate)) {
+                    trimmedResp.push(parsedResp[dateCounter]);
+                } else {
+                    foundBreakDate = true;
+                }
+                dateCounter++;
+            }
+
+            let sydneyTime = 0;
+            let lilacTime = 0;
+            let prevTimestamp = new Date(trimmedResp[0].timestamp).getTime();
+            for (let i = 1; i < trimmedResp.length; i++) {
+                let curTimestamp = new Date(trimmedResp[i].timestamp).getTime();
+                if (trimmedResp[i].members[0] == 'tfprjx') {
+                    lilacTime = lilacTime+(prevTimestamp - curTimestamp);
+                } else if (trimmedResp[i].members[0] == 'ckccgs') {
+                    sydneyTime = sydneyTime+(prevTimestamp - curTimestamp);
+                }
+                prevTimestamp = curTimestamp;
+            }
+
+            //if we're at the end, we want to get it exactly to 30 days - whoever was last fronting gets that extra time added
+            let extraTime = thirtyAgoAmount-(sydneyTime+lilacTime);
+            if (trimmedResp[trimmedResp.length-1].members[0] == 'tfprjx') {
+                lilacTime = lilacTime+extraTime;
+            } else if (trimmedResp[trimmedResp.length-1].members[0] == 'ckccgs') {
+                sydneyTime = sydneyTime+extraTime;
+            }
+            let totalTime = sydneyTime+lilacTime;
+            let respWithPercent = {
+                lilacPercent: Math.round((lilacTime/totalTime)*100),
+                sydneyPercent: Math.round((sydneyTime/totalTime)*100),
+                frontHistory: trimmedResp
+            }
+
+            res.send(respWithPercent);
         } else {
             apiResp = await fetch(`${systemURL}/members/${user}`);
             res.send(await apiResp.json());
         }
     } catch (err) {
-        console.log(err.message)
+        console.log(err.message);
     }
 });
