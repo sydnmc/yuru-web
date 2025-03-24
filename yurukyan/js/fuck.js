@@ -85,11 +85,11 @@ function dateParser(time, isCurrent, fronterTime, isJapanese) {
     try {
         curSongInfo.recenttracks.track[0]['@attr'].nowplaying //will error since this doesn't exist when not playing
         document.getElementById("last-played").innerHTML = `${currentText} <a style="color: rgb(180 181 191); text-decoration: none;" href="${songURL}">• ${curSongArtist} - ${curSongName}</a>
-        <img style="width: 4%; border-radius: 4px; vertical-align: middle;" src=${curSongInfo.recenttracks.track[0].image[3]['#text']}></img>`;
+        <img class="lastfm-album-img" src=${curSongInfo.recenttracks.track[0].image[3]['#text']}></img>`;
     } catch {
         console.log("Song is not currently being played, reverting to last played");
         document.getElementById("last-played").innerHTML = `${lastText} <a style="color: rgb(180 181 191); text-decoration: none;" href="${songURL}">• ${curSongArtist} - ${curSongName}</a>
-        <img style="width: 4%; border-radius: 4px; vertical-align: middle;" src=${curSongInfo.recenttracks.track[0].image[3]['#text']}></img>`;
+        <img class="lastfm-album-img" src=${curSongInfo.recenttracks.track[0].image[3]['#text']}></img>`;
     }
 
     /* fronter */
@@ -113,7 +113,7 @@ function dateParser(time, isCurrent, fronterTime, isJapanese) {
 
         if (frontList.frontHistory[0].members[0] == members[i].id) { //long way to check if current user is fronting or not
             personTime = dateParser(frontList.frontHistory[0].timestamp, true, null, jp);
-            document.getElementById(`p${i+1}-wrapper`).classList = "person-shine";
+            document.getElementById(`p${i+1}-wrapper`).classList = "person-shine hidden-link";
             document.getElementById(`img-${i}`).classList = "cur-fronter";
 
             //update links at the bottom depending on whos fronting

@@ -1,0 +1,252 @@
+/* local variables */
+:root {
+    --tent: #FCE758;
+    --lilac-main: rgb(222, 224, 237);
+}
+
+/* body/header */
+body {
+    text-align: center;
+}
+
+h1 {
+    font-size: 58px;
+    padding-left: 15px;
+    font-weight: normal;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 5vh;
+    margin-bottom: 0px;
+}
+
+header a {
+    padding-right: 8px; /* gives spacing to the icons */
+}
+
+#page {
+    margin-left: 24%;
+    margin-right: 24%;
+}
+
+/* main content */
+#title {
+    font-family: Kyokasho, sans-serif;
+    color: var(--tent);
+    font-size: 58px;
+    text-decoration: none;
+}
+
+.plural {
+    display: flex;
+}
+
+.person {
+    display: flex;
+    border: 3px solid var(--accent);
+    border-radius: 5px;
+    height: 85px;
+    width: 100%;
+}
+
+.person-shine {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 90px;
+} .person-shine::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 5px;
+    padding: 3px;
+    background: var(--shine);
+    mask:
+        linear-gradient(var(--transparent)) content-box, 
+        linear-gradient(var(--transparent));
+    -webkit-mask-composite: xor;
+            mask-composite: exclude; 
+    background-size: 500% auto;
+    animation: shine 5s ease-in-out infinite alternate;
+}
+
+@keyframes shine {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.person-shine .person-img { 
+    margin: 3px; /* adds back in the 3px padding from the border */
+}
+
+.person-img {
+    padding: 3px;
+    height: 78px; /* not sure why this is the case, might have to look into it */
+}
+
+.person-img img {
+    max-height: 100%; /* limits height growth of fronter imgs */
+    border-radius: 5px;
+}
+
+.person-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 5px;
+}
+
+#lilac-text {
+    margin-left: 0; /* lilac is less (me :O) because my name looks weird and starts with an l :p */
+}
+
+.person-text span {
+    font-family: Kyokasho, sans-serif;
+    font-size: 38px;
+    color: white;
+}
+
+.person-text p {
+    margin: 0px;
+}
+
+#time-0 {
+    padding-left: 2px; /* these are both also hacky solutions to get the text to line up nicely, but it's honestly ok for now */
+}
+
+#time-1 {
+    padding-left: 5px;
+}
+
+#front-percent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#front-percentage {
+    display: flex;
+    border: 2px solid var(--accent);
+    border-radius: 5px;
+    width: 90%;
+    height: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#sydney-percent {
+    background-color: var(--main);
+}
+
+#lilac-percent {
+    position: relative;
+    background-color: var(--lilac-main);
+} #lilac-percent:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--lilac-main);
+    transform-origin: 100% 0;
+    transform: skew(-45deg);
+} /* will def want to make this change direction depending on the fronter, but i'll get to that later~ */
+
+.front-divider {
+    border: 2px solid var(--main);
+    height: 105px;
+    margin-top: -10px; /* makes it centered, kinda weird so i might fix this later~ */
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+/* would be nice to align images to some baseline, but nothing seemed to really work */
+
+.socials-bar-big a {
+    font-size: 30px;
+    color: white;
+} .socials-bar-big span {
+    font-size: 30px;
+    color: white;
+}
+
+.socials-bar img {
+    max-width: 16px;
+}
+
+.socials-bar-big img {
+    max-width: 28px;
+}
+
+.lastfm-album-img {
+    width: 35px;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+footer {
+    position: absolute;
+    bottom: 5px;
+    font-size: 18px;
+    color: var(--off-white);
+}
+
+/* mobile */
+@media only screen and (max-device-width: 1000px)
+{
+    #page {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .front-divider {
+        display: none;
+    }
+
+    .plural {
+        flex-direction: column;
+    }
+
+    .person {
+        margin-bottom: 20px;
+    }
+
+    .person-shine {
+        margin-bottom: 20px;
+    }
+
+    #front-percentage {
+        margin-top: 0;
+    }
+
+    .socials-bar-big {
+        font-size: 23px;
+    }
+
+    .person-text p {
+        font-size: 12px;
+    }
+
+    #bottom-translate-text {
+        display: none;
+    }
+
+    footer {
+        display: none;
+    }
+}
+
+
