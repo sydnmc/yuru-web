@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Zen+Kaku+Gothic+New&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&family=Zen+Kaku+Gothic+New&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
     <link rel="icon" href="../common/favicon.ico">
     <script src="./js/fuck.js" async></script>
   </head>
@@ -76,6 +76,12 @@
         <span id="bottom-translate-text"><strong>日本語でご覧になりたい方は、<a href="index-ja_jp.html">こっち</a>か上のグローブマークをクリックしてください。</strong></span>
       </div>
     </section>
-    <footer><i class="fa fa-gear"></i></footer>
+    <div id="settings-overlay">
+      <div id="settings-container">
+        <span>front percentage duration (days)</span><input id="front-input" type="text" class="blank-input" value="30">
+      </div>
+      <span id="disclaimer">note: this site is not affiliated, associated, authorized, or endorsed by Laid-Back Camp / ゆるキャン△, あfろ, C-Station, Eight Bit, or any other copywrite holders. i just... really, really like yuru camp. if you haven't watched it, please do so in a way that supports the original artists.</span>
+    </div>
+    <footer><i class="fa fa-gear" id="settings"></i></footer>
   </body>
 </html>

@@ -1,13 +1,3 @@
-@font-face { font-family: Kyokasho; src: url('fonts/Kyokasho.ttf')}
-@font-face { font-family: Kyokasho; font-weight: bold; src: url('fonts/KyokashoBold.ttf')}
-@font-face { font-family: YuGothic; src: url('fonts/YuGothic.ttf')}
-@font-face { font-family: OpenSans; src: url('fonts/OpenSans.ttf')}
-
-body {
-    background-color: rgb(40 40 40);
-    font-family: YuGothic, sans-serif;
-}
-
 .set {
     display: flex;
     background-color: rgb(55, 55, 55);

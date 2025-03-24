@@ -1,7 +1,7 @@
 /* local variables */
 :root {
     --tent: #FCE758;
-    --lilac-main: rgb(222, 224, 237);
+    --lilac-main: rgb(255, 143, 199);
 }
 
 /* body/header */
@@ -202,6 +202,50 @@ footer {
     bottom: 5px;
     font-size: 18px;
     color: var(--off-white);
+    z-index: 1;
+}
+
+/* overlay */
+#settings-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+#settings-container {
+    position: relative;
+    top: 75vh;
+    width: 30%;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.blank-input {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    border: none;
+    background-color: var(--transparent);
+    color: white;
+} .blank-input:focus {
+    outline: none;
+}
+
+#front-input {
+    margin-left: 6vw;
+    width: 10%;
+}
+
+#disclaimer { /* might be cool to align this with the gear */
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    left: 0;
+    font-size: 10px;
+    width: 100%;
 }
 
 /* mobile */
