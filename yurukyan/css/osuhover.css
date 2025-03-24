@@ -1,10 +1,17 @@
 .osu-user {
     position: relative;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .osu-hover {
     display: none;
     position: absolute;
+    left: 0; /* need to set a position for it to spawn right under the text */
+    text-decoration: none;
+    font-weight: normal;
+    color: white;
     height: 80px;
     width: 300px;
     border-radius: 15px;
@@ -23,10 +30,8 @@
 }
 
 .hover-username {
-    font-family: OpenSans, sans-serif;
-    color: white;
+    font-weight: bold;
     font-size: 26px;
-    text-decoration: none;
 }
 
 .flaguser-container {

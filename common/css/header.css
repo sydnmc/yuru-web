@@ -1,31 +1,6 @@
-body {
-    background-color: rgb(40 40 40);
-    font-family: YuGothic, sans-serif;
-}
-
+/* main style for each website page */
 audio {
     display: none;
-}
-
-a {
-    color: rgb(180 181 191);
-    text-decoration: none;
-}
-
-a.normal-text {
-    font-family: YuGothic, sans-serif;
-    font-size: 16px;
-    color: rgb(100, 101, 112);
-    font-weight: normal;
-    text-decoration: underline;
-}
-
-span {
-    color: rgb(180 181 191);
-}
-
-p {
-    color: rgb(180 181 191);
 }
 
 .header {

@@ -1,39 +1,28 @@
-.set {
-    display: flex;
-    background-color: rgb(55, 55, 55);
-    min-height: 85px;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    margin-top: 20px;
-    border-radius: 5px;
-    border: 3px solid rgb(90, 73, 105);
-}
-
-a {
-    color: rgb(180 181 191);
-    text-decoration: none;
-}
-
-a.normal-text {
-    font-family: YuGothic, sans-serif;
-    font-size: 16px;
-    color: rgb(100, 101, 112);
-    font-weight: normal;
-    text-decoration: underline;
+/* local variables */
+:root {
+    --tent: #FCE758;
+    --lighter-bg: rgb(55, 55, 55);
 }
 
 a.title {
     font-family: Kyokasho, sans-serif;
-    color: #FCE758;
+    color: var(--tent);
     font-size: 58px;
     text-decoration: none;
 }
 
-p {
-    color: rgb(180 181 191);
+.set {
+    display: flex;
+    background-color: var(--lighter-bg);
+    border: 3px solid var(--sydney-main);
+    border-radius: 5px;
+    min-height: 85px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-top: 20px;
 }
 
-h1 {
+h1 { /* this is needed for things other than the title (incomplete/complete sets text), makes it centered */
     font-family: Kyokasho, sans-serif;
     font-weight: normal;
     color: white;
@@ -41,31 +30,33 @@ h1 {
     text-align: center;
 }
 
-img.set-content {
-    max-width: 19%;
+.set img {
+    max-width: 20%;
     object-fit: cover;
 }
 
-.text-container {
+.text-container { /* container of text inside each set */
     width: 100%;
     padding-left: 10px;
     padding-top: 10px;
 }
 
-a.set-content {
+.set-title {
     font-family: Kyokasho, sans-serif;
     font-size: 32px;
     color: white;
+    text-decoration: none;
 }
 
 .status-icon {
-    width: 1%;
+    width: 16px;
     padding-right: 5px;
+    /* vertical-align: middle doesn't look quite right, but i'd want this centered in some way */
 }
 
 .incomplete-warning {
+    color: var(--lilac-main);
     margin-top: 20px;
-    color: #DEE0ED;
     text-align: center;
 }
 

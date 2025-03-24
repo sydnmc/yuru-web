@@ -332,34 +332,32 @@ app.get('/pkInfo', async(req, res) => {
     const systemId = "ytcvss"
     let user = req.query.user;
     let frontList = req.query.frontList;
+    let before = parseInt(req.query.before);
     let apiResp;
 
-    let thirtyAgoAmount = 1000*60*60*24*30; //30 days in ms
-    let thirtyAgoDate = new Date();
-
-    if (req.query.before) {
-        thirtyAgoDate = req.query.before;
-    } else {
-        thirtyAgoDate = thirtyAgoDate.getTime() - thirtyAgoAmount; //minus 30 days ago
-    }
+    let daysAgoAmount = 1000*60*60*24*before; //x num of days in ms
+    let now = new Date();
+    let daysAgoDate = now.getTime() - daysAgoAmount;
 
     try {
         if (frontList) {
             apiResp = await fetch(`${systemURL}/systems/${systemId}/switches`); //unfortunately can't access after= with api, have to get all 100 switches from the past however long ago
             let parsedResp = await apiResp.json();
-
+            console.log(parsedResp);
             let dateCounter = 0;
             let foundBreakDate = false;
             let trimmedResp = [];
             while (dateCounter < parsedResp.length && !foundBreakDate) {
                 let switchDate = new Date(parsedResp[dateCounter].timestamp);
-                if (switchDate > new Date(thirtyAgoDate)) {
+                if (switchDate > new Date(daysAgoDate)) {
                     trimmedResp.push(parsedResp[dateCounter]);
                 } else {
                     foundBreakDate = true;
                 }
                 dateCounter++;
             }
+
+            console.log(trimmedResp);
 
             let sydneyTime = 0;
             let lilacTime = 0;
@@ -374,8 +372,8 @@ app.get('/pkInfo', async(req, res) => {
                 prevTimestamp = curTimestamp;
             }
 
-            //if we're at the end, we want to get it exactly to 30 days - whoever was last fronting gets that extra time added
-            let extraTime = thirtyAgoAmount-(sydneyTime+lilacTime);
+            //if we're at the end, we want to get it exactly to however many days - whoever was last fronting gets that extra time added
+            let extraTime = daysAgoAmount-(sydneyTime+lilacTime);
             if (trimmedResp[trimmedResp.length-1].members[0] == 'tfprjx') {
                 lilacTime = lilacTime+extraTime;
             } else if (trimmedResp[trimmedResp.length-1].members[0] == 'ckccgs') {

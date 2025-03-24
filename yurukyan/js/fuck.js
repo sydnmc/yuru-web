@@ -106,7 +106,7 @@ document.getElementById('settings').addEventListener("click", () => {
     }
 
     /* fronter */
-    var frontLength = document.getElementById('front-input');
+    var frontLength = document.getElementById('front-input').value;
     try {
         frontLength = parseInt(frontLength);
     } catch {
