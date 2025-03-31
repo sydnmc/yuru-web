@@ -1,12 +1,7 @@
-body {
-    background-color: var(--background);
-    font-family: YuGothic, sans-serif;
-}
-
 .header-wrapper {
     padding: 15px 15px;
     text-align: center;
-    background-color: var(--main);
+    background-color: var(--sydney-main);
     border-radius: 10px;
     margin-left: 20%;
     margin-right: 20%;

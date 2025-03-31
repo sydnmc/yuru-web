@@ -7,7 +7,7 @@
 * it totally isnt me hating on js. i would never. */
 //FUCK also includes code for updating the currently/last playing song displayed
 
-const endpoint = "https://api.yuru.ca"; //endpoint (backend)
+const endpoint = "http://localhost:3333"; //endpoint (backend)
 
 async function fetchFromApi(apiEndpoint) {
     let response;
@@ -74,6 +74,15 @@ document.getElementById('settings').addEventListener("click", () => {
         overlayActive = false;
     }
 });
+document.getElementById('settings-overlay').addEventListener("click", () => {
+    if (!overlayActive) {
+        overlay.style.display = 'block';
+        overlayActive = true;
+    } else {
+        overlay.style.display = 'none';
+        overlayActive = false;
+    }
+});
 
 (async () => {
     /* checking for page language */
@@ -116,7 +125,8 @@ document.getElementById('settings').addEventListener("click", () => {
     const frontList = await fetchFromApi(`pkInfo?frontList=true?before=${frontLength}`);
     const p1 = await getUser(true, frontList.frontHistory); //true = fronter
     const p2 = await getUser(false, frontList.frontHistory);
-    var members = [p1, p2]; //hardcoded 2 members bc im not gonna have more than lilac in me. if so shit
+    //var members = [p1, p2]; //hardcoded 2 members bc im not gonna have more than lilac in me. if so shit
+    //good morning, petal. i have to write code to account for you, cutie
 
     if (members[0].name != "sydney") { //whenever lilac is fronting
         let lilac = p1;

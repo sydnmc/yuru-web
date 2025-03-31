@@ -7,7 +7,7 @@ audio {
     display: flex;
     align-items: center;
     position: sticky;
-    background-color: rgb(222, 224, 237);
+    background-color: var(--lilac-main);
     border-radius: 10px;
 }
 
@@ -32,7 +32,7 @@ img.header {
 h1 {
     font-family: Kyokasho, sans-serif;
     font-weight: normal;
-    color: rgb(40 40 40);
+    color: var(--background);
     font-size: 58px;
     padding-left: 15px;
 }
@@ -57,12 +57,12 @@ button {
     transition-duration: 0.2s;
     cursor: pointer;
     border-radius: 5px;
-    background-color: rgb(181, 182, 190);
+    background-color: var(--lilac-accent);
     margin: 0;
 }
   
 button:hover {
-    background-color: rgb(147, 147, 151); 
+    background-color: var(--lilac-accent); 
 }
 
 .translate-button {
@@ -166,7 +166,7 @@ a.footer {
 
 /* mobile */
 @media only screen and (max-device-width: 1000px)
-{ 
+{
     h1 {
         font-size: 46px;
     }

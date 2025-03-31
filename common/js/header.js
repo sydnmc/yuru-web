@@ -1,7 +1,7 @@
 export function generatePageHeader(isJapanese, currentPage) {
     var header = `<div class="header">
         <a class="top-img" href="https://yuru.ca">
-          <img class="header" id="profile-pic-image" src="images/lilacpfp.png" alt="lilac's kyu-kurarin pfp">
+          <img class="header" id="profile-pic-image" src="../common/images/lilacpfp.png" alt="lilac's kyu-kurarin pfp">
         </a>
         <h1 class="header">yuiyamu</h1>
         <div class="dropdown" style="margin-left: 1%;">
@@ -10,7 +10,7 @@ export function generatePageHeader(isJapanese, currentPage) {
           </a>
           <div class="dropdown-content">
             <a href="http://yuru.ca/sets.html" id="sets-but">our sets</a>
-            <a href="gds.html" id="gds-but">my gds</a>
+            <a href="../common/gds.html" id="gds-but">my gds</a>
           </div>
         </div>
         <button class="borgar" id="hamburger"><span id="borgar-text">&#9776;</span></button>
@@ -21,7 +21,7 @@ export function generatePageHeader(isJapanese, currentPage) {
             <a class="borgar-menu-text" id="close-button-text">&times;</a>
           </div>
           <div class="borgar-text-wrapper">
-            <a class="borgar-menu-text" href="gds.html">osu! | gds</a>
+            <a class="borgar-menu-text" href="../common/gds.html">osu! | gds</a>
           </div>
           <div class="borgar-text-wrapper">
             <a class="borgar-menu-text" href="whoami.html">who am i?</a>

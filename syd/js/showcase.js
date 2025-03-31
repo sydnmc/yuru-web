@@ -1,7 +1,7 @@
 //basically kinda like gds.js but not really :3
 
-import { generatePageHeader } from './header.js';
-import { colorate } from './osucolorator.js';
+import { generatePageHeader } from '../../common/js/header.js';
+import { colorate } from '../../common/js/osucolorator.js';
 
 const endpoint = "https://api.yuru.ca"; //endpoint (backend)
 

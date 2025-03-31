@@ -64,4 +64,5 @@ h1 { /* this is needed for things other than the title (incomplete/complete sets
     font-size: 22px;
     background-color: #f26376;
     border-radius: 5px;
+    margin-bottom: 8px;
 }

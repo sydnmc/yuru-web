@@ -7,10 +7,10 @@
 .below-text {
     text-align: center;
     margin: 3px;
-    color: rgb(180 181 191);
 }
 
 .gdtab {
+    font-family: "Open Sans", sans-serif;
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: auto; 
@@ -33,7 +33,7 @@
 
 .gdtab .gdtab-top {
     color: white;
-    font-family: OpenSans, sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 14px;
     font-weight: normal;
     position: -webkit-sticky;
@@ -47,7 +47,6 @@
 .gdtab .gdtab-element {
     height: 80px;
     color: rgb(222, 224, 237);
-    font-family: OpenSans, sans-serif;
     text-align: left;
     vertical-align: top;
 }
@@ -58,7 +57,7 @@
 
 .gdtab a {
     color: rgb(222, 224, 237);
-    font-family: OpenSans, sans-serif;
+    text-decoration: none;
     text-align: left;
     vertical-align: top;
 }
@@ -66,7 +65,6 @@
 .gdtab .gdtab-diff-box {
     vertical-align: top;
     padding-top: 10px;
-    font-family: OpenSans, sans-serif;
     color: rgb(222, 224, 237);
 }
 
