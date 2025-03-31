@@ -363,13 +363,16 @@ app.get('/pkInfo', async(req, res) => {
 
             let sydneyTime = 0;
             let lilacTime = 0;
-            let prevTimestamp = new Date(trimmedResp[0].timestamp).getTime();
-            for (let i = 1; i < trimmedResp.length; i++) {
+            let hazelTime = 0;
+            let prevTimestamp = new Date().getTime();
+            for (let i = 0; i < trimmedResp.length; i++) {
                 let curTimestamp = new Date(trimmedResp[i].timestamp).getTime();
                 if (trimmedResp[i].members[0] == 'tfprjx') {
                     lilacTime = lilacTime+(prevTimestamp - curTimestamp);
                 } else if (trimmedResp[i].members[0] == 'ckccgs') {
                     sydneyTime = sydneyTime+(prevTimestamp - curTimestamp);
+                } else if (trimmedResp[i].members[0] == 'yaangx') {
+                    hazelTime = hazelTime+(prevTimestamp - curTimestamp);
                 }
                 prevTimestamp = curTimestamp;
             }
@@ -380,12 +383,21 @@ app.get('/pkInfo', async(req, res) => {
                 lilacTime = lilacTime+extraTime;
             } else if (trimmedResp[trimmedResp.length-1].members[0] == 'ckccgs') {
                 sydneyTime = sydneyTime+extraTime;
+            }  else if (trimmedResp[trimmedResp.length-1].members[0] == 'yaangx') {
+                hazelTime = hazelTime+extraTime;
             }
-            let totalTime = sydneyTime+lilacTime;
+            let totalTime = sydneyTime+lilacTime+hazelTime;
             let respWithPercent = {
                 lilacPercent: Math.round((lilacTime/totalTime)*100),
                 sydneyPercent: Math.round((sydneyTime/totalTime)*100),
+                hazelPercent: Math.round((hazelTime/totalTime)*100),
                 frontHistory: trimmedResp
+            }
+
+            if ((respWithPercent.lilacPercent + respWithPercent.sydneyPercent + respWithPercent.hazelPercent) > 1) { //if it's less than 1 due to rounding shenanigans
+                if ((respWithPercent.lilacPercent > respWithPercent.sydneyPercent) && (respWithPercent.lilacPercent > respWithPercent.hazelPercent)) {
+                    respWithPercent.lilacPercent++;
+                } //sydney or lilac can figure out a more efficient way to do this >_< this feels really bad...
             }
 
             res.send(respWithPercent);

@@ -214,21 +214,14 @@ a.person-shine {
 }
 
 #lilac-percent {
-    position: relative;
     background-color: rgb(222, 224, 237);
 }
 
-#lilac-percent:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgb(222, 224, 237);
-    transform-origin: 100% 0;
-    transform: skew(-45deg);
-  }
+#hazel-percent {
+    background-color: #724653;
+}
+
+/* will want to add back the slant to these, but that seems a lil bit complicated~ */
 
 .front-divider {
     border-left: 4px solid;
