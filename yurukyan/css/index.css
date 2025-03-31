@@ -164,6 +164,10 @@ header a {
     transform: skew(-45deg);
 } /* will def want to make this change direction depending on the fronter, but i'll get to that later~ */
 
+#hazel-percent {
+    background-color: #724653;
+}
+
 .front-divider {
     border: 2px solid var(--main);
     height: 105px;
