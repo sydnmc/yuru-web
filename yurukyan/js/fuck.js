@@ -19,42 +19,30 @@ async function fetchFromApi(apiEndpoint) {
     return await response.json();
 }
 
-async function getUser(front, frontList) {
-    let userID;
-
-    if (front) {
-        userID = frontList[0].members[0];
+function dateParser(fronterTime, prevTimestamp, isCurrent, isJapanese) { 
+    if (prevTimestamp) {
+        prevTimestamp = Date.parse(prevTimestamp);
     } else {
-        userID = frontList[1].members[0];
+        prevTimestamp = Date.now();
     }
 
-    return await fetchFromApi(`pkInfo?user=${userID}`);
-}
-
-function dateParser(time, isCurrent, fronterTime, isJapanese) { 
-    time = Date.parse(time);
     fronterTime = Date.parse(fronterTime);
-    var currentTime = Date.now();
-    var timeDiff = currentTime - time;
-    var timeDisplay;
+    let timeDiff = prevTimestamp - fronterTime;
+    let timeDisplay;
 
     if (isCurrent) {
-        var hours = parseInt((timeDiff/1000)/60/60);
-        var minutes = parseInt((timeDiff/1000)/60) - hours*60;
+        let hours = parseInt((timeDiff/1000)/60/60);
+        let minutes = parseInt((timeDiff/1000)/60) - hours*60;
         if (isJapanese) {
             timeDisplay = `${hours}時間${minutes}分`;
-            console.log('the fuck');
         } else {
             timeDisplay = `for ${hours} hours, ${minutes} minutes`;
         }
     } else {
-        timeDiff = currentTime - fronterTime - timeDiff;
-
-        var hours = parseInt((timeDiff/1000)/60/60);
-        var minutes = parseInt((timeDiff/1000)/60) - hours*60;
+        let hours = parseInt((timeDiff/1000)/60/60);
+        let minutes = parseInt((timeDiff/1000)/60) - hours*60;
         if (isJapanese) {
             timeDisplay = `意識時間は${hours}時間${minutes}分でした`;
-            console.log('the fuck');
         } else {
             timeDisplay = `last fronted for ${hours} hours, ${minutes} minutes`;
         }
@@ -121,39 +109,84 @@ document.getElementById('settings-overlay').addEventListener("click", () => {
     } catch {
         document.getElementById('front-input').insertAdjacentHTML('afterend', `<span>meow</span>`);
     }
-
+    
     const frontList = await fetchFromApi(`pkInfo?frontList=true?before=${frontLength}`);
-    const p1 = await getUser(true, frontList.frontHistory); //true = fronter
-    const p2 = await getUser(false, frontList.frontHistory);
-    //var members = [p1, p2]; //hardcoded 2 members bc im not gonna have more than lilac in me. if so shit
-    //good morning, petal. i have to write code to account for you, cutie
+    const sydneyInfo = await fetchFromApi(`pkInfo?user=tfprjx`);
+    const lilacInfo = await fetchFromApi(`pkInfo?user=ckccgs`);
+    const hazelInfo = await fetchFromApi(`pkInfo?user=yaangx`);
+    //hardcoded 2 members bc im not gonna have more than lilac in me. if so shit
+    //i'm keeping this comment because it's really funny in hindsight ^
+    //there shouldn't be more than 3 of us, so i'm still not making it automatically update (front display needs different colours too!!)
+    //but, just in case, it should be easier now.
 
-    if (members[0].name != "sydney") { //whenever lilac is fronting
-        let lilac = p1;
-        let sydney = p2;
-        members = [sydney, lilac];
-    }
+    var members = [sydneyInfo, lilacInfo, hazelInfo];
+    var fronter;
 
     document.getElementById('sydney-percent').style = `width: ${frontList.sydneyPercent}%`;
     document.getElementById('lilac-percent').style = `width: ${frontList.lilacPercent}%`;
+    document.getElementById('hazel-percent').style = `width: ${frontList.hazelPercent}%`;
+
+    var lastSydneyTimestamp;
+    var lastLilacTimestamp;
+    var lastHazelTimestamp;
+    var leastCheck = 100;
 
     for (let i = 0; i < members.length; i++) {
-        let personTime;
-        let personName = members[i].name;
-
-        if (frontList.frontHistory[0].members[0] == members[i].id) { //long way to check if current user is fronting or not
-            personTime = dateParser(frontList.frontHistory[0].timestamp, true, null, jp);
-            document.getElementById(`p${i+1}-wrapper`).classList = "person-shine hidden-link";
-            document.getElementById(`img-${i}`).classList = "cur-fronter";
-
-            //update links at the bottom depending on whos fronting
-            if (personName != "sydney") {
-                document.getElementById('twitter').href = "https://twitter.com/yuiyamuu";
-                document.getElementById('discord').href = "discord://-/users/245588170903781377";
+        let curCheck = 0;
+        let foundMatch = false;
+        while (curCheck < frontList.frontHistory.length && !foundMatch) {
+            if (members[i].id == frontList.frontHistory[curCheck].members[0]) {
+                let isCurrent = false;
+                let lastTimestamp;
+                if (curCheck == 0) {
+                    isCurrent = true;
+                } else {
+                    lastTimestamp = frontList.frontHistory[curCheck-1].timestamp;
+                }
+                let matchTimestamp = frontList.frontHistory[curCheck].timestamp;
+                if (i == 0) {
+                    lastSydneyTimestamp = dateParser(matchTimestamp, lastTimestamp, isCurrent, jp);
+                    if (curCheck < leastCheck) {
+                        fronter = 'sydney';
+                        leastCheck = curCheck;
+                    }
+                } else if (i == 1) {
+                    lastLilacTimestamp = dateParser(matchTimestamp, lastTimestamp, isCurrent, jp);;
+                    if (curCheck < leastCheck) {
+                        fronter = 'lilac';
+                        leastCheck = curCheck;
+                    }
+                } else {
+                    lastHazelTimestamp = dateParser(matchTimestamp, lastTimestamp, isCurrent, jp);;
+                    if (curCheck < leastCheck) {
+                        fronter = 'hazel';
+                        leastCheck = curCheck;
+                    }
+                }
+                foundMatch = true;
             }
-        } else {
-            personTime = dateParser(frontList.frontHistory[0].timestamp, false, frontList.frontHistory[1].timestamp, jp);
+            curCheck++;
         }
-        document.getElementById("time-"+i).textContent = personTime;
     }
+
+    if (fronter != 'sydney') { //update links at the bottom to lilac's socials if lilac or hazel is fronting
+        document.getElementById('twitter').href = "https://twitter.com/yuiyamuu";
+        document.getElementById('discord').href = "discord://-/users/245588170903781377";
+
+        document.getElementById(`p2-wrapper`).classList = "person-shine";
+        document.getElementById(`img-1`).classList = "cur-fronter";
+        if (fronter == 'hazel') {
+            document.getElementById(`name-1`).textContent = 'hazel';
+            document.getElementById(`img-1`).classList = "cur-fronter";
+            document.getElementById(`img-1`).src = './images/hazelpfp.jpg';
+            document.getElementById('time-1').style.padding = `2px`; //also not a great solution, but it makes the text align properly for now
+            document.getElementById("time-1").textContent = lastHazelTimestamp;
+        } else {
+            document.getElementById("time-1").textContent = lastLilacTimestamp;
+        }
+    } else {
+        document.getElementById(`p1-wrapper`).classList = "person-shine hidden-link";
+        document.getElementById(`img-0`).classList = "cur-fronter";
+    }
+    document.getElementById("time-0").textContent = lastSydneyTimestamp;
 })();
