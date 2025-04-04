@@ -140,7 +140,7 @@ function dateParser(fronterTime, prevTimestamp, isCurrent, isJapanese) {
         }
     }
 
-    if (fronter != 'sydney') { //update links at the bottom to lilac's socials if lilac or hazel is fronting
+    if (fronter == 'hazel' | fronter == 'lilac') { //update links at the bottom to lilac's socials if lilac or hazel is fronting
         document.getElementById('twitter').href = "https://twitter.com/yuiyamuu";
         document.getElementById('discord').href = "discord://-/users/245588170903781377";
 
