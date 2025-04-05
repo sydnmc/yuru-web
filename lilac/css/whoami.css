@@ -55,6 +55,20 @@ li {
     padding-bottom: 40px;
 }
 
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(222, 224, 237);
+    text-align: center;
+}
+
+a.footer {
+    text-decoration: none;
+    color: rgb(40 40 40);
+}
+
 /* mobile */
 @media only screen and (max-device-width: 1000px)
 { 

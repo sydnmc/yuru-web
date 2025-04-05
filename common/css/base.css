@@ -6,6 +6,7 @@
     --sydney-accent: rgb(65, 54, 75);
 
     --lilac-main: rgb(222, 224, 237);
+    --lilac-light-accent: rgb(181, 182, 190);
     --lilac-accent: rgb(126, 126, 129);
 
     --text: rgb(180 181 191);
@@ -42,4 +43,8 @@ a {
 
 .dark-text {
     color: var(--link);
+}
+
+audio {
+    display: none;
 }

@@ -75,10 +75,9 @@ document.getElementById('settings-overlay').addEventListener("click", () => {
 (async () => {
     /* checking for page language */
     var jp = false;
-    try {
-        document.getElementById('jp-page').innerHTML = "";
+    if (document.documentElement.lang == 'jp') {
         jp = true;
-    } catch { }
+    }
 
     /* last.fm */
     var curSongInfo = await fetchFromApi('songInfo');

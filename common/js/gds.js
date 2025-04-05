@@ -1,5 +1,5 @@
 import { colorate } from './osucolorator.js';
-import { generatePageHeader } from './header.js';
+import { } from './header.js';
 
 const endpoint = "https://api.yuru.ca"; //endpoint (backend)
 
@@ -247,12 +247,9 @@ async function populateRow(i, mapStatus, isJapanese) { //i = row number
 (async () => {
     /* checking for page language */
     var jp = false;
-    try {
-        document.getElementById('jp-page').innerHTML = "";
+    if (document.documentElement.lang == 'jp') {
         jp = true;
-    } catch { }
-
-    generatePageHeader(jp, "gds");
+    }
 
     /* populating rows */
     var curMapStatus = await getMapStatus(jp);

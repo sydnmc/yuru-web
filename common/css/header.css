@@ -1,144 +1,38 @@
-/* main style for each website page */
-audio {
-    display: none;
-}
-
-.header {
+/* header styling properties */
+#header { /* probably originally supposed to scroll with the page? */
     display: flex;
+    position: relative;
     align-items: center;
-    position: sticky;
-    background-color: var(--lilac-main);
     border-radius: 10px;
+    padding: 10px;
 }
 
-a.header {
-    width: 7.5%;
+#pfp-image {
+    width: 120px;
     border-radius: 50%;
-    padding-left: 15px;
-}
-
-img.header {
-    border-radius: 50%;
-    width: 100%;
-}
-
-.top-img {
-    width: 130px;
-    padding-left: 15px;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 h1 {
     font-family: Kyokasho, sans-serif;
+    font-size: 58px;
     font-weight: normal;
     color: var(--background);
-    font-size: 58px;
-    padding-left: 15px;
-}
-
-.borgar {
-    display: none;
-}
-
-.borgar-menu {
-    display: none;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 
 button {
-    border: none;
     font-family: Kyokasho, sans-serif;
-    color: white;
     font-size: 32px;
-    padding: 15px 90px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--lilac-light-accent);
+    padding: 15px 90px; /* determines the button size, default is this */
     transition-duration: 0.2s;
     cursor: pointer;
-    border-radius: 5px;
-    background-color: var(--lilac-accent);
-    margin: 0;
-}
-  
-button:hover {
+} button:hover {
     background-color: var(--lilac-accent); 
-}
-
-.translate-button {
-    text-decoration: none;
-    position: absolute;
-    top: 7.5px;
-    right: 7.5px;
-}
-
-.current-tab-on-page {
-    border: 1px solid rgb(147, 147, 151);
-    cursor: default;
-}
-
-.button-link {
-    margin-left: 1.5%;
-}
-
-.dropdown {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 0px;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    top: 68px;
-    background-color: rgb(181, 182, 190);
-    border-radius: 5px;
-    width: 252px;
-    box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.5);
-    z-index: 1;
-  }
-
-.dropdown-content a {
-    color: white;
-    float: none;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    cursor: pointer;
-  }
-
-.dropdown-content a:hover {
-    background-color: rgb(147, 147, 151);
-    border-radius: 5px;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.page-top-text {
-    text-align: center;
-    font-size: 24px;
-    color: white;
-    margin-bottom: 0;
-}
-
-.socials-bar {
-    text-align: center;
-    color: white;
-    font-size: 24px;
-}
-
-a.socials-bar {
-    font-weight: bold;
-    text-decoration: none;
-}
-
-img.socials-bar {
-    max-width: 2.25%;
 }
 
 .smaller-button {
@@ -146,36 +40,62 @@ img.socials-bar {
     padding: 15px 40px;
 }
 
-.button-text {
-    color: white;
-}
-
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: rgb(222, 224, 237);
-    text-align: center;
-}
-
-a.footer {
+#translate-button {
+    position: absolute; /* absolute based on the header position */
+    top: 10px;
+    right: 10px;
     text-decoration: none;
-    color: rgb(40 40 40);
 }
 
-/* mobile */
+.button-with-dropdown-container {
+    position: relative;
+} .button-with-dropdown-container:hover .dropdown-content { /* makes dropdown content visible when hovered over */
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: calc(244px + 10px); /* really not a good way to go about it, but the box with osu! text is 244px */
+    left: -5px; /* also not great, but i'll keep this for now to centre it */
+    background-color: var(--lilac-light-accent);
+    border-radius: 5px;
+    box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.5);
+}
+
+.dropdown-content a {
+    display: block;
+    color: white;
+    padding: 12px 16px; /* gives the text enough breathing room */
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+} .dropdown-content a:hover { /* makes dropdowns darker when you hover as well */
+    background-color: var(--lilac-accent);
+    border-radius: 5px;
+}
+
+/* burger menu (shouldn't display on desktop */
+#hamburger {
+    display: none;
+}
+
+.borgar-menu {
+    display: none;
+}
+
+/* mobile - burger menu */
 @media only screen and (max-device-width: 1000px)
 {
-    h1 {
-        font-size: 46px;
-    }
-
     .top-img {
         width: 90px;
     }
 
-    .dropdown {
+    #hamburger {
+        display: contents;
+    }
+
+    .button-with-dropdown-container {
         display: none;
     }
 
@@ -198,10 +118,9 @@ a.footer {
         height: 100%; 
         width: 0;
         position: fixed;
-        z-index: 1; 
         top: 0;
         right: 0;
-        background-color: rgb(181, 182, 190);
+        background-color: var(--lilac-light-accent);
         overflow-x: hidden;
         text-align: center;
         border-radius: 5px;
@@ -223,7 +142,7 @@ a.footer {
       }
 
       .borgar-text-wrapper:hover {
-        background-color: rgb(222, 224, 237);
+        background-color: var(--lilac-main);
       }
 
       #close-button {
@@ -235,15 +154,11 @@ a.footer {
       }
 
       #close-button:hover {
-        background-color: rgb(181, 182, 190);
+        background-color: var(--lilac-light-accent);
       }
 
       #close-button-text {
         cursor: pointer;
       }
-
-      img.socials-bar {
-        max-width: 5%;
-    }
 }
 
