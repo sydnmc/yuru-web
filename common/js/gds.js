@@ -1,5 +1,4 @@
 import { colorate } from './osucolorator.js';
-import { } from './header.js';
 
 const endpoint = "https://api.yuru.ca"; //endpoint (backend)
 
@@ -28,11 +27,11 @@ function createRows(num) {
     }
 }
 
-async function getMapStatus() {
+async function getMapStatus(person) {
     var mapStatus;
     try {
         var response;
-        response = await fetch(`${endpoint}/gds?person=lilac`);
+        response = await fetch(`${endpoint}/gds?person=${person}`);
         if (!response.ok) {
             throw new Error(`Response: ${response.status}`);
         }
@@ -244,15 +243,10 @@ async function populateRow(i, mapStatus, isJapanese) { //i = row number
     } 
 }
 
-(async () => {
-    /* checking for page language */
-    var jp = false;
-    if (document.documentElement.lang == 'jp') {
-        jp = true;
-    }
-
+export async function initializeGdsPage(jp, person) {
+    console.log('doing init');
     /* populating rows */
-    var curMapStatus = await getMapStatus(jp);
+    var curMapStatus = await getMapStatus(jp, person);
     var wipCount = 0;
     var collabCount = 0;
     var additionalPluralMaps = 0;
@@ -322,4 +316,4 @@ async function populateRow(i, mapStatus, isJapanese) { //i = row number
             }
         });
     }
-})();
+}

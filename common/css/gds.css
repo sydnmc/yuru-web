@@ -36,12 +36,9 @@
     font-family: "Open Sans", sans-serif;
     font-size: 14px;
     font-weight: normal;
-    position: -webkit-sticky;
-    position: sticky;
     text-align: left;
     top: -1px;
     vertical-align: top;
-    will-change: transform;
 }
 
 .gdtab .gdtab-element {

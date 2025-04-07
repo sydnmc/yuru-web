@@ -1,3 +1,5 @@
+import { initializeGdsPage } from './gds.js';
+
 var documentSheets = document.styleSheets;
 var headerSheet;
 
@@ -64,102 +66,125 @@ console.log(`testing: ${testing}, site: ${site}, pathname: ${pathname}, jp: ${jp
 function generatePageHeader(jp, curPage, person) {
   let username;
   let pfpAlt;
-  let translateUrl;
+  let translateUrl = `./${curPage}-ja_jp.html`;
+  let prevPage;
+
+  let mobileContent = "";
+  let desktopContent = "";
+  let buttonInfo = [{
+      name: "osu!",
+      link: "",
+      dropdown: [
+        {
+          name: "our sets",
+          link: "https://yuru.ca/sets"
+        },
+        {
+          name: "my gds",
+          link: `../common/gds.html?${person}`
+        }
+      ]
+    }];
   switch (person) {
     case 'lilac':
       username = 'yuiyamu';
+      pfpAlt = "lilac's kyu-kurarin pfp";
+      headerSheet.cssRules[2].style.color = `var(--background)`; //h1 text
+      headerSheet.cssRules[14].cssRules[4].style.color = `var(--background)`; //hamburger-button
+      buttonInfo.push({ name: "who am i?", link: './whoami.html'});
       break;
     case 'sydney':
       username = 'sydnmc';
+      pfpAlt = "sydney's shima rin pfp";
+      headerSheet.cssRules[2].style.color = `white`; //h1 text
+      headerSheet.cssRules[14].cssRules[4].style.color = `white`; //hamburger-button
+      headerSheet.cssRules[14].cssRules[6].style.color = `white`; //burger-text
+      buttonInfo.push({ name: "music", link: './music.html'});
       break;
   }
 
+  if (curPage == "index") {
+    prevPage = "https://yuru.ca";
+  } else {
+    prevPage = "./index.html";
+    if (curPage == "gds") { //or any other common page, though gds is the only one now
+      
+    }
+  }
+
+  if (jp) {
+    buttonInfo[0].dropdown[0].name = "あたしたちのgds";
+    buttonInfo[0].dropdown[1].name = "自分の譜面";
+    translateUrl = `./${curPage}.html`;
+    switch (person) {
+      case 'lilac':
+        buttonInfo[1].name = "あたしって誰？";
+        pfpAlt = "らいらっくのきゅうくらりんリンプロフィール画";
+        break;
+      case 'sydney':
+        buttonInfo[1].name = "自分の曲";
+        pfpAlt = "シドニーの志摩リンプロフィール画像";
+        break;
+    }
+    if (curPage == "index") {
+      prevPage = "https://yuru.ca/index-ja_jp.html";
+    } else {
+      prevPage = "./index-ja_jp.html"
+    }
+  }
+
+  buttonInfo.forEach(button => {
+    if (button.dropdown) {
+      desktopContent = desktopContent+`<div class="button-with-dropdown-container"><button class="drop-button">${button.name}</button><div class="dropdown-content">`; //starts the dropdown container
+      //mobileContent = 
+      button.dropdown.forEach(dropdown => {
+        desktopContent = desktopContent+`<a href="${dropdown.link}">${dropdown.name}</a>`;
+        mobileContent = mobileContent+`<a class="burger-text" href="${dropdown.link}">${button.name} | ${dropdown.name}</a>`;
+      });
+      desktopContent = desktopContent+`</div></div>`; //closes out both divs we opened
+    } else {
+      desktopContent = desktopContent+`<a href="${button.link}"><button class="header-button">${button.name}</button></a>`;
+      mobileContent = mobileContent+`<a class="burger-text" href="${button.link}">${button.name}</a>`;
+    }
+  });
+
   let header = 
   `<div id="header">
-        <a id="top-img" href="https://yuru.ca"> <!-- needs to update depending on jp page/where we are -->
-          <img id="pfp-image" src="../common/images/${person}pfp.png"> <!-- should update both alt text and source -->
+        <a href="${prevPage}">
+          <img id="pfp-image" src="../common/images/${person}pfp.png" alt="${pfpAlt}">
         </a>
         <h1>${username}</h1>
-        <div class="button-with-dropdown-container">
-          <button class="drop-button">osu!</button>
-          <div class="dropdown-content">
-            <a href="http://yuru.ca/sets.html">our sets</a>
-            <a href="../common/gds.html?${person}">my gds</a>
-          </div>
-        </div>
-        <button id="hamburger"><span>&#9776;</span></button>
-        <a id="translate-button" href="index-ja_jp.html">&#127760;</a>
+        ${desktopContent}
+        <span id="hamburger-button">&#9776;</span>
+        <a id="translate-button" href="${translateUrl}">&#127760;</a>
 
-        <div class="borgar-menu" id="popout-menu">
-          <div class="borgar-text-wrapper" id="close-button">
-            <a id="close-button-text">&times;</a>
-          </div>
-          <div class="borgar-text-wrapper">
-            <a href="../common/gds.html?${person}">osu! | gds</a>
-          </div>
-          <div class="borgar-text-wrapper">
-            <a href="http://yuru.ca/sets.html">osu! | sets</a>
-          </div>
-          <div class="borgar-text-wrapper">
-            <a href="whoami.html">who am i?</a>
-          </div>
+        <div id="burger-menu">
+          <a id="close-button">&times;</a>
+          ${mobileContent}
         </div>
       </div>`;
 
     document.getElementById('page-header').innerHTML = header; //puts the header on the page
-    document.getElementById('header').style.backgroundColor = `var(--${person}-main)`;
+    console.log(headerSheet);
 
-    let currentlyOnPage = `cursor: default; background-color: var(--${person}-accent); border-radius: 5px;`;
+    /* changing elements based on person */
+    headerSheet.cssRules[0].style.backgroundColor = `var(--${person}-main)`; //header
+    headerSheet.cssRules[3].style.backgroundColor = `var(--${person}-light-accent)`; //button
+    headerSheet.cssRules[4].style.backgroundColor = `var(--${person}-accent)`; //button:hover
+    headerSheet.cssRules[9].style.backgroundColor = `var(--${person}-light-accent)`; //button:hover
+    headerSheet.cssRules[11].style.backgroundColor = `var(--${person}-accent)`; //button:hover
 
-    let gdsButton = document.getElementById('gds-but');
-    let setsButton = document.getElementById('sets-but');
-    let translateButton = document.getElementsByClassName('translate-button')[0];
-    translateButton = document.getElementsByClassName('button').style.backgroundColor = `var(--${person}-accent)`;
-    
+    headerSheet.cssRules[14].cssRules[5].style.backgroundColor = `var(--${person}-light-accent)`; //burger-menu
+    headerSheet.cssRules[14].cssRules[7].style.backgroundColor = `var(--${person}-main)`; //burger-text:hover
 
-    if (jp) {
-        gdsButton.textContent = "あたしたちのgds";
-        setsButton.textContent = "自分の譜面";
-        document.getElementById('pfp-image').setAttribute('alt', 'らいらっくのきゅうくらりんリンプロフィール画像');
+    //let currentlyOnPage = `cursor: default; background-color: var(--${person}-accent); border-radius: 5px;`;
 
-        gdsButton.setAttribute('href', 'gds-ja_jp.html');
-        setsButton.setAttribute('href', '404translate.html');
-        switch (curPage) {
-            case "index":
-                document.getElementsByClassName('top-img')[0].setAttribute('href', 'https://yuru.ca/index-ja_jp');
-                translateButton.setAttribute('href', 'index.html');
-                break;
-            case "gds":
-                gdsButton.style = currentlyOnPage;
-                gdsButton.removeAttribute('href');
-                translateButton.setAttribute('href', 'gds.html');
-                document.getElementsByClassName('top-img')[0].setAttribute('href', 'index-ja_jp.html');
-                break;
-        }
-    } else {
-        switch (curPage) {
-            case "index":
-                document.getElementsByClassName('top-img')[0].setAttribute('href', 'https://yuru.ca/');
-                break;
-            case "gds":
-                gdsButton.style = currentlyOnPage;
-                gdsButton.removeAttribute('href');
-                translateButton.setAttribute('href', 'gds-ja_jp.html');
-                document.getElementsByClassName('top-img')[0].setAttribute('href', 'index.html');
-                break;
-            case "whoami":
-                document.getElementsByClassName('top-img')[0].setAttribute('href', 'index.html');
-                translateButton.setAttribute('href', '404translate.html');
-                break;
-        }
-    }
-
-  document.getElementById('hamburger').addEventListener('click', function() {
-      document.getElementById('popout-menu').style = "width: 250px;"
+  document.getElementById('hamburger-button').addEventListener('click', function() {
+      document.getElementById('burger-menu').style = "width: 250px;"
   });
   
   document.getElementById('close-button').addEventListener('click', function() {
-      document.getElementById('popout-menu').style = "width: 0px;"
+      document.getElementById('burger-menu').style = "width: 0px;"
   });
 }
 

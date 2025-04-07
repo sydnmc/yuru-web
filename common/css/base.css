@@ -2,8 +2,9 @@
 @font-face { font-family: Kyokasho; font-weight: bold; src: url('../fonts/KyokashoBold.ttf')}
 
 :root {
-    --sydney-main: rgb(198, 148, 242);
-    --sydney-accent: rgb(65, 54, 75);
+    --sydney-main: rgb(90, 73, 105);
+    --sydney-light-accent: rgb(65, 54, 75);
+    --sydney-accent: rgb(49, 43, 53);
 
     --lilac-main: rgb(222, 224, 237);
     --lilac-light-accent: rgb(181, 182, 190);
