@@ -131,7 +131,7 @@ document.getElementById('settings-overlay').addEventListener("click", () => {
                 document.getElementById(`name-1`).textContent = 'ヘーゼル';
             }
             document.getElementById(`img-1`).classList = "cur-fronter";
-            document.getElementById(`img-1`).src = '../common/images/hazelpfp.jpg';
+            document.getElementById(`img-1`).src = 'https://api.yuru.ca/images/hazelpfp.jpg';
             document.getElementById('time-1').style.padding = `2px`; //also not a great solution, but it makes the text align properly for now
             document.getElementById("time-1").textContent = dateParser(frontList[2].lastFrontAmount, frontList[2].isFronting, jp);
         } else {

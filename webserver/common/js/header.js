@@ -82,7 +82,7 @@ function generatePageHeader(jp, curPage, person) {
         },
         {
           name: "my gds",
-          link: `../common/gds.html?${person}`
+          link: `https://api.yuru.ca/gds.html?${person}`
         }
       ]
     }];
@@ -151,7 +151,7 @@ function generatePageHeader(jp, curPage, person) {
   let header = 
   `<div id="header">
         <a href="${prevPage}">
-          <img id="pfp-image" src="../common/images/${person}pfp.png" alt="${pfpAlt}">
+          <img id="pfp-image" src="https://api.yuru.ca/images/${person}pfp.png" alt="${pfpAlt}">
         </a>
         <h1>${username}</h1>
         ${desktopContent}

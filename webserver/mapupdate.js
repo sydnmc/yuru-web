@@ -21,6 +21,7 @@ app.listen(3333, () => {
 })
 app.use(cors());
 app.use(express.json());
+app.use(express.static('common')); //serves (cunt) all files from the common folder
 app.use(express.urlencoded({ extended: true }));
 
 var mapStatusSydney;
