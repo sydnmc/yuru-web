@@ -330,6 +330,7 @@ app.get('/songInfo', async(req, res) => {
 app.get('/pkInfo', async(req, res) => {
     const systemURL = "https://api.pluralkit.me/v2";
     const systemId = "ytcvss"
+    const sysMembers = ['ckccgs', 'tfprjx', 'yaangx']; //sydney, lilac, hazel
     let user = req.query.user;
     let frontList = req.query.frontList;
     let before = parseInt(req.query.before);
@@ -343,11 +344,11 @@ app.get('/pkInfo', async(req, res) => {
         if (frontList) {
             apiResp = await fetch(`${systemURL}/systems/${systemId}/switches`); //unfortunately can't access after= with api, have to get all 100 switches from the past however long ago
             let parsedResp = await apiResp.json();
-            console.log(parsedResp);
+
             let dateCounter = 0;
             let foundBreakDate = false;
             let trimmedResp = [];
-            while (dateCounter < parsedResp.length && !foundBreakDate) {
+            while (dateCounter < parsedResp.length && !foundBreakDate) { //this finds the number of switches in the defined timeframe~ doesn't currently support more than 100 >w<
                 let switchDate = new Date(parsedResp[dateCounter].timestamp);
                 if (switchDate > new Date(daysAgoDate)) {
                     trimmedResp.push(parsedResp[dateCounter]);
@@ -357,48 +358,56 @@ app.get('/pkInfo', async(req, res) => {
                 dateCounter++;
             }
 
-            console.log(trimmedResp);
+            let frontersInfo = [
+                { name: 'sydney', memberTime: 0},
+                { name: 'lilac', memberTime: 0 },
+                { name: 'hazel', memberTime: 0 }
+            ]
 
-            let sydneyTime = 0;
-            let lilacTime = 0;
-            let hazelTime = 0;
             let prevTimestamp = new Date().getTime();
             for (let i = 0; i < trimmedResp.length; i++) {
                 let curTimestamp = new Date(trimmedResp[i].timestamp).getTime();
-                if (trimmedResp[i].members[0] == 'tfprjx') {
-                    lilacTime = lilacTime+(prevTimestamp - curTimestamp);
-                } else if (trimmedResp[i].members[0] == 'ckccgs') {
-                    sydneyTime = sydneyTime+(prevTimestamp - curTimestamp);
-                } else if (trimmedResp[i].members[0] == 'yaangx') {
-                    hazelTime = hazelTime+(prevTimestamp - curTimestamp);
+                for (let j = 0; j < sysMembers.length; j++) {
+                    if (trimmedResp[i].members[0] == sysMembers[j]) {
+                        frontersInfo[j].memberTime = frontersInfo[j].memberTime+(prevTimestamp - curTimestamp);
+                    }
                 }
                 prevTimestamp = curTimestamp;
             }
 
             //if we're at the end, we want to get it exactly to however many days - whoever was last fronting gets that extra time added
-            let extraTime = daysAgoAmount-(sydneyTime+lilacTime);
-            if (trimmedResp[trimmedResp.length-1].members[0] == 'tfprjx') {
-                lilacTime = lilacTime+extraTime;
-            } else if (trimmedResp[trimmedResp.length-1].members[0] == 'ckccgs') {
-                sydneyTime = sydneyTime+extraTime;
-            }  else if (trimmedResp[trimmedResp.length-1].members[0] == 'yaangx') {
-                hazelTime = hazelTime+extraTime;
+            let extraTime = daysAgoAmount-(frontersInfo[0].memberTime+frontersInfo[1].memberTime+frontersInfo[2].memberTime);
+            for (let i = 0; i < sysMembers.length; i++) {
+                if (trimmedResp[trimmedResp.length-1].members[0] == sysMembers[0]) {
+                    frontersInfo[i].memberTime = frontersInfo[i].memberTime+extraTime;
+                }
             }
-            let totalTime = sydneyTime+lilacTime+hazelTime;
-            let respWithPercent = {
-                lilacPercent: Math.round((lilacTime/totalTime)*100),
-                sydneyPercent: Math.round((sydneyTime/totalTime)*100),
-                hazelPercent: Math.round((hazelTime/totalTime)*100),
-                frontHistory: trimmedResp
+            let totalTime = frontersInfo[0].memberTime+frontersInfo[1].memberTime+frontersInfo[2].memberTime;
+
+            for (let i = 0; i < sysMembers.length; i++) {
+                frontersInfo[i].memberPercent = Math.round((frontersInfo[i].memberTime/totalTime)*100);
+
+                let foundMember = false;
+                let memberInt = 0;
+                while (memberInt < trimmedResp.length && !foundMember) {
+                    if (trimmedResp[memberInt].members[0] == sysMembers[i]) {
+                        let nextTimestamp;
+                        try {
+                            nextTimestamp = Date.parse(trimmedResp[memberInt-1].timestamp);
+                            frontersInfo[i].isFronting = false;
+                        } catch {
+                            nextTimestamp = Date.now(); //if there's not a next timestamp, the member must be currently fronting
+                            frontersInfo[i].isFronting = true;
+                        }
+                        frontersInfo[i].lastFrontTimestamp = trimmedResp[memberInt].timestamp;
+                        frontersInfo[i].lastFrontAmount = nextTimestamp-Date.parse(trimmedResp[memberInt].timestamp);
+                        foundMember = true;
+                    }
+                    memberInt++;
+                }
             }
 
-            if ((respWithPercent.lilacPercent + respWithPercent.sydneyPercent + respWithPercent.hazelPercent) > 1) { //if it's less than 1 due to rounding shenanigans
-                if ((respWithPercent.lilacPercent > respWithPercent.sydneyPercent) && (respWithPercent.lilacPercent > respWithPercent.hazelPercent)) {
-                    respWithPercent.lilacPercent++;
-                } //sydney or lilac can figure out a more efficient way to do this >_< this feels really bad...
-            }
-
-            res.send(respWithPercent);
+            res.send(frontersInfo);
         } else {
             apiResp = await fetch(`${systemURL}/members/${user}`);
             res.send(await apiResp.json());

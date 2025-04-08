@@ -27,20 +27,14 @@ function createRows(num) {
     }
 }
 
-async function getMapStatus(person) {
-    var mapStatus;
+async function fetchFromApi(apiEndpoint) {
+    let response;
     try {
-        var response;
-        response = await fetch(`${endpoint}/gds?person=${person}`);
-        if (!response.ok) {
-            throw new Error(`Response: ${response.status}`);
-        }
-        mapStatus = await response.json();
-    } catch (error) {
-        console.log(error.message);
+        response = await fetch(`${endpoint}/${apiEndpoint}`);
+    } catch (err) {
+        console.log(`Failed to fetch from yuru.ca API: ${err.message}`);
     }
-
-    return await mapStatus;
+    return await response.json();
 }
 
 async function populateRow(i, mapStatus, isJapanese) { //i = row number
@@ -244,9 +238,10 @@ async function populateRow(i, mapStatus, isJapanese) { //i = row number
 }
 
 export async function initializeGdsPage(jp, person) {
-    console.log('doing init');
+    console.log(jp);
+    console.log(person);
     /* populating rows */
-    var curMapStatus = await getMapStatus(jp, person);
+    var curMapStatus = await fetchFromApi(`gds?person=${person}`);
     var wipCount = 0;
     var collabCount = 0;
     var additionalPluralMaps = 0;

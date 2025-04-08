@@ -18,7 +18,8 @@
     <script src="./js/fuck.js" async></script>
   </head>
   <header>
-    <a class="fa fa-github hidden-link" style="color: white; font-size: 18px;" href="https://github.com/sydnmc/yuru-web"></a>
+    <a class="fa fa-github hidden-link" style="position: relative; top: 1.5px; color: white; font-size: 20px;" href="https://github.com/sydnmc/yuru-web"></a>
+    <!-- this sucks but i'm manually bringing it down a bit :3 -->
     <a class="hidden-link" href="index-ja_jp.html">&#127760;</a>
   </header>
   <body>
@@ -27,7 +28,7 @@
       <div class="plural">
           <a class="person hidden-link" id="p1-wrapper" href="https://syd.yuru.ca">
             <div class=person-img>
-              <img id="img-0" alt="sydney's profile pic" src="../common/images/sydpfp.png"></img>
+              <img id="img-0" alt="sydney's profile pic" src="../common/images/sydneypfp.png"></img>
             </div>
             <div class="person-text" id="sydney-text">
               <span id="name-0">sydney</span>
@@ -47,11 +48,14 @@
       </div>
       <div id="front-percent-container">
         <div id="front-percentage">
-          <div id="sydney-percent">
+          <div id="sydney-percent" class="front-percent-person">
+            <span id="sydney-tooltip" class="front-percent-hover">sydney</span>
           </div>
-          <div id="lilac-percent">
+          <div id="lilac-percent" class="front-percent-person">
+            <span id="lilac-tooltip" class="front-percent-hover">lilac</span>
           </div>
-          <div id="hazel-percent">
+          <div id="hazel-percent" class="front-percent-person">
+            <span id="hazel-tooltip" class="front-percent-hover">hazel</span>
           </div>
         </div>
       </div>

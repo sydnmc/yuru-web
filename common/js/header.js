@@ -60,6 +60,7 @@ if (pathname == '') { //if we're at the index, set it to be index for clarity
 } if (jp) {
   pathname = pathname.split('-ja_jp')[0]; //lastly, all japanese pages have -ja_jp after them, so we want to remove that as well
 }
+pathname = pathname.split('.html')[0]; //removes the .html after, which should be the last thing that we have
 
 console.log(`testing: ${testing}, site: ${site}, pathname: ${pathname}, jp: ${jp}`);
 
@@ -136,7 +137,6 @@ function generatePageHeader(jp, curPage, person) {
   buttonInfo.forEach(button => {
     if (button.dropdown) {
       desktopContent = desktopContent+`<div class="button-with-dropdown-container"><button class="drop-button">${button.name}</button><div class="dropdown-content">`; //starts the dropdown container
-      //mobileContent = 
       button.dropdown.forEach(dropdown => {
         desktopContent = desktopContent+`<a href="${dropdown.link}">${dropdown.name}</a>`;
         mobileContent = mobileContent+`<a class="burger-text" href="${dropdown.link}">${button.name} | ${dropdown.name}</a>`;
@@ -165,7 +165,6 @@ function generatePageHeader(jp, curPage, person) {
       </div>`;
 
     document.getElementById('page-header').innerHTML = header; //puts the header on the page
-    console.log(headerSheet);
 
     /* changing elements based on person */
     headerSheet.cssRules[0].style.backgroundColor = `var(--${person}-main)`; //header
@@ -178,6 +177,9 @@ function generatePageHeader(jp, curPage, person) {
     headerSheet.cssRules[14].cssRules[7].style.backgroundColor = `var(--${person}-main)`; //burger-text:hover
 
     //let currentlyOnPage = `cursor: default; background-color: var(--${person}-accent); border-radius: 5px;`;
+    if (curPage == "gds") {
+      initializeGdsPage(jp, person);
+    }
 
   document.getElementById('hamburger-button').addEventListener('click', function() {
       document.getElementById('burger-menu').style = "width: 250px;"

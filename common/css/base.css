@@ -10,6 +10,8 @@
     --lilac-light-accent: rgb(181, 182, 190);
     --lilac-accent: rgb(126, 126, 129);
 
+    --hazel-main: #724653;
+
     --text: rgb(180 181 191);
     --link: rgb(100, 101, 112);
     --background: rgb(40 40 40);
@@ -44,6 +46,10 @@ a {
 
 .dark-text {
     color: var(--link);
+}
+
+.centered {
+    text-align: center;
 }
 
 audio {

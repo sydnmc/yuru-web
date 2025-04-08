@@ -126,6 +126,7 @@ button {
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
         transition: .25s ease; /* makes the slide out animation~ */
+        z-index: 1;
     }
 
     .burger-text {
