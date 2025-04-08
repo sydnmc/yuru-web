@@ -1,6 +1,6 @@
 //basically kinda like gds.js but not really :3
-import {} from '../https://api.yuru.ca/js/header.js'; //even though we're importing nothing, it still runs all the header generating code here
-import { colorate } from '../https://api.yuru.ca/js/osucolorator.js';
+import {} from 'https://api.yuru.ca/js/header.js'; //even though we're importing nothing, it still runs all the header generating code here
+import { colorate } from 'https://api.yuru.ca/js/osucolorator.js';
 
 const endpoint = "https://api.yuru.ca"; //endpoint (backend)
 
