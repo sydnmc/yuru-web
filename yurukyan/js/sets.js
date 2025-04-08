@@ -8,11 +8,11 @@ function createSetRows(num) {
 
     for (let i = 0; i < num; i++) {
         var rowElement = rowElement+`<div class="set">
-            <img class="set-content" id="set-img-${i}">
+            <img id="set-img-${i}">
             <div class="text-container">
                 <img class="status-icon" id="status-icon-${i}"></img>
-                <a class="set-content" id="set-title-${i}"></a>
-                <p class="set-content" id="set-yapping-${i}"><br>
+                <a id="set-title-${i}" class="set-title"></a>
+                <p id="set-yapping-${i}"><br>
             </div>
         </div>`;
         container.innerHTML = rowElement;
@@ -25,10 +25,10 @@ function createIncompleteSetRows(num, offsetNum) {
 
     for (let i = 0; i < num; i++) {
         var rowElement = rowElement+`<div class="set">
-            <img class="set-content" id="set-img-${i+offsetNum}">
+            <img id="set-img-${i+offsetNum}">
             <div class="text-container">
-                <a class="set-content" id="set-title-${i+offsetNum}"></a>
-                <p class="set-content" id="set-yapping-${i+offsetNum}"><br>
+                <a id="set-title-${i+offsetNum}" class="set-title"></a>
+                <p id="set-yapping-${i+offsetNum}"><br>
             </div>
         </div>`;
         container.innerHTML = rowElement;
@@ -72,7 +72,7 @@ function populateRows(setInfo, incomplete, offsetNum) {
                     break;
                 case "ranked":
                     iconUrl = "https://i.ppy.sh/7f116c7b5f20a0f1b9b38d35b521f5bd070d864a/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f72616e6b65642e706e67";
-                    statusIcon.style.width = "1.9%";
+                    statusIcon.style.width = "26px";
                     break;
                 case "qualified":
                     iconUrl = "https://i.ppy.sh/dd2c44bf7db9f2e33f670205df7df3d028101888/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f7175616c69666965642e706e67";

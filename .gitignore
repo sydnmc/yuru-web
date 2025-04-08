@@ -7,4 +7,6 @@ webserver/lilac-mapstatus.json
 webserver/syd-mapstatus.json
 webserver/setinfo.json
 
+webserver/redirect/wrangler.toml
+
 .vscode

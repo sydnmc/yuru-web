@@ -1,3 +1,4 @@
+/* needs to be redone, might do something like using buttercms instead :O */
 ul {
     margin-top: 2px;
 }
@@ -53,6 +54,20 @@ li {
     padding-right: 15px;
     text-align: right;
     padding-bottom: 40px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(222, 224, 237);
+    text-align: center;
+}
+
+a.footer {
+    text-decoration: none;
+    color: rgb(40 40 40);
 }
 
 /* mobile */

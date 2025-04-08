@@ -1,0 +1,35 @@
+.header-wrapper {
+    padding: 15px 15px;
+    text-align: center;
+    background-color: var(--sydney-main);
+    border-radius: 10px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 35px;
+}
+
+#image {
+    border-radius: 50%;
+    width: 10%;
+}
+
+h1 {
+    font-family: Kyokasho, sans-serif;
+    font-weight: normal;
+    color: var(--offwhite);
+    font-size: 58px;
+    margin-top: 10px;
+}
+
+span {
+    color: var(--offwhite);
+}
+
+a {
+    color: var(--text);
+}
+
+.dark-text {
+    color: var(--text);
+}
+

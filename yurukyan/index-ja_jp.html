@@ -8,34 +8,39 @@
     <meta property="og:description" content="yurukyan△システムのパーソナルウェブページ">
     <meta name="theme-color" content="#FCE758">
     <title>yurukyan△</title>
-    <link rel="stylesheet" type="text/css" href="css/mainstyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="https://api.yuru.ca/css/base.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&family=Zen+Kaku+Gothic+New&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://api.yuru.ca/favicon.ico">
     <script src="./js/fuck.js" async></script>
   </head>
   <header>
-    <a class="translate-button" href="index.html">&#127760;</a>
-    <a class="fa fa-github" id="github-link" href="https://github.com/sydnmc/yuru-web"></a>
+    <a class="fa fa-github hidden-link" style="position: relative; top: 1.5px; color: white; font-size: 20px;" href="https://github.com/sydnmc/yuru-web"></a>
+    <!-- this sucks but i'm manually bringing it down a bit :3 -->
+    <a class="hidden-link" href="index.html">&#127760;</a>
   </header>
   <body>
     <section id="page">
-      <h1><a class=title href="https://yuru.ca/index-ja_jp.html">yurukyan△</a><h1>
+      <h1><a id="title" href="https://yuru.ca">yurukyan△</a></h1>
       <div class="plural">
-          <a class="person" id="p1-wrapper" href="https://syd.yuru.ca/index-ja_jp.html">
+          <a class="person hidden-link" id="p1-wrapper" href="https://syd.yuru.ca">
             <div class=person-img>
-              <img id="img-0" alt="シド二ーのプロフィール画像" src="images/sydpfp.png"></img>
+              <img id="img-0" alt="シド二ーのプロフィール画像" src="https://api.yuru.ca/images/sydneypfp.png"></img>
             </div>
-            <div class="person-text">
+            <div class="person-text" id="sydney-text">
               <span id="name-0">シドニー</span>
               <p id="time-0">フロント時間をローディング中...</p>
             </div>
           </a>
         <div class="front-divider"></div>
-          <a class="person" id="p2-wrapper" href="https://lilac.yuru.ca/index-ja_jp.html">
+          <a class="person hidden-link" id="p2-wrapper" href="https://lilac.yuru.ca">
             <div class=person-img>
-              <img id="img-1" alt="らいらっくのプロフィール画像" src="images/lilacpfp.png"></img>
+              <img id="img-1" alt="lilac's profile pic" src="https://api.yuru.ca/images/lilacpfp.png"></img>
             </div>
-            <div class="person-text">
+            <div class="person-text" id="lilac-text">
               <span id="name-1">らいらっく</span>
               <p id="time-1">フロント時間をローディング中...</p>
             </div>
@@ -43,39 +48,44 @@
       </div>
       <div id="front-percent-container">
         <div id="front-percentage">
-          <div id="sydney-percent">
+          <div id="sydney-percent" class="front-percent-person">
+            <span id="sydney-tooltip" class="front-percent-hover">sydney</span>
           </div>
-          <div id="lilac-percent">
+          <div id="lilac-percent" class="front-percent-person">
+            <span id="lilac-tooltip" class="front-percent-hover">lilac</span>
           </div>
-          <div id="hazel-percent">
+          <div id="hazel-percent" class="front-percent-person">
+            <span id="hazel-tooltip" class="front-percent-hover">hazel</span>
           </div>
         </div>
       </div>
-      <div style="padding-bottom: 20px;"></div>
-      <div class="socials-bar-big">
-        <span class="socials-bar-big"><strong>
-          <a class="socials-bar-big" id="twitter" href="https://twitter.com/sydnmc_"><img class="socials-bar-big" src="images/twitter.png" alt="twitter logo"></img> twitter</a> |
-          <a class="socials-bar-big" id="osu" href="https://osu.ppy.sh/users/14829744"><img class="socials-bar-big" src="images/osu.png" alt="osu logo"></img> osu!</a> |
-          <a class="socials-bar-big" id="discord" href="discord://-/users/226885796739678229"><img class="socials-bar-big" src="images/discord.png" alt="discord logo"></img> discord</a></strong></span>
+      <div class="socials-bar socials-bar-big hidden-link">
+        <span><strong>
+          <a id="twitter" href="https://twitter.com/sydnmc_"><img src="https://api.yuru.ca/images/twitter.png" alt="twitter logo"></img> twitter</a><span> | </span>
+          <a id="osu" href="https://osu.ppy.sh/users/14829744"><img src="https://api.yuru.ca/images/osu.png" alt="osu logo"></img> osu!</a><span> | </span>
+          <a id="discord" href="discord://-/users/226885796739678229"><img src="https://api.yuru.ca/images/discord.png" alt="discord logo"></img> discord</a></strong></span>
       </div>
-      <div class="socials-bar">
-        <span class="socials-bar"><strong></strong>
-          <a class="socials-bar" id="bluesky" href="https://bsky.app/profile/syd.yuru.ca"><img class="socials-bar" src="images/bluesky.png" alt="bluesky logo"></img> bluesky</a> | 
-          <a class="socials-bar" id="youtube" href="https://www.youtube.com/@bnmc"><img class="socials-bar" src="images/youtube.png" alt="youtube logo"></img> youtube</a> | 
-          <a class="socials-bar" id="soundcloud" href="https://soundcloud.com/sydnmc"><img class="socials-bar" src="images/soundcloud.png" alt="soundcloud logo"></img> soundcloud</a> | 
-          <a class="socials-bar" id="spotify" href="https://open.spotify.com/artist/2skthVx4TUgiiFjG1UWftN"><img class="socials-bar" src="images/spotify.png" alt="spotify logo"></img> spotify</a></strong></span>
+      <div class="socials-bar hidden-link">
+        <span><strong>
+          <a id="bluesky" href="https://bsky.app/profile/syd.yuru.ca"><img src="https://api.yuru.ca/images/bluesky.png" alt="bluesky logo"></img> bluesky</a><span> | </span>
+          <a id="youtube" href="https://www.youtube.com/@bnmc"><img src="https://api.yuru.ca/images/youtube.png" alt="youtube logo"></img> youtube</a><span> | </span>
+          <a id="soundcloud" href="https://soundcloud.com/sydnmc"><img src="https://api.yuru.ca/images/soundcloud.png" alt="soundcloud logo"></img> soundcloud</a><span> | </span>
+          <a id="spotify" href="https://open.spotify.com/artist/2skthVx4TUgiiFjG1UWftN"><img src="https://api.yuru.ca/images/spotify.png" alt="spotify logo"></img> spotify</a></strong></span>
         <br>
       </div>
       <div>
-        <p id="last-played">歌の情報ローディング中...</p>
+        <p class="dark-text" id="last-played">retriving song info...</p>
       </div>
-      <div class="socials-bar">
-        <span>19 | 女の子です | EN OK</span>
-        <br>
+      <div>
+        <span>19 | 女の子です | EN OK</span><br>
         <span id="bottom-translate-text"><strong>if you'd like to view this site in english, click <a class="socials-bar" href="index.html">here</a> or click the globe symbol at the top of the page.</strong></span>
       </div>
     </section>
-    <footer>注意：このサイトは、ゆるキャン△、あｆろ、C-Station、エイトビット、その他の著作権所有者と提携、関連、認可、または承認しているものではありません。ただ... ゆるキャンが本当に、本当に好きです。まだ見たことないなら、独自作者をサポートする形で見てください。</footer>
-    <div id="jp-page"></div>
+    <div id="settings-overlay">
+      <div id="settings-container">
+        <span>front percentage duration (days)</span><input id="front-input" type="text" class="blank-input" value="30">
+      </div>
+    </div>
+    <footer><i class="fa fa-gear" id="settings"></i></footer>
   </body>
 </html>
