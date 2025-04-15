@@ -119,11 +119,27 @@ h3 {
 }
 
 .upper-ranked-text {
-    position: absolute;
+    position: absolute; /* only shows up when the relative position is the showcase wrapper */
     color: white;
     font-size: 14px;
-    top: 130px;
-    left: 105px;
+    top: calc(15% - 10px);
+    width: calc(((33% * 0.6) - 4px)); /* close enough for now, but i wanna find a better solution with js, probably? */
+    text-align: center;
+    /* should add this to the common folder when i can >_< */
+    background: var(--shine);
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-color: #93c47d;
+    -webkit-text-fill-color: transparent;
+    background-size: 500% auto;
+    animation: textShine 5s ease-in-out infinite alternate;
+} @keyframes textShine {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
 .larger-text {

@@ -45,6 +45,7 @@ header a {
 
 .plural {
     display: flex;
+    position: relative;
 }
 
 .person {
@@ -135,6 +136,51 @@ header a {
 
 #time-1 {
     padding-left: 5px;
+}
+
+#lilac-dropdown {
+    font-size: 26px;
+    color: white;
+    position: absolute;
+    cursor: pointer;
+    right: 5px;
+    top: 0px;
+    padding: 5px; /* padding is so that more area is clickable (especially useful on mobile) */
+}
+
+#person-dropdown {
+    position: absolute;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    background-color: var(--background);
+    width: calc((50% - 3%) - 8px);
+    right: 0%;
+    bottom: -52px;
+    height: 50px;
+    border: 3px solid var(--sydney-light-accent);
+    border-radius: 5px;
+}
+
+#dropdown-img {
+    padding: 3px;
+    height: 44px; /* not sure why this is the case, might have to look into it */
+} #dropdown-img img {
+    max-height: 100%; /* limits height growth of fronter imgs */
+    border-radius: 5px;
+}
+
+#name-2 {
+    font-family: Kyokasho, sans-serif;
+    font-size: 32px;
+    color: white;
+    margin-right: 8px;
+    margin-left: 2px;
+}
+
+#time-2 {
+    font-size: 13px;
 }
 
 #front-percent-container {

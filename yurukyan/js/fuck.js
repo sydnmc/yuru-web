@@ -82,6 +82,19 @@ document.getElementById('settings-overlay').addEventListener("click", () => {
     }
 });
 
+var dropdownClicked = false;
+document.getElementById('lilac-dropdown').addEventListener("click", () => {
+    let dropdown = document.getElementById('person-dropdown');
+    if (!dropdownClicked) {
+        dropdown.style.visibility = 'visible';
+        dropdownClicked = true;
+    } else {
+        dropdown.style.visibility = 'hidden';
+        dropdownClicked = false;
+    }
+});
+
+
 (async () => {
     /* checking for page language */
     var jp = false;
@@ -111,35 +124,48 @@ document.getElementById('settings-overlay').addEventListener("click", () => {
     document.getElementById('lilac-percent').style = `width: ${frontList[1].memberPercent}%`;
     document.getElementById('hazel-percent').style = `width: ${frontList[2].memberPercent}%`;
 
+    var frontTimes = [];
+
     for (let i = 0; i < frontList.length; i++) {
+        /* writing to main front display */
+        let date = dateParser(frontList[i].lastFrontAmount, frontList[i].isFronting, jp);
+        if (frontList[2].isFronting && i == 2) { //if hazel is fronting, putting lilac in time 2
+            document.getElementById('time-'+i).textContent = dateParser(frontList[i-1].lastFrontAmount, frontList[i-1].isFronting, jp);
+            document.getElementById('time-'+(i-1)).textContent = date;
+        } else {
+            document.getElementById('time-'+i).textContent = date; //proceed putting all the dates where they should go
+        }
+        
+        /* creating hovers */
         let days = Math.floor(frontList[i].memberTime/1000/60/60/24);
         let hours = Math.round((frontList[i].memberTime/1000/60/60)-days*24);
         document.getElementById(`${frontList[i].name}-tooltip`).innerHTML = `${frontList[i].name}<br>${days} days, ${hours} hours | ${frontList[i].memberPercent}%`;
     }
 
     //should probably optimize all of this at some point, but i think this works for now...?
+    
     if (frontList[1].isFronting || frontList[2].isFronting) { //update links at the bottom to lilac's socials if lilac or hazel is fronting
         document.getElementById('twitter').href = "https://twitter.com/yuiyamuu";
         document.getElementById('discord').href = "discord://-/users/245588170903781377";
 
         document.getElementById(`p2-wrapper`).classList = "person-shine hidden-link";
         document.getElementById(`img-1`).classList = "cur-fronter";
-        if (frontList[2].isFronting) {
+        if (frontList[2].isFronting) { //if hazel is fronting, we want to swap the dropdown/main display
+            let hazelName = document.getElementById('name-1');
+            let lilacName = document.getElementById('name-2');
             if (!jp) {
-                document.getElementById(`name-1`).textContent = 'hazel';
+                hazelName.textContent = 'hazel';
+                lilacName.textContent = 'lilac';
             } else {
-                document.getElementById(`name-1`).textContent = 'ヘーゼル';
+                hazelName.textContent = 'ヘーゼル';
+                lilacName.textContent = 'らいらっく';
             }
-            document.getElementById(`img-1`).classList = "cur-fronter";
-            document.getElementById(`img-1`).src = 'https://api.yuru.ca/images/hazelpfp.jpg';
+            document.getElementById('img-1').src = 'https://api.yuru.ca/images/hazelpfp.jpg';
+            document.getElementById('img-2').src = 'https://api.yuru.ca/images/lilacpfp.png'
             document.getElementById('time-1').style.padding = `2px`; //also not a great solution, but it makes the text align properly for now
-            document.getElementById("time-1").textContent = dateParser(frontList[2].lastFrontAmount, frontList[2].isFronting, jp);
-        } else {
-            document.getElementById("time-1").textContent = dateParser(frontList[1].lastFrontAmount, frontList[1].isFronting, jp);
         }
-    } else {
+    } else { //else, we set the fronter to sydney
         document.getElementById(`p1-wrapper`).classList = "person-shine hidden-link";
         document.getElementById(`img-0`).classList = "cur-fronter";
     }
-    document.getElementById("time-0").textContent = dateParser(frontList[0].lastFrontAmount, frontList[0].isFronting, jp);
 })();
