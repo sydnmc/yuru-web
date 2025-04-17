@@ -65,9 +65,18 @@ pathname = pathname.split('.html')[0]; //removes the .html after, which should b
 console.log(`testing: ${testing}, site: ${site}, pathname: ${pathname}, jp: ${jp}`);
 
 function generatePageHeader(jp, curPage, person) {
+  let websitePerson = person;
+  if (person == 'sydney') {
+    websitePerson = 'syd';
+  }
   let username;
   let pfpAlt;
   let translateUrl = `./${curPage}-ja_jp.html`;
+  if (((curPage == 'index' || curPage == 'music' ) && person == 'sydney') || (curPage == 'whoami' && person == 'lilac')) {
+    //for right now, these are all of the untranslated pages that also have headers (sets aren't translated yet either, but i'll get to that at some point~)
+    //we want to redirect these to the custom translate 404 page instead of the normal 404 page :3
+    translateUrl = `https://${websitePerson}.yuru.ca/404translate`;
+  }
   let prevPage;
 
   let mobileContent = "";
@@ -82,7 +91,7 @@ function generatePageHeader(jp, curPage, person) {
         },
         {
           name: "my gds",
-          link: `https://api.yuru.ca/gds.html?${person}`
+          link: `https://${websitePerson}.gds.html`
         }
       ]
     }];
@@ -108,9 +117,6 @@ function generatePageHeader(jp, curPage, person) {
     prevPage = "https://yuru.ca";
   } else {
     prevPage = "./index.html";
-    if (curPage == "gds") { //or any other common page, though gds is the only one now
-      
-    }
   }
 
   if (jp) {

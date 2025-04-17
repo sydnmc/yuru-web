@@ -52,6 +52,7 @@ header a {
     display: flex;
     border: 3px solid var(--sydney-light-accent);
     border-radius: 5px;
+    cursor: pointer;
     height: 85px;
     width: 100%;
     box-shadow: -2px 8px 20px 6px rgba(0,0,0,0.3);
@@ -63,6 +64,7 @@ header a {
 .person-shine {
     display: flex;
     position: relative;
+    cursor: pointer;
     width: 100%;
     height: 90px;
     box-shadow: -2px 8px 20px 6px rgba(0,0,0,0.3);
@@ -155,7 +157,7 @@ header a {
     align-items: center;
     z-index: 1;
     background-color: var(--background);
-    width: calc((50% - 3%) - 8px);
+    width: calc((50% - 3%) - 8px); /* 8px only really works for when lilac/hazel are fronting, not sydney */
     right: 0%;
     bottom: -52px;
     height: 50px;
@@ -348,6 +350,10 @@ footer {
 
     .person-shine {
         margin-bottom: 20px;
+    }
+
+    #person-dropdown {
+        width: 100%;
     }
 
     #front-percentage {

@@ -24,12 +24,3 @@ h1 {
 span {
     color: var(--offwhite);
 }
-
-a {
-    color: var(--text);
-}
-
-.dark-text {
-    color: var(--text);
-}
-

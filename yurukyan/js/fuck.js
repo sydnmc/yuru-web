@@ -82,18 +82,28 @@ document.getElementById('settings-overlay').addEventListener("click", () => {
     }
 });
 
-var dropdownClicked = false;
-document.getElementById('lilac-dropdown').addEventListener("click", () => {
+var dropdownOpen = false;
+var dropdownClick = false;
+var lilacDropdown = document.getElementById('lilac-dropdown');
+lilacDropdown.addEventListener("click", e => {
+    e.stopPropagation(); //stops the link from working on the p2-wrapper :3
     let dropdown = document.getElementById('person-dropdown');
-    if (!dropdownClicked) {
+    if (!dropdownOpen) {
         dropdown.style.visibility = 'visible';
-        dropdownClicked = true;
+        dropdownOpen = true;
     } else {
         dropdown.style.visibility = 'hidden';
-        dropdownClicked = false;
+        dropdownOpen = false;
     }
 });
 
+//handling the links in js because of the dropdown arrow, this is the best solution for it unfortunately >_<;;
+document.getElementById('p1-wrapper').addEventListener("click", () => {
+    location.href = 'https://syd.yuru.ca';
+});
+document.getElementById('p2-wrapper').addEventListener("click", () => {
+    location.href = 'https://lilac.yuru.ca';
+});
 
 (async () => {
     /* checking for page language */
@@ -167,5 +177,6 @@ document.getElementById('lilac-dropdown').addEventListener("click", () => {
     } else { //else, we set the fronter to sydney
         document.getElementById(`p1-wrapper`).classList = "person-shine hidden-link";
         document.getElementById(`img-0`).classList = "cur-fronter";
+        document.getElementById(`person-dropdown`).style.width = 'calc((50% - 3%) - 3px)';
     }
 })();
