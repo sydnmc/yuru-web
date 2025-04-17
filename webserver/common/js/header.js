@@ -91,7 +91,7 @@ function generatePageHeader(jp, curPage, person) {
         },
         {
           name: "my gds",
-          link: `https://${websitePerson}.gds.html`
+          link: `https://${websitePerson}.yuru.ca/gds`
         }
       ]
     }];
