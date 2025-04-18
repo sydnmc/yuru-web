@@ -19,20 +19,31 @@ async function fetchFromApi(apiEndpoint) {
     return await response.json();
 }
 
-function dateParser(frontLength, isFronting, jp) { 
-    let hours = parseInt((frontLength/1000)/60/60);
-    let minutes = parseInt((frontLength/1000)/60) - hours*60;
-    if (isFronting) {
+function dateParser(frontLength, isFronting, jp, lastFrontTime) { 
+    let timeDisplay;
+    let frontAgoTime = (Date.now() - Date.parse(lastFrontTime))/1000/60/60/24;
+    if (frontAgoTime > 3) {
+        let parsedTime = new Date(lastFrontTime);
         if (jp) {
-            timeDisplay = `${hours}時間${minutes}分`;
+            timeDisplay = `最新の目覚めは${parsedTime.getUTCFullYear()}年${parsedTime.getUTCMonth()+1}月${parsedTime.getUTCDate()}日でした`;
         } else {
-            timeDisplay = `for ${hours} hours, ${minutes} minutes`;
+            timeDisplay = `last fronted on ${parsedTime.getUTCMonth()+1}/${parsedTime.getUTCDate()}/${parsedTime.getUTCFullYear()}`;
         }
     } else {
-        if (jp) {
-            timeDisplay = `意識時間は${hours}時間${minutes}分でした`;
-        } else {
-            timeDisplay = `last fronted for ${hours} hours, ${minutes} minutes`;
+        let hours = parseInt((frontLength/1000)/60/60);
+        let minutes = parseInt((frontLength/1000)/60) - hours*60;
+        if (isFronting) {
+            if (jp) {
+                timeDisplay = `${hours}時間${minutes}分`;
+            } else {
+                timeDisplay = `for ${hours} hours, ${minutes} minutes`;
+            }
+        } else  {
+            if (jp) {
+                timeDisplay = `意識時間は${hours}時間${minutes}分でした`;
+            } else {
+                timeDisplay = `last fronted for ${hours} hours, ${minutes} minutes`;
+            }
         }
     }
     return timeDisplay;
@@ -138,9 +149,9 @@ document.getElementById('p2-wrapper').addEventListener("click", () => {
 
     for (let i = 0; i < frontList.length; i++) {
         /* writing to main front display */
-        let date = dateParser(frontList[i].lastFrontAmount, frontList[i].isFronting, jp);
+        let date = dateParser(frontList[i].lastFrontAmount, frontList[i].isFronting, jp, frontList[i].lastFrontTimestamp);
         if (frontList[2].isFronting && i == 2) { //if hazel is fronting, putting lilac in time 2
-            document.getElementById('time-'+i).textContent = dateParser(frontList[i-1].lastFrontAmount, frontList[i-1].isFronting, jp);
+            document.getElementById('time-'+i).textContent = dateParser(frontList[i-1].lastFrontAmount, frontList[i-1].isFronting, jp, frontList[i-1].lastFrontTimestamp);
             document.getElementById('time-'+(i-1)).textContent = date;
         } else {
             document.getElementById('time-'+i).textContent = date; //proceed putting all the dates where they should go
