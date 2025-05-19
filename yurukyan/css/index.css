@@ -77,10 +77,10 @@ header a {
     padding: 3px;
     background: var(--shine);
     mask:
-        linear-gradient(var(--transparent)) content-box, 
+        linear-gradient(var(--transparent)) content-box,
         linear-gradient(var(--transparent));
     -webkit-mask-composite: xor;
-            mask-composite: exclude; 
+            mask-composite: exclude;
     background-size: 500% auto;
     animation: shine 5s ease-in-out infinite alternate;
 } .person-shine:hover {
@@ -96,7 +96,7 @@ header a {
     }
 }
 
-.person-shine .person-img { 
+.person-shine .person-img {
     margin: 3px; /* adds back in the 3px padding from the border */
 }
 
@@ -328,6 +328,22 @@ footer {
     width: 10%;
 }
 
+#other-project-container {
+    margin-top: 20px;
+} #other-project-container p {
+    margin: 0;
+}
+
+.project img {
+    max-width: 24px;
+    vertical-align: middle;
+}
+
+#flanstore-color-text {
+    font-weight: bold;
+    color: rgb(193, 115, 66);
+}
+
 /* mobile */
 @media only screen and (max-device-width: 1000px)
 {
@@ -368,13 +384,7 @@ footer {
         font-size: 12px;
     }
 
-    #bottom-translate-text {
-        display: none;
-    }
-
     footer {
         display: none;
     }
 }
-
-
