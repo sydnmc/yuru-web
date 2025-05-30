@@ -19,16 +19,26 @@ async function fetchFromApi(apiEndpoint) {
     return await response.json();
 }
 
-function dateParser(frontLength, isFronting, jp, lastFrontTime) { 
+function dateParser(frontLength, isFronting, jp, lastFrontTime) {
     let timeDisplay;
     let frontAgoTime = (Date.now() - Date.parse(lastFrontTime))/1000/60/60/24;
-    if (frontAgoTime > 3) {
-        let parsedTime = new Date(lastFrontTime);
+    if (frontAgoTime > 2) {
+      let parsedTime = new Date(lastFrontTime);
+      if (isFronting) {
+        let days = parseInt((frontLength/1000)/60/60/24);
+        let hours = parseInt((frontLength/1000)/60/60) - days*24;
+        if (jp) {
+            timeDisplay = `${days}日間${hours}時間`;
+        } else {
+            timeDisplay = `for ${days} day(s), ${hours} hours`;
+        }
+      } else {
         if (jp) {
             timeDisplay = `最新の目覚めは${parsedTime.getUTCFullYear()}年${parsedTime.getUTCMonth()+1}月${parsedTime.getUTCDate()}日でした`;
         } else {
             timeDisplay = `last fronted on ${parsedTime.getUTCMonth()+1}/${parsedTime.getUTCDate()}/${parsedTime.getUTCFullYear()}`;
         }
+      }
     } else {
         let hours = parseInt((frontLength/1000)/60/60);
         let minutes = parseInt((frontLength/1000)/60) - hours*60;
@@ -134,7 +144,7 @@ document.getElementById('p2-wrapper').addEventListener("click", () => {
     } catch {
         document.getElementById('front-input').insertAdjacentHTML('afterend', `<span>meow</span>`); //displays an error on the webpage
     }
-    
+
     const frontList = await fetchFromApi(`pkInfo?frontList=true&before=${frontLength}`);
     //hardcoded 2 members bc im not gonna have more than lilac in me. if so shit
     //i'm keeping this comment because it's really funny in hindsight ^
@@ -156,7 +166,7 @@ document.getElementById('p2-wrapper').addEventListener("click", () => {
         } else {
             document.getElementById('time-'+i).textContent = date; //proceed putting all the dates where they should go
         }
-        
+
         /* creating hovers */
         let days = Math.floor(frontList[i].memberTime/1000/60/60/24);
         let hours = Math.round((frontList[i].memberTime/1000/60/60)-days*24);
@@ -164,7 +174,7 @@ document.getElementById('p2-wrapper').addEventListener("click", () => {
     }
 
     //should probably optimize all of this at some point, but i think this works for now...?
-    
+
     if (frontList[1].isFronting || frontList[2].isFronting) { //update links at the bottom to lilac's socials if lilac or hazel is fronting
         document.getElementById('twitter').href = "https://twitter.com/yuiyamuu";
         document.getElementById('discord').href = "discord://-/users/245588170903781377";
