@@ -1,5 +1,4 @@
 @font-face { font-family: Kyokasho; src: url('../fonts/Kyokasho.ttf')}
-@font-face { font-family: Kyokasho; font-weight: bold; src: url('../fonts/KyokashoBold.ttf')}
 
 :root {
     --sydney-main: rgb(90, 73, 105);

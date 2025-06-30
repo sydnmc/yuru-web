@@ -79,29 +79,7 @@ async function lastFmUpdate(jp, curSongInfo) {
         document.getElementById("last-played").innerHTML = `${lastText} <a style="color: rgb(180 181 191); text-decoration: none;" href="${songURL}">• ${curSongArtist} - ${curSongName}</a>
         <img class="lastfm-album-img" src=${curSongInfo.recenttracks.track[0].image[3]['#text']}></img>`;
     }
-}
-
-
-var overlayActive = false;
-var overlay = document.getElementById('settings-overlay');
-document.getElementById('settings').addEventListener("click", () => {
-    if (!overlayActive) {
-        overlay.style.display = 'block';
-        overlayActive = true;
-    } else {
-        overlay.style.display = 'none';
-        overlayActive = false;
-    }
-});
-document.getElementById('settings-overlay').addEventListener("click", () => {
-    if (!overlayActive) {
-        overlay.style.display = 'block';
-        overlayActive = true;
-    } else {
-        overlay.style.display = 'none';
-        overlayActive = false;
-    }
-});
+}   
 
 var dropdownOpen = false;
 var dropdownClick = false;
@@ -138,14 +116,7 @@ document.getElementById('p2-wrapper').addEventListener("click", () => {
     lastFmUpdate(jp, songInfo);
 
     /* pluralkit */
-    var frontLength = document.getElementById('front-input').value; //takes in the value from the settings page
-    try {
-        frontLength = parseInt(frontLength);
-    } catch {
-        document.getElementById('front-input').insertAdjacentHTML('afterend', `<span>meow</span>`); //displays an error on the webpage
-    }
-
-    const frontList = await fetchFromApi(`pkInfo?frontList=true&before=${frontLength}`);
+    const frontList = await fetchFromApi(`pkInfo?frontList=true&before=30`);
     //hardcoded 2 members bc im not gonna have more than lilac in me. if so shit
     //i'm keeping this comment because it's really funny in hindsight ^
     //there shouldn't be more than 3 of us, so i'm still not making it automatically update (front display needs different colours too!!)
