@@ -1,0 +1,58 @@
+/* local variables */
+:root {
+    --tent: #FCE758;
+}
+
+/* header icons */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 5vh;
+    margin-bottom: 0px;
+}
+
+header a {
+    padding-right: 8px; /* gives spacing to the icons */
+}
+
+/* page section */
+#page {
+    margin-left: 24%;
+    margin-right: 24%;
+}
+
+#title {
+    font-family: Kyokasho, sans-serif;
+    color: var(--tent);
+    font-size: 58px;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+#api-text {
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.section-divide {
+    width: 100%;
+    height: 3px;
+    background-color: rgb(60, 60, 60);
+}
+
+#footer {
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+} #footer img {
+    width: 2%;
+    vertical-align: middle;
+} #footer a {
+    text-decoration: none;
+    color: var(--tent);
+}

@@ -293,7 +293,7 @@ function completeDiffQuestions(diffStructure, sydney, curMapStatus) {
 }
 
 app.get('/', (req, res) => {
-    res.send(JSON.parse(`{"response":"meow~"}`));
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/gds', (req, res) => {
