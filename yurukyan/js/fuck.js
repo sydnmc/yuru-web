@@ -7,7 +7,7 @@
 * it totally isnt me hating on js. i would never. */
 //FUCK also includes code for updating the currently/last playing song displayed
 
-const endpoint = "http://localhost:3333"; //endpoint (backend)
+const endpoint = "https://api.yuru.ca"; //endpoint (backend)
 
 async function fetchFromApi(apiEndpoint) {
     let response;
@@ -164,16 +164,21 @@ document.getElementById('p2-wrapper').addEventListener("click", () => {
         document.getElementById(`${sysmember.name}-tooltip`).innerHTML = `${sysmember.name}<br>${days} days, ${hours} hours | ${sysmember.memberPercent}%`;
     }
 
+    var altWidth = 'calc((50% - 3%) - 3px)';
+    if (window.innerWidth > 1000) { //same for in the css
+        altWidth = '100%';
+    }
+
     switch(curFronter) {
         case "sydney":
             document.getElementById(`p1-wrapper`).classList = "person-shine hidden-link";
             document.getElementById(`img-0`).classList = "cur-fronter";
-            document.getElementById(`hazel-info`).style.width = 'calc((50% - 3%) - 3px)';
+            document.getElementById(`hazel-info`).style.width = altWidth;
             break; //js doesn't seem to support fallthrough like this? and it's kinda dangerous, but yeah c:
         case "may":
             document.getElementById(`p1-wrapper`).classList = "person-shine hidden-link";
             document.getElementById(`img-0`).classList = "cur-fronter";
-            document.getElementById(`hazel-info`).style.width = 'calc((50% - 3%) - 3px)';
+            document.getElementById(`hazel-info`).style.width = altWidth;
             let mayImg = document.getElementById(`img-0`);
             let sydneyImg = document.getElementById(`img-3`);
 
@@ -203,7 +208,7 @@ document.getElementById('p2-wrapper').addEventListener("click", () => {
             document.getElementById('twitter').href = "https://twitter.com/yuiyamuu";
             document.getElementById('discord').href = "discord://-/users/245588170903781377";
 
-            document.getElementById(`may-info`).style.width = 'calc((50% - 3%) - 3px)';
+            document.getElementById(`may-info`).style.width = altWidth;
             break;
         case "hazel":
             document.getElementById(`p2-wrapper`).classList = "person-shine hidden-link";
@@ -211,7 +216,7 @@ document.getElementById('p2-wrapper').addEventListener("click", () => {
 
             document.getElementById('twitter').href = "https://twitter.com/yuiyamuu";
             document.getElementById('discord').href = "discord://-/users/245588170903781377";
-            document.getElementById(`may-info`).style.width = 'calc((50% - 3%) - 3px)';
+            document.getElementById(`may-info`).style.width = altWidth;
             let lilacImg = document.getElementById(`img-1`);
             let hazelImg = document.getElementById(`img-2`);
 

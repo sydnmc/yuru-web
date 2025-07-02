@@ -158,18 +158,17 @@ header a {
     z-index: 1;
     background-color: var(--background);
     bottom: -52px;
+    width: calc((50% - 3% - 8px));
     height: 50px;
     border: 3px solid var(--sydney-light-accent);
     border-radius: 5px;
 }
 
 #hazel-info {
-    width: calc((50% - 3%) - 8px); /* 8px only really works for when lilac/hazel are fronting, not sydney */
     right: 0;
 }
 
 #may-info {
-    width: calc((50% - 3% - 8px));
     left: 0;
 }
 
@@ -308,40 +307,6 @@ footer {
     z-index: 1;
 }
 
-/* overlay */
-#settings-overlay {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-#settings-container {
-    position: relative;
-    top: 75vh;
-    width: 30%;
-    font-size: 14px;
-    padding: 10px;
-}
-
-.blank-input {
-    font-family: "Zen Kaku Gothic New", sans-serif;
-    border: none;
-    background-color: var(--transparent);
-    color: white;
-} .blank-input:focus {
-    outline: none;
-}
-
-#front-input {
-    margin-left: 6vw;
-    width: 10%;
-}
-
 #other-project-container {
     margin-top: 20px;
 } #other-project-container p {
@@ -382,8 +347,17 @@ footer {
         margin-bottom: 20px;
     }
 
-    #person-dropdown {
+    .person-dropdown {
         width: 100%;
+    }
+
+    #may-info { /* super jank, but i don't really care for now */
+        top: 90px;
+    }
+
+    #hazel-info {
+        left: 0;
+        bottom: -35px;
     }
 
     #front-percentage {
@@ -395,6 +369,10 @@ footer {
     }
 
     .person-text p {
+        font-size: 12px;
+    }
+
+    .dropdown-text {
         font-size: 12px;
     }
 
