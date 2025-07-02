@@ -7,7 +7,7 @@
 * it totally isnt me hating on js. i would never. */
 //FUCK also includes code for updating the currently/last playing song displayed
 
-const endpoint = "https://api.yuru.ca"; //endpoint (backend)
+const endpoint = "http://localhost:3333"; //endpoint (backend)
 
 async function fetchFromApi(apiEndpoint) {
     let response;
@@ -81,18 +81,31 @@ async function lastFmUpdate(jp, curSongInfo) {
     }
 }   
 
-var dropdownOpen = false;
-var dropdownClick = false;
+var lilacDropdownOpen = false;
 var lilacDropdown = document.getElementById('lilac-dropdown');
 lilacDropdown.addEventListener("click", e => {
     e.stopPropagation(); //stops the link from working on the p2-wrapper :3
-    let dropdown = document.getElementById('person-dropdown');
-    if (!dropdownOpen) {
+    let dropdown = document.getElementById('hazel-info');
+    if (!lilacDropdownOpen) {
         dropdown.style.visibility = 'visible';
-        dropdownOpen = true;
+        lilacDropdownOpen = true;
     } else {
         dropdown.style.visibility = 'hidden';
-        dropdownOpen = false;
+        lilacDropdownOpen = false;
+    }
+});
+
+var sydneyDropdownOpen = false;
+var sydneyDropdown = document.getElementById('sydney-dropdown');
+sydneyDropdown.addEventListener("click", e => {
+    e.stopPropagation();
+    let dropdown = document.getElementById('may-info');
+    if (!sydneyDropdownOpen) {
+        dropdown.style.visibility = 'visible';
+        sydneyDropdownOpen = true;
+    } else {
+        dropdown.style.visibility = 'hidden';
+        sydneyDropdownOpen = false;
     }
 });
 
@@ -116,59 +129,110 @@ document.getElementById('p2-wrapper').addEventListener("click", () => {
     lastFmUpdate(jp, songInfo);
 
     /* pluralkit */
-    const frontList = await fetchFromApi(`pkInfo?frontList=true&before=30`);
+    var frontList = await fetchFromApi(`pkInfo?frontList=true&before=30`);
     //hardcoded 2 members bc im not gonna have more than lilac in me. if so shit
     //i'm keeping this comment because it's really funny in hindsight ^
     //there shouldn't be more than 3 of us, so i'm still not making it automatically update (front display needs different colours too!!)
     //but, just in case, it should be easier now.
 
+    //may here - thank you so much lilac <3 it is really much easier now~
+
     document.getElementById('sydney-percent').style = `width: ${frontList[0].memberPercent}%`;
     document.getElementById('lilac-percent').style = `width: ${frontList[1].memberPercent}%`;
     document.getElementById('hazel-percent').style = `width: ${frontList[2].memberPercent}%`;
+    document.getElementById('may-percent').style = `width: ${frontList[3].memberPercent}%`;
 
-    var frontTimes = [];
+    var curFronter;
+    frontList.forEach(sysmember => {
+        if (sysmember.isFronting) {
+            curFronter = sysmember.name;
+        }
+    });
 
     for (let i = 0; i < frontList.length; i++) {
-        /* writing to main front display */
-        let date = dateParser(frontList[i].lastFrontAmount, frontList[i].isFronting, jp, frontList[i].lastFrontTimestamp);
-        if (frontList[2].isFronting && i == 2) { //if hazel is fronting, putting lilac in time 2
-            document.getElementById('time-'+i).textContent = dateParser(frontList[i-1].lastFrontAmount, frontList[i-1].isFronting, jp, frontList[i-1].lastFrontTimestamp);
-            document.getElementById('time-'+(i-1)).textContent = date;
-        } else {
-            document.getElementById('time-'+i).textContent = date; //proceed putting all the dates where they should go
+        let sysmember = frontList[i];
+        if (sysmember.isFronting) {
+            curFronter = sysmember.name;
         }
 
-        /* creating hovers */
-        let days = Math.floor(frontList[i].memberTime/1000/60/60/24);
-        let hours = Math.round((frontList[i].memberTime/1000/60/60)-days*24);
-        document.getElementById(`${frontList[i].name}-tooltip`).innerHTML = `${frontList[i].name}<br>${days} days, ${hours} hours | ${frontList[i].memberPercent}%`;
+        let date = dateParser(sysmember.lastFrontAmount, sysmember.isFronting, jp, sysmember.lastFrontTimestamp);
+        document.getElementById(`time-${i}`).textContent = date;
+        frontList[i].siteText = date;
+
+        let days = Math.floor(sysmember.memberTime/1000/60/60/24);
+        let hours = Math.round((sysmember.memberTime/1000/60/60)-days*24);
+        document.getElementById(`${sysmember.name}-tooltip`).innerHTML = `${sysmember.name}<br>${days} days, ${hours} hours | ${sysmember.memberPercent}%`;
     }
 
-    //should probably optimize all of this at some point, but i think this works for now...?
+    switch(curFronter) {
+        case "sydney":
+            document.getElementById(`p1-wrapper`).classList = "person-shine hidden-link";
+            document.getElementById(`img-0`).classList = "cur-fronter";
+            document.getElementById(`hazel-info`).style.width = 'calc((50% - 3%) - 3px)';
+            break; //js doesn't seem to support fallthrough like this? and it's kinda dangerous, but yeah c:
+        case "may":
+            document.getElementById(`p1-wrapper`).classList = "person-shine hidden-link";
+            document.getElementById(`img-0`).classList = "cur-fronter";
+            document.getElementById(`hazel-info`).style.width = 'calc((50% - 3%) - 3px)';
+            let mayImg = document.getElementById(`img-0`);
+            let sydneyImg = document.getElementById(`img-3`);
 
-    if (frontList[1].isFronting || frontList[2].isFronting) { //update links at the bottom to lilac's socials if lilac or hazel is fronting
-        document.getElementById('twitter').href = "https://twitter.com/yuiyamuu";
-        document.getElementById('discord').href = "discord://-/users/245588170903781377";
+            /* swapping sydney/may */
+            mayImg.src = `https://api.yuru.ca/images/maypfp.jpg`;
+            sydneyImg.src = `https://api.yuru.ca/images/sydneypfp.png`;
 
-        document.getElementById(`p2-wrapper`).classList = "person-shine hidden-link";
-        document.getElementById(`img-1`).classList = "cur-fronter";
-        if (frontList[2].isFronting) { //if hazel is fronting, we want to swap the dropdown/main display
-            let hazelName = document.getElementById('name-1');
-            let lilacName = document.getElementById('name-2');
             if (!jp) {
-                hazelName.textContent = 'hazel';
-                lilacName.textContent = 'lilac';
+                document.getElementById(`name-0`).textContent = "may";
+                document.getElementById(`name-3`).textContent = "sydney";
+                mayImg.alt = `may's profile pic`;
+                sydneyImg.alt = `sydney's profile pic`;
             } else {
-                hazelName.textContent = 'ヘーゼル';
-                lilacName.textContent = 'らいらっく';
+                document.getElementById(`name-0`).textContent = "メイ";
+                document.getElementById(`name-3`).textContent = "シド二ー";
+                mayImg.alt = `メイのプロフィール画像`;
+                sydneyImg.alt = `シド二ーのプロフィール画像`;
             }
-            document.getElementById('img-1').src = 'https://api.yuru.ca/images/hazelpfp.jpg';
-            document.getElementById('img-2').src = 'https://api.yuru.ca/images/lilacpfp.png'
-            document.getElementById('time-1').style.padding = `2px`; //also not a great solution, but it makes the text align properly for now
-        }
-    } else { //else, we set the fronter to sydney
-        document.getElementById(`p1-wrapper`).classList = "person-shine hidden-link";
-        document.getElementById(`img-0`).classList = "cur-fronter";
-        document.getElementById(`person-dropdown`).style.width = 'calc((50% - 3%) - 3px)';
+
+            document.getElementById(`time-0`).textContent = frontList[3].siteText;
+            document.getElementById(`time-3`).textContent = frontList[0].siteText;
+            break;
+        case "lilac":
+            document.getElementById(`p2-wrapper`).classList = "person-shine hidden-link";
+            document.getElementById(`img-1`).classList = "cur-fronter";
+
+            document.getElementById('twitter').href = "https://twitter.com/yuiyamuu";
+            document.getElementById('discord').href = "discord://-/users/245588170903781377";
+
+            document.getElementById(`may-info`).style.width = 'calc((50% - 3%) - 3px)';
+            break;
+        case "hazel":
+            document.getElementById(`p2-wrapper`).classList = "person-shine hidden-link";
+            document.getElementById(`img-1`).classList = "cur-fronter";
+
+            document.getElementById('twitter').href = "https://twitter.com/yuiyamuu";
+            document.getElementById('discord').href = "discord://-/users/245588170903781377";
+            document.getElementById(`may-info`).style.width = 'calc((50% - 3%) - 3px)';
+            let lilacImg = document.getElementById(`img-1`);
+            let hazelImg = document.getElementById(`img-2`);
+
+            /* swapping lilac/hazel */
+            hazelImg.src = `https://api.yuru.ca/images/lilacpfp.png`;
+            lilacImg.src = `https://api.yuru.ca/images/hazelpfp.jpg`;
+
+            if (!jp) {
+                document.getElementById(`name-1`).textContent = "hazel";
+                document.getElementById(`name-2`).textContent = "lilac";
+                lilacImg.alt = `may's profile pic`;
+                hazelImg.alt = `sydney's profile pic`;
+            } else {
+                document.getElementById(`name-1`).textContent = "ヘイズル";
+                document.getElementById(`name-2`).textContent = "らいらっく";
+                lilacImg.alt = `らいらっくのプロフィール画像`;
+                hazelImg.alt = `ヘイズルのプロフィール画像`;
+            }
+
+            document.getElementById(`time-1`).textContent = frontList[2].siteText;
+            document.getElementById(`time-2`).textContent = frontList[1].siteText;
+            break;
     }
 })();

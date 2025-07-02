@@ -89,7 +89,7 @@ function generateDisplay(mapDb, isGd) {
     generateDisplay(setDb, false);
 
     document.getElementById('gd-display-wrapper').addEventListener("click", () => {
-        window.location.href = 'gds.html';
+        window.location.href = 'gds';
     });
 
     document.getElementById('maps-showcase-wrapper').addEventListener("click", () => {

@@ -50,6 +50,7 @@ header a {
 
 .person {
     display: flex;
+    position: relative;
     border: 3px solid var(--sydney-light-accent);
     border-radius: 5px;
     cursor: pointer;
@@ -140,8 +141,7 @@ header a {
     padding-left: 5px;
 }
 
-#lilac-dropdown {
-    font-size: 26px;
+.fa-angle-down {
     color: white;
     position: absolute;
     cursor: pointer;
@@ -150,19 +150,27 @@ header a {
     padding: 5px; /* padding is so that more area is clickable (especially useful on mobile) */
 }
 
-#person-dropdown {
+.person-dropdown {
     position: absolute;
     visibility: hidden;
     display: flex;
     align-items: center;
     z-index: 1;
     background-color: var(--background);
-    width: calc((50% - 3%) - 8px); /* 8px only really works for when lilac/hazel are fronting, not sydney */
-    right: 0%;
     bottom: -52px;
     height: 50px;
     border: 3px solid var(--sydney-light-accent);
     border-radius: 5px;
+}
+
+#hazel-info {
+    width: calc((50% - 3%) - 8px); /* 8px only really works for when lilac/hazel are fronting, not sydney */
+    right: 0;
+}
+
+#may-info {
+    width: calc((50% - 3% - 8px));
+    left: 0;
 }
 
 #dropdown-img {
@@ -173,13 +181,14 @@ header a {
     border-radius: 5px;
 }
 
-#name-2 {
+.dropdown-name {
     font-family: Kyokasho, sans-serif;
     font-size: 32px;
     color: white;
     margin-right: 8px;
     margin-left: 2px;
 }
+
 
 #time-2 {
     font-size: 13px;
@@ -224,6 +233,11 @@ header a {
 #hazel-percent {
     position: relative;
     background-color: var(--hazel-main);
+}
+
+#may-percent {
+  position: relative;
+  background-color: var(--may-main);
 }
 
 .front-percent-hover {

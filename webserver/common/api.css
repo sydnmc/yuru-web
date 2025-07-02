@@ -56,3 +56,13 @@ header a {
     text-decoration: none;
     color: var(--tent);
 }
+
+
+/* mobile */
+@media only screen and (max-device-width: 1000px)
+{
+    #page {
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+}
