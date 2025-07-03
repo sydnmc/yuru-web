@@ -1,6 +1,4 @@
 node_modules
-package-lock.json
-package.json
 
 webserver/servoptions.json
 webserver/lilac-mapstatus.json
@@ -10,3 +8,11 @@ webserver/setinfo.json
 webserver/redirect/wrangler.toml
 
 .vscode
+
+#svelte output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
