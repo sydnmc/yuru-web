@@ -22,9 +22,9 @@
     </div>
     <div style="padding-bottom: 25px;"></div>
     <div class="socials-bar-big">
-      <a href="https://bsky.app/profile/lilac.yuru.ca"><img src="https://api.yuru.ca/images/bluesky.png" alt="bluesky logo"></img> bluesky</a><span> | </span>
-      <a href="https://twitter.com/yuiyamuu"><img src="https://api.yuru.ca/images/twitter.png" alt="twitter logo"></img> twitter</a><span> | </span>
-      <a href="discord://-/users/245588170903781377"><img src="https://api.yuru.ca/images/discord.png" alt="discord logo"></img> discord</a>
+      <a href="https://bsky.app/profile/lilac.yuru.ca"><img src="https://api.yuru.ca/images/bluesky.png" alt="bluesky logo"> bluesky</a><span> | </span>
+      <a href="https://twitter.com/yuiyamuu"><img src="https://api.yuru.ca/images/twitter.png" alt="twitter logo"> twitter</a><span> | </span>
+      <a href="discord://-/users/245588170903781377"><img src="https://api.yuru.ca/images/discord.png" alt="discord logo"> discord</a>
     </div>
     <p style="text-align: center;">^ these are some socials that are specifically mine, if you ever need to get into contact with me ^<br>
       <span style="font-size: 13px">(sydney and i share a few accounts, but these are only mine~)</span></p>

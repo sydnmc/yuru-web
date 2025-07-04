@@ -7,13 +7,14 @@
 </svelte:head>
 
 <script lang="ts">
+    import { onMount } from 'svelte';
+
     const endpoint = "https://api.yuru.ca"; //endpoint (backend)
     async function fetchFromApi(apiEndpoint: string) {
         let response = await fetch(`${endpoint}/${apiEndpoint}`);
         return await response.json();
     }
 
-    import { onMount } from 'svelte'
 	let frontList: any = null;
 	onMount(async () => {
 		frontList = await fetchFromApi(`pkInfo?frontList=true&before=30`);
@@ -135,6 +136,10 @@
 </header>
 <section id="page">
     <div id="info-box">
+    <div id="mobile-button-box">
+        <a class="fa fa-github hidden-link" style="color: white; font-size: 22px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
+        <a class="fa fa-globe hidden-link" style="color: white; font-size: 22px;" href="index-ja_jp.html" aria-label="translate page to japanese"></a>
+    </div>
     <h1><a id="title" href="https://yuru.ca">yurukyan△</a></h1>
     <a class="fronter" href="https://{main.name}.yuru.ca/">
         <div class="fronter-img">
@@ -215,54 +220,59 @@
 </section>
 
 <style>
-    /* local variables */
-    :root {
-        --tent: #FCE758;
-        --shine: linear-gradient(90deg,rgba(73, 114, 133, 1) 0%, rgba(96, 191, 135, 1) 50%, rgba(133, 127, 102, 1) 100%);
-        --accent: #497285;
-    }
+/* local variables */
+:root {
+    --tent: #FCE758;
+    --shine: linear-gradient(90deg,rgba(73, 114, 133, 1) 0%, rgba(96, 191, 135, 1) 50%, rgba(133, 127, 102, 1) 100%);
+    --accent: #497285;
+}
 
-    #background {
-        position: absolute;
-        height: 100vh;
-        width: 100vw;
-        top: 0;
-        left: 0;
-        background-image: url('/yurukyan/bg.jpg');
-        background-size: cover;
-        background-position: center;
-        z-index: -1;
-    }
+#background {
+    position: absolute;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-image: url('/yurukyan/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
 
-    /* body/header */
-    h1 {
-        font-size: 58px;
-        padding-left: 15px;
-        font-weight: normal;
-    }
+/* body/header */
+h1 {
+    font-size: 58px;
+    padding-left: 15px;
+    font-weight: normal;
+}
 
-    header {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        height: 5vh;
-        margin-bottom: 0px;
-    }
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 5vh;
+    margin-bottom: 0px;
+}
 
 header a {
     padding-right: 8px; /* gives spacing to the icons */
+}
+
+#mobile-button-box {
+    display: none;
 }
 
 #page {
     display: flex;
     flex-direction: column;
     text-align: center;
+    height: 100vh;
     justify-content: center;
-    height: 100%;
     margin-left: 16%;
     margin-right: 16%;
 }
@@ -361,7 +371,7 @@ header a {
     border-radius: 5px;
     cursor: pointer;
     height: 50px;
-    width: 30%;
+    width: 32%;
     text-decoration: none;
     color: var(--text);
     box-shadow: -2px 8px 20px 6px rgba(0,0,0,0.3);
@@ -503,20 +513,117 @@ header a {
     margin-bottom: 5px;
 }
 
-/* mobile */
-@media only screen and (max-device-width: 1000px)
+@media only screen and (max-device-width: 1600px) { /* alter text breaks around here */
+    #page {
+        height: auto;
+        margin-top: 10px;
+    }
+
+    #background {
+        height: 127%; /* this is AWFUL but it's the easiest solution */
+    }
+    
+    #alter-container {
+        justify-content: center;
+        margin-left: 27px; /* makes it offset other margin */
+    }
+
+    .alter {
+        margin-right: 2px;
+    }
+
+    .alter-text {
+        font-size: 11px;
+    }
+}
+
+@media only screen and (max-device-width: 1450px) { /* need to bring alters closer now */
+    #alter-container {
+        flex-direction: column;
+        margin-left: 0;
+        margin-right: 0;
+        align-items: center;
+    }
+
+    .alter {
+        width: 80%;
+        margin-bottom: 4px;
+    }
+
+    .alter-text {
+        font-size: 14px;
+    }
+
+    #shima-img {
+        background-position: 43%;
+    }
+}
+
+@media only screen and (max-device-width: 700px)
 {
     #page {
-        margin-left: 5%;
-        margin-right: 5%;
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+    
+    #info-box {
+        font-size: 16px;
     }
 
-    #front-percentage {
-        margin-top: 0;
+    #mobile-button-box { /* copied from header */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        height: 30px;
+        margin-bottom: 0px;
     }
 
-    .socials-bar-big {
-        font-size: 23px;
+    #mobile-button-box a {
+        padding-right: 8px; /* gives spacing to the icons */
+    }
+
+    header {
+        display: none;
+    }
+
+    h1 {
+        padding-left: 0px;
+    }
+
+    #title {
+        font-size: 54px;
+    }
+
+    .fronter {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .fronter-text {
+        font-size: 16px;
+    }
+
+    .alter {
+        width: 100%;
+    }
+
+    .alter-text {
+        font-size: 11px;
+    }
+
+    .socials-bar-big a {
+        font-size: 26px;
+    }
+
+    .socials-bar-big img {
+        max-width: 20px;
     }
 }
 </style>
