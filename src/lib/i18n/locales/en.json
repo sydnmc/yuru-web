@@ -1,0 +1,20 @@
+{
+    "yurukyan":{
+        "home":{
+            "loadingFront":"loading front info...",
+            "loadingSong":"retrieving song info...",
+            "sydney":"sydney",
+            "lilac":"lilac",
+            "hazel":"hazel",
+            "may":"may",
+            "frontedFor":"❀ last fronted for ❀<br> {hours} hours, {minutes} minutes",
+            "frontedOn":"❀ last fronted on ❀<br> {month}/{day}/{year}",
+            "fronting":"for {hours} hours, {minutes} minutes",
+            "frontingLong":"for {days} hours, {hours} minutes",
+            "lastFmListening":"currently listening to",
+            "lastFmListened":"last listened to",
+            "bio":"19 | she/her | 日本語もOK | 🍁",
+            "healing":"۶ৎ˗ˏˋ ♡ ˎˊ˗.ᐟ doing our best to heal together"
+        }
+    }
+}

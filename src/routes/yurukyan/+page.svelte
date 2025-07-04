@@ -7,6 +7,7 @@
 </svelte:head>
 
 <script lang="ts">
+    import { _, locale, getLocaleFromNavigator } from 'svelte-i18n'
     import { onMount } from 'svelte';
 
     const endpoint = "https://api.yuru.ca"; //endpoint (backend)
@@ -15,72 +16,57 @@
         return await response.json();
     }
 
-	let frontList: any = null;
 	onMount(async () => {
-		frontList = await fetchFromApi(`pkInfo?frontList=true&before=30`);
+		const frontList = await fetchFromApi(`pkInfo?frontList=true&before=30`);
         processPkInfo(frontList);
 	});
 
-    function dateParser(frontLength: number, isFronting: boolean, jp: boolean, lastFrontTime: string) {
+    let currentLocale = $state($locale || getLocaleFromNavigator());
+    function changeLocale() {
+        console.log(currentLocale);
+        if (currentLocale === "en-US") {
+            locale.set('jp');
+        } else if (currentLocale === "ja-jP") {
+            locale.set('en');
+        }
+    }
+
+    function dateParser(frontLength: number, isFronting: boolean, lastFrontTime: string) {
         let timeDisplay;
         let frontAgoTime = (Date.now() - Date.parse(lastFrontTime))/1000/60/60/24;
-        if (frontAgoTime > 2) {
-            let parsedTime = new Date(lastFrontTime);
+        if (frontAgoTime > 2) { //if someone swapped more than 2 days ago
             if (isFronting) {
                 let days = Math.floor((frontLength/1000)/60/60/24);
                 let hours = Math.round((frontLength/1000)/60/60) - days*24;
-                if (jp) {
-                    timeDisplay = `${days}日間${hours}時間`;
-                } else {
-                    timeDisplay = `for ${days} day(s), ${hours} hours`;
-                }
+                timeDisplay = $_('yurukyan.home.frontingLong', {values: {days, hours}});
             } else {
-                if (jp) {
-                    timeDisplay = `最新の目覚めは${parsedTime.getUTCFullYear()}年${parsedTime.getUTCMonth()+1}月${parsedTime.getUTCDate()}日でした`;
-                } else {
-                    timeDisplay = `❀ last fronted on ❀<br>${parsedTime.getUTCMonth()+1}/${parsedTime.getUTCDate()}/${parsedTime.getUTCFullYear()}`;
-                }
+                let parsedTime = new Date(lastFrontTime);
+                let month = parsedTime.getUTCMonth()+1;
+                let day = parsedTime.getUTCDate();
+                let year = parsedTime.getUTCFullYear();
+                timeDisplay = $_('yurukyan.home.frontedOn', {values: {month, day, year}});
             }
         } else {
             let hours = Math.floor((frontLength/1000)/60/60);
             let minutes = Math.round((frontLength/1000)/60) - hours*60;
             if (isFronting) {
-                if (jp) {
-                    timeDisplay = `${hours}時間${minutes}分`;
-                } else {
-                    timeDisplay = `for ${hours} hours, ${minutes} minutes`;
-                }
+                timeDisplay = $_('yurukyan.home.fronting', {values: {hours, minutes}});
             } else  {
-                if (jp) {
-                    timeDisplay = `意識時間は${hours}時間${minutes}分でした`;
-                } else {
-                    timeDisplay = `❀ last fronted for ❀<br>${hours} hours, ${minutes} minutes`;
-                }
+                timeDisplay = $_('yurukyan.home.frontedFor', {values: {hours, minutes}});
             }
         }
         return timeDisplay;
     }
 
-    /* checking for page language */
-    const jp = false;
-
     async function lastFmUpdate() {
-        let songInfo = await fetchFromApi('songInfo');
-        let preText;
+        const songInfo = await fetchFromApi('songInfo');
+        let preText = $state();
 
         try {
             songInfo.recenttracks.track[0]['@attr'].nowplaying //will error since this doesn't exist when not playing
-            if (jp) {
-                preText = "今聞いているの曲";
-            } else {
-                preText = "currently listening to";
-            }
+            preText = $_('yurukyan.home.lastFmListening');
         } catch {
-            if (jp) {
-                preText = "最後聞いたの曲";
-            } else {
-                preText = "last listened to";
-            }
+            preText = $_('yurukyan.home.lastFmListened');
         }
 
         return {
@@ -91,14 +77,14 @@
         };
     }
 
-    let sysmembers: sysmember[] = [
-        {name: "sydney", type: "secondary", img: "https://api.yuru.ca/images/sydneypfp.png", main: false},
-        {name: "lilac", type: "primary", img: "https://api.yuru.ca/images/lilacpfp.png", main: true},
-        {name: "hazel", type: "secondary", img: "https://api.yuru.ca/images/hazelpfp.jpg", main: false},
-        {name: "may", type: "primary", img: "https://api.yuru.ca/images/maypfp.jpg", main: false}
-    ];
-    let main: sysmember;
-    let sleepyAlters: sysmember[] = [];
+    let sysmembers: sysmember[] = $state([
+        {name: $_('yurukyan.home.sydney'), type: "secondary", img: "https://api.yuru.ca/images/sydneypfp.png", main: false},
+        {name: $_('yurukyan.home.lilac'), type: "primary", img: "https://api.yuru.ca/images/lilacpfp.png", main: true},
+        {name: $_('yurukyan.home.hazel'), type: "secondary", img: "https://api.yuru.ca/images/hazelpfp.jpg", main: false},
+        {name: $_('yurukyan.home.may'), type: "primary", img: "https://api.yuru.ca/images/maypfp.jpg", main: false}
+    ]);
+    let main: sysmember = $state();
+    let sleepyAlters: sysmember[] = $state([]);
 
     sysmembers.forEach(member => {
         if (member.main) {
@@ -108,6 +94,7 @@
         }
     });
 
+    let pkInfoAru = $state(false);
     function processPkInfo(frontList: any) {
         sleepyAlters = [];
         for (let i = 0; i < sysmembers.length; i++) {
@@ -118,27 +105,28 @@
             let hours = Math.round((frontList[i].memberTime/1000/60/60)-days*24);
             sysmembers[i].tooltip = `${days} days, ${hours} hours | ${sysmembers[i].percent}%`;
 
-            sysmembers[i].text = dateParser(frontList[i].lastFrontAmount, frontList[i].isFronting, jp, frontList[i].lastFrontTimestamp);
-        
+            sysmembers[i].text = dateParser(frontList[i].lastFrontAmount, frontList[i].isFronting, frontList[i].lastFrontTimestamp);
+            console.log(sysmembers[i].text);
             if (frontList[i].isFronting) {
                 main = sysmembers[i];
             } else {
                 sleepyAlters.push(sysmembers[i]);
             }
         }
+        pkInfoAru = true;
     }
 </script>
 
 <div id="background"></div>
 <header>
     <a class="fa fa-github hidden-link" style="color: white; font-size: 22px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
-    <a class="fa fa-globe hidden-link" style="color: white; font-size: 22px;" href="index-ja_jp.html" aria-label="translate page to japanese"></a>
+    <i class="fa fa-globe hidden-link" style="color: white; font-size: 22px;" onclick={() => changeLocale()}></i>
 </header>
 <section id="page">
     <div id="info-box">
     <div id="mobile-button-box">
         <a class="fa fa-github hidden-link" style="color: white; font-size: 22px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
-        <a class="fa fa-globe hidden-link" style="color: white; font-size: 22px;" href="index-ja_jp.html" aria-label="translate page to japanese"></a>
+        <i class="fa fa-globe hidden-link" style="color: white; font-size: 22px;" onclick={() => changeLocale()}></i>
     </div>
     <h1><a id="title" href="https://yuru.ca">yurukyan△</a></h1>
     <a class="fronter" href="https://{main.name}.yuru.ca/">
@@ -147,10 +135,10 @@
         </div>
         <div class="fronter-text">
             <span>{main.name}</span>
-            {#if frontList}
+            {#if pkInfoAru}
                 <p>{main.text}</p>
             {:else}
-                <p>loading front info...</p>
+                <p>{$_('yurukyan.home.loadingFront')}</p>
             {/if}
         </div>
     </a>
@@ -162,10 +150,10 @@
               <img alt="{person.name}'s profile pic" src={person.img}>
             </div>
             <span class="alter-name">{person.name}</span>
-            {#if frontList}
+            {#if pkInfoAru}
                 <span class="alter-text">{@html person.text}</span>
             {:else}
-                <span class="alter-text">loading front info...</span>
+                <span class="alter-text">{$_('yurukyan.home.loadingFront')}</span>
             {/if}
         </a>
         {/each}
@@ -193,7 +181,7 @@
       
       <div>
         {#await lastFmUpdate()}
-            <p class="dark-text">retrieving song info...</p>
+            <p class="dark-text">{$_('yurukyan.home.loadingSong')}</p>
         {:then lastFmData}
             <p class="dark-text">{lastFmData.songType}
                 <a style="color: rgb(180 181 191); text-decoration: none;" href={lastFmData.songURL}>{lastFmData.songMeta}</a>
@@ -201,8 +189,8 @@
             </p>
         {/await}
       </div>
-    <span>19 | she/her | 日本語もOK | 🍁</span>
-    <p style="margin-bottom: 0;">۶ৎ˗ˏˋ ♡ ˎˊ˗.ᐟ doing our best to heal together</p>
+    <span>{$_('yurukyan.home.bio')}</span>
+    <p style="margin-bottom: 0;">{$_('yurukyan.home.healing')}</p>
     </div>
     <div id="shima-img">
         <div id="link-container">
@@ -257,10 +245,14 @@ header {
     align-items: center;
     height: 5vh;
     margin-bottom: 0px;
+} header a {
+    padding-right: 8px; /* gives spacing to the icons */
+} header i {
+    padding-right: 8px;
 }
 
-header a {
-    padding-right: 8px; /* gives spacing to the icons */
+i {
+    cursor: pointer;
 }
 
 #mobile-button-box {
@@ -586,6 +578,8 @@ header a {
 
     #mobile-button-box a {
         padding-right: 8px; /* gives spacing to the icons */
+    } #mobile-button-box i {
+        padding-right: 8px;
     }
 
     header {
