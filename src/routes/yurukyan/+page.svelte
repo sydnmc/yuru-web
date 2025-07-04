@@ -7,7 +7,7 @@
 </svelte:head>
 
 <script lang="ts">
-    import { _, locale, getLocaleFromNavigator } from 'svelte-i18n'
+    import { _, locale, getLocaleFromNavigator } from 'svelte-i18n';
     import { onMount } from 'svelte';
 
     const endpoint = "https://api.yuru.ca"; //endpoint (backend)
@@ -83,7 +83,7 @@
         {name: $_('yurukyan.home.hazel'), type: "secondary", img: "https://api.yuru.ca/images/hazelpfp.jpg", main: false},
         {name: $_('yurukyan.home.may'), type: "primary", img: "https://api.yuru.ca/images/maypfp.jpg", main: false}
     ]);
-    let main: sysmember = $state();
+    let main: sysmember = $state({} as sysmember);
     let sleepyAlters: sysmember[] = $state([]);
 
     sysmembers.forEach(member => {

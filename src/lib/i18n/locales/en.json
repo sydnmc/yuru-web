@@ -16,5 +16,23 @@
             "bio":"19 | she/her | 日本語もOK | 🍁",
             "healing":"۶ৎ˗ˏˋ ♡ ˎˊ˗.ᐟ doing our best to heal together"
         }
+    },
+    "sydney":{
+        "header":{
+            "pfpAlt":"sydney's shima rin pfp",
+            "music":"music"
+        }
+    },
+    "lilac":{
+        "header":{
+            "pfpAlt":"lilac's kyu kurarin pfp",
+            "whoAmI":"who am i?"
+        }
+    },
+    "common":{
+        "header":{
+            "ourSets":"our sets",
+            "myGds":"my gds"
+        }
     }
 }

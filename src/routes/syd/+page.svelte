@@ -6,8 +6,11 @@
     <title>sydnmc△</title>
 </svelte:head>
 
-    <header id="page-header">
-    </header>
+<script lang="ts">
+    import Header from "$lib/Header.svelte";
+</script>
+
+<Header person="syd" page="home"/>
     <audio controls id="tab-player-source">
       <source type="audio/mpeg">
     </audio>

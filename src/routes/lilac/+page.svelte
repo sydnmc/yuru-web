@@ -6,8 +6,11 @@
     <title>yuiyamu△</title>
 </svelte:head>
 
-    <header id="page-header">
-    </header>
+<script lang="ts">
+    import Header from "$lib/Header.svelte";
+</script>
+
+<Header person="lilac" page="home"/>
     <p class="page-top-text">o/ welcome to lilac.yuru.ca! o/</p>
       <p>hello!! if you don't know who i am, i'm <span style="color: white; font-weight: bold;">lilac</span> / <span style="color: white; font-weight: bold;">yuiyamu</span>.
       <br><br>

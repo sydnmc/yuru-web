@@ -1,147 +1,119 @@
 <script lang="ts">
+  export let person: string;
+  export let page: string;
 
-function generatePageHeader(jp, curPage, person) {
-  let websitePerson = person;
-  if (person == 'sydney') {
-    websitePerson = 'syd';
-  }
-  let username;
-  let pfpAlt;
-  let translateUrl = `./${curPage}-ja_jp.html`;
-  if (((curPage == 'index' || curPage == 'music' ) && person == 'sydney') || (curPage == 'whoami' && person == 'lilac')) {
-    //for right now, these are all of the untranslated pages that also have headers (sets aren't translated yet either, but i'll get to that at some point~)
-    //we want to redirect these to the custom translate 404 page instead of the normal 404 page :3
-    translateUrl = `https://${websitePerson}.yuru.ca/404translate`;
-  }
+  import { _ } from 'svelte-i18n';
+
   let prevPage;
-
-  let mobileContent = "";
-  let desktopContent = "";
-  let buttonInfo = [{
-      name: "osu!",
-      link: "",
-      dropdown: [
-        {
-          name: "our sets",
-          link: "https://yuru.ca/sets"
-        },
-        {
-          name: "my gds",
-          link: `https://${websitePerson}.yuru.ca/gds`
-        }
-      ]
-    }];
-  switch (person) {
-    case 'lilac':
-      username = 'yuiyamu';
-      pfpAlt = "lilac's kyu-kurarin pfp";
-      headerSheet.cssRules[2].style.color = `var(--background)`; //h1 text
-      headerSheet.cssRules[14].cssRules[4].style.color = `var(--background)`; //hamburger-button
-      buttonInfo.push({ name: "who am i?", link: './whoami.html'});
-      break;
-    case 'sydney':
-      username = 'sydnmc';
-      pfpAlt = "sydney's shima rin pfp";
-      headerSheet.cssRules[2].style.color = `white`; //h1 text
-      headerSheet.cssRules[14].cssRules[4].style.color = `white`; //hamburger-button
-      headerSheet.cssRules[14].cssRules[6].style.color = `white`; //burger-text
-      buttonInfo.push({ name: "music", link: './music.html'});
-      break;
-  }
-
-  if (curPage == "index") {
+  if (page === "home") {
     prevPage = "https://yuru.ca";
   } else {
-    prevPage = "./index.html";
+    prevPage = `https://${person}.yuru.ca`;
   }
 
-  if (jp) {
-    buttonInfo[0].dropdown[0].name = "あたしたちのgds";
-    buttonInfo[0].dropdown[1].name = "自分の譜面";
-    translateUrl = `./${curPage}.html`;
-    switch (person) {
-      case 'lilac':
-        buttonInfo[1].name = "あたしって誰？";
-        pfpAlt = "らいらっくのきゅうくらりんリンプロフィール画";
-        break;
-      case 'sydney':
-        buttonInfo[1].name = "自分の曲";
-        pfpAlt = "シドニーの志摩リンプロフィール画像";
-        break;
-    }
-    if (curPage == "index") {
-      prevPage = "https://yuru.ca/index-ja_jp.html";
-    } else {
-      prevPage = "./index-ja_jp.html"
-    }
+  interface buttonInfo {
+    name: string;
+    link: string;
+    dropdown?: buttonInfo[];
   }
 
-  buttonInfo.forEach(button => {
-    if (button.dropdown) {
-      desktopContent = desktopContent+`<div class="button-with-dropdown-container"><button class="drop-button">${button.name}</button><div class="dropdown-content">`; //starts the dropdown container
-      button.dropdown.forEach(dropdown => {
-        desktopContent = desktopContent+`<a href="${dropdown.link}">${dropdown.name}</a>`;
-        mobileContent = mobileContent+`<a class="burger-text" href="${dropdown.link}">${button.name} | ${dropdown.name}</a>`;
-      });
-      desktopContent = desktopContent+`</div></div>`; //closes out both divs we opened
-    } else {
-      desktopContent = desktopContent+`<a href="${button.link}"><button class="header-button">${button.name}</button></a>`;
-      mobileContent = mobileContent+`<a class="burger-text" href="${button.link}">${button.name}</a>`;
-    }
-  });
+  let buttonInfo: buttonInfo[] = [{
+    name: "osu!", //consistent across both pages, but we want to add more buttons for each person
+    link: "",
+    dropdown: [
+      {
+        name: $_('common.header.ourSets'),
+        link: "https://yuru.ca/sets"
+      },
+      {
+        name: $_('common.header.myGds'),
+        link: `https://${person}.yuru.ca/gds`
+      }
+    ]
+  }];
 
-  let header = 
-  `<div id="header">
-        <a href="${prevPage}">
-          <img id="pfp-image" src="https://api.yuru.ca/images/${person}pfp.png" alt="${pfpAlt}">
-        </a>
-        <h1>${username}</h1>
-        ${desktopContent}
-        <span id="hamburger-button">&#9776;</span>
-        <a id="translate-button" href="${translateUrl}">&#127760;</a>
+  let pfpAlt = '';
+  let pfpLink = '';
+  let username = '';
 
-        <div id="burger-menu">
-          <a id="close-button">&times;</a>
-          ${mobileContent}
-        </div>
-      </div>`;
+  let main = '';
+  let accent = '';
+  let lightAccent = '';
+  switch (person) {
+    case "syd":
+      pfpAlt = $_('sydney.header.pfpAlt');
+      pfpLink = '/common/sydneypfp.png';
+      username = "sydnmc"
+      buttonInfo.push({ name: "music", link: './music.html'});
 
-    document.getElementById('page-header').innerHTML = header; //puts the header on the page
+      main = 'var(--sydney-main)';
+      accent = 'var(--sydney-accent)';
+      lightAccent = 'var(--sydney-light-accent)';
+      break;
+    case "lilac":
+      pfpAlt = $_('lilac.header.pfpAlt');
+      pfpLink = '/common/lilacpfp.png';
+      username = "yuiyamu";
+      buttonInfo.push({ name: "who am i?", link: './whoami.html'});
 
-    /* changing elements based on person */
-    headerSheet.cssRules[0].style.backgroundColor = `var(--${person}-main)`; //header
-    headerSheet.cssRules[3].style.backgroundColor = `var(--${person}-light-accent)`; //button
-    headerSheet.cssRules[4].style.backgroundColor = `var(--${person}-accent)`; //button:hover
-    headerSheet.cssRules[9].style.backgroundColor = `var(--${person}-light-accent)`; //button:hover
-    headerSheet.cssRules[11].style.backgroundColor = `var(--${person}-accent)`; //button:hover
+      main = 'var(--lilac-main)';
+      accent = 'var(--lilac-accent)';
+      lightAccent = 'var(--lilac-light-accent)';
+      break;
+  }
 
-    headerSheet.cssRules[14].cssRules[5].style.backgroundColor = `var(--${person}-light-accent)`; //burger-menu
-    headerSheet.cssRules[14].cssRules[7].style.backgroundColor = `var(--${person}-main)`; //burger-text:hover
 
-    //let currentlyOnPage = `cursor: default; background-color: var(--${person}-accent); border-radius: 5px;`;
-    if (curPage == "gds") {
-      initializeGdsPage(jp, person);
-    }
-
-  document.getElementById('hamburger-button').addEventListener('click', function() {
-      document.getElementById('burger-menu').style = "width: 250px;"
-  });
-  
-  document.getElementById('close-button').addEventListener('click', function() {
-      document.getElementById('burger-menu').style = "width: 0px;"
-  });
-}
-
-generatePageHeader(jp, pathname, site);
+  if (((page === 'home' || page === 'music' ) && person === 'sydney') || (page === 'whoami' && person === 'lilac')) {
+    //for right now, these are all of the untranslated pages that also have headers (sets aren't translated yet either, but i'll get to that at some point~)
+    //we want to redirect these to the custom translate 404 page instead of the normal 404 page :3
+    
+    //will impliment :3
+  }
 </script>
 
+<div id="header" style="background-color: {main}">
+  <a href={prevPage}>
+    <img id="pfp-image" src={pfpLink} alt={pfpAlt}>
+  </a>
+  <h1>{username}</h1>
+    {#each buttonInfo as button}
+      {#if button.dropdown}
+      <div class="button-with-dropdown-container">
+        <button class="drop-button" style="background-color: {lightAccent}">{button.name}</button>
+          <div class="dropdown-content">
+            {#each button.dropdown as dropdown}
+            <a href="{dropdown.link}" style="background-color: {lightAccent}">{dropdown.name}</a>
+            {/each}
+          </div>
+      </div>
+      {:else}
+        <a href="{button.link}">
+          <button class="header-button" style="background-color: {lightAccent}">{button.name}</button>
+        </a>
+      {/if}
+    {/each}
+    <span id="hamburger-button">&#9776;</span>
+    <i class="fa fa-globe hidden-link" style="color: white; font-size: 22px;"></i>
+    <div id="burger-menu">
+      <a id="close-button">&times;</a>
+      {#each buttonInfo as button}
+      {#if button.dropdown}
+        {#each button.dropdown as dropdown}
+          <a class="burger-text" href="${dropdown.link}">{button.name} | {dropdown.name}</a>
+        {/each}
+      {:else}
+        <a class="burger-text" href="${button.link}">{button.name}</a>
+      {/if}
+    {/each}
+    </div>
+</div>
+
 <style>
-    /* header styling properties */
+/* header styling properties */
 #header { /* probably originally supposed to scroll with the page? */
     display: flex;
     position: relative;
     align-items: center;
-    /* background set by js */
     border-radius: 10px;
     padding: 10px;
 }
@@ -156,6 +128,7 @@ h1 {
     font-size: 58px;
     font-weight: normal;
     padding-left: 20px;
+    color: white;
 }
 
 button {
@@ -164,13 +137,10 @@ button {
     border: none;
     border-radius: 5px;
     color: white;
-    /* background set by js */
     padding: 15px 90px; /* determines the button size, default is this */
     transition-duration: 0.2s;
     cursor: pointer;
     margin-left: 20px;
-} button:hover {
-    /* background set by js */
 }
 
 .smaller-button {
@@ -178,7 +148,7 @@ button {
     padding: 15px 40px;
 }
 
-#translate-button {
+.fa-globe {
     position: absolute; /* absolute based on the header position */
     top: 10px;
     right: 10px;
@@ -196,7 +166,6 @@ button {
     position: absolute;
     width: calc(244px + 10px); /* really not a good way to go about it, but the box with osu! text is 244px */
     left: 15px; /* also not great, but i'll keep this for now to centre it */
-    /* background set by js */
     border-radius: 5px;
     box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.5);
 }
@@ -209,7 +178,6 @@ button {
     cursor: pointer;
     text-decoration: none;
 } .dropdown-content a:hover { /* makes dropdowns darker when you hover as well */
-    /* background set by js */
     border-radius: 5px;
 }
 
