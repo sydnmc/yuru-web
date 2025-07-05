@@ -19,6 +19,12 @@ async function fetchFromApi(apiEndpoint) {
     return await response.json();
 }
 
+/* checking for page language */
+var jp = false;
+if (document.documentElement.lang == 'jp') {
+    jp = true;
+}
+
 function dateParser(frontLength, isFronting, jp, lastFrontTime) {
     let timeDisplay;
     let frontAgoTime = (Date.now() - Date.parse(lastFrontTime))/1000/60/60/24;
@@ -59,7 +65,9 @@ function dateParser(frontLength, isFronting, jp, lastFrontTime) {
     return timeDisplay;
 }
 
-async function lastFmUpdate(jp, curSongInfo) {
+async function lastFmUpdate() {
+    var curSongInfo = await fetchFromApi('songInfo');
+
     var curSongName = curSongInfo.recenttracks.track[0].name;
     var curSongArtist = curSongInfo.recenttracks.track[0].artist['#text'];
     var songURL = curSongInfo.recenttracks.track[0].url;
@@ -118,15 +126,7 @@ document.getElementById('p2-wrapper').addEventListener("click", () => {
 });
 
 (async () => {
-    /* checking for page language */
-    var jp = false;
-    if (document.documentElement.lang == 'jp') {
-        jp = true;
-    }
-
-    /* last.fm */
-    var songInfo = await fetchFromApi('songInfo');
-    lastFmUpdate(jp, songInfo);
+    lastFmUpdate(); //runs async since it doesn't depend on anything else first
 
     /* pluralkit */
     var frontList = await fetchFromApi(`pkInfo?frontList=true&before=30`);

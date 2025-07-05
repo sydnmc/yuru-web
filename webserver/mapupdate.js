@@ -26,9 +26,9 @@ app.get('/gds', (req, res) => {
 
     let person = req.query.person;
     if (person == 'sydney') {
-        serverResponse = mapStatusSydney;
+        serverResponse = JSON.parse(fs.readFileSync('syd-mapstatus.json', 'utf8'));;
     } else if (person == 'lilac') {
-        serverResponse = mapStatusLilac;
+        serverResponse = JSON.parse(fs.readFileSync('lilac-mapstatus.json', 'utf8'));;
     } else {
         serverResponse = 'Invalid person specified.';
     }
