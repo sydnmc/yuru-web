@@ -31,6 +31,22 @@ declare global {
         bns: string[];
         isUnserious?: boolean;
         mapStatus: string
+
+        plural?: boolean;
+        plurality?: number;
+        pluralInfo?: pluralGd[];
+        statusColour?: string;
+        statusTextColour?: string;
+        diffColour?: string;
+    }
+
+    interface pluralGd {
+        songURL: string;
+        diffname: string;
+        amountMapped: string;
+        sr: number;
+        diffColour?: string;
+        dateFinished: string;
     }
 
     interface set {
@@ -43,4 +59,4 @@ declare global {
     }
 }
 
-export {}
+export { gd }
