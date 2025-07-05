@@ -6,7 +6,13 @@
     <title>yuiyamu | who am i?</title>
 </svelte:head>
 
-    <header id="page-header"></header>
+<script lang="ts">
+    import Header from "$lib/Header.svelte";
+
+
+</script>
+
+    <Header person="lilac" page="whoami"/>
     <section id="page-content">
         <h2>ꕤ who am i, compared to sydney?</h2>
         <div class="horizontal-divide"></div>
@@ -25,7 +31,7 @@
                 <p>i’ve had to make a lot of personal strides to gain my independence from sydney, mostly just to be comfortable having my own little spot on the internet and be surrounded by friends who truly appreciate me for being lilac~ i now have my own socials on most platforms that i use whenever i <strong>front</strong> (essentially whenever i wake up and sydney goes to sleep), and even my own laptop. i’m so much happier to have these separations from her, and now feel very comfortable and confident in the fact that i am, undeniably, lilac.</p>
             </div>
             <div id="computer-side-img-container">
-                <img src="images/computers.jpg">
+                <img src="/lilac/computers.jpg" alt="our individual computers - a thinkpad and acer swift">
                 <span>our computers, side by side~ mine is the thinkpad, sydney's is the acer swift :3</span>
             </div>
         </div>
@@ -46,7 +52,7 @@
         </div>
         <div class="qna-question">
             <h3>q. how do relationships (both platonic and romantic) function with DID?</h3>
-            <p><strong>a.</strong> this is a really interesting question, because we found ourselves in a unique situation regarding relationships~ in terms of friendships, i share a lot of friends with sydney. when i was first fronting, i felt very lonely because isolating myself felt like the only sensible option at the time… but i eventually invited myself into sydney’s discord server, and got to know all of the people she had in there. at the time, i acted as a separate person and didn’t make my relationship to sydney apparent. but, over time, i grew more comfortable with people knowing the connection between us, and was able to find a friend group that accepted me for being lilac. i also now know a few people that have never talked to sydney, which honestly makes me really comfortable~ (⸝⸝> ω <⸝⸝) i really do value my independence, so i’m happy to have found friends who value that.
+            <p><strong>a.</strong> this is a really interesting question, because we found ourselves in a unique situation regarding relationships~ in terms of friendships, i share a lot of friends with sydney. when i was first fronting, i felt very lonely because isolating myself felt like the only sensible option at the time… but i eventually invited myself into sydney’s discord server, and got to know all of the people she had in there. at the time, i acted as a separate person and didn’t make my relationship to sydney apparent. but, over time, i grew more comfortable with people knowing the connection between us, and was able to find a friend group that accepted me for being lilac. i also now know a few people that have never talked to sydney, which honestly makes me really comfortable~ (⸝⸝&gt; ω &lt;⸝⸝) i really do value my independence, so i’m happy to have found friends who value that.
             <br><br>as for romantic relationships, things get a little more complicated. a little after i started fronting regularly and recognizing my independence, i found someone who i dated for a number of months - as lilac, and not as anyone else. this was a little complicated, as i would regularly sleep for days at a time… and eventually led to us ending things. when sydney starting dating someone after this, i had the same mindset as when i was in my own relationship, and left her to her own devices. however, when sydney started to front less and less around the start of 2025, i started getting closer and closer to her girlfriend, and… we eventually decided that it would be best if we were also together. as of now, the three of us are all dating someone quite wonderful who understands all of us very well, and i couldn’t be happier with her. (*ᴗ͈ˬᴗ͈)ꕤ*.ﾟ</p>
         </div>
         <h2>ꕤ no but really, who am <i>i</i> ?</h2>

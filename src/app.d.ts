@@ -18,6 +18,29 @@ declare global {
     	setUrl: string;
         setYapping: string;
     }
+
+    interface gd {
+        bgLink: string;
+        songName: string;
+        songURLs: string[];
+        mapper: string;
+        difficulties: string[];
+        amountsMapped: string[];
+        starRatings: number[];
+        datesFinished: string[];
+        bns: string[];
+        isUnserious?: boolean;
+        mapStatus: string
+    }
+
+    interface set {
+        incomplete: boolean;
+        setBackgroundLink: string;
+        setStatus: string;
+        setTitle: string;
+        setUrl: string;
+        setYapping?: string;
+    }
 }
 
 export {}

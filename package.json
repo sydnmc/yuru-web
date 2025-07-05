@@ -27,6 +27,7 @@
 		"vitest-browser-svelte": "^0.1.0"
 	},
 	"dependencies": {
+		"osu-colourizer": "^1.0.1",
 		"svelte-i18n": "^4.0.1"
 	}
 }

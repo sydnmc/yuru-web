@@ -59,6 +59,23 @@
     max-width: 28px;
 }
 
+button {
+    font-family: Kyokasho, sans-serif;
+    font-size: 32px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 15px 90px; /* determines the button size, default is this */
+    transition-duration: 0.2s;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.smaller-button {
+    font-size: 26px;
+    padding: 15px 40px;
+}
+
 @media only screen and (max-device-width: 1000px) {
     img.socials-bar {
         max-width: 5%;

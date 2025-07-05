@@ -44,7 +44,7 @@
       pfpAlt = $_('sydney.header.pfpAlt');
       pfpLink = '/common/sydneypfp.png';
       username = "sydnmc"
-      buttonInfo.push({ name: "music", link: './music.html'});
+      buttonInfo.push({ name: "music", link: 'syd/music'}); //only for testing
 
       main = 'var(--sydney-main)';
       accent = 'var(--sydney-accent)';
@@ -54,7 +54,7 @@
       pfpAlt = $_('lilac.header.pfpAlt');
       pfpLink = '/common/lilacpfp.png';
       username = "yuiyamu";
-      buttonInfo.push({ name: "who am i?", link: './whoami.html'});
+      buttonInfo.push({ name: "who am i?", link: 'lilac/whoami'}); //only for testing
 
       main = 'var(--lilac-main)';
       accent = 'var(--lilac-accent)';

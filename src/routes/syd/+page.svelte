@@ -8,6 +8,48 @@
 
 <script lang="ts">
     import Header from "$lib/Header.svelte";
+    import * as osuColourize from 'osu-colourizer';
+
+    const endpoint = "https://api.yuru.ca"; //endpoint (backend)
+    async function fetchFromApi(apiEndpoint: string) {
+        let response = await fetch(`${endpoint}/${apiEndpoint}`);
+        return await response.json();
+    }
+
+    let notableSets: set[] = [
+        {"incomplete":false,"setBackgroundLink":"https://assets.ppy.sh/beatmaps/2009205/covers/cover.jpg","setStatus":"ranked","setTitle":"Aiobahn - INTERNET ANGEL","setUrl":"https://osu.ppy.sh/beatmapsets/2009205"},
+        {"incomplete":false,"setBackgroundLink":"https://assets.ppy.sh/beatmaps/1801304/covers/cover.jpg","setStatus":"ranked","setTitle":"Asaka - Sun is Coming Up (Movie Edit)","setUrl":"https://osu.ppy.sh/beatmapsets/1801304"},
+        {"incomplete":false,"setBackgroundLink":"https://assets.ppy.sh/beatmaps/2186078/covers/cover.jpg","setStatus":"ranked","setTitle":"Kiminone - Laid-Back Journey (TV Size)","setUrl":"https://osu.ppy.sh/beatmapsets/2186078"}
+    ];
+    let notableGds: gd[] = [
+        {"bgLink": "https://assets.ppy.sh/beatmaps/1638844/covers/cover.jpg","songName": "U2 - Saigetsu (Koko & Satsuki ga Tenkomori's Sagyou Bougai Remix)","songURLs": ["https://osu.ppy.sh/beatmapsets/1638844#osu/3839993"],"mapper": "Bloxi","difficulties": ["bnmc's LUNATIC JAPANESE GOBLIN!"],"amountsMapped": ["all"],"starRatings": [4.8],"datesFinished": ["6/3/2022"],"bns": ["Luscent","Zelq"],"isUnserious": false,"mapStatus": "ranked"},
+        {"bgLink": "https://assets.ppy.sh/beatmaps/2263303/covers/cover.jpg","songName": "irohaRingo feat. flower - Why I hate you","songURLs": ["https://osu.ppy.sh/beatmapsets/2263303#osu/4826294"],"mapper": "Ryuusei Aika","difficulties": ["sydnmc's kuyashimagire//Ultra"],"amountsMapped": ["all"],"starRatings": [7.8],"datesFinished": ["10/18/2024"],"bns": ["Riana","Iceluin"],"isUnserious": false,"mapStatus": "ranked"}
+    ]
+
+    function getArtist(title: string) {
+        return title.substring(0, title.indexOf("-"));
+    }
+
+    function getTitle(title: string) {
+        return title.substr(title.indexOf("-")+2);
+    }
+
+    async function getRecentGd() {
+        let gds: gd[] = await fetchFromApi('gds?person=sydney');
+
+        let latestRanked;
+
+        let i = gds.length-1; //starting from the very top here
+        let foundRanked = false;
+        while (!foundRanked && i > 0) {
+            if (gds[i].mapStatus === "ranked" || gds[i].mapStatus === "qualified") { //qualified should show up, since i basically treat it as being ranked :p
+                latestRanked = gds[i];
+                foundRanked = true;
+            }
+            i--;
+        }
+        return latestRanked;
+    }
 </script>
 
 <Header person="syd" page="home"/>
@@ -21,46 +63,45 @@
         <p class="centered" style="font-size: 14px;">i make maps (charts) for a rhythm game called osu!, as well as doing a few other things within the community. <br>here are some of my mostly recently ranked maps, along with some of maps that i'm known for~</p>
         <h3>˖⁺‧₊˚ notable gds ˚₊‧⁺˖</h3>
         <div id="gd-display-wrapper" style="cursor: pointer;">
-          <div class="gd-thumb" id="gd-thumb-0">
-            <p class="upper-ranked-text">❀ latest ranked gd ❀</p>
-            <h2 class="gd-title"><a class="gd-link" id="gd-link-0">Loading</a></h2>
-            <p class="gd-artist"><span style="font-size: 13px">by </span><span id="latest-ranked-artist">loading</span></p>
-            <p class="gd-text" id="diff-text-0">☆ loading sr ☆</p>
-          </div>
+        {#await getRecentGd()}
+            <div class="gd-thumb">
+                <p class="upper-ranked-text">❀ latest ranked gd ❀</p>
+                <h2 class="gd-title"><a class="gd-link" id="gd-link-0">Loading</a></h2>
+                <p class="gd-artist"><span style="font-size: 13px">by </span><span id="latest-ranked-artist">loading</span></p>
+                <p class="gd-text" id="diff-text-0">☆ loading sr ☆</p>
+            </div>
+            {:then gd}
+            <div class="gd-thumb" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url(${gd?.bgLink}">
+                <p class="upper-ranked-text">❀ latest ranked gd ❀</p>
+                <h2 class="gd-title"><a class="gd-link" href={gd?.songURLs[0]}>{getTitle(gd?.songName)}</a></h2>
+                <p class="gd-artist"><span style="font-size: 13px">by </span><span id="latest-ranked-artist">{getArtist(gd?.songName)}</span></p>
+                <p class="gd-text" style="color: {osuColourize.colourize(gd.starRatings[0])}">{gd?.difficulties[0]} | {gd?.starRatings[0]} ☆</p>
+            </div>
+            {/await}
           <div id="divider"></div>
-          <div class="gd-thumb" id="gd-thumb-1">
-            <h2 class="gd-title"><a class="gd-link" id="gd-link-1" style="font-size: 22px">Why I Hate You</a></h2>
-            <!-- just a temp thing to make japanese goblin gd actually fit properly -->
-            <p class="gd-artist"><span style="font-size: 13px">by </span>irohaRingo feat. Flower</p>
-            <p class="gd-text" id="diff-text-1">☆ loading sr ☆</p>
-          </div>
-          <div class="gd-thumb" id="gd-thumb-2">
-            <h2 class="gd-title"><a class="gd-link" id="gd-link-2">Saigetsu (Koko & Satsuki ga...</a></h2>
-            <p class="gd-artist"><span style="font-size: 13px">by </span>U2</p>
-            <p class="gd-text" id="diff-text-2">☆ loading sr ☆</p>
-          </div>
+          {#each notableGds as gd}
+            <div class="gd-thumb" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url({gd.bgLink}">
+                <h2 class="gd-title"><a class="gd-link" style="font-size: 22px">{getTitle(gd.songName)}</a></h2>
+                <p class="gd-artist"><span style="font-size: 13px">by </span>{getArtist(gd.songName)}</p>
+                <p class="gd-text" style="color: {osuColourize.colourize(gd.starRatings[0])}">{gd.difficulties[0]} | {gd.starRatings[0]} ☆</p>
+            </div>
+          {/each}
         </div>
         <h3>˖⁺‧₊˚ notable maps ˚₊‧⁺˖</h3>
         <div id="maps-showcase-wrapper" style="cursor: pointer;">
-          <div class="set-thumb" id="set-thumb-0">
-            <h2 class="gd-title push-text"><a class="gd-link">INTERNET ANGEL</a></h2>
-            <p class="gd-artist push-text"><span style="font-size: 13px">by </span>Aiobahn</p>
+        {#each notableSets as set}
+            <div class="set-thumb" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url({set.setBackgroundLink})">
+            <h2 class="gd-title push-text"><a class="gd-link" href={set.setUrl}>{getTitle(set.setTitle)}</a></h2>
+            <p class="gd-artist push-text"><span style="font-size: 13px">by </span>{getArtist(set.setTitle)}</p>
           </div>
-          <div class="set-thumb" id="set-thumb-1">
-            <h2 class="gd-title push-text"><a class="gd-link">Sun is Coming Up (Movie Edit)</a></h2>
-            <p class="gd-artist push-text"><span style="font-size: 13px">by </span>Asaka</p>
-          </div>
-          <div class="set-thumb" id="set-thumb-2">
-            <h2 class="gd-title push-text"><a class="gd-link">NUCiFERA</a></h2>
-            <p class="gd-artist push-text"><span style="font-size: 13px">by </span>Yuuni</p>
-          </div>
+        {/each}
         </div>
       </div>
       <div id="right-side">
         <div id="songs-preview">
           <h2>also, check out some of my music here!!</h2>
           <p class="under-title-text">because yeah ^^ i do make music just a little bit~</p>
-          <img src="/music preview.jpg" alt="music preview" id="songs-image">
+          <img src="/sydney/music preview.jpg" alt="music preview" id="songs-image">
         </div>
         <div>
           <h2>i also code too!</h2>
