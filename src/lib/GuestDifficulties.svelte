@@ -4,10 +4,10 @@
     import * as osuColourize from 'osu-colourizer';
     import type { gd } from '../app';
     import AudioPlayer from './AudioPlayer.svelte';
+    import { PUBLIC_API } from '$env/static/public';
 
-    const endpoint = "https://api.yuru.ca"; //endpoint (backend)
     async function fetchFromApi(apiEndpoint: string) {
-        let response = await fetch(`${endpoint}/${apiEndpoint}`);
+        let response = await fetch(`${PUBLIC_API}/${apiEndpoint}`);
         return await response.json();
     }
 
@@ -64,19 +64,6 @@
                     break;
                 case "set wip":
                     mapStatus[i].statusColour = "#f6b26b";
-                    break;
-                case "wip":
-                    //not sure
-                    break;
-                case "pending":
-                    mapStatus[i].statusColour = "#ffd966";
-                    mapStatus[i].statusTextColour = "black"; //background too bright
-                    break;
-                case "qualified":
-                    //not sure
-                    break;
-                case "ranked":
-                    //not sure
                     break;
             }
 
@@ -252,6 +239,7 @@
 }
 
 .gdtab .gdtab-element {
+    color: rgb(222, 224, 237);
     height: 80px;
     text-align: left;
     vertical-align: top;
@@ -262,6 +250,7 @@
 }
 
 .gdtab a {
+    color: rgb(222, 224, 237);
     text-decoration: none;
     text-align: left;
     vertical-align: top;
@@ -327,6 +316,14 @@
 } .qualified a {
     color: var(--text);
 } .qualified span {
+    color: var(--text);
+}
+
+.pending {
+    background-color: rgb(255, 217, 102);
+} .pending a {
+    color: var(--text);
+} .pending span {
     color: var(--text);
 }
 

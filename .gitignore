@@ -1,13 +1,15 @@
 node_modules
 
-webserver/servoptions.json
-webserver/lilac-mapstatus.json
-webserver/syd-mapstatus.json
-webserver/setinfo.json
+webserver/lilacgds.json
+webserver/sydneygds.json
+webserver/sets.json
 
 webserver/redirect/wrangler.toml
 
 .vscode
+
+.env
+.evn.production
 
 #svelte output
 .output

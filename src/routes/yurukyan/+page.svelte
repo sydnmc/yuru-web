@@ -9,10 +9,10 @@
 <script lang="ts">
     import { _, locale, getLocaleFromNavigator } from 'svelte-i18n';
     import { onMount } from 'svelte';
+    import { PUBLIC_API } from '$env/static/public';
 
-    const endpoint = "https://api.yuru.ca"; //endpoint (backend)
     async function fetchFromApi(apiEndpoint: string) {
-        let response = await fetch(`${endpoint}/${apiEndpoint}`);
+        let response = await fetch(`${PUBLIC_API}/${apiEndpoint}`);
         return await response.json();
     }
 

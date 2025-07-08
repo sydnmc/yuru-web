@@ -11,26 +11,30 @@ declare global {
     }
 
 	interface beatmapset {
-        incomplete: boolean;
-        setBackgroundLink: string;
-        setStatus: string;
-        setTitle: string;
-    	setUrl: string;
-        setYapping: string;
+        isIncomplete: boolean;
+        bgLink: string;
+        title: string;
+        artist: string;
+        url: string;
+        mapId: string;
+        description: string;
+        creator: string;
+    	dateFinished: string;
+        creatorPerson: string;
+        status: string;
     }
 
     interface gd {
         bgLink: string;
-        songName: string;
-        songURLs: string[];
-        mapper: string;
-        difficulties: string[];
-        amountsMapped: string[];
-        starRatings: number[];
-        datesFinished: string[];
-        bns: string[];
-        isUnserious?: boolean;
-        mapStatus: string
+        title: string;
+        artist: string;
+        creator: string;
+        mapId: string;
+        status: string;
+        isForRank: boolean;
+        bn1: string;
+        bn2: string;
+        maps: beatmap[];
 
         plural?: boolean;
         plurality?: number;
@@ -40,22 +44,19 @@ declare global {
         diffColour?: string;
     }
 
-    interface pluralGd {
-        songURL: string;
+    interface beatmap {
+        url: string;
+        id: string;
         diffname: string;
         amountMapped: string;
         sr: number;
-        diffColour?: string;
         dateFinished: string;
+
+        diffColour?: string;
     }
 
-    interface set {
-        incomplete: boolean;
-        setBackgroundLink: string;
-        setStatus: string;
-        setTitle: string;
-        setUrl: string;
-        setYapping?: string;
+    interface hover {
+        username: string;
     }
 }
 

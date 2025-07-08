@@ -7,12 +7,12 @@
 </svelte:head>
 
 <script lang="ts">
+    import { PUBLIC_API } from "$env/static/public";
     import Header from "$lib/Header.svelte";
     import * as osuColourize from 'osu-colourizer';
 
-    const endpoint = "https://api.yuru.ca"; //endpoint (backend)
     async function fetchFromApi(apiEndpoint: string) {
-        let response = await fetch(`${endpoint}/${apiEndpoint}`);
+        let response = await fetch(`${PUBLIC_API}/${apiEndpoint}`);
         return await response.json();
     }
 

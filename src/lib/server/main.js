@@ -1,9 +1,8 @@
-const fs = require('fs'); 
-const express = require('express');
-const cors = require('cors');
-const options = JSON.parse(fs.readFileSync('servoptions.json', 'utf8'));
+import cors from 'cors';
+import express from 'express';
+import fs from 'node:fs';
 
-const osuURL = "https://osu.ppy.sh/api/get_beatmaps";
+const osuApi = "https://osu.ppy.sh/api/get_beatmaps";
 const app = express();
 
 app.listen(3333, () => {
@@ -14,49 +13,44 @@ app.use(express.json());
 app.use(express.static('common')); //serves (cunt) all files from the common folder
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => { //serves the basic api webpage~
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/gds', (req, res) => {
-    let serverResponse;
-
+app.get('/gds', (req, res) => { //sends back the gd info we have stored
     let person = req.query.person;
-    if (person == 'sydney') {
-        serverResponse = mapStatusSydney;
-    } else if (person == 'lilac') {
-        serverResponse = mapStatusLilac;
+
+    if (person === 'sydney' || person === 'syd') {
+        res.send(fs.readFileSync('./sydneygds.json', 'utf-8'));
+    } else if (person === 'lilac') {
+        res.send(fs.readFileSync('./lilacgds.json', 'utf-8'));
     } else {
-        serverResponse = 'Invalid person specified.';
+        res.send('no person specified >_<;;');
     }
-    
-    res.send(serverResponse);
 });
 
-app.get('/sets', (req, res) => {
-    let setInfo = JSON.parse(fs.readFileSync('setinfo.json', 'utf8'));
-    res.send(setInfo);
+app.get('/sets', (req, res) => { //sends back set info we have stored c:
+    res.send(JSON.parse(fs.readFileSync('./sets.json', 'utf-8')));
 });
 
 app.get('/songInfo', async(req, res) => {
-    const lastFmURL = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${options.lastFmUsername}&api_key=${options.lastFmKey}&format=json&limit=1`;
-    let songInfo;
-    
-    try {
-        songInfo = await fetch(lastFmURL);
-        res.send(await songInfo.json());
-    } catch (err) {
-        console.log(err.message);
-    }
+    let songInfo = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=yurukyan&api_key=${process.env.LAST_FM_KEY}&format=json&limit=1`);
+    res.send(await songInfo.json());
 });
 
 app.get('/pkInfo', async(req, res) => {
     const systemURL = "https://api.pluralkit.me/v2";
     const systemId = "ytcvss"
     const sysMembers = ['ckccgs', 'tfprjx', 'yaangx', 'ayaxfc']; //sydney, lilac, hazel, may
+
     let user = req.query.user;
     let frontList = req.query.frontList;
-    let before = parseInt(req.query.before);
+    let before = 30;
+    try {
+        before = parseInt(req.query.before);
+    } catch {
+        res.send('invalid before value >_<;;');
+    }
     let apiResp;
 
     let daysAgoAmount = 1000*60*60*24*before; //x num of days in ms

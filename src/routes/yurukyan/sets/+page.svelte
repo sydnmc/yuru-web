@@ -21,36 +21,42 @@
         }
     }
 
-function findStatus(status: string) {
-    let iconUrl = "https://i.ppy.sh/75dfe0bdfceeeed6a426c8db0234e4ef3300dc10/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f6772617665796172642e706e67"; //default to graved if nothing else
-    switch (status) {
-        case "graved":
-            iconUrl = "https://i.ppy.sh/75dfe0bdfceeeed6a426c8db0234e4ef3300dc10/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f6772617665796172642e706e67";
-            break;
-        case "ranked":
-            iconUrl = "https://i.ppy.sh/7f116c7b5f20a0f1b9b38d35b521f5bd070d864a/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f72616e6b65642e706e67";
-            break;
-        case "qualified":
-            iconUrl = "https://i.ppy.sh/dd2c44bf7db9f2e33f670205df7df3d028101888/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f7175616c69666965642e706e67";
-            break;
-        case "loved":
-            iconUrl = "https://i.ppy.sh/2d6ca47d8e93f21d1bf09ce1c3c9661442092e57/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f6c6f7665642e706e67";
-            break;
-        }
-    return iconUrl;
-}
-</script>
+    function findStatus(status: string) {
+        let iconUrl = "https://i.ppy.sh/75dfe0bdfceeeed6a426c8db0234e4ef3300dc10/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f6772617665796172642e706e67"; //default to graved if nothing else
+        switch (status) {
+            case "graved":
+                iconUrl = "https://i.ppy.sh/75dfe0bdfceeeed6a426c8db0234e4ef3300dc10/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f6772617665796172642e706e67";
+                break;
+            case "ranked":
+                iconUrl = "https://i.ppy.sh/7f116c7b5f20a0f1b9b38d35b521f5bd070d864a/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f72616e6b65642e706e67";
+                break;
+            case "qualified":
+                iconUrl = "https://i.ppy.sh/dd2c44bf7db9f2e33f670205df7df3d028101888/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f7175616c69666965642e706e67";
+                break;
+            case "loved":
+                iconUrl = "https://i.ppy.sh/2d6ca47d8e93f21d1bf09ce1c3c9661442092e57/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f6c6f7665642e706e67";
+                break;
+            }
+        return iconUrl;
+    }
 
+    let hover = {
+        tilda: {
+
+        }
+    }
+</script>
+<div id="background"></div>
     <h1 style="text-align: center;"><a class=title href="https://yuru.ca">yurukyan△</a></h1>
     <h1>complete spreads:</h1>
     <div class="set-container" id="set-container">
         {#each completeSetsList as set}
         <div class="set">
-            <img alt={set.setTitle} src={set.setBackgroundLink}>
+            <img alt="{set.artist} - {set.title}" src={set.bgLink}>
             <div class="text-container">
-                <img class="status-icon" src={findStatus(set.setStatus)} alt="status icon">
-                <a class="set-title" href={set.setUrl}>{set.setTitle}</a>
-                <p>{@html set.setYapping}</p><br>
+                <img class="status-icon" src={findStatus(set.status)} alt="status icon">
+                <a class="set-title" href={set.url}>{set.artist} - {set.title}</a>
+                <p>{@html set.description}</p><br>
             </div>
         </div>
         {/each}
@@ -58,17 +64,17 @@ function findStatus(status: string) {
     <div class="incomplete-warning">
       <div id="warning"><strong>! warning !</strong><br></div>
       <span>only read this if you have nothing to better to do<br>
-      <span style="font-size: 12px;">or just wanna know what i think about a particular map or something idk im not judging</span><br>
+      <span style="font-size: 12px;">or just wanna know what we think about a particular map or something idk we're not judging</span><br>
        you have been warned...</span></div>
     <h1>incomplete spreads:</h1>
     <div class="set-container" id="incomplete-set-container">
         {#each incompleteSetsList as set}
         <div class="set">
-            <img alt={set.setTitle} src={set.setBackgroundLink}>
+            <img alt="{set.artist} - {set.title}" src={set.bgLink}>
             <div class="text-container">
-                <img class="status-icon" src={findStatus(set.setStatus)} alt="status icon">
-                <a class="set-title" href={set.setUrl}>{set.setTitle}</a>
-                <p>{@html set.setYapping}</p><br>
+                <img class="status-icon" src={findStatus(set.status)} alt="status icon">
+                <a class="set-title" href={set.url}>{set.artist} - {set.title}</a>
+                <p>{@html set.description}</p><br>
             </div>
         </div>
         {/each}
@@ -78,7 +84,22 @@ function findStatus(status: string) {
     /* local variables */
 :root {
     --tent: #FCE758;
+    --main: #79b8d4;
+    --accent: #497285;
     --lighter-bg: rgb(55, 55, 55);
+}
+
+#background {
+    position: fixed;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-image: url('/yurukyan/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
 }
 
 a.title {
@@ -90,10 +111,10 @@ a.title {
 
 .set {
     display: flex;
-    background-color: var(--lighter-bg);
-    border: 3px solid var(--sydney-main);
+    backdrop-filter: blur(5px) brightness(0.5);
+    border: 3px solid var(--main);
     border-radius: 5px;
-    min-height: 85px;
+    min-height: 180px;
     margin-left: 2.5%;
     margin-right: 2.5%;
     margin-top: 20px;
