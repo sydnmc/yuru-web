@@ -17,7 +17,7 @@ declare global {
         artist: string;
         url: string;
         mapId: string;
-        description: description;
+        description: description[];
         creator: string;
     	dateFinished: string;
         creatorPerson: string;
