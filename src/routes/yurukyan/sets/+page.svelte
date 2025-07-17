@@ -14,7 +14,7 @@
     let incompleteSetsList: beatmapset[] = [];
 
     for (let i = 0; i < setInfo.length; i++) { //creating seperate set arrays
-        if (setInfo[i].incomplete) {
+        if (setInfo[i].isIncomplete) {
             incompleteSetsList.push(setInfo[i]);
         } else {
             completeSetsList.push(setInfo[i]);
@@ -40,12 +40,12 @@
         return iconUrl;
     }
 
-    let hover = {
-        tilda: {
-
-        }
+    let curUserHover: number;
+    function showHover(hover: number) {
+        curUserHover = hover;
     }
 </script>
+
 <div id="background"></div>
     <h1 style="text-align: center;"><a class=title href="https://yuru.ca">yurukyan△</a></h1>
     <h1>complete spreads:</h1>
@@ -56,7 +56,34 @@
             <div class="text-container">
                 <img class="status-icon" src={findStatus(set.status)} alt="status icon">
                 <a class="set-title" href={set.url}>{set.artist} - {set.title}</a>
-                <p>{@html set.description}</p><br>
+                <p>mapped by {set.creator}</p>
+                <p>finished on {set.dateFinished}</p>
+                {#each set.description as desc}
+                    {#if desc.type === 'description'}
+                    <span >{@html desc.content}</span>
+                    {:else if desc.type === 'hover'}
+                    <a class="osu-user" href="https://osu.ppy.sh/users/{desc.content.userID}" on:mouseover={() => showHover(desc.content.id)}>{desc.content.username}</a>
+                    <a class="osu-hover" href="https://osu.ppy.sh/users/{desc.content.userID}" style="display: {curUserHover === desc.content.id ? 'flex' : 'none'}; 
+                    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({desc.content.bannerUrl}); 
+                    background-size: cover;
+                    background-origin: padding-box, padding-box;
+                    background-clip: border-box, border-box;">
+                        <img src="https://a.ppy.sh/{desc.content.userID}" class="hover-pfp" alt="{desc.content.userID}'s pfp"/>
+                            <div class="osu-hover-text-container">
+                                <div class="osu-hover-flagtext-container">
+                                    <div class="flaguser-container">
+                                        <img src="https://osu.ppy.sh/assets/images/flags/{desc.content.flag}" class="osu-flag" alt={desc.content.flagCode}/>
+                                        <span class="hover-username">{desc.content.username}</span>
+                                    </div>
+                                    <div>
+                                        <span>click to go to profile!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {/if}
+                {/each}
+                <br>
             </div>
         </div>
         {/each}
@@ -74,7 +101,7 @@
             <div class="text-container">
                 <img class="status-icon" src={findStatus(set.status)} alt="status icon">
                 <a class="set-title" href={set.url}>{set.artist} - {set.title}</a>
-                <p>{@html set.description}</p><br>
+                <br>
             </div>
         </div>
         {/each}
@@ -163,5 +190,52 @@ h1 { /* this is needed for things other than the title (incomplete/complete sets
     background-color: #f26376;
     border-radius: 5px;
     margin-bottom: 8px;
+}
+
+/* osu hover stuff */
+.osu-user {
+    position: relative;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.osu-hover {
+    display: none;
+    position: absolute;
+    left: 0; /* need to set a position for it to spawn right under the text */
+    text-decoration: none;
+    font-weight: normal;
+    color: white;
+    height: 80px;
+    width: 300px;
+    border-radius: 15px;
+}
+
+.hover-pfp {
+    height: 70px;
+    border-radius: 15px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.osu-hover-flagtext-container {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.hover-username {
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.flaguser-container {
+    display: flex;
+    align-items: center;
+}
+
+.osu-flag {
+    height: 35px;
+    margin-right: 5px;
 }
 </style>

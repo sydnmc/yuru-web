@@ -1,15 +1,13 @@
 node_modules
 
-webserver/lilacgds.json
-webserver/sydneygds.json
-webserver/sets.json
-
-webserver/redirect/wrangler.toml
+src/lib/server/lilacgds.json
+src/lib/server/sydneygds.json
+src/lib/server/sets.json
 
 .vscode
 
 .env
-.evn.production
+.env.production
 
 #svelte output
 .output

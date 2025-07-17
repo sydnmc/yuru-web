@@ -1,6 +1,9 @@
 import cors from 'cors';
 import express from 'express';
 import fs from 'node:fs';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const osuApi = "https://osu.ppy.sh/api/get_beatmaps";
 const app = express();

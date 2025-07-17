@@ -17,7 +17,7 @@ declare global {
         artist: string;
         url: string;
         mapId: string;
-        description: string;
+        description: description;
         creator: string;
     	dateFinished: string;
         creatorPerson: string;
@@ -55,8 +55,17 @@ declare global {
         diffColour?: string;
     }
 
+    interface description {
+        type: string;
+        content: any;
+    }
+
     interface hover {
         username: string;
+        userID: number;
+        flag: string;
+        flagCode: string;
+        bannerUrl: string;
     }
 }
 
