@@ -1,8 +1,8 @@
 node_modules
 
-src/lib/server/lilacgds.json
-src/lib/server/sydneygds.json
-src/lib/server/sets.json
+#src/lib/server/lilacgds.json
+#src/lib/server/sydneygds.json
+#src/lib/server/sets.json
 
 .vscode
 
