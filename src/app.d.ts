@@ -32,16 +32,8 @@ declare global {
         mapId: string;
         status: string;
         isForRank: boolean;
-        bn1: string;
-        bn2: string;
+        bns: string[];
         maps: beatmap[];
-
-        plural?: boolean;
-        plurality?: number;
-        pluralInfo?: pluralGd[];
-        statusColour?: string;
-        statusTextColour?: string;
-        diffColour?: string;
     }
 
     interface beatmap {

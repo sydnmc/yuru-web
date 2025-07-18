@@ -60,6 +60,15 @@
       accent = 'var(--lilac-accent)';
       lightAccent = 'var(--lilac-light-accent)';
       break;
+    case "may":
+      pfpAlt = $_('may.header.pfpAlt');
+      pfpLink = '/common/maypfp.jpg';
+      username = "anemone_";
+
+      main = 'var(--may-main)';
+      accent = 'var(--lilac-accent)';
+      lightAccent = 'var(--lilac-light-accent)';
+      break;
   }
 
 

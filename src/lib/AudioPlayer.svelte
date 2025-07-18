@@ -48,7 +48,9 @@
 }
 </script>
 
-
+<audio controls id="tab-player-source">
+    <source type="audio/mpeg">
+</audio>
 <div class="play-button-container" id="play-container-${i}">
     <span class="play-button" id="tab-player-${i}"><i class="fa fa-play" style="font-size: 40px"></i></span>
 </div>

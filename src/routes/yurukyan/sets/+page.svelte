@@ -132,7 +132,6 @@
     padding-right: 20px;
     padding-bottom: 5px;
     background: linear-gradient(90deg,rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 100%);
-
 } .divider h1 {
     margin-top: 0;
     margin-bottom: 0;

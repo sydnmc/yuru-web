@@ -15,24 +15,27 @@
     let collabCount = 0;
     let totalCount = 0;
 
-    async function populateRow() { //only actually doing 1 sweep????
+    let showUnserious = false;
+
+    async function populateRow() {
         let fetchPerson = person;
         if (person === "syd") { fetchPerson = 'sydney' }
         let mapStatus: gd[] = await fetchFromApi(`gds?person=${fetchPerson}`); //since we fetch mapdata in this function, it's best to populate everything we need for other parts of the page as well~
 
         for (let i = 0; i < mapStatus.length; i++) {
-            if (mapStatus[i].mapStatus == "wip") {
-                wipCount++;
-            }
-            if (mapStatus[i].amountsMapped[0] != "all") {
-                collabCount++;
-            }
-
-            if (mapStatus[i].difficulties.length > 1) { //plurality check
-                totalCount = totalCount+mapStatus[i].difficulties.length-1;
+            let set: gd = mapStatus[i];
+            for (let j = 0; j < mapStatus[i].maps.length; j++) {
+                let diff: beatmap = mapStatus[i].maps[j];
+                if (set.status === "wip") {
+                    wipCount++;
+                } else {
+                    totalCount++;
+                }
+                if (diff.amountMapped !== "all") {
+                    collabCount++;
+                }
             }
         }
-        totalCount = totalCount+mapStatus.length;
 
         /* done with updating the rest of the page, so now we focus on the gds themselves~ */
         for (let i = 0; i < mapStatus.length; i++) { //loops through every diff we have
@@ -41,65 +44,31 @@
                 mapStatus[i].bgLink = "/common/tamate.jpg" //replaces backgrounds with no link with えっとですねぇ～　たまてって名前は玉手箱が由来でして
             }
 
-            let plural = false; //if a map has more than one difficulty in it
-            let plurality = 0; //number of diffs this diff has (defined if plural)
-
-            if (mapStatus[i].difficulties.length > 1) {
-                plural = true;
-                plurality = mapStatus[i].difficulties.length;
-            }
-
-            switch(mapStatus[i].mapStatus) {
-                case "deadge (pretty bad)":
-                case "deadge (unfinished spread)":
-                    mapStatus[i].statusColour = "#999999";
-                    break;
-                case "deadge":
-                case "deadge (not for rank)":
-                case "deadge (meme set)":
-                    mapStatus[i].statusColour = "#b7b7b7";
-                    break;
-                case "deleted":
-                    mapStatus[i].statusColour = "#666666";
-                    break;
-                case "set wip":
-                    mapStatus[i].statusColour = "#f6b26b";
-                    break;
-            }
-
-            //adding difficulty colors + all plural info
+            //adding difficulty colors
             let blackish = "rgb(40, 40, 40)";
-            if (plural) {
-                mapStatus[i].plural = true;
-                mapStatus[i].pluralInfo = [];
-                for (let j = 0; j < plurality; j++) {
-                    let info: pluralGd = {"songURL": mapStatus[i].songURLs[j], "diffname": mapStatus[i].difficulties[j], "sr": mapStatus[i].starRatings[j], "dateFinished": mapStatus[i].datesFinished[j], "amountMapped": mapStatus[i].amountsMapped[j]}
-                    mapStatus[i].pluralInfo?.push(info);
-
-                    let bgColor;
-                    if (typeof mapStatus[i].starRatings[j] == "string") {
-                        bgColor = "rgb(222, 224, 237)"; //makes it the wip color if its still wip but in a plural gd thats finished already
-                    } else {
-                        bgColor = osuColourize.colourize(mapStatus[i].starRatings[j]);
-                    }
-                    mapStatus[i].pluralInfo[j].diffColour = bgColor;
-
-                    if (mapStatus[i].starRatings[j] < 4.4 || typeof mapStatus[i].starRatings[j] == "string") { //in cases where the map background text is too bright, or is wip (still too bright)
-                        
-                    }
+            for (let j = 0; j < mapStatus[i].maps.length; j++) {
+                let diff = mapStatus[i].maps[j];
+                let bgColor;
+                if (typeof diff.sr === "string") {
+                    bgColor = "rgb(222, 224, 237)"; //makes it the wip color if its still wip but in a plural gd thats finished already
+                } else {
+                    bgColor = osuColourize.colourize(diff.sr);
+                    bgColor = bgColor.replace('rgb', 'rgba');
+                    bgColor = bgColor.replace(')', ', 0.3)');
+                                    console.log(bgColor);
                 }
-            } else {
-                let bgColor = osuColourize.colourize(mapStatus[i].starRatings[0]);
-                mapStatus[i].diffColour = bgColor;
-                if (mapStatus[i].starRatings[0] < 4.4) {
+                console.log(bgColor);
+                diff.diffColour = bgColor;
 
+                if (diff.sr < 4.4 || typeof diff.sr === "string") { //in cases where the map background text is too bright, or is wip (still too bright)
+                    mapStatus[i].maps[j]
                 }
             }
         }
         return mapStatus;
     }
 
-    function determineRowBg(status: string) {
+    function determineRowColour(status: string) {
         let statusClass = '';
         switch (status) {
             case "ranked":
@@ -119,229 +88,144 @@
     }
 </script>
 
-
-      <p id="top-gd-text">below is a list of all <strong>{totalCount}</strong> gds i've done to date, including <strong>{wipCount}</strong> work in progress gds.</p>
-      <p class="below-text" style="font-size: 20px;">this also includes all <strong>{collabCount}</strong> collabs that i've done so far~<br></p>
-      <p class="below-text" style="font-size: 14px;">note that some may no longer have links associated with them (have been deleted).</p>
-      <div class="gd-table-container">
-        <audio controls id="tab-player-source">
-          <source type="audio/mpeg">
-        </audio>
-        <table id="gdtab-kvEUP" class="gdtab">
-            <colgroup>
-                <col style="width: 18%;"/>
-            </colgroup>
-            <thead>
-                <tr>
-                    <th class="gdtab-top">background</th>
-                    <th class="gdtab-top">title - artist</th>
-                    <th class="gdtab-top">mapper</th>
-                    <th class="gdtab-top">my diff</th>
-                    <th class="gdtab-top">sr</th>
-                    <th class="gdtab-top">mapped?</th>
-                    <th class="gdtab-top">date finished</th>
-                    <th class="gdtab-top">1st bn</th>
-                    <th class="gdtab-top">2nd bn</th>
-                    <th class="gdtab-top">status</th>
-                </tr>
-            </thead>
-            <tbody id="gdtab-start">
-                {#await populateRow()}
-                    <tr><td>loading maps...</td></tr>
-                {:then maps}
-                    {#each maps as map}
-                    <tr class="{determineRowBg(map.mapStatus)}">
-                        <td style="background-image: url({map.bgLink}); padding: 0px 0px; background-size: cover; background-position: center;">
-                            <!-- AudioPlayer here -->
-                        </td>
-                        <td class="gdtab-element"><a href={map.songURLs[0]}>{map.songName}</a></td>
-                        <td class="gdtab-element"><span>{map.mapper}</span></td>
-                        {#if map.plural}
-                            <td class="gdtab-diff-box" style="padding: 0;">
-                                {#each map.pluralInfo! as plural}
-                                <div class="plural-padding" style="background-color: {plural.diffColour}"><span>{plural.diffname}</span></div>
-                                {/each}
-                            </td>
-                            <td class="gdtab-diff-box" style="padding: 0;">
-                                {#each map.pluralInfo! as plural}
-                                <div class="plural-padding" style="background-color: {plural.diffColour}"><span>{plural.sr}</span></div>
-                                {/each}
-                            </td>
-                            <td class="gdtab-element" style="padding: 0;">
-                                {#each map.pluralInfo! as plural}
-                                <div class="plural-padding" style="background-color: {plural.diffColour}"><span>{plural.amountMapped}</span></div>
-                                {/each}
-                            </td>
-                        {:else}
-                        <td class="gdtab-diff-box" style="background-color: {map.diffColour}">
-                            <a href={map.songURLs[0]}>{map.difficulties[0]}</a>
-                        </td>
-                        <td class="gdtab-diff-box" style="background-color: {map.diffColour}">
-                            <span>{map.starRatings[0]}</span>
-                        </td>
-                        <td class="gdtab-element" style="background-color: {map.diffColour}">
-                            <span>{map.amountsMapped[0]}</span>
-                        </td>
-                        {/if}
-                        <td class="gdtab-element"><span>{map.datesFinished[0]}</span></td>
-                        <td class="gdtab-element"><span>{map.bns[0]}</span></td>
-                        <td class="gdtab-element"><span>{map.bns[1]}</span></td>
-                        <td class="gdtab-element" style="background-color: {map.statusColour}"><span>{map.mapStatus}</span></td>
-                    </tr>
-                    {/each}
-                {/await}
-            </tbody>
-        </table>
+<div class="divider">
+    <div id="rank-checkbox-container">
+        <input type="checkbox" bind:checked={showUnserious}/>
+        <span>show not for rank gds</span>
     </div>
+    <h2>guest difficulties ❀</h2>
+    <p>total finished <span>{totalCount}</span></p>
+    <p>collabs <span>{collabCount}</span></p>
+    <p>wip <span>{wipCount}</span></p>
+</div>
+<div>
+    {#await populateRow()}
+        <h1 class="loading-text">now loading gds...</h1>
+    {:then maps}
+        {#each maps as gd}
+            {#if (gd.isForRank && !showUnserious) || showUnserious}
+            <div class="gd {determineRowColour(gd.status)}" style="linear-gradient(90deg,rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 100%);">
+                <img src={gd.bgLink} alt="{gd.artist} - {gd.title}"/>
+                <div class="gd-text">
+                    <h2><a class="hidden-link" href="https://osu.ppy.sh/beatmapsets/{gd.mapId}">{gd.artist} - {gd.title}</a></h2>
+                    <p>status <span>{gd.status}</span></p>
+                    <p>host <span>{gd.creator}</span></p>
+                    {#if gd.bns.length > 0}
+                    <p>bns 
+                        {#each gd.bns as bn}
+                        <span>{bn}⠀</span> <!-- uses a stupid fucking unicode space since svelte cuts off normal spaces, best solution i could think of -->
+                        {/each}
+                    </p>
+                    {/if}
+                    <div class="diff-container">
+                        {#each gd.maps as diff}
+                        <div class="diff" style="background-color: {diff.diffColour}">
+                            <h3>{diff.diffname}</h3>
+                            <p>stars <span>{diff.sr}</span></p>
+                            <p>mapped <span>{diff.amountMapped}</span></p>
+                            <p>date finished <span>{diff.dateFinished}</span></p>
+                        </div>
+                        {/each}
+                    </div>
+                </div>
+            </div>
+            {/if}
+        {/each}
+    {:catch}
+        <h1 class="loading-text">something went wrong! :c</h1>
+    {/await}
+</div>
+        
 
-    <style>
-      #top-gd-text {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 0;
-}
-
-.below-text {
-    text-align: center;
-    margin: 3px;
-}
-
-.gdtab {
-    font-family: "Open Sans", sans-serif;
-    border-collapse: collapse;
-    border-spacing: 0;
-    table-layout: auto; 
-    width: 100%;
-}
-
-.gdtab td {
-    border-color: rgb(100, 101, 112);
-    padding: 10px 5px;
-    word-break: normal;
-}
-
-.gdtab th {
-    border-color: rgb(100, 101, 112);
-    border-bottom: 1px solid;
-    overflow: hidden;
-    padding: 10px 5px;
-    word-break: normal;
-}
-
-.gdtab .gdtab-top {
-    color: white;
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
+<style>
+.divider {
+    position: relative;
+    text-align: right;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    background: linear-gradient(90deg,rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 100%);
+} .divider h2 {
+    margin-top: 5px;
     font-weight: normal;
-    text-align: left;
-    top: -1px;
-    vertical-align: top;
 }
 
-.gdtab .gdtab-element {
-    color: rgb(222, 224, 237);
-    height: 80px;
-    text-align: left;
-    vertical-align: top;
+.loading-text {
+    text-align: center;
 }
 
-.gdtab .gdtab-element-img {
-    background-color: #6d9eeb;
+#rank-checkbox-container {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
 }
 
-.gdtab a {
-    color: rgb(222, 224, 237);
-    text-decoration: none;
-    text-align: left;
-    vertical-align: top;
+.gd {
+    display: flex;
+    min-height: 120px;
+    margin-left: 15px;
+    margin-right: 15px;
+} .gd img {
+    width: 22%;
+    object-fit: cover;
 }
 
-.gdtab .gdtab-diff-box {
-    vertical-align: top;
+.gd-text {
+    display: flex;
+    flex-direction: column;
+    width: 78%;
+    padding-left: 10px;
     padding-top: 10px;
+} .gd-text h2 {
+    display: inline;
+    color: white;
+    margin: 0;
+} .gd-text p {
+    margin: 0;
+} .gd-text p span {
+    color: white;
+}
+
+.diff-container {
+    display: flex;
+    margin-left: -10px;
+    margin-top: 10px;
+}
+
+.diff {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 100%;
+} .diff h3 {
+    margin: 0;
+} .diff p {
+    margin: 0;
+} .diff p span {
+    color: white;
 }
 
 .ranked {
-    background-color: #93c47d;
-    color: white;
-} .ranked a {
-    background: var(--shine);
-    -webkit-background-clip: text;
-    background-clip: text;
-    background-color: #93c47d;
-    -webkit-text-fill-color: transparent;
-    background-size: 500% auto;
-    animation: textShine 5s ease-in-out infinite alternate;
-} .ranked span {
-    background: var(--shine);
-    -webkit-background-clip: text;
-    background-clip: text;
-    background-color: #93c47d;
-    -webkit-text-fill-color: transparent;
-    background-size: 500% auto;
-    animation: textShine 5s ease-in-out infinite alternate;
+    background: linear-gradient(90deg,rgba(147, 196, 125, 0.8) 0%, rgba(147, 196, 125, 0.0) 100%);
 }
 
 .qualified {
-    background-color: #6d9eeb;
-} .qualified a {
-    background: var(--shine);
-    -webkit-background-clip: text;
-    background-clip: text;
-    background-color: #93c47d;
-    -webkit-text-fill-color: transparent;
-    background-size: 500% auto;
-    animation: textShine 5s ease-in-out infinite alternate;
-} .qualified span {
-    background: var(--shine);
-    -webkit-background-clip: text;
-    background-clip: text;
-    background-color: #93c47d;
-    -webkit-text-fill-color: transparent;
-    background-size: 500% auto;
-    animation: textShine 5s ease-in-out infinite alternate;
-}
-
-@keyframes textShine {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
+    background: linear-gradient(90deg,rgba(109, 158, 235, 0.8) 0%, rgba(109, 158, 235, 0.0) 100%);
+    
 }
 
 .wip {
     background-color: #DEE0ED;
-} .qualified a {
-    color: var(--text);
-} .qualified span {
-    color: var(--text);
 }
 
 .pending {
-    background-color: rgb(255, 217, 102);
-} .pending a {
-    color: var(--text);
-} .pending span {
-    color: var(--text);
-}
-
-.plural-padding {
-    padding: 7.5px 0 7.5px 5px;
-    min-height: 35px;
+    background: linear-gradient(90deg,rgba(255, 217, 102, 0.8) 0%, rgba(255, 217, 102, 0.0) 100%);
 }
 
 @media screen and (max-width: 767px) {
-    .gdtab {
-        width: auto !important;
-    }
-    .gdtab col {
-        width: auto !important;
-    }
-    .gd-table-container {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
+
 }
 </style>

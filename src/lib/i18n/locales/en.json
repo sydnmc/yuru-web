@@ -29,6 +29,11 @@
             "whoAmI":"who am i?"
         }
     },
+    "may":{
+        "header":{
+            "pfpAlt":"may's ena shinonome pfp"
+        }
+    },
     "common":{
         "header":{
             "ourSets":"our sets",

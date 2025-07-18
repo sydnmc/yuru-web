@@ -29,6 +29,11 @@
             "whoAmI":"あたしって誰？"
         }
     },
+    "may":{
+        "header":{
+            "pfpAlt":"メイの東雲絵名プロフィール画像"
+        }
+    },
     "common":{
         "header":{
             "ourSets":"あたしたちのgds",
