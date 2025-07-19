@@ -44,24 +44,21 @@
                 mapStatus[i].bgLink = "/common/tamate.jpg" //replaces backgrounds with no link with えっとですねぇ～　たまてって名前は玉手箱が由来でして
             }
 
-            //adding difficulty colors
+            //adding difficulty colour
             let blackish = "rgb(40, 40, 40)";
             for (let j = 0; j < mapStatus[i].maps.length; j++) {
                 let diff = mapStatus[i].maps[j];
-                let bgColor;
+                let bgColour;
                 if (typeof diff.sr === "string") {
-                    bgColor = "rgb(222, 224, 237)"; //makes it the wip color if its still wip but in a plural gd thats finished already
+                    bgColour = "rgb(222, 224, 237)"; //makes it the wip colour if its still wip but in a plural gd thats finished already
                 } else {
-                    bgColor = osuColourize.colourize(diff.sr);
-                    bgColor = bgColor.replace('rgb', 'rgba');
-                    bgColor = bgColor.replace(')', ', 0.3)');
-                                    console.log(bgColor);
+                    bgColour = osuColourize.colourizeHex(diff.sr);
+                    bgColour = bgColour+"4d"; //30% brightness in hex
                 }
-                console.log(bgColor);
-                diff.diffColour = bgColor;
+                diff.diffColour = bgColour;
 
                 if (diff.sr < 4.4 || typeof diff.sr === "string") { //in cases where the map background text is too bright, or is wip (still too bright)
-                    mapStatus[i].maps[j]
+                    mapStatus[i].maps[j];
                 }
             }
         }
@@ -105,13 +102,15 @@
         {#each maps as gd}
             {#if (gd.isForRank && !showUnserious) || showUnserious}
             <div class="gd {determineRowColour(gd.status)}" style="linear-gradient(90deg,rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 100%);">
-                <img src={gd.bgLink} alt="{gd.artist} - {gd.title}"/>
+                <div class="audio-container" style="background-image: url({gd.bgLink});">
+                    <AudioPlayer gdInfo={gd} />
+                </div>
                 <div class="gd-text">
-                    <h2><a class="hidden-link" href="https://osu.ppy.sh/beatmapsets/{gd.mapId}">{gd.artist} - {gd.title}</a></h2>
+                    <h2><a href="https://osu.ppy.sh/beatmapsets/{gd.mapId}">{gd.artist} - {gd.title}</a></h2>
                     <p>status <span>{gd.status}</span></p>
                     <p>host <span>{gd.creator}</span></p>
                     {#if gd.bns.length > 0}
-                    <p>bns 
+                    <p>bns
                         {#each gd.bns as bn}
                         <span>{bn}⠀</span> <!-- uses a stupid fucking unicode space since svelte cuts off normal spaces, best solution i could think of -->
                         {/each}
@@ -120,7 +119,7 @@
                     <div class="diff-container">
                         {#each gd.maps as diff}
                         <div class="diff" style="background-color: {diff.diffColour}">
-                            <h3>{diff.diffname}</h3>
+                            <h3><a href="https://osu.ppy.sh/beatmapsets/{gd.mapId}#osu/{diff.id}">{diff.diffname}</a></h3>
                             <p>stars <span>{diff.sr}</span></p>
                             <p>mapped <span>{diff.amountMapped}</span></p>
                             <p>date finished <span>{diff.dateFinished}</span></p>
@@ -135,7 +134,7 @@
         <h1 class="loading-text">something went wrong! :c</h1>
     {/await}
 </div>
-        
+
 
 <style>
 .divider {
@@ -165,7 +164,9 @@
     min-height: 120px;
     margin-left: 15px;
     margin-right: 15px;
-} .gd img {
+}
+
+.audio-container {
     width: 22%;
     object-fit: cover;
 }
@@ -177,9 +178,13 @@
     padding-left: 10px;
     padding-top: 10px;
 } .gd-text h2 {
+    font-family: Kyokasho, sans-serif;
+    font-weight: normal;
     display: inline;
-    color: white;
     margin: 0;
+} .gd-text h2 a {
+    color: white;
+    text-decoration: none;
 } .gd-text p {
     margin: 0;
 } .gd-text p span {
@@ -202,6 +207,9 @@
     width: 100%;
 } .diff h3 {
     margin: 0;
+} .diff h3 a {
+    text-decoration: none;
+    color: white;
 } .diff p {
     margin: 0;
 } .diff p span {
@@ -214,11 +222,15 @@
 
 .qualified {
     background: linear-gradient(90deg,rgba(109, 158, 235, 0.8) 0%, rgba(109, 158, 235, 0.0) 100%);
-    
+
 }
 
 .wip {
     background-color: #DEE0ED;
+} .wip div h2 a {
+    color: black;
+} .wip div span {
+    color: black;
 }
 
 .pending {

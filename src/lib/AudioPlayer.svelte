@@ -1,81 +1,88 @@
 <script lang="ts">
-    export async function createAudioButtons() {
-    /* preview buttons */
-    var audio = document.getElementById('tab-player-source');
-    var setIDs = [];
+  import { addToPageAudioController, playFromAudioController, pauseFromAudioController, currentAudioInfo } from "./audio";
+  export let gdInfo: gd;
 
-    for (let i = 0; i < curMapStatus.length; i++) {
-        var curSongUrl = curMapStatus[i].songURLs[0];
-        var setID = curSongUrl.substr(curSongUrl.indexOf("/beatmapsets/")+13, curSongUrl.length); //gets the beatmap id
-        if (setID.includes("#osu")) { //again, will only work for std so be careful
-            setID = setID.substring(0, setID.indexOf("#osu"));
+  let buttonType = "play";
+  let audioPlaying = false; //both of these are used for keeping track of audio status locally
+  addToPageAudioController(gdInfo); //each map we get, we wanna add it to here, so when one audio plays, the currently playing one gets paused
+
+  let audioProgress = 0;
+
+  let unsubscribeFromAudio;
+  function updateAudio() {
+    if (audioPlaying) {
+      pauseFromAudioController(gdInfo.mapId);
+      unsubscribeFromAudio(); //frees up some subscriptions when pausing and unpausing the same song
+      audioPlaying = false;
+      buttonType = "play";
+    } else {
+        playFromAudioController(gdInfo.mapId);
+        unsubscribeFromAudio = currentAudioInfo.subscribe((audioInfo) => {
+        let id = audioInfo.id;
+        if ((id !== gdInfo.mapId) && (id > -1)) {  //when id updates, we want to change the button to a play button again >.<
+            audioPlaying = false;
+            buttonType = "play";
+            unsubscribeFromAudio();
         }
-        setIDs.push(setID);
+        audioProgress = audioInfo.progress;
+      });
+      audioPlaying = true;
+      buttonType = "pause"; //pause button comes on when we're playing :3
     }
-
-    var mapIsPlaying = new Array(setIDs.length).fill(false);
-
-    for (let i = 0; i < curMapStatus.length; i++) {
-        var curButton = document.getElementById('tab-player-'+i);
-
-        curButton.addEventListener("click", () => {
-            var clickedButton = document.getElementById('tab-player-'+i);
-            audio.src = `https://b.ppy.sh/preview/${setIDs[i]}.mp3`;
-            audio.volume = 0.2; //doesnt make your ears DIE
-
-            if (!mapIsPlaying[i]) {
-                audio.play();
-                clickedButton.innerHTML = `<i class="fa fa-pause" style="font-size: 40px"></i>`; //pause button
-                mapIsPlaying[i] = true;
-            } else {
-                audio.pause();
-            }
-
-            if (audio.paused || audio.ended) {
-                mapIsPlaying[i] = false;
-                clickedButton.innerHTML = `<i class="fa fa-play" style="font-size: 40px"></i>`; //makes it a play button again if paused
-            }
-            if (mapIsPlaying.filter(Boolean).length > 1) { //checks for if it's paused or ended, but also if more than 1 value is true (if another button is clicked instead)
-                for (let check = 0; check < mapIsPlaying.length; check++) {
-                    if (mapIsPlaying[check] && check != i) {
-                        mapIsPlaying[check] = false;
-                        document.getElementById('tab-player-'+check).innerHTML = `<i class="fa fa-play" style="font-size: 40px"></i>`; //makes it a play button again if paused
-                    }
-                }
-            }
-        });
-    }
-}
+  }
 </script>
 
-<audio controls id="tab-player-source">
-    <source type="audio/mpeg">
-</audio>
-<div class="play-button-container" id="play-container-${i}">
-    <span class="play-button" id="tab-player-${i}"><i class="fa fa-play" style="font-size: 40px"></i></span>
-</div>
+<main class="play-button-side-panel">
+    <audio bind:this={audio} src="https://b.ppy.sh/preview/{gdInfo.mapId}.mp3"></audio>
+    <div class="play-button-container">
+        <i class="fa fa-{buttonType} button"
+            style="font-size: 56px;"
+            onclick={() => updateAudio()}></i>
+            <div class="play-button-ring" style="background: conic-gradient(var(--accent-green) {audioProgress}%, transparent {audioProgress}%)"></div>
+    </div>
+</main>
 
 <style>
-.play-button-container {
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    min-height: 80px;
-    background: radial-gradient(circle, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.75) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+    audio {
+        display: none;
+    }
 
-.play-button-container:hover {
-    opacity: 1; /* triggers fadein */
-}
+    /* play button controller */
+    .play-button-side-panel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.0) 100%);
+    }
 
-.play-button {
-    color: rgb(222, 224, 237);
-}
+    .play-button-container {
+        position: relative;
+        height: 65px;
+        width: 65px;
+    }
 
-.play-button:hover {
-    color: rgb(222, 224, 237);
-    cursor: pointer;
-}
+    .play-button-ring {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        /* the background gets continually updated by js, but just to have it here as well:
+        * background: conic-gradient(var(--accent-green) 0%, transparent 0%);
+        * where both of the percentages are updated to how far along we are~ */
+        mask: radial-gradient(circle 40px at center, transparent 34px, black 40px);
+        -webkit-mask: radial-gradient(circle 29px at center, transparent 29px, black 29px);
+        pointer-events: none; /* makes it so mouse clicks can pass through it */
+    }
+
+    .button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* positions it actually in the centre */
+        color: var(--accent-green);
+        cursor: pointer;
+    }
 </style>

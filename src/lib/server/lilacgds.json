@@ -122,7 +122,7 @@
                 "id": "5028099",
                 "diffname": "muya- & sydnmc's Normal ft. yuiyamu & I Love Egg",
                 "amountMapped": "odds from 00:52:006 to 01:27:206",
-                "sr": "2.23",
+                "sr": 2.23,
                 "dateFinished": "3/14/25"
             }
         ]
@@ -135,23 +135,22 @@
         "mapId": "2356054",
         "status": "unfinished",
         "isForRank": true,
-        "bn1": "",
-        "bn2": "",
+        "bns":[],
         "maps": [
             {
                 "url": "https://osu.ppy.sh/beatmapsets/2356054#osu/5094211",
                 "id": "5094211",
                 "diffname": "yuiyamu's normal",
-                "amountMapped": "",
-                "sr": "2.47",
+                "amountMapped": "all",
+                "sr": 2.47,
                 "dateFinished": "4/28/2025"
             }
         ]
     },
     {
         "bgLink": "https://assets.ppy.sh/beatmaps/2359982/covers/cover.jpg",
-        "title": "u - Many Merry Memories! (TV Size)",
-        "artist": "Cinephot",
+        "title": "Many Merry Memories! (TV Size)",
+        "artist": "Cinephoto-bu",
         "creator": "_Karaage",
         "mapId": "2359982",
         "status": "pending",
@@ -162,7 +161,7 @@
                 "url": "https://osu.ppy.sh/beatmapsets/2359982#osu/5102475",
                 "id": "5102475",
                 "diffname": "yuiyamu's Insane",
-                "amountMapped": "",
+                "amountMapped": "all",
                 "sr": 4.89,
                 "dateFinished": "5/5/2025"
             }
@@ -173,7 +172,7 @@
         "title": "Have A Good Game!!",
         "artist": "Kohama Lam",
         "creator": "Amano Tooko",
-        "mapId": "https://osu.ppy.sh/beatmapsets/",
+        "mapId": "2342825",
         "status": "wip",
         "isForRank": true,
         "bns":[],
@@ -182,7 +181,7 @@
                 "url": "https://osu.ppy.sh/beatmapsets/2342825",
                 "id": "",
                 "diffname": "yuiyamu's insanely unsure what diffname she should use >_<;;",
-                "amountMapped": "",
+                "amountMapped": "all",
                 "sr": "~4.9",
                 "dateFinished": ""
             }
@@ -193,7 +192,7 @@
         "title": "Kuu Neru Andgazer",
         "artist": "DenkiQujira",
         "creator": "Phten02",
-        "mapId": "https://osu.ppy.sh/beatmapsets/",
+        "mapId": "2235132",
         "status": "wip",
         "isForRank": true,
         "bns":[],
@@ -202,8 +201,28 @@
                 "url": "https://osu.ppy.sh/beatmapsets/2235132",
                 "id": "",
                 "diffname": "sydnmc & yuiyamu's Insane",
-                "amountMapped": "random, for now~",
+                "amountMapped": "odds",
                 "sr": "~4.9",
+                "dateFinished": "N/A"
+            }
+        ]
+    },
+    {
+        "bgLink": "https://assets.ppy.sh/beatmaps/2304073/covers/cover.jpg",
+        "title": "Hatachi no Koi",
+        "artist": "Lamp",
+        "creator": "Mysty",
+        "mapId": "2304073",
+        "status": "wip",
+        "isForRank": true,
+        "bns":[],
+        "maps": [
+            {
+                "url": "https://osu.ppy.sh/beatmapsets/2304073",
+                "id": "",
+                "diffname": "yuiyamu & muya-'s Normal",
+                "amountMapped": "evens",
+                "sr": "~2.1",
                 "dateFinished": "N/A"
             }
         ]
