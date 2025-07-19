@@ -9,7 +9,7 @@
 <script lang="ts">
     import { _, locale, getLocaleFromNavigator } from 'svelte-i18n';
     import { onMount } from 'svelte';
-    import { PUBLIC_API } from '$env/static/public';
+    import { PUBLIC_API, PUBLIC_HOME_LINK, PUBLIC_LILAC_HOME, PUBLIC_MAY_HOME, PUBLIC_SYDNEY_HOME } from '$env/static/public';
 
     async function fetchFromApi(apiEndpoint: string) {
         let response = await fetch(`${PUBLIC_API}/${apiEndpoint}`);
@@ -78,10 +78,10 @@
     }
 
     let sysmembers: sysmember[] = $state([
-        {name: $_('yurukyan.home.sydney'), type: "secondary", img: "https://api.yuru.ca/images/sydneypfp.png", main: false},
-        {name: $_('yurukyan.home.lilac'), type: "primary", img: "https://api.yuru.ca/images/lilacpfp.png", main: true},
-        {name: $_('yurukyan.home.hazel'), type: "secondary", img: "https://api.yuru.ca/images/hazelpfp.jpg", main: false},
-        {name: $_('yurukyan.home.may'), type: "primary", img: "https://api.yuru.ca/images/maypfp.jpg", main: false}
+        {name: $_('yurukyan.home.sydney'), type: "secondary", img: "https://api.yuru.ca/images/sydneypfp.png", main: false, link: PUBLIC_SYDNEY_HOME},
+        {name: $_('yurukyan.home.lilac'), type: "primary", img: "https://api.yuru.ca/images/lilacpfp.png", main: true, link: PUBLIC_LILAC_HOME},
+        {name: $_('yurukyan.home.hazel'), type: "secondary", img: "https://api.yuru.ca/images/hazelpfp.jpg", main: false, link: ''},
+        {name: $_('yurukyan.home.may'), type: "primary", img: "https://api.yuru.ca/images/maypfp.jpg", main: false, link: PUBLIC_MAY_HOME}
     ]);
     let main: sysmember = $state({} as sysmember);
     let sleepyAlters: sysmember[] = $state([]);
@@ -128,8 +128,8 @@
         <a class="fa fa-github hidden-link" style="color: white; font-size: 22px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
         <i class="fa fa-globe hidden-link" style="color: white; font-size: 22px;" onclick={() => changeLocale()}></i>
     </div>
-    <h1><a id="title" href="https://yuru.ca">yurukyan△</a></h1>
-    <a class="fronter" href="https://{main.name}.yuru.ca/">
+    <h1><a id="title" href={PUBLIC_HOME_LINK}>yurukyan△</a></h1>
+    <a class="fronter" href={main.link}>
         <div class="fronter-img">
             <img alt="{main.name}'s profile pic" src={main.img}>
         </div>
@@ -145,7 +145,7 @@
 
     <div id="alter-container">
         {#each sleepyAlters as person}
-        <a class="alter" href="https://{person.name}.yuru.ca">
+        <a class="alter" href={person.link}>
             <div class="alter-img">
               <img alt="{person.name}'s profile pic" src={person.img}>
             </div>
@@ -216,15 +216,15 @@
 }
 
 #background {
-    position: absolute;
+    position: fixed;
     height: 100%;
-    min-height: 100%;
     width: 100%;
     top: 0;
     left: 0;
     background-image: url('/yurukyan/bg.jpg');
     background-size: cover;
     background-position: center;
+    filter: blur(12.5px) brightness(0.9);
     z-index: -1;
 }
 
@@ -272,7 +272,7 @@ i {
 #info-box {
     padding: 0 40px 40px 40px;
     border: 3px solid #79b8d4;
-    backdrop-filter: blur(5px) brightness(0.5);
+    backdrop-filter: brightness(0.5);
     border-radius: 15px;
     font-size: 18px;
 }

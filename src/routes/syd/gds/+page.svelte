@@ -8,8 +8,8 @@
 
 <script lang="ts">
     import GuestDifficulties from "$lib/GuestDifficulties.svelte";
-    import Header from "$lib/Header.svelte";
+    import LegacyHeader from "$lib/LegacyHeader.svelte";
 </script>
 
-<Header person="syd" page="gds"/>
+<LegacyHeader page="gds"/>
 <GuestDifficulties person="syd"/>

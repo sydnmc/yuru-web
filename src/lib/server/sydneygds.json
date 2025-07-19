@@ -1383,31 +1383,11 @@
         ]
     },
     {
-        "bgLink": "https://assets.ppy.sh/beatmaps/2253683/covers/cover.jpg",
-        "title": "Ma La'asot Im Haze'ev",
-        "artist": "Alma Gov",
-        "creator": "f2alon",
-        "mapId": "https://osu.ppy.sh/beatmapsets/",
-        "status": "wip",
-        "isForRank": true,
-        "bns":[],
-        "maps": [
-            {
-                "url": "https://osu.ppy.sh/beatmapsets/2253683",
-                "id": "",
-                "diffname": "sydnmc's Hard",
-                "amountMapped": "all",
-                "sr": "~3.1",
-                "dateFinished": "N/A"
-            }
-        ]
-    },
-    {
         "bgLink": "https://assets.ppy.sh/beatmaps/2235132/covers/cover.jpg",
         "title": "Kuu Neru Andgazer",
         "artist": "DenkiQujira",
         "creator": "Phten02",
-        "mapId": "https://osu.ppy.sh/beatmapsets/",
+        "mapId": "2235132",
         "status": "wip",
         "isForRank": true,
         "bns":[],
@@ -1418,26 +1398,6 @@
                 "diffname": "sydnmc & yuiyamu's Insane",
                 "amountMapped": "all",
                 "sr": "~4.9",
-                "dateFinished": "N/A"
-            }
-        ]
-    },
-    {
-        "bgLink": "https://assets.ppy.sh/beatmaps/2313117/covers/cover.jpg",
-        "title": "Karakara",
-        "artist": "Kessoku Band",
-        "creator": "I Love Egg",
-        "mapId": "https://osu.ppy.sh/beatmapsets/",
-        "status": "wip",
-        "isForRank": true,
-        "bns":[],
-        "maps": [
-            {
-                "url": "https://osu.ppy.sh/beatmapsets/2313117",
-                "id": "",
-                "diffname": "sydnmc's nonverbal insane",
-                "amountMapped": "all",
-                "sr": "~5.2",
                 "dateFinished": "N/A"
             }
         ]

@@ -6,8 +6,7 @@ node_modules
 
 .vscode
 
-.env
-.env.production
+/src/lib/server/.env
 
 #svelte output
 .output

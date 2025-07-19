@@ -3,191 +3,117 @@
   export let page: string;
 
   import { _ } from 'svelte-i18n';
+  import { PUBLIC_HOME_LINK, PUBLIC_LILAC_GDS_LINK, PUBLIC_LILAC_HOME, PUBLIC_MAY_HOME, PUBLIC_SETS_LINK, PUBLIC_WHOAMI_LINK } from '$env/static/public';
 
-  let prevPage;
+  let prevPage = '';
   if (page === "home") {
-    prevPage = "https://yuru.ca";
+    prevPage = PUBLIC_HOME_LINK;
   } else {
-    prevPage = `https://${person}.yuru.ca`;
+    switch (person) {
+      case "lilac":
+        prevPage = PUBLIC_LILAC_HOME;
+        break;
+      case "may":
+        prevPage = PUBLIC_MAY_HOME;
+        break;
+    }
   }
 
   interface buttonInfo {
     name: string;
     link: string;
-    dropdown?: buttonInfo[];
   }
-
-  let buttonInfo: buttonInfo[] = [{
-    name: "osu!", //consistent across both pages, but we want to add more buttons for each person
-    link: "",
-    dropdown: [
-      {
-        name: $_('common.header.ourSets'),
-        link: "https://yuru.ca/sets"
-      },
-      {
-        name: $_('common.header.myGds'),
-        link: `https://${person}.yuru.ca/gds`
-      }
-    ]
-  }];
+  let buttonInfo: buttonInfo[] = [ //each person has at least a link back to our sets
+    {
+      name: $_('common.header.ourSets'),
+      link: ""
+    }
+  ];
 
   let pfpAlt = '';
   let pfpLink = '';
   let username = '';
-
-  let main = '';
-  let accent = '';
-  let lightAccent = '';
   switch (person) {
-    case "syd":
-      pfpAlt = $_('sydney.header.pfpAlt');
-      pfpLink = '/common/sydneypfp.png';
-      username = "sydnmc"
-      buttonInfo.push({ name: "music", link: 'syd/music'}); //only for testing
-
-      main = 'var(--sydney-main)';
-      accent = 'var(--sydney-accent)';
-      lightAccent = 'var(--sydney-light-accent)';
-      break;
     case "lilac":
       pfpAlt = $_('lilac.header.pfpAlt');
       pfpLink = '/common/lilacpfp.png';
       username = "yuiyamu";
-      buttonInfo.push({ name: "who am i?", link: 'lilac/whoami'}); //only for testing
-
-      main = 'var(--lilac-main)';
-      accent = 'var(--lilac-accent)';
-      lightAccent = 'var(--lilac-light-accent)';
+      buttonInfo.push({ name: "my osu! gds", link: PUBLIC_LILAC_GDS_LINK})
+      buttonInfo.push({ name: "who am i?", link: PUBLIC_WHOAMI_LINK});
       break;
     case "may":
       pfpAlt = $_('may.header.pfpAlt');
       pfpLink = '/common/maypfp.jpg';
       username = "anemone_";
-
-      main = 'var(--may-main)';
-      accent = 'var(--lilac-accent)';
-      lightAccent = 'var(--lilac-light-accent)';
       break;
-  }
-
-
-  if (((page === 'home' || page === 'music' ) && person === 'sydney') || (page === 'whoami' && person === 'lilac')) {
-    //for right now, these are all of the untranslated pages that also have headers (sets aren't translated yet either, but i'll get to that at some point~)
-    //we want to redirect these to the custom translate 404 page instead of the normal 404 page :3
-    
-    //will impliment :3
   }
 </script>
 
-<div id="header" style="background-color: {main}">
-  <a href={prevPage}>
-    <img id="pfp-image" src={pfpLink} alt={pfpAlt}>
+<div id="header">
+  <a id="pfp-container" href={prevPage}>
+    <img src={pfpLink} alt={pfpAlt}/>
+    <span>{username}</span>
   </a>
-  <h1>{username}</h1>
+  {#each buttonInfo as option, i}
+    <a class="option" href={option.link}>{option.name}</a>
+    {#if i < buttonInfo.length-1}
+    <span class="flower-divider">ꕤ</span>
+    {/if}
+  {/each}
+
+  <span id="hamburger-button">&#9776;</span>
+  <i class="fa fa-globe hidden-link"></i>
+  <div id="burger-menu">
+    <a id="close-button">&times;</a>
     {#each buttonInfo as button}
-      {#if button.dropdown}
-      <div class="button-with-dropdown-container">
-        <button class="drop-button" style="background-color: {lightAccent}">{button.name}</button>
-          <div class="dropdown-content">
-            {#each button.dropdown as dropdown}
-            <a href="{dropdown.link}" style="background-color: {lightAccent}">{dropdown.name}</a>
-            {/each}
-          </div>
-      </div>
-      {:else}
-        <a href="{button.link}">
-          <button class="header-button" style="background-color: {lightAccent}">{button.name}</button>
-        </a>
-      {/if}
+    <a class="burger-text" href="${button.link}">{button.name}</a>
     {/each}
-    <span id="hamburger-button">&#9776;</span>
-    <i class="fa fa-globe hidden-link" style="color: white; font-size: 22px;"></i>
-    <div id="burger-menu">
-      <a id="close-button">&times;</a>
-      {#each buttonInfo as button}
-      {#if button.dropdown}
-        {#each button.dropdown as dropdown}
-          <a class="burger-text" href="${dropdown.link}">{button.name} | {dropdown.name}</a>
-        {/each}
-      {:else}
-        <a class="burger-text" href="${button.link}">{button.name}</a>
-      {/if}
-    {/each}
-    </div>
+  </div>
 </div>
 
 <style>
-/* header styling properties */
-#header { /* probably originally supposed to scroll with the page? */
-    display: flex;
-    position: relative;
-    align-items: center;
-    border-radius: 10px;
-    padding: 10px;
+#header {
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding: 15px;
+  background: linear-gradient(360deg,rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
 }
 
-#pfp-image {
-    width: 120px;
-    border-radius: 50%;
+#pfp-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  text-decoration: none;
+} #pfp-container img {
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+} #pfp-container span {
+  color: white;
 }
 
-h1 {
-    font-family: Kyokasho, sans-serif;
-    font-size: 58px;
-    font-weight: normal;
-    padding-left: 20px;
-    color: white;
+.option {
+  text-decoration: none;
+} .option:hover {
+  transition: 0.15s;
+  text-shadow: -5px 4px 14px rgba(0,0,0,1);
 }
 
-button {
-    font-family: Kyokasho, sans-serif;
-    font-size: 32px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 15px 90px; /* determines the button size, default is this */
-    transition-duration: 0.2s;
-    cursor: pointer;
-    margin-left: 20px;
-}
-
-.smaller-button {
-    font-size: 26px;
-    padding: 15px 40px;
+.flower-divider {
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .fa-globe {
-    position: absolute; /* absolute based on the header position */
-    top: 10px;
-    right: 10px;
-    text-decoration: none;
-}
-
-.button-with-dropdown-container {
-    position: relative;
-} .button-with-dropdown-container:hover .dropdown-content { /* makes dropdown content visible when hovered over */
-    display: block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    width: calc(244px + 10px); /* really not a good way to go about it, but the box with osu! text is 244px */
-    left: 15px; /* also not great, but i'll keep this for now to centre it */
-    border-radius: 5px;
-    box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.5);
-}
-
-.dropdown-content a {
-    display: block;
-    color: white;
-    padding: 12px 16px; /* gives the text enough breathing room */
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none;
-} .dropdown-content a:hover { /* makes dropdowns darker when you hover as well */
-    border-radius: 5px;
+  font-size: 20px;
+  color: white;
+  position: absolute; /* absolute based on the header position */
+  top: 10px;
+  right: 10px;
+  text-decoration: none;
 }
 
 /* burger menu (shouldn't display on desktop */
@@ -202,23 +128,13 @@ button {
 /* mobile - burger menu */
 @media only screen and (max-device-width: 1000px)
 {
-    /* changing/removing desktop elements */
-    #pfp-image {
-        width: 90px;
-    }
+  .option {
+    display: none;
+  }
 
-    h1 {
-        font-size: 50px;
-        padding-left: 10px;
-    }
-
-    .button-with-dropdown-container {
-        display: none;
-    }
-
-    .header-button {
-        display: none;
-    }
+  .flower-divider {
+    display: none;
+  }
 
     /* displaying hamburger menu */
     #hamburger-button {
@@ -253,8 +169,6 @@ button {
         padding-bottom: 7.5px;
         text-decoration: none;
 
-    } .burger-text:hover {
-        /* background set by js */
     }
 
     #close-button {

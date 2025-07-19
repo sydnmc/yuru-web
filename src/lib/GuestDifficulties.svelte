@@ -5,6 +5,7 @@
     import type { gd } from '../app';
     import AudioPlayer from './AudioPlayer.svelte';
     import { PUBLIC_API } from '$env/static/public';
+    import { getMessageFormatter } from 'svelte-i18n';
 
     async function fetchFromApi(apiEndpoint: string) {
         let response = await fetch(`${PUBLIC_API}/${apiEndpoint}`);
@@ -111,8 +112,11 @@
                     <p>host <span>{gd.creator}</span></p>
                     {#if gd.bns.length > 0}
                     <p>bns
-                        {#each gd.bns as bn}
-                        <span>{bn}⠀</span> <!-- uses a stupid fucking unicode space since svelte cuts off normal spaces, best solution i could think of -->
+                        {#each gd.bns as bn, i}
+                        <span>{bn}</span>
+                        {#if i < gd.bns.length-1}
+                        <span class="flower-divider">ꕤ</span>
+                        {/if}
                         {/each}
                     </p>
                     {/if}
@@ -178,7 +182,7 @@
     padding-left: 10px;
     padding-top: 10px;
 } .gd-text h2 {
-    font-family: Kyokasho, sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-weight: normal;
     display: inline;
     margin: 0;
@@ -214,6 +218,11 @@
     margin: 0;
 } .diff p span {
     color: white;
+}
+
+.flower-divider {
+    font-size: 12px;
+    margin-right: 5px;
 }
 
 .ranked {

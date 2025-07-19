@@ -7,12 +7,12 @@
 </svelte:head>
 
 <script lang="ts">
-    import Header from "$lib/Header.svelte";
+    import LegacyHeader from "$lib/LegacyHeader.svelte";
 
 
 </script>
 
-<Header person="syd" page="music"/>
+<LegacyHeader page="music"/>
       <h2 class="centered">hi! o/</h2>
       <p class="centered">producing is something that my brain has always wanted me to do, but honestly hasn't materialized in too much so far</p>
       <p class="centered">i started taking a bit seriously when i made my first music projects in 2021, taking a music technology class in high school. i'd continue with this class for a number of years, but the only thing i feel proud enough with to share publicly today is <a>shiranaieki</a>.
@@ -35,9 +35,9 @@
         <p>released <strong>Feb 16th, 2023</strong></p>
         <p>only thing here that i actually finished for class and feel good enough releasing to the public ^_^ made this in a mix of logic and ableton - most of the chords and stuff i did in class with logic and other effects + beat were done with logic. pretty happy with how this turned out, so c:</p>
         <div class="links-container">
-          <a href="https://open.spotify.com/track/76c9EA38of8JP8uj3IpAsw?si=8d652ddc2da0414b" class="clickable-image-text"></a>
-            <img alt="spotify" src="/common/spotify.png" class="socials-image">
-            <a class="image-link" href="https://open.spotify.com/track/76c9EA38of8JP8uj3IpAsw?si=8d652ddc2da0414b" style="margin-right: 5px;">listen on spotify</a><span style="font-size: 14px; color: rgb(100, 101, 112)">(only thing i have on spotify so far)</span>
+          <a href="https://open.spotify.com/track/76c9EA38of8JP8uj3IpAsw?si=8d652ddc2da0414b" class="clickable-image-text"><img alt="spotify" src="/common/spotify.png" class="socials-image"></a>
+          <a class="image-link" href="https://open.spotify.com/track/76c9EA38of8JP8uj3IpAsw?si=8d652ddc2da0414b" style="margin-right: 5px;">listen on spotify</a>
+          <span style="font-size: 14px; color: rgb(100, 101, 112)">(only thing i have on spotify so far)</span>
         </div>
       </div>
       <div class="song-element" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 100%), url(/sydney/sugar\ particle.jpg);">
@@ -54,7 +54,7 @@
     </div>
 
 <style>
-  .centered {
+.centered {
     text-align: center;
 }
 
@@ -106,8 +106,13 @@ h2 {
 }
 
 .socials-image {
-    width: 100%;
+    height: 20px;
     margin: 0;
+}
+
+.image-link {
+  color: white;
+  text-decoration: none;
 }
 
 /* mobile */

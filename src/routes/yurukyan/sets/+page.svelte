@@ -115,14 +115,13 @@
 #background {
     position: fixed;
     height: 100%;
-    min-height: 100%;
     width: 100%;
     top: 0;
     left: 0;
     background-image: url('/yurukyan/bg.jpg');
     background-size: cover;
     background-position: center;
-    filter: blur(10px);
+    filter: blur(12.5px) brightness(0.9);
     z-index: -1;
 }
 
@@ -174,7 +173,7 @@
 }
 
 .set-link {
-    font-family: Kyokasho, sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 32px;
     color: white;
     text-decoration: none;

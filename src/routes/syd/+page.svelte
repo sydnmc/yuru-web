@@ -8,7 +8,7 @@
 
 <script lang="ts">
     import { PUBLIC_API } from "$env/static/public";
-    import Header from "$lib/Header.svelte";
+    import LegacyHeader from "$lib/LegacyHeader.svelte";
     import * as osuColourize from 'osu-colourizer';
 
     async function fetchFromApi(apiEndpoint: string) {
@@ -16,23 +16,87 @@
         return await response.json();
     }
 
-    let notableSets: set[] = [
-        {"incomplete":false,"setBackgroundLink":"https://assets.ppy.sh/beatmaps/2009205/covers/cover.jpg","setStatus":"ranked","setTitle":"Aiobahn - INTERNET ANGEL","setUrl":"https://osu.ppy.sh/beatmapsets/2009205"},
-        {"incomplete":false,"setBackgroundLink":"https://assets.ppy.sh/beatmaps/1801304/covers/cover.jpg","setStatus":"ranked","setTitle":"Asaka - Sun is Coming Up (Movie Edit)","setUrl":"https://osu.ppy.sh/beatmapsets/1801304"},
-        {"incomplete":false,"setBackgroundLink":"https://assets.ppy.sh/beatmaps/2186078/covers/cover.jpg","setStatus":"ranked","setTitle":"Kiminone - Laid-Back Journey (TV Size)","setUrl":"https://osu.ppy.sh/beatmapsets/2186078"}
+    let notableSets: beatmapset[] = [
+        {
+        "isIncomplete": false,
+        "bgLink": "https://assets.ppy.sh/beatmaps/2009205/covers/cover.jpg",
+        "title": "INTERNET ANGEL",
+        "artist": "Aiobahn",
+        "url": "https://osu.ppy.sh/beatmapsets/2009205",
+        "mapId": "2009205",
+        "creator": "bnmc",
+        "dateFinished": "6/14/2023",
+        "personCreator": "sydney",
+        "status": "ranked"
+        },
+        {
+        "isIncomplete": false,
+        "bgLink": "https://assets.ppy.sh/beatmaps/1801304/covers/cover.jpg",
+        "title": "Sun is Coming Up (Movie Edit)",
+        "artist": "Asaka",
+        "url": "https://osu.ppy.sh/beatmapsets/1801304",
+        "mapId": "1801304",
+        "creator": "bnmc",
+        "dateFinished": "7/7/2022",
+        "personCreator": "sydney",
+        "status": "ranked"
+        },
+            {
+        "isIncomplete": false,
+        "bgLink": "https://assets.ppy.sh/beatmaps/2186078/covers/cover.jpg",
+        "title": "Laid-Back Journey (TV Size)",
+        "artist": "Kiminone",
+        "url": "https://osu.ppy.sh/beatmapsets/2186078",
+        "mapId": "2186078",
+        "creator": "bnmc",
+        "dateFinished": "5/24/2024",
+        "personCreator": "sydney",
+        "status": "ranked"
+        },
     ];
+
     let notableGds: gd[] = [
-        {"bgLink": "https://assets.ppy.sh/beatmaps/1638844/covers/cover.jpg","songName": "U2 - Saigetsu (Koko & Satsuki ga Tenkomori's Sagyou Bougai Remix)","songURLs": ["https://osu.ppy.sh/beatmapsets/1638844#osu/3839993"],"mapper": "Bloxi","difficulties": ["bnmc's LUNATIC JAPANESE GOBLIN!"],"amountsMapped": ["all"],"starRatings": [4.8],"datesFinished": ["6/3/2022"],"bns": ["Luscent","Zelq"],"isUnserious": false,"mapStatus": "ranked"},
-        {"bgLink": "https://assets.ppy.sh/beatmaps/2263303/covers/cover.jpg","songName": "irohaRingo feat. flower - Why I hate you","songURLs": ["https://osu.ppy.sh/beatmapsets/2263303#osu/4826294"],"mapper": "Ryuusei Aika","difficulties": ["sydnmc's kuyashimagire//Ultra"],"amountsMapped": ["all"],"starRatings": [7.8],"datesFinished": ["10/18/2024"],"bns": ["Riana","Iceluin"],"isUnserious": false,"mapStatus": "ranked"}
+        {
+        "bgLink": "https://assets.ppy.sh/beatmaps/1638844/covers/cover.jpg",
+        "title": "Saigetsu (Koko & Satsuki ga Tenkomori's Sagyou Bougai Remix)",
+        "artist": "U2",
+        "creator": "Bloxi",
+        "mapId": "1638844",
+        "status": "ranked",
+        "isForRank": true,
+        "bns":["Luscent", "Zelq"],
+        "maps": [
+            {
+                "url": "https://osu.ppy.sh/beatmapsets/1638844#osu/3839993",
+                "id": "3839993",
+                "diffname": "bnmc's LUNATIC JAPANESE GOBLIN!",
+                "amountMapped": "all",
+                "sr": 4.8,
+                "dateFinished": "6/3/2022"
+            }
+        ]
+        },
+        {
+        "bgLink": "https://assets.ppy.sh/beatmaps/2263303/covers/cover.jpg",
+        "title": "Why I hate you",
+        "artist": "irohaRingo feat. flower",
+        "creator": "Ryuusei Aika",
+        "mapId": "2263303",
+        "status": "ranked",
+        "isForRank": true,
+        "bns":["Riana", "Iceluin"],
+        "maps": [
+            {
+                "url": "https://osu.ppy.sh/beatmapsets/2263303#osu/4826294",
+                "id": "4826294",
+                "diffname": "sydnmc's kuyashimagire//Ultra",
+                "amountMapped": "all",
+                "sr": 7.8,
+                "dateFinished": "10/18/2024"
+            }
+        ]
+        },
     ]
-
-    function getArtist(title: string) {
-        return title.substring(0, title.indexOf("-"));
-    }
-
-    function getTitle(title: string) {
-        return title.substr(title.indexOf("-")+2);
-    }
 
     async function getRecentGd() {
         let gds: gd[] = await fetchFromApi('gds?person=sydney');
@@ -42,7 +106,7 @@
         let i = gds.length-1; //starting from the very top here
         let foundRanked = false;
         while (!foundRanked && i > 0) {
-            if (gds[i].mapStatus === "ranked" || gds[i].mapStatus === "qualified") { //qualified should show up, since i basically treat it as being ranked :p
+            if (gds[i].status === "ranked" || gds[i].status === "qualified") { //qualified should show up, since i basically treat it as being ranked :p
                 latestRanked = gds[i];
                 foundRanked = true;
             }
@@ -52,7 +116,7 @@
     }
 </script>
 
-<Header person="syd" page="home"/>
+<LegacyHeader person="syd" page="home"/>
     <audio controls id="tab-player-source">
       <source type="audio/mpeg">
     </audio>
@@ -67,32 +131,32 @@
             <div class="gd-thumb">
                 <p class="upper-ranked-text">❀ latest ranked gd ❀</p>
                 <h2 class="gd-title"><a class="gd-link" id="gd-link-0">Loading</a></h2>
-                <p class="gd-artist"><span style="font-size: 13px">by </span><span id="latest-ranked-artist">loading</span></p>
+                <p class="gd-artist"><span class="artist-text">by</span><span id="latest-ranked-artist">loading</span></p>
                 <p class="gd-text" id="diff-text-0">☆ loading sr ☆</p>
             </div>
             {:then gd}
-            <div class="gd-thumb" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url(${gd?.bgLink}">
+            <div class="gd-thumb" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url({gd?.bgLink}">
                 <p class="upper-ranked-text">❀ latest ranked gd ❀</p>
-                <h2 class="gd-title"><a class="gd-link" href={gd?.songURLs[0]}>{getTitle(gd?.songName)}</a></h2>
-                <p class="gd-artist"><span style="font-size: 13px">by </span><span id="latest-ranked-artist">{getArtist(gd?.songName)}</span></p>
-                <p class="gd-text" style="color: {osuColourize.colourize(gd.starRatings[0])}">{gd?.difficulties[0]} | {gd?.starRatings[0]} ☆</p>
+                <h2 class="gd-title"><a class="gd-link" href="https://osu.ppy.sh/beatmapsets/{gd?.mapId}">{gd?.title}</a></h2>
+                <p class="gd-artist"><span class="artist-text">by</span><span id="latest-ranked-artist">{gd?.artist}</span></p>
+                <p class="gd-text" style="color: {osuColourize.colourize(gd?.maps[0].sr)}">{gd?.maps[0].diffname} | {gd?.maps[0].sr} ☆</p>
             </div>
             {/await}
           <div id="divider"></div>
           {#each notableGds as gd}
             <div class="gd-thumb" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url({gd.bgLink}">
-                <h2 class="gd-title"><a class="gd-link" style="font-size: 22px">{getTitle(gd.songName)}</a></h2>
-                <p class="gd-artist"><span style="font-size: 13px">by </span>{getArtist(gd.songName)}</p>
-                <p class="gd-text" style="color: {osuColourize.colourize(gd.starRatings[0])}">{gd.difficulties[0]} | {gd.starRatings[0]} ☆</p>
+                <h2 class="gd-title"><a class="gd-link" style="font-size: 22px" href="https://osu.ppy.sh/beatmapsets/{gd.mapId}">{gd.title}</a></h2>
+                <p class="gd-artist"><span class="artist-text">by</span>{gd.artist}</p>
+                <p class="gd-text" style="color: {osuColourize.colourize(gd.maps[0].sr)}">{gd.maps[0].diffname} | {gd.maps[0].sr} ☆</p>
             </div>
           {/each}
         </div>
         <h3>˖⁺‧₊˚ notable maps ˚₊‧⁺˖</h3>
         <div id="maps-showcase-wrapper" style="cursor: pointer;">
         {#each notableSets as set}
-            <div class="set-thumb" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url({set.setBackgroundLink})">
-            <h2 class="gd-title push-text"><a class="gd-link" href={set.setUrl}>{getTitle(set.setTitle)}</a></h2>
-            <p class="gd-artist push-text"><span style="font-size: 13px">by </span>{getArtist(set.setTitle)}</p>
+            <div class="set-thumb" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url({set.bgLink})">
+            <h2 class="gd-title push-text"><a class="gd-link" href={set.url}>{set.title}</a></h2>
+            <p class="gd-artist push-text"><span class="artist-text">by</span>{set.artist}</p>
           </div>
         {/each}
         </div>
@@ -115,7 +179,7 @@
     </div>
 
 <style>
-  h2 {
+h2 {
     color: white;
     text-align: center;
     margin-bottom: 0px;
@@ -222,6 +286,11 @@ h3 {
     margin-top: 15px;
     margin-bottom: 0px;
     text-shadow: black 1px 0 5px;
+}
+
+.artist-text {
+    font-size: 13px;
+    margin-right: 4px;
 }
 
 .push-text {

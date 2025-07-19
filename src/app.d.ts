@@ -4,6 +4,7 @@ declare global {
         type: string;
         img: string;
         main: boolean;
+        link: string;
         fronting?: boolean;
         percent?: number;
         text?: string,
@@ -17,10 +18,10 @@ declare global {
         artist: string;
         url: string;
         mapId: string;
-        description: description[];
+        description?: description[];
         creator: string;
     	dateFinished: string;
-        creatorPerson: string;
+        personCreator: string;
         status: string;
     }
 
