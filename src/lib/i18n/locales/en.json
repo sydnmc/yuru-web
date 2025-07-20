@@ -27,11 +27,26 @@
         "header":{
             "pfpAlt":"lilac's kyu kurarin pfp",
             "whoAmI":"who am i?"
+        },
+        "home":{
+            "welcome":"o/ welcome to lilac.yuru.ca! o/",
+            "intro":"if you don't know who i am, i'm {lilac} / {yuiyamu}.",
+            "intro1":"i haven't done a whole ton that i can show off like sydney, but i've {intro1Link} and have helped with this website, and other programming projects that sydney is working on.",
+            "intro1Link":"mapped a few things on osu",
+            "intro2":"if you're curious about what exactly my relation to sydney is, {intro2Link} it's a bit complicated, so it's okay to not understand too much at first if you aren't used to systems. if you aren't too interested in all the details but don't know me, then basically: if you get along with sydney, you'll probably get along fine with me too~",
+            "intro2Link":"click here!",
+            "socials":"^ these are some socials that are specifically mine, if you ever need to get into contact with me ^",
+            "accountSharing":"(sydney and i share a few accounts, but these are only mine~)"
         }
     },
     "may":{
         "header":{
             "pfpAlt":"may's ena shinonome pfp"
+        },
+        "home":{
+            "hi":"hi! o/",
+            "intro":"similar to lilac, i'm pretty new here. most of what i've done so far is working on the <strong>sitewide redesign</strong> here + helping maintain some of our other projects.",
+            "intro1":"i suppose i'm basically replacing the role sydney had, but i like to maintain a low profile c: <strong>doesn't mean you're discouraged from coming and saying hi to me tho!"
         }
     },
     "common":{

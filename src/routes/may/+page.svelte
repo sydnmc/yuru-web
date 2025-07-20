@@ -8,16 +8,25 @@
 
 <script lang="ts">
     import Header from "$lib/Header.svelte";
+    import { _ } from 'svelte-i18n';
+
+    let neneProgress = 0;
+    let nenePaused = true;
+    function playNene() {
+        if (!nenePaused) {
+            neneProgress = 0; //lets us spam her, which is really funny
+        } else {
+            nenePaused = false;
+        }
+    }
 </script>
 
 <Header person="may" page="home"/>
-<div>
-    
-</div>
+<audio src="/may/nene.ogg" bind:paused={nenePaused} bind:currentTime={neneProgress}></audio>
 <h1>hi! o/</h1>
-<p style="margin-bottom: 5px;">similar to lilac, i'm pretty new here. most of what i've done so far is working on the <strong>sitewide redesign</strong> here + helping maintain some of our other projects.</p>
-<p style="margin-top: 0">i suppose i'm basically replacing the role sydney had, but i like to maintain a low profile c: <strong>doesn't mean you're discouraged from coming and saying hi to me tho!</strong></p>
-<img id="nene" src="/may/cute ass nene.png" alt="nene chibi">
+<p style="margin-bottom: 5px;">{@html $_('may.home.intro')}</p>
+<p style="margin-top: 0">{@html $_('may.home.intro1')}</p>
+<img id="nene" src="/may/cute ass nene.png" alt="nene chibi" on:click={() => playNene()}>
 
 <style>
 h1 {
@@ -32,15 +41,19 @@ p {
 
 #nene {
     position: absolute;
-    bottom: 15px;
+    bottom: 0;
     right: 15px;
-    animation: scroll-loop 2s linear infinite;
-    animation-timing-function: cubic-bezier(.1,0,.0,1)
+    animation: nene-jump 1.8s ease-in-out infinite;
+    transform-origin: bottom center; /* makes her squishy from the bottom */
 }
 
-@keyframes scroll-loop {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-80px); }
+@keyframes nene-jump {
+  0%   { transform: translateY(0) scaleY(1) scaleX(1) }
+  20%  { transform: translateY(0) scaleY(0.94) scaleX(1.06) }
+  40%  { transform: translateY(-60px) scaleY(1.04) scaleX(0.98)}
+  60%  { transform: translateY(0) scaleY(0.9) scaleX(1.1) }
+  75%  { transform: translateY(0) scaleY(1.02) scaleX(0.98) }
+  100% { transform: translateY(0) scaleY(1) scaleX(1) }
 }
 
 </style>

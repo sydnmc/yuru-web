@@ -27,11 +27,26 @@
         "header":{
             "pfpAlt":"らいらっくのきゅうくらりんリンプロフィール画像",
             "whoAmI":"あたしって誰？"
+        },
+        "home":{
+            "welcome":"o/ lilac.yuru.caへよこそう！ o/",
+            "intro":"こんにちは！！ あたしが誰だか知らないなら、{lilac} / {yuiyamu}です。 ",
+            "intro1":"あたしはシドニーよりも少ないことしかしていないけど、{intro1Link}、このウェブサイトや色んなプログラミングプロジェクトなどシドニーと一緒に取り組んだ。",
+            "intro1Link":"osu!でいくつかの譜面を作ったし",
+            "intro2":" あたしとシドニーの関係について興味あるなら、{intro2Link}をクリックしてください！ちょっと複雑から、システムのことを慣れなく分からないなら大丈夫です。 詳細には興味ないけどあたしのことを知らないなら、基本的には： シドニーと仲良くなれば、あたしも仲良くと思う~ ",
+            "intro2Link":"ここ",
+            "socials":"^ あたしと連絡したいなら、あたしのソーシャルズはこちら ^",
+            "accountSharing":"(シドニーとあたしはいくつかのアカウントを共有しているけど、これはあたしのだけ~)"
         }
     },
     "may":{
         "header":{
             "pfpAlt":"メイの東雲絵名プロフィール画像"
+        },
+        "home":{
+            "hi":"hi! o/",
+            "intro":"らいらっくに似ている、あたしも新任です。 これまであたしがしてきたことのほとんどは<strong>このサイト全体のリデザイン</strongと他のプロジェクトのメンテナンスも手伝っています。",
+            "intro1":"i suppose i'm basically replacing the role sydney had, but i like to maintain a low profile c: <strong>doesn't mean you're discouraged from coming and saying hi to me tho!"
         }
     },
     "common":{
