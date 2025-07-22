@@ -40,8 +40,23 @@
         <br>
         ホームページに戻るには、<a href="https://syd.yuru.ca">ここ</a>をクリックしてください。
     </p>
+    <div style="display: flex; justify-content: center;">
+        <div id="divider"></div>
+    </div>
+    <strong>- עברית -</strong>
+    <p dir="rtl">
+        {#if page.status === 404}
+            אנחנו מצתערות, העמוד שחיפשת לא קיים.
+        {:else if page.status === 500}
+            אנחנו מצתערות, השרת נתקל בשגיאה פנימית.
+        {:else}
+            קרתה שגיאה לא ידועה.
+        {/if}
+        <br>
+        <a href="https://syd.yuru.ca">לחצו כאן</a> כדי לחצור בחזרה לדף הראשי.
+    </p>
 </div>
-
+<!-- ~<3 - anne -->
 <style>
 #page {
     position: relative;
