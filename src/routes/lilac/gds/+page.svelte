@@ -12,4 +12,20 @@
 </script>
 
 <Header person="lilac" page="gds"/>
+<div id="background"></div>
 <GuestDifficulties person="lilac"/>
+
+<style>
+#background {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-image: url('/lilac/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px) brightness(0.5);
+    z-index: -1;
+}
+</style>

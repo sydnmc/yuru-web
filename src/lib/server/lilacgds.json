@@ -168,6 +168,25 @@
         ]
     },
     {
+      "bgLink": "https://assets.ppy.sh/beatmaps/2394124/covers/cover.jpg",
+      "title": "mochi",
+      "artist": "momone chinoi",
+      "creator": "Mochi -",
+      "mapId": "2394124",
+      "status": "pending",
+      "isForRank": true,
+      "bns":[],
+      "maps": [
+        {
+          "url": "https://osu.ppy.sh/beatmapsets/2359982#osu/5102475",
+          "id": "5188116","diffname": "muya-'s rain ft. yuiyamu",
+          "amountMapped": "00:06:064 (1,2,3,4,5,1) pretty much",
+          "sr": 3.16,
+          "dateFinished": "6/29/2025"
+        }
+      ]
+    },
+    {
         "bgLink": "https://assets.ppy.sh/beatmaps/2342825/covers/cover.jpg",
         "title": "Have A Good Game!!",
         "artist": "Kohama Lam",

@@ -11,7 +11,8 @@
 <div id="page">
     <a id="header" href={PUBLIC_HOME_LINK}>
         <img alt="system pfp" src="/common/systempfp.jpg">
-        <h1 id="title">{page.status}△</h1>
+        <h1>{page.status}△</h1>
+        <h2>{page.error?.message.toLowerCase()}</h2>
     </a>
     <strong>- english -</strong>
     <p>
@@ -91,6 +92,11 @@ h1 {
     margin-left: 10px;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+h2 {
+    font-size: 30px;
+    margin-left: 10px;
 }
 
 strong {
