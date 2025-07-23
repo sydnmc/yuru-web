@@ -19,6 +19,10 @@
 	onMount(async () => {
 		const frontList = await fetchFromApi(`pkInfo?frontList=true&before=30`);
         processPkInfo(frontList);
+
+        locale.subscribe(() => {
+            processPkInfo(frontList);
+        });
 	});
 
     let currentLocale = $state($locale || getLocaleFromNavigator());
@@ -60,28 +64,28 @@
 
     async function lastFmUpdate() {
         const songInfo = await fetchFromApi('songInfo');
-        let preText = $state();
+        let isPlaying: boolean;
 
         try {
             songInfo.recenttracks.track[0]['@attr'].nowplaying //will error since this doesn't exist when not playing
-            preText = $_('yurukyan.home.lastFmListening');
+            isPlaying = true;
         } catch {
-            preText = $_('yurukyan.home.lastFmListened');
+            isPlaying = false;
         }
 
         return {
+            isPlaying,
             "songURL": songInfo.recenttracks.track[0].url,
             "songMeta": `• ${songInfo.recenttracks.track[0].artist['#text']} - ${songInfo.recenttracks.track[0].name}`,
-            "songType": preText,
             "songImg": songInfo.recenttracks.track[0].image[3]['#text']
         };
     }
 
     let sysmembers: sysmember[] = $state([
-        {name: $_('yurukyan.home.sydney'), type: "secondary", img: "https://api.yuru.ca/images/sydneypfp.png", main: false, link: PUBLIC_SYDNEY_HOME},
-        {name: $_('yurukyan.home.lilac'), type: "primary", img: "https://api.yuru.ca/images/lilacpfp.png", main: true, link: PUBLIC_LILAC_HOME},
-        {name: $_('yurukyan.home.hazel'), type: "secondary", img: "https://api.yuru.ca/images/hazelpfp.jpg", main: false, link: ''},
-        {name: $_('yurukyan.home.may'), type: "primary", img: "https://api.yuru.ca/images/maypfp.jpg", main: false, link: PUBLIC_MAY_HOME}
+        {name: 'sydney', type: "secondary", img: "https://api.yuru.ca/images/sydneypfp.png", main: false, link: PUBLIC_SYDNEY_HOME},
+        {name: 'lilac', type: "primary", img: "https://api.yuru.ca/images/lilacpfp.png", main: true, link: PUBLIC_LILAC_HOME},
+        {name: 'hazel', type: "secondary", img: "https://api.yuru.ca/images/hazelpfp.jpg", main: false, link: ''},
+        {name: 'may', type: "primary", img: "https://api.yuru.ca/images/maypfp.jpg", main: false, link: PUBLIC_MAY_HOME}
     ]);
     let main: sysmember = $state({} as sysmember);
     let sleepyAlters: sysmember[] = $state([]);
@@ -134,7 +138,7 @@
             <img alt="{main.name}'s profile pic" src={main.img}>
         </div>
         <div class="fronter-text">
-            <span>{main.name}</span>
+            <span>{$_(`yurukyan.home.${main.name}`)}</span>
             {#if pkInfoAru}
                 <p>{main.text}</p>
             {:else}
@@ -149,7 +153,7 @@
             <div class="alter-img">
               <img alt="{person.name}'s profile pic" src={person.img}>
             </div>
-            <span class="alter-name">{person.name}</span>
+            <span class="alter-name">{$_(`yurukyan.home.${person.name}`)}</span>
             {#if pkInfoAru}
                 <span class="alter-text">{@html person.text}</span>
             {:else}
@@ -183,7 +187,12 @@
         {#await lastFmUpdate()}
             <p class="dark-text">{$_('yurukyan.home.loadingSong')}</p>
         {:then lastFmData}
-            <p class="dark-text">{lastFmData.songType}
+            <p class="dark-text">
+                {#if lastFmData.isPlaying}
+                {$_('yurukyan.home.lastFmListening')}
+                {:else}
+                {$_('yurukyan.home.lastFmListened')}
+                {/if}
                 <a style="color: rgb(180 181 191); text-decoration: none;" href={lastFmData.songURL}>{lastFmData.songMeta}</a>
                 <img class="lastfm-album-img" src={lastFmData.songImg} alt="lastfm album">
             </p>

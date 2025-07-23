@@ -5,7 +5,7 @@
     import type { gd } from '../app';
     import AudioPlayer from './AudioPlayer.svelte';
     import { PUBLIC_API } from '$env/static/public';
-    import { getMessageFormatter } from 'svelte-i18n';
+    import { _ } from 'svelte-i18n';
 
     async function fetchFromApi(apiEndpoint: string) {
         let response = await fetch(`${PUBLIC_API}/${apiEndpoint}`);
@@ -18,9 +18,10 @@
 
     let showUnserious = false;
 
+    let fetchPerson = person;
+    if (person === "syd") { fetchPerson = 'sydney' }
+
     async function populateRow() {
-        let fetchPerson = person;
-        if (person === "syd") { fetchPerson = 'sydney' }
         let mapStatus: gd[] = await fetchFromApi(`gds?person=${fetchPerson}`); //since we fetch mapdata in this function, it's best to populate everything we need for other parts of the page as well~
 
         for (let i = 0; i < mapStatus.length; i++) {
@@ -84,6 +85,14 @@
         }
         return statusClass;
     }
+
+    function determineGdColour(sr: number, status: string) {
+        if (status !== 'wip') {
+            if (sr > 2.6) {
+                return 'lighter';
+            }
+        }
+    }
 </script>
 
 <div class="divider">
@@ -104,7 +113,7 @@
             {#if (gd.isForRank && !showUnserious) || showUnserious}
             <div class="gd {determineRowColour(gd.status)}" style="linear-gradient(90deg,rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 100%);">
                 <div class="audio-container" style="background-image: url({gd.bgLink});">
-                    <AudioPlayer gdInfo={gd} />
+                    <AudioPlayer mapId={parseInt(gd.mapId)} person={fetchPerson}/>
                 </div>
                 <div class="gd-text">
                     <h2><a href="https://osu.ppy.sh/beatmapsets/{gd.mapId}">{gd.artist} - {gd.title}</a></h2>
@@ -122,7 +131,7 @@
                     {/if}
                     <div class="diff-container">
                         {#each gd.maps as diff}
-                        <div class="diff" style="background-color: {diff.diffColour}">
+                        <div class="diff {determineGdColour(diff.sr, gd.status)}" style="background-color: {diff.diffColour}">
                             <h3><a href="https://osu.ppy.sh/beatmapsets/{gd.mapId}#osu/{diff.id}">{diff.diffname}</a></h3>
                             <p>stars <span>{diff.sr}</span></p>
                             <p>mapped <span>{diff.amountMapped}</span></p>
@@ -172,7 +181,8 @@
 
 .audio-container {
     width: 22%;
-    object-fit: cover;
+    background-size: cover;
+    background-position: center;
 }
 
 .gd-text {
@@ -227,6 +237,8 @@
 
 .ranked {
     background: linear-gradient(90deg,rgba(147, 196, 125, 0.8) 0%, rgba(147, 196, 125, 0.0) 100%);
+} .ranked p {
+    color: var(--offwhite);
 }
 
 .qualified {
@@ -240,10 +252,22 @@
     color: black;
 } .wip div span {
     color: black;
+} .wip div div div h3 a {
+    color: black;
+} .wip div p {
+    color: var(--link)
+} .wip div div div p {
+    color: var(--link)
 }
 
 .pending {
     background: linear-gradient(90deg,rgba(255, 217, 102, 0.8) 0%, rgba(255, 217, 102, 0.0) 100%);
+} .pending p {
+    color: var(--offwhite)
+}
+
+.lighter p {
+    color: var(--offwhite);
 }
 
 @media screen and (max-width: 767px) {

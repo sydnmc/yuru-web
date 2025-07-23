@@ -26,7 +26,7 @@
   let buttonInfo: buttonInfo[] = [ //each person has at least a link back to our sets
     {
       name: $_('common.header.ourSets'),
-      link: ""
+      link: PUBLIC_SETS_LINK
     }
   ];
 

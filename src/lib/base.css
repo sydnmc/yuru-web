@@ -1,17 +1,15 @@
 @font-face { font-family: Kyokasho; src: url('./fonts/Kyokasho.ttf')}
 
 :root {
-    --sydney-main: rgb(90, 73, 105);
-    --sydney-light-accent: rgb(65, 54, 75);
-    --sydney-accent: rgb(49, 43, 53);
+    --sydney-main: #5a4969;
+    --sydney-light-accent: #41364b;
+    --sydney-accent: #312b35;
 
-    --lilac-main: rgb(163, 214, 128);
-    --lilac-light-accent: rgb(181, 182, 190);
-    --lilac-accent: rgb(126, 126, 129);
+    --lilac-main: #c9a6bd;
 
     --hazel-main: #724653;
 
-    --may-main: #725f63;
+    --may-main: #8ed369;
 
     --text: rgb(180 181 191);
     --link: rgb(100, 101, 112);

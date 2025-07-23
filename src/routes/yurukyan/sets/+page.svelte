@@ -7,6 +7,9 @@
 </svelte:head>
     
 <script lang="ts">
+    import { PUBLIC_HOME_LINK } from '$env/static/public';
+    import AudioPlayer from '$lib/AudioPlayer.svelte';
+
     export let data;
     let { setInfo } = data; //loads setInfo before the page can completely load - useful since that's the main point of the page :p
 
@@ -52,7 +55,7 @@
 
 <div id="background"></div>
 <div class="divider">
-    <h1><a href="https://yuru.ca">yurukyan△</a></h1>
+    <h1><a href={PUBLIC_HOME_LINK}>yurukyan△</a></h1>
     <h2>finished sets ❀</h2>
 </div>
 <div class="set-container" id="set-container">
@@ -64,7 +67,9 @@
     </div>
     {/if}
     <div class="set" style="border-color: var(--{set.personCreator}-main)">
-        <img alt="{set.artist} - {set.title}" src={set.bgLink}>
+        <div class="set-img" style="background-image: url({set.bgLink})">
+            <AudioPlayer mapId={parseInt(set.mapId)} person={set.personCreator}/>
+        </div>
         <div class="set-text-container">
             <img class="status-icon" src={findStatus(set.status)} alt={set.status} />
             <a class="set-link" href={set.url}>{set.artist} - {set.title}</a>
@@ -75,12 +80,12 @@
                 <span >{@html desc.content}</span>
                 {:else if desc.type === 'hover'}
                 <a class="osu-user" href="https://osu.ppy.sh/users/{desc.content.userID}" 
-                on:mouseover={() => showHover(desc.content.id)}
-                on:focus={() => showHover(desc.content.id)}
-                on:mouseleave={() => removeHover()}
-                on:focusout={() => removeHover()}>{desc.content.username}
+                onmouseover={() => showHover(desc.content.id)}
+                onfocus={() => showHover(desc.content.id)}
+                onmouseleave={() => removeHover()}
+                onfocusout={() => removeHover()}>{desc.content.username}
                     <div class="osu-hover" 
-                    on:click={location.href = "https://osu.ppy.sh/users/{desc.content.userID}"}
+                    onclick={() => location.href = "https://osu.ppy.sh/users/{desc.content.userID}"}
                     style="display: {curUserHover === desc.content.id ? 'flex' : 'none'}; 
                     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({desc.content.bannerUrl});">
                         <img src="https://a.ppy.sh/{desc.content.userID}" class="hover-pfp" alt="{desc.content.userID}'s pfp"/>
@@ -155,13 +160,16 @@
     margin-right: 2.5%;
     margin-top: 20px;
     background-color: rgba(0, 0, 0, 0.4);
-} .set img {
-    max-width: 20%;
-    object-fit: cover;
+} 
+
+.set-img {
+    width: 24%;
+    background-size: cover;
+    background-position: center;
 }
 
 .set-text-container { /* container of text inside each set */
-    width: 100%;
+    width: 76%;
     padding-left: 10px;
     padding-top: 10px;
     padding-bottom: 20px;

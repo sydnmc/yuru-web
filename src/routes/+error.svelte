@@ -54,9 +54,9 @@
         {/if}
         <br>
         <a href="https://syd.yuru.ca">לחצו כאן</a> כדי לחצור בחזרה לדף הראשי.
-    </p>
+    </p> <!-- ~<3 - anne -->
 </div>
-<!-- ~<3 - anne -->
+
 <style>
 #page {
     position: relative;

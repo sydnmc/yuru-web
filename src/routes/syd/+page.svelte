@@ -7,7 +7,7 @@
 </svelte:head>
 
 <script lang="ts">
-    import { PUBLIC_API } from "$env/static/public";
+    import { PUBLIC_API, PUBLIC_MUSIC_LINK } from "$env/static/public";
     import LegacyHeader from "$lib/LegacyHeader.svelte";
     import * as osuColourize from 'osu-colourizer';
 
@@ -126,7 +126,7 @@
       <div id="osu-showcase-wrapper">
         <p class="centered" style="font-size: 14px;">i make maps (charts) for a rhythm game called osu!, as well as doing a few other things within the community. <br>here are some of my mostly recently ranked maps, along with some of maps that i'm known for~</p>
         <h3>˖⁺‧₊˚ notable gds ˚₊‧⁺˖</h3>
-        <div id="gd-display-wrapper" style="cursor: pointer;">
+        <div id="gd-display-wrapper">
         {#await getRecentGd()}
             <div class="gd-thumb">
                 <p class="upper-ranked-text">❀ latest ranked gd ❀</p>
@@ -152,7 +152,7 @@
           {/each}
         </div>
         <h3>˖⁺‧₊˚ notable maps ˚₊‧⁺˖</h3>
-        <div id="maps-showcase-wrapper" style="cursor: pointer;">
+        <div id="maps-showcase-wrapper">
         {#each notableSets as set}
             <div class="set-thumb" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url({set.bgLink})">
             <h2 class="gd-title push-text"><a class="gd-link" href={set.url}>{set.title}</a></h2>
@@ -162,7 +162,7 @@
         </div>
       </div>
       <div id="right-side">
-        <div id="songs-preview">
+        <div id="songs-preview" onclick={() => location.href = PUBLIC_MUSIC_LINK}>
           <h2>also, check out some of my music here!!</h2>
           <p class="under-title-text">because yeah ^^ i do make music just a little bit~</p>
           <img src="/sydney/music preview.jpg" alt="music preview" id="songs-image">
