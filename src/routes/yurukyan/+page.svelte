@@ -7,9 +7,10 @@
 </svelte:head>
 
 <script lang="ts">
-    import { _, locale, getLocaleFromNavigator } from 'svelte-i18n';
+    import { _, locale } from 'svelte-i18n';
     import { onMount } from 'svelte';
     import { PUBLIC_API, PUBLIC_HOME_LINK, PUBLIC_LILAC_HOME, PUBLIC_MAY_HOME, PUBLIC_SYDNEY_HOME } from '$env/static/public';
+    import Locale from '$lib/Locale.svelte';
 
     async function fetchFromApi(apiEndpoint: string) {
         let response = await fetch(`${PUBLIC_API}/${apiEndpoint}`);
@@ -24,16 +25,6 @@
             processPkInfo(frontList);
         });
 	});
-
-    let currentLocale = $state($locale || getLocaleFromNavigator());
-    function changeLocale() {
-        console.log(currentLocale);
-        if (currentLocale === "en-US") {
-            locale.set('jp');
-        } else if (currentLocale === "ja-jP") {
-            locale.set('en');
-        }
-    }
 
     function dateParser(frontLength: number, isFronting: boolean, lastFrontTime: string) {
         let timeDisplay;
@@ -110,7 +101,6 @@
             sysmembers[i].tooltip = `${days} days, ${hours} hours | ${sysmembers[i].percent}%`;
 
             sysmembers[i].text = dateParser(frontList[i].lastFrontAmount, frontList[i].isFronting, frontList[i].lastFrontTimestamp);
-            console.log(sysmembers[i].text);
             if (frontList[i].isFronting) {
                 main = sysmembers[i];
             } else {
@@ -124,13 +114,14 @@
 <div id="background"></div>
 <header>
     <a class="fa fa-github hidden-link" style="color: white; font-size: 22px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
-    <i class="fa fa-globe hidden-link" style="color: white; font-size: 22px;" onclick={() => changeLocale()}></i>
+    <Locale mode="home"/>
 </header>
+
 <section id="page">
     <div id="info-box">
     <div id="mobile-button-box">
         <a class="fa fa-github hidden-link" style="color: white; font-size: 22px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
-        <i class="fa fa-globe hidden-link" style="color: white; font-size: 22px;" onclick={() => changeLocale()}></i>
+        <Locale mode="home"/>
     </div>
     <h1><a id="title" href={PUBLIC_HOME_LINK}>yurukyan△</a></h1>
     <a class="fronter" href={main.link}>
@@ -256,12 +247,6 @@ header {
     margin-bottom: 0px;
 } header a {
     padding-right: 8px; /* gives spacing to the icons */
-} header i {
-    padding-right: 8px;
-}
-
-i {
-    cursor: pointer;
 }
 
 #mobile-button-box {
@@ -587,8 +572,6 @@ i {
 
     #mobile-button-box a {
         padding-right: 8px; /* gives spacing to the icons */
-    } #mobile-button-box i {
-        padding-right: 8px;
     }
 
     header {

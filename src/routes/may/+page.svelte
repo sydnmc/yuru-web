@@ -49,7 +49,7 @@
     background-image: url('/may/mmj sekai.webp');
     background-size: cover;
     background-position: center;
-    filter: brightness(0.2);
+    filter: brightness(0.15);
     z-index: -1;
 }
 

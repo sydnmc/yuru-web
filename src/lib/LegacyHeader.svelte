@@ -3,6 +3,7 @@
 
   import { _ } from 'svelte-i18n';
   import { PUBLIC_HOME_LINK, PUBLIC_MUSIC_LINK, PUBLIC_SETS_LINK, PUBLIC_SYDNEY_GDS_LINK, PUBLIC_SYDNEY_HOME } from '$env/static/public';
+  import Locale from './Locale.svelte';
 
   let prevPage;
   if (page === "home") {
@@ -82,7 +83,6 @@
       {/if}
     {/each}
     <span id="hamburger-button" on:click={() => openHamburgerMenu()}>&#9776;</span>
-    <i class="fa fa-globe hidden-link" style="color: white; font-size: 22px;"></i>
     <div id="burger-menu" style="width: {displayBurger? '300px' : '0'}">
       <span id="close-button" on:click={() => closeHambugerMenu()}>&times;</span>
       {#each buttonInfo as button}
@@ -162,13 +162,6 @@ button {
     margin-left: 20px;
 } button:hover {
     background-color: var(--local-accent);
-}
-
-.fa-globe {
-    position: absolute; /* absolute based on the header position */
-    top: 10px;
-    right: 10px;
-    text-decoration: none;
 }
 
 .button-with-dropdown-container {

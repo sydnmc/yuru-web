@@ -4,6 +4,7 @@
 
   import { _ } from 'svelte-i18n';
   import { PUBLIC_HOME_LINK, PUBLIC_LILAC_GDS_LINK, PUBLIC_LILAC_HOME, PUBLIC_MAY_HOME, PUBLIC_SETS_LINK, PUBLIC_WHOAMI_LINK } from '$env/static/public';
+  import Locale from './Locale.svelte';
 
   let prevPage = '';
   if (page === "home") {
@@ -62,7 +63,9 @@
   {/each}
 
   <span id="hamburger-button">&#9776;</span>
-  <i class="fa fa-globe hidden-link"></i>
+  <div id="locale-position">
+    <Locale mode="header"/>
+  </div>
   <div id="burger-menu">
     <a id="close-button">&times;</a>
     {#each buttonInfo as button}
@@ -107,13 +110,10 @@
   margin-right: 20px;
 }
 
-.fa-globe {
-  font-size: 20px;
-  color: white;
+#locale-position {
   position: absolute; /* absolute based on the header position */
   top: 10px;
-  right: 10px;
-  text-decoration: none;
+  right: 2px; /* 10 total */
 }
 
 /* burger menu (shouldn't display on desktop */
