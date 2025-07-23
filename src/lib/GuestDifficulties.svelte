@@ -6,6 +6,7 @@
     import AudioPlayer from './AudioPlayer.svelte';
     import { PUBLIC_API } from '$env/static/public';
     import { _ } from 'svelte-i18n';
+    import AudioVolume from './AudioVolume.svelte';
 
     async function fetchFromApi(apiEndpoint: string) {
         let response = await fetch(`${PUBLIC_API}/${apiEndpoint}`);
@@ -147,6 +148,7 @@
         <h1 class="loading-text">something went wrong! :c</h1>
     {/await}
 </div>
+<AudioVolume person={fetchPerson}/>
 
 
 <style>

@@ -9,6 +9,7 @@
 <script lang="ts">
     import { PUBLIC_HOME_LINK } from '$env/static/public';
     import AudioPlayer from '$lib/AudioPlayer.svelte';
+    import AudioVolume from '$lib/AudioVolume.svelte';
 
     export let data;
     let { setInfo } = data; //loads setInfo before the page can completely load - useful since that's the main point of the page :p
@@ -108,6 +109,7 @@
         </div>
         {/each}
 </div>
+<AudioVolume person={'sydney'}/>
 
 <style>
 /* local variables */

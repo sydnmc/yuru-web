@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'; //handles subscriptions in svelte
 
-export let audioInfo = writable({progress: -1, id: -1});
+export let audioInfo = writable({progress: -1, id: -1, currentlyPlaying: false});
 let animationCounter = -1;
 
 interface AudioStore {
@@ -32,6 +32,13 @@ export function pauseFromAudioController(index: number) {
   let currentAudio = audioStore[index];
   currentAudio.isPlaying = false;
   currentAudio.audio.pause();
+  audioInfo.set({progress: -1, id: -1, currentlyPlaying: false});
+}
+
+export function changeVolume(volume: number) {
+  Object.entries(audioStore).forEach(audio => {
+    audio[1].audio.volume = volume;
+  });
 }
 
 function startUpdatingProgress(id: number, audio: HTMLAudioElement) {
@@ -41,7 +48,7 @@ function startUpdatingProgress(id: number, audio: HTMLAudioElement) {
 		}
 
 		let progress = audio.currentTime*10; //every song file is 10 seconds, so we get a percentage out of this
-		audioInfo.set({progress, id});
+		audioInfo.set({progress, id, currentlyPlaying: true});
 		animationCounter = requestAnimationFrame(pollAudioProgress);
 	}
 
