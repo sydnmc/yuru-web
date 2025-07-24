@@ -2,9 +2,10 @@
   export let person: string;
   export let page: string;
 
-  import { _ } from 'svelte-i18n';
+  import { _, locale } from 'svelte-i18n';
   import { PUBLIC_HOME_LINK, PUBLIC_LILAC_GDS_LINK, PUBLIC_LILAC_HOME, PUBLIC_MAY_HOME, PUBLIC_SETS_LINK, PUBLIC_WHOAMI_LINK } from '$env/static/public';
-  import Locale from './Locale.svelte';
+  import Locale from '$lib/Locale.svelte';
+  import { onMount } from 'svelte';
 
   let prevPage = '';
   if (page === "home") {
@@ -39,8 +40,8 @@
       pfpAlt = $_('lilac.header.pfpAlt');
       pfpLink = '/common/lilacpfp.png';
       username = "yuiyamu";
-      buttonInfo.push({ name: "my osu! gds", link: PUBLIC_LILAC_GDS_LINK})
-      buttonInfo.push({ name: "who am i?", link: PUBLIC_WHOAMI_LINK});
+      buttonInfo.push({ name: $_('common.header.myGds'), link: PUBLIC_LILAC_GDS_LINK});
+      buttonInfo.push({ name: $_('lilac.header.whoAmI'), link: PUBLIC_WHOAMI_LINK});
       break;
     case "may":
       pfpAlt = $_('may.header.pfpAlt');
@@ -148,7 +149,7 @@
     #burger-menu {
         display: block;
         position: fixed;
-        height: 100%; 
+        height: 100%;
         width: 0; /* width gets changed when it's opened, 0 by default */
         top: 0;
         right: 0;

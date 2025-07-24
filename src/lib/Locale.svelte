@@ -73,6 +73,7 @@
     flex-direction: column;
     border-radius: 10px;
     width: 180px;
+    z-index: 1;
 } .header-locale-menu div {
     display: flex;
     padding: 8px;

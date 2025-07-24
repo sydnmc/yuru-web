@@ -99,16 +99,16 @@
 <div class="divider">
     <div id="rank-checkbox-container">
         <input type="checkbox" bind:checked={showUnserious}/>
-        <span>show not for rank gds</span>
+        <span>{$_('common.gds.notForRank')}</span>
     </div>
-    <h2>guest difficulties ❀</h2>
-    <p>total finished <span>{totalCount}</span></p>
-    <p>collabs <span>{collabCount}</span></p>
-    <p>wip <span>{wipCount}</span></p>
+    <h2>{$_('common.gds.gds')}</h2>
+    <p>{$_('common.gds.finished')} <span>{totalCount}</span></p>
+    <p>{$_('common.gds.collabs')} <span>{collabCount}</span></p>
+    <p>{$_('common.gds.wip')} <span>{wipCount}</span></p>
 </div>
 <div>
     {#await populateRow()}
-        <h1 class="loading-text">now loading gds...</h1>
+        <h1 class="loading-text">{$_('common.gds.loading')}</h1>
     {:then maps}
         {#each maps as gd}
             {#if (gd.isForRank && !showUnserious) || showUnserious}
@@ -118,10 +118,10 @@
                 </div>
                 <div class="gd-text">
                     <h2><a href="https://osu.ppy.sh/beatmapsets/{gd.mapId}">{gd.artist} - {gd.title}</a></h2>
-                    <p>status <span>{gd.status}</span></p>
-                    <p>host <span>{gd.creator}</span></p>
+                    <p>{$_('common.gds.status')} <span>{gd.status}</span></p>
+                    <p>{$_('common.gds.host')} <span>{gd.creator}</span></p>
                     {#if gd.bns.length > 0}
-                    <p>bns
+                    <p>{$_('common.gds.bns')}
                         {#each gd.bns as bn, i}
                         <span>{bn}</span>
                         {#if i < gd.bns.length-1}
@@ -134,9 +134,9 @@
                         {#each gd.maps as diff}
                         <div class="diff {determineGdColour(diff.sr, gd.status)}" style="background-color: {diff.diffColour}">
                             <h3><a href="https://osu.ppy.sh/beatmapsets/{gd.mapId}#osu/{diff.id}">{diff.diffname}</a></h3>
-                            <p>stars <span>{diff.sr}</span></p>
-                            <p>mapped <span>{diff.amountMapped}</span></p>
-                            <p>date finished <span>{diff.dateFinished}</span></p>
+                            <p>{$_('common.gds.stars')} <span>{diff.sr}</span></p>
+                            <p>{$_('common.gds.amount')} <span>{diff.amountMapped}</span></p>
+                            <p>{$_('common.gds.dateFinished')} <span>{diff.dateFinished}</span></p>
                         </div>
                         {/each}
                     </div>
@@ -145,7 +145,7 @@
             {/if}
         {/each}
     {:catch}
-        <h1 class="loading-text">something went wrong! :c</h1>
+        <h1 class="loading-text">{$_('common.gds.error')}</h1>
     {/await}
 </div>
 <AudioVolume person={fetchPerson}/>

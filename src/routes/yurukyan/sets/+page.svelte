@@ -5,7 +5,7 @@
     <meta name="theme-color" content="#FCE758">
     <title>yurukyan△ | sets</title>
 </svelte:head>
-    
+
 <script lang="ts">
     import { PUBLIC_HOME_LINK } from '$env/static/public';
     import AudioPlayer from '$lib/AudioPlayer.svelte';
@@ -80,14 +80,14 @@
                 {#if desc.type === 'description'}
                 <span >{@html desc.content}</span>
                 {:else if desc.type === 'hover'}
-                <a class="osu-user" href="https://osu.ppy.sh/users/{desc.content.userID}" 
+                <a class="osu-user" href="https://osu.ppy.sh/users/{desc.content.userID}"
                 onmouseover={() => showHover(desc.content.id)}
                 onfocus={() => showHover(desc.content.id)}
                 onmouseleave={() => removeHover()}
                 onfocusout={() => removeHover()}>{desc.content.username}
-                    <div class="osu-hover" 
+                    <div class="osu-hover"
                     onclick={() => location.href = "https://osu.ppy.sh/users/{desc.content.userID}"}
-                    style="display: {curUserHover === desc.content.id ? 'flex' : 'none'}; 
+                    style="display: {curUserHover === desc.content.id ? 'flex' : 'none'};
                     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({desc.content.bannerUrl});">
                         <img src="https://a.ppy.sh/{desc.content.userID}" class="hover-pfp" alt="{desc.content.userID}'s pfp"/>
                             <div class="osu-hover-text-container">
@@ -162,7 +162,7 @@
     margin-right: 2.5%;
     margin-top: 20px;
     background-color: rgba(0, 0, 0, 0.4);
-} 
+}
 
 .set-img {
     width: 24%;

@@ -95,7 +95,7 @@
         for (let i = 0; i < sysmembers.length; i++) {
             sysmembers[i].fronting = frontList[i].isFronting;
             sysmembers[i].percent = frontList[i].memberPercent;
-        
+
             let days = Math.floor(frontList[i].memberTime/1000/60/60/24);
             let hours = Math.round((frontList[i].memberTime/1000/60/60)-days*24);
             sysmembers[i].tooltip = `${days} days, ${hours} hours | ${sysmembers[i].percent}%`;
@@ -163,7 +163,7 @@
             {/each}
         </div>
       </div>
-      
+
       <div class="socials-bar socials-bar-big hidden-link">
         <strong>
             <a href="https://twitter.com/sydnmc_"><img src="/common/twitter.png" alt="twitter logo"> twitter</a>
@@ -173,7 +173,7 @@
             <a href="discord://-/users/226885796739678229"><img src="/common/discord.png" alt="discord logo"> discord</a>
         </strong>
       </div>
-      
+
       <div>
         {#await lastFmUpdate()}
             <p class="dark-text">{$_('yurukyan.home.loadingSong')}</p>
@@ -508,7 +508,7 @@ header {
     #background {
         height: 127%; /* this is AWFUL but it's the easiest solution */
     }
-    
+
     #alter-container {
         justify-content: center;
         margin-left: 27px; /* makes it offset other margin */
@@ -553,7 +553,7 @@ header {
         margin-top: 3%;
         margin-bottom: 3%;
     }
-    
+
     #info-box {
         font-size: 16px;
     }

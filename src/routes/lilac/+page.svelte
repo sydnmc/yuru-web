@@ -38,29 +38,29 @@
     <div id="project-container">
         <div class="project">
             <h2>‧₊˚❀ osugds.moe</h2>
-            <p>while still currently unreleased,</p>
+            <p>{$_('lilac.home.osugdsDescTop')}</p>
             <a href="https://osugds.moe" id="osugds">
                 <h2>osugds.moe</h2>
                 <img src="/common/osugds.png" alt="osugds logo" />
             </a>
-            <p style="margin-bottom: 0">is a site that i've been the main one working on~</p>
-            <p class="smaller-text" style="margin-top: 8px;">it's a platform to find people to make guest difficulties (difficulties mapped by someone other than the one hosting the map, for the uninitiated) and to find new and exciting maps to make guest difficulties for! i hope that many people enjoy using it when we eventually finish work on it~~</p>
+            <p style="margin-bottom: 0">{$_('lilac.home.osugdsDescMiddle')}</p>
+            <p class="smaller-text" style="margin-top: 8px;">{$_('lilac.home.osugdsDescBottom')}</p>
         </div>
         <div class="project middle">
-            <h2>‧₊˚❀ osu! mapping</h2>
-            <p>i've done a few different things on osu! when it comes to creating my own maps, currently only having this map ranked:</p>
+            <h2>{$_('lilac.home.osuMapping')}</h2>
+            <p>{$_('lilac.home.osuMappingDescTop')}</p>
             <a class="map" href={mochi.url} style="background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url('{mochi.bgLink}');">
-                <h2>{mochi.artist} - {mochi.title}</h2>
-                <p>mapped by yuiyamu</p>
+                <h2>{$_('lilac.home.mochi')}</h2>
+                <p>{$_('lilac.home.mochiCreator')}</p>
             </a>
-            <p>but, mapping is something that does interest me quite a bit, and i would love to share more of my accomplishments as they happen~!!</p>
+            <p>{$_('lilac.home.osuMappingDescBottom')}</p>
             <p>ꕤ(˶˃ ᵕ ˂˶*)ꕤ</p>
         </div>
         <div class="project">
-            <h2>‧₊˚❀ who am i?</h2>
-            <p>if you're curious as to who i even am, or if you'd like to learn more about systems in general, then click below! i exist within a DID system, so identity does get a little complicated for all of us~</p>
+            <h2>{$_('lilac.home.whoAmI')}</h2>
+            <p>{$_('lilac.home.whoAmIDesc')}</p>
             <div style="display: flex; justify-content: center;">
-                <a href={PUBLIC_WHOAMI_LINK} id="whoami">who am i?</a>
+                <a href={PUBLIC_WHOAMI_LINK} id="whoami">{$_('lilac.header.whoAmI')}</a>
             </div>
             <img id="non" src="/lilac/non.png" alt="momone chinoi"/>
         </div>
@@ -88,8 +88,8 @@ h1 {
 
 #page {
     text-align: center;
-    margin-left: 7%;
-    margin-right: 7%;
+    margin-left: 6%;
+    margin-right: 6%;
 }
 
 #project-container {

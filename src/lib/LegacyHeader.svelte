@@ -99,8 +99,8 @@
 
 <style>
 :root {
-  --local-main: var(--sydney-main); 
-  --local-accent: var(--sydney-accent); 
+  --local-main: var(--sydney-main);
+  --local-accent: var(--sydney-accent);
   --light-accent: var(--sydney-light-accent);
 }
 
@@ -232,7 +232,7 @@ button {
     #burger-menu {
         display: block;
         position: fixed;
-        height: 100%; 
+        height: 100%;
         width: 0; /* width gets changed when it's opened, 0 by default */
         top: 0;
         right: 0;

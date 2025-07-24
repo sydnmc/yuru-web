@@ -26,17 +26,19 @@
     "lilac":{
         "header":{
             "pfpAlt":"らいらっくのきゅうくらりんリンプロフィール画像",
-            "whoAmI":"あたしって誰？"
+            "whoAmI":"あたしは誰？"
         },
         "home":{
-            "welcome":"o/ lilac.yuru.caへよこそう！ o/",
-            "intro":"こんにちは！！ あたしが誰だか知らないなら、{lilac} / {yuiyamu}です。 ",
-            "intro1":"あたしはシドニーよりも少ないことしかしていないけど、{intro1Link}、このウェブサイトや色んなプログラミングプロジェクトなどシドニーと一緒に取り組んだ。",
-            "intro1Link":"osu!でいくつかの譜面を作ったし",
-            "intro2":" あたしとシドニーの関係について興味あるなら、{intro2Link}をクリックしてください！ちょっと複雑から、システムのことを慣れなく分からないなら大丈夫です。 詳細には興味ないけどあたしのことを知らないなら、基本的には： シドニーと仲良くなれば、あたしも仲良くと思う~ ",
-            "intro2Link":"ここ",
-            "socials":"^ あたしと連絡したいなら、あたしのソーシャルズはこちら ^",
-            "accountSharing":"(シドニーとあたしはいくつかのアカウントを共有しているけど、これはあたしのだけ~)"
+          "osugdsDescTop":"まだ未発表ですけど、",
+          "osugdsDescMiddle":"はあたしが中心となって作っているサイトです〜",
+          "osugdsDescBottom":"自分の譜面でゲスト難易度を作って人を探してと新しくてカッコいい譜面で自分のゲスト難易度を作ってためにプラットホーム です！結局完成した時に、多くの人に楽しんでもらいたいです〜〜",
+          "osuMapping":"‧₊˚❀ osu!マッピング",
+          "osuMappingDescTop":"osu!に色んなことをしてきたけど、今はこの譜面だけはランクされた：",
+          "osuMappingDescBottom":"でも、譜面を作ることはすごく気になるから、その都度に業績をもっと紹介したいです〜！！",
+          "mochi":"桃寝ちのい - mochi",
+          "mochiCreator":"作者 yuiyamu",
+          "whoAmI":"‧₊˚❀ あたしは誰？",
+          "whoAmIDesc":"あたしのことが気になるかシステムのことをもっと詳しくな方は、下にクリックしてください！DIDシステムには存在あるから、みんなのアイデンティティはちょっと複雑になります〜"
         }
     },
     "may":{
@@ -44,16 +46,31 @@
             "pfpAlt":"メイの東雲絵名プロフィール画像"
         },
         "home":{
-            "hi":"hi! o/",
-            "intro":"らいらっくに似ている、あたしも新任です。 これまであたしがしてきたことのほとんどは<strong>このサイト全体のリデザイン</strongと他のプロジェクトのメンテナンスも手伝っています。",
-            "intro1":"i suppose i'm basically replacing the role sydney had, but i like to maintain a low profile c: <strong>doesn't mean you're discouraged from coming and saying hi to me tho!"
+            "hi":"こんにちは！ o/",
+            "intro":"らいらっくの様に、あたしも新任です。 これまであたしがやってきたことのほとんどは<strong>このサイト全体のリデザイン</strong>と他のプロジェクトのメンテナンスも手伝っています。",
+            "intro1":"基本的にシドニーの役割の代わりますが、低姿勢が好きです c: <strong>だけど、挨拶に来るのを緊張する必要はないわ！</strong>",
+            "platform":"（このプラットフォームしか使っていない）"
         }
     },
     "common":{
         "header":{
-            "ourSets":"あたしたちのgds",
-            "myGds":"自分の譜面"
+            "ourSets":"みんあの譜面",
+            "myGds":"自分のゲスト難易度"
+        },
+        "gds":{
+          "loading":"ゲスト難易度はローディング中...",
+          "gds":"ゲスト難易度 ❀",
+          "finished":"完成合計",
+          "collabs":"コラボ",
+          "wip":"wip",
+          "notForRank":"ランクしたくない難易度を見せる",
+          "status":"現状",
+          "host":"作者",
+          "stars":"難易度 (★）",
+          "amount":"できた量",
+          "dateFinished":"完成日付",
+          "bns":"ノミネーター",
+          "error":"何かが間違っていた！:c"
         }
     }
-    
 }

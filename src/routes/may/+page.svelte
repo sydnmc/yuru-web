@@ -24,7 +24,7 @@
 <div id="background"></div>
 <Header person="may" page="home"/>
 <audio src="/may/nene.ogg" bind:paused={nenePaused} bind:currentTime={neneProgress}></audio>
-<h1>hi! o/</h1>
+<h1>{$_('may.home.hi')}</h1>
 <p style="margin-bottom: 5px;">{@html $_('may.home.intro')}</p>
 <p style="margin-top: 0">{@html $_('may.home.intro1')}</p>
 <div style="display: flex; justify-content: center">
@@ -35,9 +35,9 @@
         <img src="/common/discord.png" alt="discord"/>
         <span>discord</span>
     </a>
-    <span>(only platform i use)</span>
+    <span>{$_('may.home.platform')}</span>
 </div>
-<img id="nene" src="/may/cute ass nene.png" alt="nene chibi" on:click={() => playNene()}>
+<img id="nene" src="/may/cute ass nene.png" alt="nene chibi" on:click={() => playNene()} />
 
 <style>
 #background {
