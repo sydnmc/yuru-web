@@ -10,4 +10,4 @@ register('he-IL', () => import('./locales/he-IL.json'));
 init({
 	fallbackLocale: defaultLocale,
 	initialLocale: browser ? window.navigator.language : defaultLocale,
-})
+});

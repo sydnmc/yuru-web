@@ -2,7 +2,7 @@
 
 yurukyan△ system personal website~
 
- 
+
 ## localization
 our system (mostly lilac) is currently working on translating every page on our site into japanese - and, thanks to the help of our lovely girlfriend, work for hebrew translations is also currently underway! however, this does not apply to sydney's pages, as those are no longer being maintained.
 
@@ -11,7 +11,7 @@ our system (mostly lilac) is currently working on translating every page on our 
 > hebrew: only `yurukyan/home` and the error page
 
 ## dev notes
-since this project now utilizes sveltekit as its framework, installation and development are relatively simple. just run `npm install` in the local directory to install all of the dev dependencies, then `npm dev run` to start a local server.
+since this project now utilizes sveltekit as its framework, installation and development are relatively simple. just run `npm install` in the local directory to install all of the dev dependencies, then `turbo dev` to start a local server.
 
 the `.env` and `.env.production` are intentionally included in the repo, as they contain routing info for development, needed to make all of the links between pages work properly.
 

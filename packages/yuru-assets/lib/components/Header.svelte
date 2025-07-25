@@ -4,7 +4,7 @@
 
   import { _, locale } from 'svelte-i18n';
   import { PUBLIC_HOME_LINK, PUBLIC_LILAC_GDS_LINK, PUBLIC_LILAC_HOME, PUBLIC_MAY_HOME, PUBLIC_SETS_LINK, PUBLIC_WHOAMI_LINK } from '$env/static/public';
-  import Locale from '$lib/Locale.svelte';
+  import Locale from './Locale.svelte';
   import { pageLocales, localeInfo } from './langSupport';
 
   let prevPage = '';

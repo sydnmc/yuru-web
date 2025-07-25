@@ -9,8 +9,8 @@
 <script lang="ts">
     import { _, locale } from 'svelte-i18n';
     import { onMount } from 'svelte';
-    import { PUBLIC_API, PUBLIC_HOME_LINK, PUBLIC_LILAC_HOME, PUBLIC_MAY_HOME, PUBLIC_SYDNEY_HOME } from '$env/static/public';
-    import Locale from '$lib/Locale.svelte';
+    //import { PUBLIC_API, PUBLIC_HOME_LINK, PUBLIC_LILAC_HOME, PUBLIC_MAY_HOME, PUBLIC_SYDNEY_HOME } from '$env/static/public';
+    import { Locale } from '@yuru-web/yuru-assets';
 
     async function fetchFromApi(apiEndpoint: string) {
         let response = await fetch(`${PUBLIC_API}/${apiEndpoint}`);

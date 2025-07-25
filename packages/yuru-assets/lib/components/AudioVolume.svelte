@@ -1,6 +1,5 @@
 <script lang="ts">
   import { changeVolume, audioInfo } from "./audio";
-
   export let person: string;
 
   let display = false;
@@ -35,12 +34,12 @@ main {
 }
 
 @keyframes slide-come {
-    from {bottom: -100px; opacity: 0} 
+    from {bottom: -100px; opacity: 0}
     to {bottom: 0; opacity: 1}
 }
 
 @keyframes slide-away {
-    from {bottom: 0; opacity: 1} 
+    from {bottom: 0; opacity: 1}
     to {bottom: -100px; opacity: 0}
 }
 
