@@ -92,12 +92,11 @@ header a {
 
 
 /* mobile */
-@media only screen and (max-device-width: 1000px)
+@media only screen and (max-device-width: 768px)
 {
     #page {
         margin-left: 0%;
         margin-right: 0%;
     }
 }
-
-    </style>
+</style>

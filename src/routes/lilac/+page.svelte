@@ -188,7 +188,7 @@ h1 {
     #non {
         width: 80px;
         bottom: -65px;
-        right: -20px;
+        right: -10px;
     }
 }
 </style>

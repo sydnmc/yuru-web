@@ -1,6 +1,9 @@
 <script lang="ts">
     import { _, locale } from 'svelte-i18n';
     export let mode: string;
+    export let person: string;
+    export let page: string;
+    import { pageLocales, localeInfo } from './langSupport';
 
     let showLocaleMenu = false;
     function openLocaleMenu() {
@@ -18,18 +21,12 @@
 
 <button class="fa fa-globe" onclick={() => openLocaleMenu()}>
     <div class="{mode === "header"? 'header-locale-menu' : 'locale-menu'}" style="display: {showLocaleMenu? 'flex' : 'none'}">
-        <div onclick={() => changeLocale('en')}>
-            <img src="https://osu.ppy.sh/assets/images/flags/1f1e8-1f1e6.svg" alt="ca"/>
-            <span>english (canadian)</span>
+      {#each pageLocales[person][page] as lang}
+        <div onclick={() => changeLocale(lang)}>
+          <img src={localeInfo[lang].flag} alt={lang}/>
+          <span>{localeInfo[lang].name}</span>
         </div>
-        <div class="middle-lang" onclick={() => changeLocale('jp')}>
-            <img src="https://osu.ppy.sh/assets/images/flags/1f1ef-1f1f5.svg" alt="jp"/>
-            <span>日本語</span>
-        </div>
-        <div onclick={() => changeLocale('il')}>
-            <img src="https://osu.ppy.sh/assets/images/flags/1f1ee-1f1f1.svg" alt="il"/>
-            <span dir="rtl">עברית</span>
-        </div>
+      {/each}
     </div>
 </button>
 

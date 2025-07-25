@@ -142,7 +142,7 @@ h3 {
 }
 
 /* mobile */
-@media only screen and (max-device-width: 1000px)
+@media only screen and (max-device-width: 768px)
 {
     #page-content {
         margin: 0;

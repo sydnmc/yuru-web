@@ -113,6 +113,7 @@
   margin-top: 8px;
   margin-right: 8px;
   border-radius: 5px;
+  text-align: center;
 } #deprecated-warning span {
   color: white;
 }
@@ -200,7 +201,7 @@ button {
 }
 
 /* mobile - burger menu */
-@media only screen and (max-device-width: 1000px)
+@media only screen and (max-device-width: 768px)
 {
     /* changing/removing desktop elements */
     #pfp-image {

@@ -114,14 +114,14 @@
 <div id="background"></div>
 <header>
     <a class="fa fa-github hidden-link" style="color: white; font-size: 22px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
-    <Locale mode="home"/>
+    <Locale mode="home" person="yurukyan" page="home"/>
 </header>
 
-<section id="page">
+<section id="page" class={$locale}>
     <div id="info-box">
     <div id="mobile-button-box">
         <a class="fa fa-github hidden-link" style="color: white; font-size: 22px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
-        <Locale mode="home"/>
+        <Locale mode="home" person="yurukyan" page="home"/>
     </div>
     <h1><a id="title" href={PUBLIC_HOME_LINK}>yurukyan△</a></h1>
     <a class="fronter" href={main.link}>
@@ -213,6 +213,11 @@
     --tent: #FCE758;
     --shine: linear-gradient(90deg,rgba(73, 114, 133, 1) 0%, rgba(96, 191, 135, 1) 50%, rgba(133, 127, 102, 1) 100%);
     --accent: #497285;
+}
+
+/* this is Probably something i don't want to apply globally, as there's a few things that are messed up from global rtl (still some english strings even in the hebrew site) */
+.he-IL {
+    direction: rtl;
 }
 
 #background {
@@ -475,7 +480,6 @@ header {
 
 #shima-img {
     background-image: url('/yurukyan/shima.png');
-    width: 100%;
     height: 230px;
     margin-top: 20px;
     border: 3px solid #79b8d4;
@@ -602,6 +606,10 @@ header {
 
     .alter-text {
         font-size: 11px;
+    }
+
+    .ja-JP .alter-name { /* tiny bit too big in japanese */
+        font-size: 22px;
     }
 
     .socials-bar-big a {

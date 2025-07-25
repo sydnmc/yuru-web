@@ -100,4 +100,19 @@ p {
   100% { transform: translateY(0) scaleY(1) scaleX(1) }
 }
 
+@media only screen and (max-device-width: 768px) {
+    #nene {
+        height: 150px;
+    }
+
+    @keyframes nene-jump {
+        0%   { transform: translateY(0) scaleY(1) scaleX(1) }
+        20%  { transform: translateY(0) scaleY(0.94) scaleX(1.06) }
+        40%  { transform: translateY(-40px) scaleY(1.04) scaleX(0.98)}
+        60%  { transform: translateY(0) scaleY(0.9) scaleX(1.1) }
+        75%  { transform: translateY(0) scaleY(1.02) scaleX(0.98) }
+        100% { transform: translateY(0) scaleY(1) scaleX(1) }
+    }
+}
+
 </style>
