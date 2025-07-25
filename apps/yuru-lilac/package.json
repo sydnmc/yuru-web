@@ -1,9 +1,9 @@
 {
-	"name": "yuru-web",
+	"name": "yuru-lilac",
 	"private": true,
-	"version": "2.1.0",
+	"version": "1.0.0",
 	"type": "module",
-	"packageManager": "^npm@11.4.2",
+	"packageManager": "npm@11.4.2",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -37,9 +37,5 @@
 		"multer": "^2.0.1",
 		"osu-colourizer": "^1.0.1",
 		"svelte-i18n": "^4.0.1"
-	},
- "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+	}
 }

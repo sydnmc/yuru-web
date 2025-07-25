@@ -1,0 +1,12 @@
+{
+	"/": [
+		"src/routes/+layout.ts",
+		"src/routes/+layout.ts"
+	],
+	"/gds": [
+		"src/routes/+layout.ts"
+	],
+	"/music": [
+		"src/routes/+layout.ts"
+	]
+}
