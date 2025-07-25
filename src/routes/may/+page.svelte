@@ -1,9 +1,9 @@
 <svelte:head>
     <meta property="og:site_name" content="yurukyan△">
-    <meta property="og:title" content="anemone_△">
+    <meta property="og:title" content="mayniaria△">
     <meta property="og:description" content="may's homepage >.<">
     <meta name="theme-color" content="#dee0ed">
-    <title>anemone_△</title>
+    <title>mayniaria△</title>
 </svelte:head>
 
 <script lang="ts">

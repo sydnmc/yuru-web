@@ -6,13 +6,11 @@ export const pageLocales = {
     },
     lilac: {
         home: ["en-CA", "ja-JP"],
+        gds: ["en-CA", "ja-JP"],
         whoAmI: ["en-CA"]
     },
     may: {
         home: ["en-CA", "ja-JP"]
-    },
-    common: {
-        gds: ["en-CA", "ja-JP"]
     }
 };
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  //header elements still aren't FREAKING translated when changing the page language despite doing so many reactive things bro
+  //TODO: header elements still aren't FREAKING translated when changing the page language despite doing so many reactive things bro
   let { person, page } = $props();
 
   import { _, locale } from 'svelte-i18n';
@@ -46,7 +46,7 @@
     case "may":
       pfpAlt = $_('may.header.pfpAlt');
       pfpLink = '/common/maypfp.jpg';
-      username = "anemone_";
+      username = "mayniaria";
       break;
   }
 

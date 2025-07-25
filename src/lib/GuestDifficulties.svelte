@@ -1,4 +1,5 @@
 <script lang="ts">
+    //TODO: add back support for original metadata (maybe add something that detects language script...?)
     export let person: string;
 
     import * as osuColourize from 'osu-colourizer';

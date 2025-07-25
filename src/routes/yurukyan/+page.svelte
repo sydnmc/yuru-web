@@ -18,7 +18,7 @@
     }
 
 	onMount(async () => {
-		const frontList = await fetchFromApi(`pkInfo?frontList=true&before=30`);
+		const frontList = await fetchFromApi(`pkInfo`);
         processPkInfo(frontList);
 
         locale.subscribe(() => {
@@ -113,14 +113,14 @@
 
 <div id="background"></div>
 <header>
-    <a class="fa fa-github hidden-link" style="color: white; font-size: 22px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
+    <a class="fa fa-github hidden-link" style="color: white; font-size: 23px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
     <Locale mode="home" person="yurukyan" page="home"/>
 </header>
 
 <section id="page" class={$locale}>
     <div id="info-box">
     <div id="mobile-button-box">
-        <a class="fa fa-github hidden-link" style="color: white; font-size: 22px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
+        <a class="fa fa-github hidden-link" style="color: white; font-size: 23px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
         <Locale mode="home" person="yurukyan" page="home"/>
     </div>
     <h1><a id="title" href={PUBLIC_HOME_LINK}>yurukyan△</a></h1>
@@ -174,7 +174,7 @@
         </strong>
       </div>
 
-      <div>
+      <div id="lastfm">
         {#await lastFmUpdate()}
             <p class="dark-text">{$_('yurukyan.home.loadingSong')}</p>
         {:then lastFmData}
@@ -184,7 +184,7 @@
                 {:else}
                 {$_('yurukyan.home.lastFmListened')}
                 {/if}
-                <a style="color: rgb(180 181 191); text-decoration: none;" href={lastFmData.songURL}>{lastFmData.songMeta}</a>
+                <a class="hidden-link" href={lastFmData.songURL}>{lastFmData.songMeta}</a>
                 <img class="lastfm-album-img" src={lastFmData.songImg} alt="lastfm album">
             </p>
         {/await}
@@ -215,11 +215,6 @@
     --accent: #497285;
 }
 
-/* this is Probably something i don't want to apply globally, as there's a few things that are messed up from global rtl (still some english strings even in the hebrew site) */
-.he-IL {
-    direction: rtl;
-}
-
 #background {
     position: fixed;
     height: 100%;
@@ -231,6 +226,12 @@
     background-position: center;
     filter: blur(12.5px) brightness(0.9);
     z-index: -1;
+}
+
+.he-IL span {
+    direction: rtl;
+} .he-IL p {
+    direction: rtl;
 }
 
 /* body/header */
@@ -251,7 +252,7 @@ header {
     height: 5vh;
     margin-bottom: 0px;
 } header a {
-    padding-right: 8px; /* gives spacing to the icons */
+    padding-right: 6px; /* gives spacing to the icons */
 }
 
 #mobile-button-box {
@@ -313,6 +314,10 @@ header {
 } .fronter:hover {
     box-shadow: -2px 8px 20px 16px rgba(0,0,0,0.3); /* increases the spread when you hover over */
     transform: rotate(0.6deg) scale(1.03);
+}
+
+.he-IL .fronter {
+    direction: rtl;
 }
 
 @keyframes shine {
@@ -380,6 +385,10 @@ header {
     border-radius: 5px;
 }
 
+.he-IL .alter {
+    direction: rtl;
+}
+
 .alter-name {
     font-family: Kyokasho, sans-serif;
     font-size: 32px;
@@ -391,6 +400,9 @@ header {
 .alter-text {
     font-size: 14px;
     text-align: left;
+} .he-IL .alter-text {
+    text-align: right;
+    margin-right: 10px;
 }
 
 #alter-container {
@@ -446,6 +458,10 @@ header {
   }
 
 /* would be nice to align images to some baseline, but nothing seemed to really work */
+
+.he-IL #lastfm {
+    direction: rtl;
+}
 
 .socials-bar-big a {
     font-size: 30px;
@@ -575,7 +591,7 @@ header {
     }
 
     #mobile-button-box a {
-        padding-right: 8px; /* gives spacing to the icons */
+        padding-right: 4px; /* gives spacing to the icons */
     }
 
     header {
