@@ -1,0 +1,76 @@
+{
+    "yurukyan":{
+        "home":{
+            "loadingFront":"loading front info...",
+            "loadingSong":"retrieving song info...",
+            "sydney":"sydney",
+            "lilac":"lilac",
+            "hazel":"hazel",
+            "may":"may",
+            "frontedFor":"❀ last fronted for ❀<br> {hours} hours, {minutes} minutes",
+            "frontedOn":"❀ last fronted on ❀<br> {month}/{day}/{year}",
+            "fronting":"for {hours} hours, {minutes} minutes",
+            "frontingLong":"for {days} hours, {hours} minutes",
+            "lastFmListening":"currently listening to",
+            "lastFmListened":"last listened to",
+            "bio":"19 | she/her | 日本語もOK | 🍁",
+            "healing":"۶ৎ˗ˏˋ ♡ ˎˊ˗.ᐟ doing our best to heal together"
+        }
+    },
+    "sydney":{
+        "header":{
+            "pfpAlt":"sydney's shima rin pfp",
+            "music":"music"
+        }
+    },
+    "lilac":{
+        "header":{
+            "pfpAlt":"lilac's kyu kurarin pfp",
+            "whoAmI":"who am i?"
+        },
+        "home":{
+          "osugdsDescTop":"while still currently unreleased,",
+          "osugdsDescMiddle":"is a site that i've been the main one working on~",
+          "osugdsDescBottom":"it's a platform to find people who can make guest difficulties for your own maps, and to find new and exciting maps to make your own guest difficulties for! i hope that many people enjoy using it when we eventually finish work on it~~",
+          "osuMapping":"‧₊˚❀ osu! mapping",
+          "osuMappingDescTop":"i've done a few different things on osu! when it comes to creating my own maps, currently only having this map ranked:",
+          "osuMappingDescBottom":"but, mapping is something that does interest me quite a bit, and i would love to share more of my accomplishments as they happen~!!",
+          "mochi":"momone chinoi - mochi",
+          "mochiCreator":"mapped by yuiyamu",
+          "whoAmI":"‧₊˚❀ who am i?",
+          "whoAmIDesc":"if you're curious as to who i even am, or if you'd like to learn more about systems in general, then click below! i exist within a DID system, so identity does get a little complicated for all of us~"
+        }
+    },
+    "may":{
+        "header":{
+            "pfpAlt":"may's ena shinonome pfp"
+        },
+        "home":{
+            "hi":"hi! o/",
+            "intro":"similar to lilac, i'm pretty new here. most of what i've done so far is working on the <strong>sitewide redesign</strong> here + helping maintain some of our other projects.",
+            "intro1":"i suppose i'm basically replacing the role sydney had, but i like to maintain a low profile c: <strong>doesn't mean you're discouraged from coming and saying hi to me tho!</strong>",
+            "platform":"(only platform i use)"
+        }
+    },
+    "common":{
+        "header":{
+            "ourSets":"our sets",
+            "myGds":"my gds"
+        },
+        "gds":{
+          "loading":"now loading gds...",
+          "gds":"guest difficulties ❀",
+          "finished":"total finished",
+          "collabs":"collabs",
+          "wip":"wip",
+          "notForRank":"show not for rank gds",
+          "status":"status",
+          "host":"host",
+          "stars":"stars",
+          "amount":"mapped",
+          "dateFinished":"date finished",
+          "bns":"bns",
+          "error":"something went wrong! :c"
+        }
+    }
+}

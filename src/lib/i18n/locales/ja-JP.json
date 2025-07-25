@@ -1,0 +1,76 @@
+{
+    "yurukyan":{
+        "home":{
+            "loadingFront":"フロント情報はローディング中...",
+            "loadingSong":"曲情報を読み込んでいる...",
+            "sydney":"シドニー",
+            "lilac":"らいらっく",
+            "hazel":"ヘイズル",
+            "may":"メイ",
+            "frontedFor":"❀ 意識時間は ❀<br>{hours}時間{minutes}分でした",
+            "frontedOn":"❀ 最新の目覚めは ❀<br>{year}年{month}月{day}日でした",
+            "fronting":"{hours}時間{minutes}分",
+            "frontingLong":"{days}日間{hours}時間",
+            "lastFmListening":"最後聞いたの曲",
+            "lastFmListened":"最後聞いたの曲",
+            "bio":"19 | EN OK | 🍁",
+            "healing":"۶ৎ˗ˏˋ ♡ ˎˊ˗.ᐟ 一緒に治るように頑張る"
+        }
+    },
+    "sydney":{
+        "header":{
+            "pfpAlt":"シドニーの志摩リンプロフィール画像",
+            "music":"自分の曲"
+        }
+    },
+    "lilac":{
+        "header":{
+            "pfpAlt":"らいらっくのきゅうくらりんリンプロフィール画像",
+            "whoAmI":"あたしは誰？"
+        },
+        "home":{
+          "osugdsDescTop":"まだ未発表ですけど、",
+          "osugdsDescMiddle":"はあたしが中心となって作っているサイトです〜",
+          "osugdsDescBottom":"自分の譜面でゲスト難易度を作って人を探してと新しくてカッコいい譜面で自分のゲスト難易度を作ってためにプラットホーム です！結局完成した時に、多くの人に楽しんでもらいたいです〜〜",
+          "osuMapping":"‧₊˚❀ osu!マッピング",
+          "osuMappingDescTop":"osu!に色んなことをしてきたけど、今はこの譜面だけはランクされた：",
+          "osuMappingDescBottom":"でも、譜面を作ることはすごく気になるから、その都度に業績をもっと紹介したいです〜！！",
+          "mochi":"桃寝ちのい - mochi",
+          "mochiCreator":"作者 yuiyamu",
+          "whoAmI":"‧₊˚❀ あたしは誰？",
+          "whoAmIDesc":"あたしのことが気になるかシステムのことをもっと詳しくな方は、下にクリックしてください！DIDシステムには存在あるから、みんなのアイデンティティはちょっと複雑になります〜"
+        }
+    },
+    "may":{
+        "header":{
+            "pfpAlt":"メイの東雲絵名プロフィール画像"
+        },
+        "home":{
+            "hi":"こんにちは！ o/",
+            "intro":"らいらっくの様に、あたしも新任です。 これまであたしがやってきたことのほとんどは<strong>このサイト全体のリデザイン</strong>と他のプロジェクトのメンテナンスも手伝っています。",
+            "intro1":"基本的にシドニーの役割の代わりますが、低姿勢が好きです c: <strong>だけど、挨拶に来るのを緊張する必要はないわ！</strong>",
+            "platform":"（このプラットフォームしか使っていない）"
+        }
+    },
+    "common":{
+        "header":{
+            "ourSets":"みんあの譜面",
+            "myGds":"自分のゲスト難易度"
+        },
+        "gds":{
+          "loading":"ゲスト難易度はローディング中...",
+          "gds":"ゲスト難易度 ❀",
+          "finished":"完成合計",
+          "collabs":"コラボ",
+          "wip":"wip",
+          "notForRank":"ランクしたくない難易度を見せる",
+          "status":"現状",
+          "host":"作者",
+          "stars":"難易度 (★）",
+          "amount":"できた量",
+          "dateFinished":"完成日付",
+          "bns":"ノミネーター",
+          "error":"何かが間違っていた！:c"
+        }
+    }
+}

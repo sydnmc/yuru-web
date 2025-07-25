@@ -1,0 +1,20 @@
+{
+    "yurukyan":{
+      "home":{
+        "loadingFront":"מידע לגבי הובלה כרגע נטען...",
+        "loadingSong":"מידע לגבי השיר האחרון כרגע נטען...",
+        "sydney":"סידני",
+        "lilac":"לילך",
+        "hazel":"הייזל",
+        "may":"מאי",
+        "frontedFor":"❀ הובילה לאחרונה  למשך ❀<br> {hours} שעות, {minutes} דקות",
+        "frontedOn":"❀ הובילה לאחרונה ב-  ❀<br> {day}/{month}/{year}",
+        "fronting":"למשך {hours} שעות, {minutes} דקות",
+        "frontingLong":"למשך {days} שעות, {hours} דקות",
+        "lastFmListening":"כרגע מקשיבה ל: ",
+        "lastFmListened":"הקשיבה לאחרונה ל: ",
+        "bio":"19 | את\\היא | מדברת: אנגלית ויפנית | 🍁",
+        "healing":"۶ৎ˗ˏˋ ♡ ˎˊ˗.ᐟ עובדות קשה כדי להחלים~"
+      }
+    }
+}
