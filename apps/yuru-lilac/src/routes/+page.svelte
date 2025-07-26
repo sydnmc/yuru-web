@@ -7,8 +7,8 @@
 </svelte:head>
 
 <script lang="ts">
-    import { PUBLIC_WHOAMI_LINK } from "$env/static/public";
-    import Header from "$lib/Header.svelte";
+    import Header from "@yuru-web/yuru-assets";
+    import type { beatmapset } from "@yuru-web/yuru-assets";
     import { _ } from 'svelte-i18n';
 
     let mochi: beatmapset = {
@@ -60,7 +60,7 @@
             <h2>{$_('lilac.home.whoAmI')}</h2>
             <p>{$_('lilac.home.whoAmIDesc')}</p>
             <div style="display: flex; justify-content: center;">
-                <a href={PUBLIC_WHOAMI_LINK} id="whoami">{$_('lilac.header.whoAmI')}</a>
+                <a href="/whoami" id="whoami">{$_('lilac.header.whoAmI')}</a>
             </div>
             <img id="non" src="/lilac/non.png" alt="momone chinoi"/>
         </div>

@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "check-types": "svelte-check --tsconfig ./tsconfig.json"
+    "dev": "svelte-kit sync && svelte-package --watch --input=src",
+    "build": "svelte-kit sync && svelte-package --input=src"
   },
   "files": [
     "dist",
@@ -19,9 +20,10 @@
   "exports": {
     ".": {
       "types": "./index.d.ts",
-      "svelte": "./index.ts"
+      "svelte": "./dist/index.js"
     },
-    "./i18n": "./lib/i18n/index.ts"
+    "./assets/*": "./assets/*",
+    "./i18n": "./dist/i18n/index.js"
   },
   "peerDependencies": {
     "svelte": "^5.0.0"

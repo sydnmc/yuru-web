@@ -7,15 +7,21 @@
 </svelte:head>
 
 <script lang="ts">
+    import '@yuru-web/yuru-assets/assets/base.css';
+    import twitter from '@yuru-web/yuru-assets/assets/twitter.png';
+    import osu from '@yuru-web/yuru-assets/assets/osu.png';
+    import discord from '@yuru-web/yuru-assets/assets/discord.png';
+    import sydPfp from '@yuru-web/yuru-assets/assets/sydneypfp.png';
+    import lilacPfp from '@yuru-web/yuru-assets/assets/lilacpfp.png';
+    import hazelPfp from '@yuru-web/yuru-assets/assets/hazelpfp.jpg';
+    import mayPfp from '@yuru-web/yuru-assets/assets/maypfp.png';
+
+    import { getPageRoot, fetchFromApi } from '@yuru-web/yuru-assets';
+    import type { sysmember } from '@yuru-web/yuru-assets';
+
     import { _, locale } from 'svelte-i18n';
     import { onMount } from 'svelte';
-    //import { PUBLIC_API, PUBLIC_HOME_LINK, PUBLIC_LILAC_HOME, PUBLIC_MAY_HOME, PUBLIC_SYDNEY_HOME } from '$env/static/public';
     import { Locale } from '@yuru-web/yuru-assets';
-
-    async function fetchFromApi(apiEndpoint: string) {
-        let response = await fetch(`${PUBLIC_API}/${apiEndpoint}`);
-        return await response.json();
-    }
 
 	onMount(async () => {
 		const frontList = await fetchFromApi(`pkInfo`);
@@ -73,10 +79,10 @@
     }
 
     let sysmembers: sysmember[] = $state([
-        {name: 'sydney', type: "secondary", img: "https://api.yuru.ca/images/sydneypfp.png", main: false, link: PUBLIC_SYDNEY_HOME},
-        {name: 'lilac', type: "primary", img: "https://api.yuru.ca/images/lilacpfp.png", main: true, link: PUBLIC_LILAC_HOME},
-        {name: 'hazel', type: "secondary", img: "https://api.yuru.ca/images/hazelpfp.jpg", main: false, link: ''},
-        {name: 'may', type: "primary", img: "https://api.yuru.ca/images/maypfp.jpg", main: false, link: PUBLIC_MAY_HOME}
+        {name: 'sydney', type: "secondary", img: sydPfp, main: false, link: getPageRoot('syd')},
+        {name: 'lilac', type: "primary", img: lilacPfp, main: true, link: getPageRoot('lilac')},
+        {name: 'hazel', type: "secondary", img: hazelPfp, main: false, link: ''},
+        {name: 'may', type: "primary", img: mayPfp, main: false, link: getPageRoot('may')}
     ]);
     let main: sysmember = $state({} as sysmember);
     let sleepyAlters: sysmember[] = $state([]);
@@ -123,7 +129,7 @@
         <a class="fa fa-github hidden-link" style="color: white; font-size: 23px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
         <Locale mode="home" person="yurukyan" page="home"/>
     </div>
-    <h1><a id="title" href={PUBLIC_HOME_LINK}>yurukyan△</a></h1>
+    <h1><a id="title" href={getPageRoot('yurukyan')}>yurukyan△</a></h1>
     <a class="fronter" href={main.link}>
         <div class="fronter-img">
             <img alt="{main.name}'s profile pic" src={main.img}>
@@ -166,11 +172,11 @@
 
       <div class="socials-bar socials-bar-big hidden-link">
         <strong>
-            <a href="https://twitter.com/sydnmc_"><img src="/common/twitter.png" alt="twitter logo"> twitter</a>
+            <a href="https://twitter.com/sydnmc_"><img src={twitter} alt="twitter logo"> twitter</a>
             <span class="social-divide">|</span>
-            <a href="https://osu.ppy.sh/users/14829744"><img src="/common/osu.png" alt="osu logo"> osu!</a>
+            <a href="https://osu.ppy.sh/users/14829744"><img src={osu} alt="osu logo"> osu!</a>
             <span class="social-divide">|</span>
-            <a href="discord://-/users/226885796739678229"><img src="/common/discord.png" alt="discord logo"> discord</a>
+            <a href="discord://-/users/226885796739678229"><img src={discord} alt="discord logo"> discord</a>
         </strong>
       </div>
 
@@ -221,7 +227,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    background-image: url('/yurukyan/bg.jpg');
+    background-image: url('/bg.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(12.5px) brightness(0.9);
@@ -495,7 +501,7 @@ header {
 }
 
 #shima-img {
-    background-image: url('/yurukyan/shima.png');
+    background-image: url('/shima.png');
     height: 230px;
     margin-top: 20px;
     border: 3px solid #79b8d4;

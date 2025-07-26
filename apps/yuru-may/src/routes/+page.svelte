@@ -1,14 +1,12 @@
 <svelte:head>
-    <meta property="og:site_name" content="yurukyan△">
-    <meta property="og:title" content="mayniaria△">
     <meta property="og:description" content="may's homepage >.<">
-    <meta name="theme-color" content="#dee0ed">
-    <title>mayniaria△</title>
 </svelte:head>
 
 <script lang="ts">
-    import Header from "$lib/Header.svelte";
+    import Header from "@yuru-web/yuru-assets";
     import { _ } from 'svelte-i18n';
+    import discord from '@yuru-web/yuru-assets/assets/discord.png';
+    import '@yuru-web/yuru-assets/assets/base.css';
 
     let neneProgress = 0;
     let nenePaused = true;
@@ -23,7 +21,7 @@
 
 <div id="background"></div>
 <Header person="may" page="home"/>
-<audio src="/may/nene.ogg" bind:paused={nenePaused} bind:currentTime={neneProgress}></audio>
+<audio src="/nene.ogg" bind:paused={nenePaused} bind:currentTime={neneProgress}></audio>
 <h1>{$_('may.home.hi')}</h1>
 <p style="margin-bottom: 5px;">{@html $_('may.home.intro')}</p>
 <p style="margin-top: 0">{@html $_('may.home.intro1')}</p>
@@ -32,12 +30,12 @@
 </div>
 <div id="socials">
     <a href="discord://-/users/1181855270809370775">
-        <img src="/common/discord.png" alt="discord"/>
+        <img src={discord} alt="discord"/>
         <span>discord</span>
     </a>
     <span>{$_('may.home.platform')}</span>
 </div>
-<img id="nene" src="/may/cute ass nene.png" alt="nene chibi" on:click={() => playNene()} />
+<img id="nene" src="/cute ass nene.png" alt="nene chibi" on:click={() => playNene()} />
 
 <style>
 #background {
@@ -46,7 +44,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    background-image: url('/may/mmj sekai.webp');
+    background-image: url('/mmj sekai.webp');
     background-size: cover;
     background-position: center;
     filter: brightness(0.15);

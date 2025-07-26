@@ -7,8 +7,8 @@
 </svelte:head>
 
 <script lang="ts">
-    import GuestDifficulties from "$lib/GuestDifficulties.svelte";
-    import LegacyHeader from "$lib/LegacyHeader.svelte";
+    import GuestDifficulties from "@yuru-web/yuru-assets";
+    import LegacyHeader from "@yuru-web/yuru-assets";
 </script>
 
 <LegacyHeader page="gds"/>

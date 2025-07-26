@@ -8,7 +8,7 @@
 
 <script lang="ts">
     import { PUBLIC_API, PUBLIC_MUSIC_LINK } from "$env/static/public";
-    import LegacyHeader from "$lib/LegacyHeader.svelte";
+    import LegacyHeader from "@yuru-web/yuru-assets";
     import * as osuColourize from 'osu-colourizer';
 
     async function fetchFromApi(apiEndpoint: string) {

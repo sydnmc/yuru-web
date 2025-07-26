@@ -7,9 +7,7 @@
 </svelte:head>
 
 <script lang="ts">
-    import LegacyHeader from "$lib/LegacyHeader.svelte";
-
-
+    import LegacyHeader from "@yuru-web/yuru-assets";
 </script>
 
 <LegacyHeader page="music"/>

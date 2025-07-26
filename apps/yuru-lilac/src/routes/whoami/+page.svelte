@@ -7,7 +7,7 @@
 </svelte:head>
 
 <script lang="ts">
-    import Header from "$lib/Header.svelte";
+    import Header from "@yuru-web/yuru-assets";
 </script>
 
 <Header person="lilac" page="whoami"/>

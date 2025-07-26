@@ -7,8 +7,8 @@
 </svelte:head>
 
 <script lang="ts">
-    import GuestDifficulties from "$lib/GuestDifficulties.svelte";
-    import Header from "$lib/Header.svelte";
+    import GuestDifficulties from "@yuru-web/yuru-assets";
+    import Header from "@yuru-web/yuru-assets";
 </script>
 
 <Header person="lilac" page="gds"/>

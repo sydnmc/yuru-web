@@ -31,11 +31,6 @@
 		"vitest-browser-svelte": "^0.1.0"
 	},
 	"dependencies": {
-		"cors": "^2.8.5",
-		"dotenv": "^17.0.1",
-		"express": "^5.1.0",
-		"multer": "^2.0.1",
-		"osu-colourizer": "^1.0.1",
 		"svelte-i18n": "^4.0.1"
 	}
 }
