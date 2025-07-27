@@ -19,7 +19,7 @@
   ],
   "exports": {
     ".": {
-      "types": "./index.d.ts",
+      "types": "./dist/index.d.ts",
       "svelte": "./dist/index.js"
     },
     "./assets/*": "./assets/*",

@@ -1,6 +1,9 @@
 node_modules
 .npmrc
 
+#i love macos
+.DS_Store
+
 #src/lib/server/lilacgds.json
 #src/lib/server/sydneygds.json
 #src/lib/server/sets.json
