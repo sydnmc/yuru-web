@@ -2,6 +2,7 @@
 
 yurukyan△ system personal website~
 
+![yuru-web](https://yui.yuru.ca/trn0rcd3o2.png)
 
 ## localization
 our system (mostly lilac) is currently working on translating every page on our site into japanese - and, thanks to the help of our lovely girlfriend, work for hebrew translations is also currently underway! however, this does not apply to sydney's pages, as those are no longer being maintained.
