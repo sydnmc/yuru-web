@@ -2,7 +2,7 @@
     //TODO: add back support for original metadata (maybe add something that detects language script...?)
     export let person: string;
 
-    import * as osuColourize from "osu-colourizer";
+    import { colourizeHex } from "osu-colourizer";
     import { _ } from "svelte-i18n";
     import type { gd } from "./index.d";
     import AudioPlayer from "./components/AudioPlayer.svelte";
@@ -43,7 +43,7 @@
             //loops through every diff we have
             let bgLink = mapStatus[i].bgLink;
             if (!bgLink) {
-                mapStatus[i].bgLink = "/common/tamate.jpg"; //replaces backgrounds with no link with えっとですねぇ～　たまてって名前は玉手箱が由来でして
+                mapStatus[i].bgLink = "/tamate.jpg"; //replaces backgrounds with no link with えっとですねぇ～　たまてって名前は玉手箱が由来でして
             }
 
             //adding difficulty colour
@@ -54,7 +54,7 @@
                 if (typeof diff.sr === "string") {
                     bgColour = "rgb(222, 224, 237)"; //makes it the wip colour if its still wip but in a plural gd thats finished already
                 } else {
-                    bgColour = osuColourize.colourizeHex(diff.sr);
+                    bgColour = colourizeHex(diff.sr);
                     bgColour = bgColour + "4d"; //30% brightness in hex
                 }
                 diff.diffColour = bgColour;
@@ -136,8 +136,8 @@
                                 <div class="diff {determineGdColour(diff.sr, gd.status)}" style="background-color: {diff.diffColour}">
                                     <h3><a href="https://osu.ppy.sh/beatmapsets/{gd.mapId}#osu/{diff.id}">{diff.diffname}</a></h3>
                                     <p>{$_("common.gds.stars")} <span>{diff.sr}</span></p>
-                                    <p>{$_("common.gds.amount")}<span>{diff.amountMapped}</span></p>
-                                    <p>{$_("common.gds.dateFinished")}<span>{diff.dateFinished}</span></p>
+                                    <p>{$_("common.gds.amount")} <span>{diff.amountMapped}</span></p>
+                                    <p>{$_("common.gds.dateFinished")} <span>{diff.dateFinished}</span></p>
                                 </div>
                             {/each}
                         </div>

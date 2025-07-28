@@ -113,6 +113,14 @@
         }
         pkInfoAru = true;
     }
+
+    let linkContainer = ["osugds.moe", "flanstore.yuru.ca", "api.yuru.ca", "jelly.yuru.ca"];
+    let personLinkContainer = ["syd.yuru.ca", "lilac.yuru.ca", "may.yuru.ca"];
+
+    let linkId = $state(-1);
+    function displayLinkHover(id: number) {
+      linkId = id;
+    }
 </script>
 
 <div id="background"></div>
@@ -198,15 +206,27 @@
     </div>
     <div id="shima-img">
         <div id="link-container">
-                <a href="https://osugds.moe">osugds.moe</a>
-                <a href="https://flanstore.yuru.ca">flanstore.yuru.ca</a>
-                <a href="https://api.yuru.ca">api.yuru.ca</a>
-                <a href="https://jelly.yuru.ca">jelly.yuru.ca</a>
-
-                <div id="link-divide"></div>
-                <a href="https://syd.yuru.ca">syd.yuru.ca</a>
-                <a href="https://lilac.yuru.ca">lilac.yuru.ca</a>
-                <a href="https://may.yuru.ca">may.yuru.ca</a>
+            {#each linkContainer as link, i}
+                <div>
+                    <div class="hover-dot" style="opacity: {linkId === i? 1 : 0}"></div>
+                    <a href="https://{link}"
+                        onmouseover={() => displayLinkHover(i)}
+                        onmouseleave={() => displayLinkHover(-1)}
+                        onfocus={() => displayLinkHover(i)}
+                        onfocusout={() => displayLinkHover(-1)}>{link}</a>
+                </div>
+            {/each}
+            <div id="link-divide"></div>
+            {#each personLinkContainer as link, i}
+                <div>
+                    <div class="hover-dot" style="opacity: {linkId === i+4? 1 : 0}"></div>
+                    <a href="https://{link}"
+                        onmouseover={() => displayLinkHover(i+4)}
+                        onmouseleave={() => displayLinkHover(-1)}
+                        onfocus={() => displayLinkHover(i+4)}
+                        onfocusout={() => displayLinkHover(-1)}>{link}</a>
+                </div>
+            {/each}
         </div>
     </div>
 </section>
@@ -263,7 +283,7 @@
         margin-bottom: 0px;
     }
     header a {
-        padding-right: 6px; /* gives spacing to the icons */
+        padding-right: 2px; /* gives spacing to the icons */
     }
 
     #mobile-button-box {
@@ -516,8 +536,21 @@
         vertical-align: middle;
     }
 
-    #link-container a {
+    #link-container div a {
         text-decoration: none;
+    }
+
+    .hover-dot {
+        display: inline-block;
+        opacity: 0;
+        height: 10px;
+        width: 10px;
+        margin-right: 5px;
+        background: radial-gradient(circle,rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+        filter: blur(4px);
+        border-radius: 50%;
+        transition: opacity 0.15s ease-in;
+        vertical-align: middle;
     }
 
     #shima-img {
@@ -616,16 +649,12 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 101%; /* absolutely horrid disgusting solution LOL */
             display: flex;
             justify-content: end;
             align-items: center;
             height: 30px;
             margin-bottom: 0px;
-        }
-
-        #mobile-button-box a {
-            padding-right: 4px; /* gives spacing to the icons */
         }
 
         header {

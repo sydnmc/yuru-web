@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" href="https://api.yuru.ca/favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- will keep for now, but i would like to move away from this one fontawesome 4 host :p -->
+
+		<meta property="og:site_name" content="yurukyan△">
+		<meta name="theme-color" content="#5a49z69">
+        <meta property="og:site_name" content="api△">
+        <meta property="og:title" content="api">
+        <meta property="og:description" content="api used for yuru.ca">
+        <meta name="theme-color" content="#FCE758">
+        <title>api△</title>
+
+		<!-- stuff needed for google fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap" rel="stylesheet">
+	</head>
+
+  <header>
+    <a class="fa fa-github" href="https://github.com/sydnmc/yuru-web"></a>
+  </header>
+    <section id="page">
+      <h1 style="display: inline-block"><a id="title" href="https://yuru.ca">yurukyan△</a></h1><h2 id="api-text">api</h2>
+      <div class="section-divide"></div>
+      <h1>endpoints</h1>
+      <div>
+        <p><code>/gds</code> - returns the osu! guest difficulties list for lilac or sydney, requires <code>person=STRING</code> option</p>
+        <p><code>/sets</code> - returns the list of osu! beatmapsets that both of us have done</p>
+        <p><code>/songInfo</code> - using last.fm, returns the song last listened to, or the song we're currently listening to</p>
+        <p><code>/pkInfo</code> - using pluralkit, returns information about the last front each alter had, as well as a percentage that each alter has fronted in that timeframe</p>
+      </div>
+      <div class="section-divide"></div>
+      <div id="footer">
+        <span>made by</span>
+        <img src="https://api.yuru.ca/favicon.ico" alt="yurukyan">
+        <span><a href="https://yuru.ca">yurukyan</a> with <i class="fa fa-heart"></i></span>
+      </div>
+    </section>
+
+<style>
+@font-face { font-family: Kyokasho; src: url('https://api.yuru.ca/Kyokasho.ttf')}
+:root {
+    --tent: #FCE758;
+    --text: rgb(180 181 191);
+    --link: rgb(100, 101, 112);
+    --background: rgb(40 40 40);
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+
+a {
+    color: var(--link);
+}
+
+:root {
+    --tent: #FCE758;
+}
+
+/* header icons */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 5vh;
+    margin-bottom: 0px;
+}
+
+.fa-github {
+    position: relative;
+    top: 5px;
+    right: 10px;
+    color: white;
+    font-size: 26px;
+    text-decoration: none;
+}
+
+/* page section */
+#page {
+    margin-left: 24%;
+    margin-right: 24%;
+}
+
+#title {
+    font-family: Kyokasho, sans-serif;
+    color: var(--tent);
+    font-size: 58px;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+#api-text {
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.section-divide {
+    width: 100%;
+    height: 3px;
+    background-color: rgb(60, 60, 60);
+}
+
+#footer {
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+} #footer img {
+    width: 2%;
+    vertical-align: middle;
+} #footer a {
+    text-decoration: none;
+    color: var(--tent);
+}
+
+
+/* mobile */
+@media only screen and (max-device-width: 768px)
+{
+    #page {
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+}
+</style>

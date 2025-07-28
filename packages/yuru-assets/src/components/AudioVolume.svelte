@@ -4,20 +4,32 @@
 
   let display = false;
   let volume = 0.2;
+  let error = false;
 
   audioInfo.subscribe((info) => {
     display = info.currentlyPlaying;
+    error = info.error;
   });
 </script>
 
-<main style="background-color: var(--{person}-main)" class:slide-away={!display}>
+{#if error}
+<div style="background-color: var(--error);" class="main error">
+    <span>song preview error &gt;_&lt;;;</span>
+</div>
+{:else}
+<div class="main" style="background-color: var(--{person}-main);" class:slide-away={!display}>
     <span>volume: </span>
     <input type="range" min="0" max="1" step="0.01" bind:value={volume} oninput={() => changeVolume(volume)} style="background: linear-gradient(to right, #79b8d4 0%, #79b8d4 {volume*100}%, white {volume*100}%, white 100%);">
-</main>
+</div>
+{/if}
 
 
 <style>
-main {
+:root {
+    --error: #e35540;
+}
+
+.main {
     position: fixed;
     display: flex;
     align-items: center;
@@ -27,6 +39,11 @@ main {
     height: 40px;
     border-top-left-radius: 15px;
     animation: slide-come 0.2s forwards;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
 }
 
 .slide-away {

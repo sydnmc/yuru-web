@@ -1,6 +1,6 @@
 {
   "name": "@repo/yuru-assets",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "svelte-kit sync && svelte-package --watch --input=src",
@@ -42,6 +42,6 @@
     "typescript": "5.8.2",
     "vite": "^6.3.2",
     "svelte-i18n": "^4.0.1",
-    "osu-colourizer": "^1.0.1"
+    "osu-colourizer": "^1.0.4"
   }
 }

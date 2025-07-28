@@ -2,10 +2,13 @@ import cors from 'cors';
 import express from 'express';
 import fs from 'node:fs';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
 const osuApi = "https://osu.ppy.sh/api/get_beatmaps";
+//will add back autoupdating later ^^
 const app = express();
 
 app.listen(3333, () => {
@@ -13,11 +16,13 @@ app.listen(3333, () => {
 })
 app.use(cors());
 app.use(express.json());
-app.use(express.static('common')); //serves (cunt) all files from the common folder
+app.use(express.static('page/assets/')); //serves the assets for the api page ^-^
 app.use(express.urlencoded({ extended: true }));
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.get('/', (req, res) => { //serves the basic api webpage~
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname+'/page/index.html');
 });
 
 app.get('/gds', (req, res) => { //sends back the gd info we have stored

@@ -7,14 +7,16 @@
   let showPanel = false;
   function openPanel() {
     showPanel = true;
-  } 
+  }
   function closePanel() {
     showPanel = false;
   }
 
   onMount(() => {
-    let audio = new Audio(`https://b.ppy.sh/preview/${mapId}.mp3`); //creates audio html elements for each audio we have
-    addToPageAudioController(mapId, audio); //each map is added to here so when one audio plays, the currently playing one gets paused
+    if (mapId) { //whatever we get will be falsy enough if invalid, so it's chill,,
+      let audio = new Audio(`https://b.ppy.sh/preview/${mapId}.mp3`); //creates audio html elements for each audio we have
+      addToPageAudioController(mapId, audio); //each map is added to here so when one audio plays, the currently playing one gets paused
+    }
   });
 
   let buttonType = "play";
@@ -26,7 +28,7 @@
     unsub = audioInfo.subscribe((info) => {
       audioProgress = info.progress;
       showPanel = true; //constantly forces the panel open while playing
-      if (info.id !== mapId) {
+      if (info.id !== mapId || info.error) {
         buttonType = "play";
         audioPlaying = false;
         showPanel = false;
@@ -64,7 +66,7 @@
   justify-content: center;
   height: 100%;
   background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.75) 100%);
-  transition: opacity 0.1s ease-in-out; 
+  transition: opacity 0.1s ease-in-out;
 }
 
 .play-button-container {

@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'; //handles subscriptions in svelte
 
-export let audioInfo = writable({progress: -1, id: -1, currentlyPlaying: false});
+export let audioInfo = writable({progress: -1, id: -1, currentlyPlaying: false, error: false});
 let animationCounter = -1;
 
 interface AudioStore {
@@ -15,24 +15,27 @@ export function addToPageAudioController(mapId: number, audio: HTMLAudioElement)
 
 export function playFromAudioController(index: number) {
   let currentAudio = audioStore[index];
+  if (currentAudio) {
+    //in order to make this clicked audio play, we have to pause the last one (if there is one)
+    Object.entries(audioStore).forEach(audio => { //pauses all currently playing audio, if we have any c:
+      audio[1].audio.pause();
+    });
 
-  //in order to make this clicked audio play, we have to pause the last one (if there is one)
-  Object.entries(audioStore).forEach(audio => { //pauses all currently playing audio, if we have any c:
-    audio[1].audio.pause();
-  });
+    currentAudio.isPlaying = true;
+    currentAudio.audio.volume = 0.2;
+    currentAudio.audio.play();
 
-  currentAudio.isPlaying = true;
-  currentAudio.audio.volume = 0.2;
-  currentAudio.audio.play();
-
-  startUpdatingProgress(index, currentAudio.audio);
+    startUpdatingProgress(index, currentAudio.audio);
+  } else { //if our audio turns out to be undefined
+    audioInfo.set({progress: -1, id: -1, currentlyPlaying: true, error: true});
+  }
 }
 
 export function pauseFromAudioController(index: number) {
   let currentAudio = audioStore[index];
   currentAudio.isPlaying = false;
   currentAudio.audio.pause();
-  audioInfo.set({progress: -1, id: -1, currentlyPlaying: false});
+  audioInfo.set({progress: -1, id: -1, currentlyPlaying: false, error: false});
 }
 
 export function changeVolume(volume: number) {
@@ -48,7 +51,7 @@ function startUpdatingProgress(id: number, audio: HTMLAudioElement) {
 		}
 
 		let progress = audio.currentTime*10; //every song file is 10 seconds, so we get a percentage out of this
-		audioInfo.set({progress, id, currentlyPlaying: true});
+		audioInfo.set({progress, id, currentlyPlaying: true, error: false});
 		animationCounter = requestAnimationFrame(pollAudioProgress);
 	}
 

@@ -5,6 +5,7 @@
 </svelte:head>
 
 <script lang="ts">
+    import { colourize } from "osu-colourizer";
     import { getPageRoot, fetchFromApi } from "@repo/yuru-assets";
     import LegacyHeader from "$lib/LegacyHeader.svelte";
     import "@repo/yuru-static/assets/base.css";
@@ -133,8 +134,7 @@
                 <p class="upper-ranked-text">❀ latest ranked gd ❀</p>
                 <h2 class="gd-title"><a class="gd-link" href="https://osu.ppy.sh/beatmapsets/{gd?.mapId}">{gd?.title}</a></h2>
                 <p class="gd-artist"><span class="artist-text">by</span><span id="latest-ranked-artist">{gd?.artist}</span></p>
-                <p class="gd-text">{gd?.maps[0].diffname} | {gd?.maps[0].sr} ☆</p>
-                <!-- this should colourize, but that doesn't work in prod because of d3 - should push through the colour from the server :3 -->
+                <p class="gd-text" style="color: {colourize(gd?.maps[0].sr)}">{gd?.maps[0].diffname} | {gd?.maps[0].sr} ☆</p>
             </div>
             {:catch}
                 <p>mreow</p>
@@ -144,7 +144,7 @@
             <div class="gd-thumb" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url({gd.bgLink}">
                 <h2 class="gd-title"><a class="gd-link" style="font-size: 22px" href="https://osu.ppy.sh/beatmapsets/{gd.mapId}">{gd.title}</a></h2>
                 <p class="gd-artist"><span class="artist-text">by</span>{gd.artist}</p>
-                <p class="gd-text">{gd.maps[0].diffname} | {gd.maps[0].sr} ☆</p>
+                <p class="gd-text" style="color: {colourize(gd.maps[0].sr)}">{gd.maps[0].diffname} | {gd.maps[0].sr} ☆</p>
             </div>
           {/each}
         </div>

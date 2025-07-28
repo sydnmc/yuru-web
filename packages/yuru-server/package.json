@@ -1,6 +1,6 @@
 {
   "name": "@repo/yuru-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "node main.js"
@@ -10,7 +10,7 @@
     "dotenv": "^17.0.1",
     "express": "^5.1.0",
     "multer": "^2.0.1",
-    "osu-colourizer": "^1.0.1"
+    "osu-colourizer": "^1.0.4"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
