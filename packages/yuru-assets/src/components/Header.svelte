@@ -6,8 +6,9 @@
     import Locale from "./Locale.svelte";
     import { pageLocales, localeInfo } from "./langSupport";
     import { getPageRoot } from "../pageHelper";
-    import mayPfp from '@repo/yuru-static/assets/maypfp.png';
-    import lilacPfp from '@repo/yuru-static/assets/lilacPfp.png';
+    //import mayPfp from '@repo/yuru-static/assets/maypfp.png';
+    //import lilacPfp from '@repo/yuru-static/assets/lilacPfp.png';
+    //vercel doesn't seem to fw these,,
 
     let prevPage = "";
     if (page === "home") {
@@ -33,7 +34,7 @@
     switch (person) {
         case "lilac":
             pfpAlt = $_("lilac.header.pfpAlt");
-            pfpLink = lilacPfp;
+            pfpLink = "/lilacpfp.png";
             username = "yuiyamu";
             buttonInfo.push({
                 name: $_("common.header.myGds"),
@@ -46,7 +47,7 @@
             break;
         case "may":
             pfpAlt = $_("may.header.pfpAlt");
-            pfpLink = mayPfp;
+            pfpLink = "/maypfp.png";
             username = "mayniaria";
             break;
     }
