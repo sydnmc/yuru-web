@@ -8,7 +8,6 @@
     import { getPageRoot, fetchFromApi } from "@repo/yuru-assets";
     import LegacyHeader from "$lib/LegacyHeader.svelte";
     import "@repo/yuru-static/assets/base.css";
-    import * as osuColourize from "osu-colourizer";
 
     let notableSets: beatmapset[] = [
         {
@@ -134,7 +133,8 @@
                 <p class="upper-ranked-text">❀ latest ranked gd ❀</p>
                 <h2 class="gd-title"><a class="gd-link" href="https://osu.ppy.sh/beatmapsets/{gd?.mapId}">{gd?.title}</a></h2>
                 <p class="gd-artist"><span class="artist-text">by</span><span id="latest-ranked-artist">{gd?.artist}</span></p>
-                <p class="gd-text" style="color: {osuColourize.colourize(gd?.maps[0].sr)}">{gd?.maps[0].diffname} | {gd?.maps[0].sr} ☆</p>
+                <p class="gd-text">{gd?.maps[0].diffname} | {gd?.maps[0].sr} ☆</p>
+                <!-- this should colourize, but that doesn't work in prod because of d3 - should push through the colour from the server :3 -->
             </div>
             {:catch}
                 <p>mreow</p>

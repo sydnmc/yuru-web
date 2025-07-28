@@ -4,7 +4,7 @@
 
 <div id="page">
     <a id="header" href="https://yuru.ca/">
-        <img alt="system pfp" src="/common/systempfp.jpg">
+        <img alt="system pfp" src="/systempfp.jpg">
         <h1>{page.status}△</h1>
         <h2>{page.error?.message.toLowerCase()}</h2>
     </a>

@@ -22,7 +22,6 @@
   "dependencies": {
     "@repo/yuru-assets": "workspace:*",
     "@repo/yuru-static":"workspace:*",
-    "@repo/i18n": "workspace:*",
-    "osu-colourizer": "^1.0.1"
+    "@repo/i18n": "workspace:*"
   }
 }
