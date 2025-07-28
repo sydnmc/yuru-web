@@ -1,27 +1,25 @@
 <svelte:head>
-    <meta property="og:site_name" content="yurukyan△">
-    <meta property="og:title" content="homepage">
-    <meta property="og:description" content="yurukyan△ system's personal webpage">
-    <meta name="theme-color" content="#FCE758">
+    <meta property="og:title" content="yurukyan△">
+    <meta property="og:description" content="yurukyan system • sydnmc, yuiyamu, kyatarii, and mayniaria">
     <title>yurukyan△</title>
 </svelte:head>
 
 <script lang="ts">
-    import '@yuru-web/yuru-assets/assets/base.css';
-    import twitter from '@yuru-web/yuru-assets/assets/twitter.png';
-    import osu from '@yuru-web/yuru-assets/assets/osu.png';
-    import discord from '@yuru-web/yuru-assets/assets/discord.png';
-    import sydPfp from '@yuru-web/yuru-assets/assets/sydneypfp.png';
-    import lilacPfp from '@yuru-web/yuru-assets/assets/lilacpfp.png';
-    import hazelPfp from '@yuru-web/yuru-assets/assets/hazelpfp.jpg';
-    import mayPfp from '@yuru-web/yuru-assets/assets/maypfp.png';
+    import '@repo/yuru-static/assets/base.css';
+    import twitter from '@repo/yuru-static/assets/twitter.png';
+    import osu from '@repo/yuru-static/assets/osu.png';
+    import discord from '@repo/yuru-static/assets/discord.png';
+    import sydPfp from '@repo/yuru-static/assets/sydneypfp.png';
+    import lilacPfp from '@repo/yuru-static/assets/lilacpfp.png';
+    import hazelPfp from '@repo/yuru-static/assets/hazelpfp.jpg';
+    import mayPfp from '@repo/yuru-static/assets/maypfp.png';
 
-    import { getPageRoot, fetchFromApi } from '@yuru-web/yuru-assets';
-    import type { sysmember } from '@yuru-web/yuru-assets';
+    import { getPageRoot, fetchFromApi } from '@repo/yuru-assets';
+    import type { sysmember } from '@repo/yuru-assets';
 
-    import { _, locale } from 'svelte-i18n';
+    import { _, locale } from '@repo/i18n';
     import { onMount } from 'svelte';
-    import { Locale } from '@yuru-web/yuru-assets';
+    import { Locale } from '@repo/yuru-assets';
 
 	onMount(async () => {
 		const frontList = await fetchFromApi(`pkInfo`);
@@ -214,377 +212,46 @@
 </section>
 
 <style>
-/* local variables */
-:root {
-    --tent: #FCE758;
-    --shine: linear-gradient(90deg,rgba(73, 114, 133, 1) 0%, rgba(96, 191, 135, 1) 50%, rgba(133, 127, 102, 1) 100%);
-    --accent: #497285;
-}
-
-#background {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-image: url('/bg.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: blur(12.5px) brightness(0.9);
-    z-index: -1;
-}
-
-.he-IL span {
-    direction: rtl;
-} .he-IL p {
-    direction: rtl;
-}
-
-/* body/header */
-h1 {
-    font-size: 58px;
-    padding-left: 15px;
-    font-weight: normal;
-}
-
-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    height: 5vh;
-    margin-bottom: 0px;
-} header a {
-    padding-right: 6px; /* gives spacing to the icons */
-}
-
-#mobile-button-box {
-    display: none;
-}
-
-#page {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    height: 100vh;
-    justify-content: center;
-    margin-left: 16%;
-    margin-right: 16%;
-}
-
-#info-box {
-    padding: 0 40px 40px 40px;
-    border: 3px solid #79b8d4;
-    backdrop-filter: brightness(0.5);
-    border-radius: 15px;
-    font-size: 18px;
-}
-
-/* main content */
-#title {
-    font-family: Kyokasho, sans-serif;
-    color: var(--tent);
-    font-size: 64px;
-    text-decoration: none;
-}
-
-.fronter {
-    display: flex;
-    position: relative;
-    cursor: pointer;
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-    height: 90px;
-    box-shadow: -2px 8px 20px 6px rgba(0,0,0,0.3);
-    transition: 0.3s;
-    text-decoration: none;
-    color: var(--text);
-} .fronter::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 5px;
-    padding: 3px;
-    background: var(--shine);
-    mask:
-        linear-gradient(var(--transparent)) content-box,
-        linear-gradient(var(--transparent));
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    background-size: 500% auto;
-    animation: shine 5s ease-in-out infinite alternate;
-} .fronter:hover {
-    box-shadow: -2px 8px 20px 16px rgba(0,0,0,0.3); /* increases the spread when you hover over */
-    transform: rotate(0.6deg) scale(1.03);
-}
-
-.he-IL .fronter {
-    direction: rtl;
-}
-
-@keyframes shine {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
-}
-
-.fronter .fronter-img {
-    margin: 3px; /* adds back in the 3px padding from the border */
-}
-
-.fronter-img {
-    padding: 3px;
-    height: 78px; /* not sure why this is the case, might have to look into it */
-} .fronter-img img {
-    max-height: 100%; /* limits height growth of fronter imgs */
-    border-radius: 5px;
-}
-
-.fronter-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    margin-left: 5px;
-}
-
-.fronter-text span {
-    font-family: Kyokasho, sans-serif;
-    font-size: 38px;
-    color: white;
-}
-
-.fronter-text p {
-    margin: 0px;
-}
-
-.alter {
-    display: flex;
-    align-items: center;
-    position: relative;
-    border: 2px solid var(--accent);
-    border-radius: 5px;
-    cursor: pointer;
-    height: 50px;
-    width: 32%;
-    text-decoration: none;
-    color: var(--text);
-    box-shadow: -2px 8px 20px 6px rgba(0,0,0,0.3);
-    transition: 0.3s;
-} .alter:hover {
-    box-shadow: -2px 8px 20px 16px rgba(0,0,0,0.3); /* increases the spread when you hover over */
-    transform: rotate(2deg) scale(1.03);
-}
-
-.alter-img {
-    padding: 3px;
-    height: 44px; /* not sure why this is the case, might have to look into it */
-} .alter-img img {
-    max-height: 100%; /* limits height growth of fronter imgs */
-    border-radius: 5px;
-}
-
-.he-IL .alter {
-    direction: rtl;
-}
-
-.alter-name {
-    font-family: Kyokasho, sans-serif;
-    font-size: 32px;
-    color: white;
-    margin-right: 12px;
-    margin-left: 2px;
-}
-
-.alter-text {
-    font-size: 14px;
-    text-align: left;
-} .he-IL .alter-text {
-    text-align: right;
-    margin-right: 10px;
-}
-
-#alter-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-    margin-left: 25px;
-    margin-right: 25px;
-}
-
-#front-percent-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#front-percentage {
-    display: flex;
-    width: 90%;
-    height: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.front-percent-hover {
-    position: absolute;
-    font-family: "Zen Kaku Gothic New", sans-serif;
-    font-size: 14px;
-    visibility: hidden;
-    width: 150px;
-    left: calc(50% - (150px/2)); /* position is exactly halfway across the bar */
-    bottom: calc(20px + 5px + 2px); /* bar is 20px wide, plus 5 for the arrow and 2 for extra spacing~ */
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    text-align: center;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    border-radius: 4px;
-    z-index: 1;
-} .front-percent-person {
-    position: relative;
-} .front-percent-person:hover .front-percent-hover { /* new class for each bar, just used to make hovers work properly */
-    visibility: visible;
-} .front-percent-hover::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: black transparent transparent transparent; /* whatever this magic is makes a triangle ehe */
-  }
-
-/* would be nice to align images to some baseline, but nothing seemed to really work */
-
-.he-IL #lastfm {
-    direction: rtl;
-}
-
-.socials-bar-big a {
-    font-size: 30px;
-    color: white;
-} .socials-bar-big span {
-    font-size: 30px;
-    color: white;
-}
-
-.socials-bar img {
-    max-width: 16px;
-}
-
-.socials-bar-big img {
-    max-width: 28px;
-}
-
-.social-divide {
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.lastfm-album-img {
-    width: 35px;
-    border-radius: 4px;
-    vertical-align: middle;
-}
-
-#link-container a {
-    text-decoration: none;
-}
-
-#shima-img {
-    background-image: url('/shima.png');
-    height: 230px;
-    margin-top: 20px;
-    border: 3px solid #79b8d4;
-    border-radius: 15px;
-}
-
-#link-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-right: 55%;
-    height: 100%;
-}
-
-#link-divide {
-    height: 3px;
-    width: 35%;
-    background: linear-gradient(90deg,rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 15%, rgba(0, 0, 0, 0.15) 85%, rgba(0, 0, 0, 0) 100%);
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-@media only screen and (max-device-width: 1600px) { /* alter text breaks around here */
-    #page {
-        height: auto;
-        margin-top: 10px;
+    /* local variables */
+    :root {
+        --tent: #fce758;
+        --shine: linear-gradient(
+            90deg,
+            rgba(73, 114, 133, 1) 0%,
+            rgba(96, 191, 135, 1) 50%,
+            rgba(133, 127, 102, 1) 100%
+        );
+        --accent: #497285;
     }
 
     #background {
-        height: 127%; /* this is AWFUL but it's the easiest solution */
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-image: url("/bg.jpg");
+        background-size: cover;
+        background-position: center;
+        filter: blur(12.5px) brightness(0.9);
+        z-index: -1;
     }
 
-    #alter-container {
-        justify-content: center;
-        margin-left: 27px; /* makes it offset other margin */
+    .he-IL span {
+        direction: rtl;
+    }
+    .he-IL p {
+        direction: rtl;
     }
 
-    .alter {
-        margin-right: 2px;
+    /* body/header */
+    h1 {
+        font-size: 58px;
+        padding-left: 15px;
+        font-weight: normal;
     }
 
-    .alter-text {
-        font-size: 11px;
-    }
-}
-
-@media only screen and (max-device-width: 1450px) { /* need to bring alters closer now */
-    #alter-container {
-        flex-direction: column;
-        margin-left: 0;
-        margin-right: 0;
-        align-items: center;
-    }
-
-    .alter {
-        width: 80%;
-        margin-bottom: 4px;
-    }
-
-    .alter-text {
-        font-size: 14px;
-    }
-
-    #shima-img {
-        background-position: 43%;
-    }
-}
-
-@media only screen and (max-device-width: 700px)
-{
-    #page {
-        margin-left: 3%;
-        margin-right: 3%;
-        margin-top: 3%;
-        margin-bottom: 3%;
-    }
-
-    #info-box {
-        font-size: 16px;
-    }
-
-    #mobile-button-box { /* copied from header */
+    header {
         position: absolute;
         top: 0;
         left: 0;
@@ -592,54 +259,416 @@ header {
         display: flex;
         justify-content: end;
         align-items: center;
-        height: 30px;
+        height: 5vh;
         margin-bottom: 0px;
     }
-
-    #mobile-button-box a {
-        padding-right: 4px; /* gives spacing to the icons */
+    header a {
+        padding-right: 6px; /* gives spacing to the icons */
     }
 
-    header {
+    #mobile-button-box {
         display: none;
     }
 
-    h1 {
-        padding-left: 0px;
+    #page {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        height: 100vh;
+        justify-content: center;
+        margin-left: 16%;
+        margin-right: 16%;
     }
 
+    #info-box {
+        padding: 0 40px 40px 40px;
+        border: 3px solid #79b8d4;
+        backdrop-filter: brightness(0.5);
+        border-radius: 15px;
+        font-size: 18px;
+    }
+
+    /* main content */
     #title {
-        font-size: 54px;
+        font-family: Kyokasho, sans-serif;
+        color: var(--tent);
+        font-size: 64px;
+        text-decoration: none;
     }
 
     .fronter {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
+        display: flex;
+        position: relative;
+        cursor: pointer;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        height: 90px;
+        box-shadow: -2px 8px 20px 6px rgba(0, 0, 0, 0.3);
+        transition: 0.3s;
+        text-decoration: none;
+        color: var(--text);
+    }
+    .fronter::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 5px;
+        padding: 3px;
+        background: var(--shine);
+        mask:
+            linear-gradient(var(--transparent)) content-box,
+            linear-gradient(var(--transparent));
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        background-size: 500% auto;
+        animation: shine 5s ease-in-out infinite alternate;
+    }
+    .fronter:hover {
+        box-shadow: -2px 8px 20px 16px rgba(0, 0, 0, 0.3); /* increases the spread when you hover over */
+        transform: rotate(0.6deg) scale(1.03);
+    }
+
+    .he-IL .fronter {
+        direction: rtl;
+    }
+
+    @keyframes shine {
+        0% {
+            background-position: 0% 50%;
+        }
+        100% {
+            background-position: 100% 50%;
+        }
+    }
+
+    .fronter .fronter-img {
+        margin: 3px; /* adds back in the 3px padding from the border */
+    }
+
+    .fronter-img {
+        padding: 3px;
+        height: 78px; /* not sure why this is the case, might have to look into it */
+    }
+    .fronter-img img {
+        max-height: 100%; /* limits height growth of fronter imgs */
+        border-radius: 5px;
     }
 
     .fronter-text {
-        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        margin-left: 5px;
+    }
+
+    .fronter-text span {
+        font-family: Kyokasho, sans-serif;
+        font-size: 38px;
+        color: white;
+    }
+
+    .fronter-text p {
+        margin: 0px;
     }
 
     .alter {
-        width: 100%;
+        display: flex;
+        align-items: center;
+        position: relative;
+        border: 2px solid var(--accent);
+        border-radius: 5px;
+        cursor: pointer;
+        height: 50px;
+        width: 32%;
+        text-decoration: none;
+        color: var(--text);
+        box-shadow: -2px 8px 20px 6px rgba(0, 0, 0, 0.3);
+        transition: 0.3s;
+    }
+    .alter:hover {
+        box-shadow: -2px 8px 20px 16px rgba(0, 0, 0, 0.3); /* increases the spread when you hover over */
+        transform: rotate(2deg) scale(1.03);
+    }
+
+    .alter-img {
+        padding: 3px;
+        height: 44px; /* not sure why this is the case, might have to look into it */
+    }
+    .alter-img img {
+        max-height: 100%; /* limits height growth of fronter imgs */
+        border-radius: 5px;
+    }
+
+    .he-IL .alter {
+        direction: rtl;
+    }
+
+    .alter-name {
+        font-family: Kyokasho, sans-serif;
+        font-size: 32px;
+        color: white;
+        margin-right: 12px;
+        margin-left: 2px;
     }
 
     .alter-text {
-        font-size: 11px;
+        font-size: 14px;
+        text-align: left;
+    }
+    .he-IL .alter-text {
+        text-align: right;
+        margin-right: 10px;
     }
 
-    .ja-JP .alter-name { /* tiny bit too big in japanese */
-        font-size: 22px;
+    #alter-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+    #front-percent-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #front-percentage {
+        display: flex;
+        width: 90%;
+        height: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .front-percent-hover {
+        position: absolute;
+        font-family: "Zen Kaku Gothic New", sans-serif;
+        font-size: 14px;
+        visibility: hidden;
+        width: 150px;
+        left: calc(
+            50% - (150px / 2)
+        ); /* position is exactly halfway across the bar */
+        bottom: calc(
+            20px + 5px + 2px
+        ); /* bar is 20px wide, plus 5 for the arrow and 2 for extra spacing~ */
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        text-align: center;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        border-radius: 4px;
+        z-index: 1;
+    }
+    .front-percent-person {
+        position: relative;
+    }
+    .front-percent-person:hover .front-percent-hover {
+        /* new class for each bar, just used to make hovers work properly */
+        visibility: visible;
+    }
+    .front-percent-hover::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: black transparent transparent transparent; /* whatever this magic is makes a triangle ehe */
+    }
+
+    /* would be nice to align images to some baseline, but nothing seemed to really work */
+
+    .he-IL #lastfm {
+        direction: rtl;
     }
 
     .socials-bar-big a {
-        font-size: 26px;
+        font-size: 30px;
+        color: white;
+    }
+    .socials-bar-big span {
+        font-size: 30px;
+        color: white;
+    }
+
+    .socials-bar img {
+        max-width: 16px;
     }
 
     .socials-bar-big img {
-        max-width: 20px;
+        max-width: 28px;
     }
-}
+
+    .social-divide {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .lastfm-album-img {
+        width: 35px;
+        border-radius: 4px;
+        vertical-align: middle;
+    }
+
+    #link-container a {
+        text-decoration: none;
+    }
+
+    #shima-img {
+        background-image: url("/shima.png");
+        height: 230px;
+        margin-top: 20px;
+        border: 3px solid #79b8d4;
+        border-radius: 15px;
+    }
+
+    #link-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-right: 55%;
+        height: 100%;
+    }
+
+    #link-divide {
+        height: 3px;
+        width: 35%;
+        background: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.15) 15%,
+            rgba(0, 0, 0, 0.15) 85%,
+            rgba(0, 0, 0, 0) 100%
+        );
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    @media only screen and (max-device-width: 1600px) {
+        /* alter text breaks around here */
+        #page {
+            height: auto;
+            margin-top: 10px;
+        }
+
+        #background {
+            height: 127%; /* this is AWFUL but it's the easiest solution */
+        }
+
+        #alter-container {
+            justify-content: center;
+            margin-left: 27px; /* makes it offset other margin */
+        }
+
+        .alter {
+            margin-right: 2px;
+        }
+
+        .alter-text {
+            font-size: 11px;
+        }
+    }
+
+    @media only screen and (max-device-width: 1450px) {
+        /* need to bring alters closer now */
+        #alter-container {
+            flex-direction: column;
+            margin-left: 0;
+            margin-right: 0;
+            align-items: center;
+        }
+
+        .alter {
+            width: 80%;
+            margin-bottom: 4px;
+        }
+
+        .alter-text {
+            font-size: 14px;
+        }
+
+        #shima-img {
+            background-position: 43%;
+        }
+    }
+
+    @media only screen and (max-device-width: 700px) {
+        #page {
+            margin-left: 3%;
+            margin-right: 3%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+        }
+
+        #info-box {
+            font-size: 16px;
+        }
+
+        #mobile-button-box {
+            /* copied from header */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            height: 30px;
+            margin-bottom: 0px;
+        }
+
+        #mobile-button-box a {
+            padding-right: 4px; /* gives spacing to the icons */
+        }
+
+        header {
+            display: none;
+        }
+
+        h1 {
+            padding-left: 0px;
+        }
+
+        #title {
+            font-size: 54px;
+        }
+
+        .fronter {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .fronter-text {
+            font-size: 16px;
+        }
+
+        .alter {
+            width: 100%;
+        }
+
+        .alter-text {
+            font-size: 11px;
+        }
+
+        .ja-JP .alter-name {
+            /* tiny bit too big in japanese */
+            font-size: 22px;
+        }
+
+        .socials-bar-big a {
+            font-size: 26px;
+        }
+
+        .socials-bar-big img {
+            max-width: 20px;
+        }
+    }
 </style>

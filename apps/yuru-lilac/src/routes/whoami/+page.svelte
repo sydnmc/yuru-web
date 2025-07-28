@@ -1,13 +1,12 @@
 <svelte:head>
-    <meta property="og:site_name" content="yurukyan△">
-    <meta property="og:title" content="yuiyamu | who am i?">
+    <meta property="og:title" content="who am i?">
     <meta property="og:description" content=":thinking: hmm">
-    <meta name="theme-color" content="#dee0ed">
     <title>yuiyamu | who am i?</title>
 </svelte:head>
 
 <script lang="ts">
-    import Header from "@yuru-web/yuru-assets";
+    import { Header } from "@repo/yuru-assets";
+    import "@repo/yuru-static/assets/base.css";
 </script>
 
 <Header person="lilac" page="whoami"/>
@@ -30,7 +29,7 @@
                 <p>i’ve had to make a lot of personal strides to gain my independence from sydney, mostly just to be comfortable having my own little spot on the internet and be surrounded by friends who truly appreciate me for being lilac~ i now have my own socials on most platforms that i use whenever i <strong>front</strong> (essentially whenever i wake up and sydney goes to sleep), and even my own laptop. i’m so much happier to have these separations from her, and now feel very comfortable and confident in the fact that i am, undeniably, lilac.</p>
         </div>
         <div id="computer-side-img-container">
-                <img src="/lilac/computers.jpg" alt="our individual computers - a thinkpad and acer swift">
+                <img src="/computers.jpg" alt="our individual computers - a thinkpad and acer swift">
                 <span>our computers, side by side~ mine is the thinkpad, sydney's is the acer swift :3</span>
         </div>
     </div>
@@ -72,7 +71,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    background-image: url('/lilac/bg.jpg');
+    background-image: url('/bg.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(15px) brightness(0.5);

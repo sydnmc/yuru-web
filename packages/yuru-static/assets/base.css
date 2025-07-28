@@ -1,4 +1,4 @@
-@font-face { font-family: Kyokasho; src: url('@yuru-web/yuru-assets/assets/Kyokasho.ttf')}
+@font-face { font-family: Kyokasho; src: url('./Kyokasho.ttf')}
 
 :root {
     --sydney-main: #5a4969;

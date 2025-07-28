@@ -1,7 +1,6 @@
-import { PUBLIC_API } from '$env/static/public';
+import { fetchFromApi } from "@repo/yuru-assets";
 
 export async function load({ fetch }) {
-    const response = await fetch(`${PUBLIC_API}/sets`);
-    const setInfo = await response?.json();
-    return { setInfo }
+  const setInfo = await fetchFromApi("sets");
+  return { setInfo };
 }

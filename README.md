@@ -11,7 +11,7 @@ our system (mostly lilac) is currently working on translating every page on our 
 > hebrew: only `yurukyan/home` and the error page
 
 ## dev notes
-since this project now utilizes sveltekit as its framework, installation and development are relatively simple. just go to the root of the project, run `npm install` to install all of the dev dependencies, then `npm run dev` to start a local server.
+since this project now utilizes sveltekit as its framework, installation and development are relatively simple. just go to the root of the project, run `pnpm install` to install all of the dev dependencies, then `pnpm run dev` to start a local server.
 
 note: because of how individual servers are run for each web page (due to turborepo), you must make sure you have ports `1414` through `1417` open before running.
 

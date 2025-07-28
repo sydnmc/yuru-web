@@ -1,14 +1,13 @@
 <svelte:head>
-    <meta property="og:site_name" content="yurukyan△">
-    <meta property="og:title" content="yurukyan△ | sets">
-    <meta property="og:description" content="a list of all of the sets we've made">
-    <meta name="theme-color" content="#FCE758">
+    <meta property="og:title" content="sets">
+    <meta property="og:description" content="all osu! sets done by us">
     <title>yurukyan△ | sets</title>
 </svelte:head>
 
 <script lang="ts">
-    import { PUBLIC_HOME_LINK } from '$env/static/public';
-    import { AudioPlayer, AudioVolume } from '@yuru-web/yuru-assets';
+    import "@repo/yuru-static/assets/base.css";
+    import { getPageRoot } from "@repo/yuru-assets";
+    import { AudioPlayer, AudioVolume } from "@repo/yuru-assets";
 
     export let data;
     let { setInfo } = data; //loads setInfo before the page can completely load - useful since that's the main point of the page :p
@@ -40,7 +39,7 @@
             case "loved":
                 iconUrl = "https://i.ppy.sh/2d6ca47d8e93f21d1bf09ce1c3c9661442092e57/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f7374617475732f6c6f7665642e706e67";
                 break;
-            }
+        }
         return iconUrl;
     }
 
@@ -55,7 +54,7 @@
 
 <div id="background"></div>
 <div class="divider">
-    <h1><a href={PUBLIC_HOME_LINK}>yurukyan△</a></h1>
+    <h1><a href={getPageRoot('yurukyan')}>yurukyan△</a></h1>
     <h2>finished sets ❀</h2>
 </div>
 <div class="set-container" id="set-container">
@@ -111,142 +110,150 @@
 <AudioVolume person={'sydney'}/>
 
 <style>
-/* local variables */
-:root {
-    --tent: #FCE758;
-    --main: #79b8d4;
-    --accent: #497285;
-}
+    /* local variables */
+    :root {
+        --tent: #fce758;
+        --main: #79b8d4;
+        --accent: #497285;
+    }
 
-#background {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-image: url('/yurukyan/bg.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: blur(12.5px) brightness(0.9);
-    z-index: -1;
-}
+    #background {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-image: url("/bg.jpg");
+        background-size: cover;
+        background-position: center;
+        filter: blur(12.5px) brightness(0.9);
+        z-index: -1;
+    }
 
-.divider {
-    text-align: right;
-    padding-top: 20px;
-    padding-right: 20px;
-    padding-bottom: 5px;
-    background: linear-gradient(90deg,rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 100%);
-} .divider h1 {
-    margin-top: 0;
-    margin-bottom: 0;
-} .divider h1 a {
-    font-family: Kyokasho, sans-serif;
-    font-weight: normal;
-    text-align: center;
-    color: var(--tent);
-    font-size: 52px;
-    text-decoration: none;
-} .divider h2 {
-    margin-top: 5px;
-    font-weight: normal;
-}
+    .divider {
+        text-align: right;
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-bottom: 5px;
+        background: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0) 40%,
+            rgba(0, 0, 0, 0.6) 100%
+        );
+    }
+    .divider h1 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .divider h1 a {
+        font-family: Kyokasho, sans-serif;
+        font-weight: normal;
+        text-align: center;
+        color: var(--tent);
+        font-size: 52px;
+        text-decoration: none;
+    }
+    .divider h2 {
+        margin-top: 5px;
+        font-weight: normal;
+    }
 
-.set {
-    display: flex;
-    border: 3px solid var(--main);
-    border-radius: 5px;
-    min-height: 180px;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    margin-top: 20px;
-    background-color: rgba(0, 0, 0, 0.4);
-}
+    .set {
+        display: flex;
+        border: 3px solid var(--main);
+        border-radius: 5px;
+        min-height: 180px;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        margin-top: 20px;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
 
-.set-img {
-    width: 24%;
-    background-size: cover;
-    background-position: center;
-}
+    .set-img {
+        width: 24%;
+        background-size: cover;
+        background-position: center;
+    }
 
-.set-text-container { /* container of text inside each set */
-    width: 76%;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-}
+    .set-text-container {
+        /* container of text inside each set */
+        width: 76%;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
 
-.status-icon {
-    height: 28px;
-    padding-right: 5px;
-}
+    .status-icon {
+        height: 28px;
+        padding-right: 5px;
+    }
 
-.set-link {
-    font-family: 'Raleway', sans-serif;
-    font-size: 32px;
-    color: white;
-    text-decoration: none;
-}
+    .set-link {
+        font-family: "Raleway", sans-serif;
+        font-size: 32px;
+        color: white;
+        text-decoration: none;
+    }
 
-.creator-text {
-    font-size: 18px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
+    .creator-text {
+        font-size: 18px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 
-.finished-text {
-    font-size: 18px;
-    margin-top: 0;
-}
+    .finished-text {
+        font-size: 18px;
+        margin-top: 0;
+    }
 
-/* osu hover stuff */
-.osu-user {
-    position: relative;
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-}
+    /* osu hover stuff */
+    .osu-user {
+        position: relative;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+    }
 
-.osu-hover {
-    display: none;
-    position: absolute;
-    left: 0; /* need to set a position for it to spawn right under the text */
-    z-index: 2;
-    text-decoration: none;
-    font-weight: normal;
-    color: white;
-    height: 80px;
-    width: 300px;
-    border-radius: 15px;
-    background-size: cover;
-    background-origin: padding-box, padding-box;
-    background-clip: border-box, border-box;
-}
+    .osu-hover {
+        display: none;
+        position: absolute;
+        left: 0; /* need to set a position for it to spawn right under the text */
+        z-index: 2;
+        text-decoration: none;
+        font-weight: normal;
+        color: white;
+        height: 80px;
+        width: 300px;
+        border-radius: 15px;
+        background-size: cover;
+        background-origin: padding-box, padding-box;
+        background-clip: border-box, border-box;
+    }
 
-.hover-pfp {
-    height: 70px;
-    border-radius: 15px;
-    margin-left: 5px;
-    margin-top: 5px;
-}
+    .hover-pfp {
+        height: 70px;
+        border-radius: 15px;
+        margin-left: 5px;
+        margin-top: 5px;
+    }
 
-.osu-hover-flagtext-container {
-    margin-left: 10px;
-    margin-top: 5px;
-}
+    .osu-hover-flagtext-container {
+        margin-left: 10px;
+        margin-top: 5px;
+    }
 
-.hover-username {
-    font-weight: bold;
-    font-size: 26px;
-}
+    .hover-username {
+        font-weight: bold;
+        font-size: 26px;
+    }
 
-.flaguser-container {
-    display: flex;
-    align-items: center;
-}
+    .flaguser-container {
+        display: flex;
+        align-items: center;
+    }
 
-.osu-flag {
-    height: 35px;
-    margin-right: 5px;
-}
+    .osu-flag {
+        height: 35px;
+        margin-right: 5px;
+    }
 </style>
