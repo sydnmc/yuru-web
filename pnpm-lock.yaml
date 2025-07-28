@@ -143,9 +143,6 @@ importers:
       '@repo/yuru-static':
         specifier: workspace:*
         version: link:../../packages/yuru-static
-      osu-colourizer:
-        specifier: ^1.0.1
-        version: 1.0.1
     devDependencies:
       '@repo/tsconfig':
         specifier: workspace:*
