@@ -9,7 +9,11 @@ export function getPageRoot(name: string) {
     if (import.meta.env.DEV) { //if we're in dev rather than prod
         return `http://localhost:${ports[name]}/`;
     } else {
+      if (name === "yurukyan") {
+        return `https://yuru.ca/`;
+      } else {
         return `https://${name}.yuru.ca/`;
+      }
     }
 }
 
