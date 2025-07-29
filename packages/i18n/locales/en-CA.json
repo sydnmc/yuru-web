@@ -10,7 +10,7 @@
             "frontedFor":"❀ last fronted for ❀<br> {hours} hours, {minutes} minutes",
             "frontedOn":"❀ last fronted on ❀<br> {month}/{day}/{year}",
             "fronting":"for {hours} hours, {minutes} minutes",
-            "frontingLong":"for {days} hours, {hours} minutes",
+            "frontingLong":"for {days} days, {hours} hours",
             "lastFmListening":"currently listening to",
             "lastFmListened":"last listened to",
             "bio":"19 | she/her | 日本語もOK | 🍁",
