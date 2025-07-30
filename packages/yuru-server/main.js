@@ -95,9 +95,8 @@ app.get('/pkInfo', async(req, res) => { //probably should maintain this code a l
             prevTimestamp = curTimestamp;
         }
 
-
         //if we're at the end, we want to get it exactly to however many days - whoever was last fronting gets that extra time added
-        let extraTime = daysAgoAmount-(frontersInfo[0].memberTime+frontersInfo[1].memberTime+frontersInfo[2].memberTime);
+        let extraTime = daysAgoAmount-(frontersInfo[0].memberTime+frontersInfo[1].memberTime+frontersInfo[2].memberTime+frontersInfo[3].memberTime);
         for (let i = 0; i < sysMembers.length; i++) {
             if (trimmedResp[trimmedResp.length-1].members[0] === sysMembers[0]) {
                 frontersInfo[i].memberTime = frontersInfo[i].memberTime+extraTime;
