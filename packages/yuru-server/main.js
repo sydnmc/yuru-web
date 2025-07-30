@@ -46,25 +46,24 @@ app.get('/songInfo', async(req, res) => {
         let songInfo = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=yurukyan&api_key=${process.env.LAST_FM_KEY}&format=json&limit=1`);
         res.send(await songInfo.json());
     } catch (err) {
-        console.log(error.message)
+        console.log(error.message);
+        res.send(err.message);
     }
 });
 
-app.get('/pkInfo', async(req, res) => { //probably should maintain this code a loooot better,,
+app.get('/pkInfo', async(req, res) => {
     const systemURL = "https://api.pluralkit.me/v2";
-    const systemId = "ytcvss"
-    const sysMembers = ['ckccgs', 'tfprjx', 'yaangx', 'ayaxfc']; //sydney, lilac, hazel, may
-
-    let frontersInfo = [
-        { name: 'sydney', memberTime: 0},
-        { name: 'lilac', memberTime: 0 },
-        { name: 'hazel', memberTime: 0 },
-        { name: 'may', memberTime: 0 }
-    ];
+    const systemId = "ytcvss";
+    const sysMembers = {
+        'ckccgs': 'sydney',
+        'tfprjx': 'lilac',
+        'yaangx': 'hazel',
+        'ayaxfc': 'may'
+    }
 
     let daysAgoAmount = 2592000000;
     let now = new Date();
-    let daysAgoDate = now.getTime() - daysAgoAmount;
+    let daysAgoDate = new Date(now.getTime() - daysAgoAmount);
 
     let apiResp;
     try {
@@ -76,7 +75,7 @@ app.get('/pkInfo', async(req, res) => { //probably should maintain this code a l
         let trimmedResp = [];
         while (dateCounter < parsedResp.length && !foundBreakDate) { //this finds the number of switches in the defined timeframe~ doesn't currently support more than 100 >w<
             let switchDate = new Date(parsedResp[dateCounter].timestamp);
-            if (switchDate > new Date(daysAgoDate)) {
+            if (switchDate > daysAgoDate) {
                 trimmedResp.push(parsedResp[dateCounter]);
             } else {
                 foundBreakDate = true;
@@ -84,52 +83,73 @@ app.get('/pkInfo', async(req, res) => { //probably should maintain this code a l
             dateCounter++;
         }
 
-        let prevTimestamp = new Date().getTime();
-        for (let i = 0; i < trimmedResp.length; i++) {
+        let alterInfo = [];
+        let prevTimestamp = daysAgoDate.getTime(); //sets it to 30 days ago
+
+        for (let i = trimmedResp.length-1; i > 0; i--) { //going up from 30 days ago
             let curTimestamp = new Date(trimmedResp[i].timestamp).getTime();
-            for (let j = 0; j < sysMembers.length; j++) {
-                if (trimmedResp[i].members[0] === sysMembers[j]) {
-                    frontersInfo[j].memberTime = frontersInfo[j].memberTime+(prevTimestamp - curTimestamp);
-                }
+            let nextTimestamp = new Date(trimmedResp[i-1].timestamp).getTime();
+            let alterIndex = alterInfo.findIndex(e => e.alterId  === trimmedResp[i].members[0]);
+
+            if (alterIndex === -1) { //if the current alter isn't in the list~
+                alterInfo.push({
+                    alterId: trimmedResp[i].members[0], 
+                    time: curTimestamp - prevTimestamp,
+                    fronting: false, //will verify later
+                    lastFrontTimestamp: trimmedResp[i].timestamp,
+                });
+            } else {
+                let frontLen = nextTimestamp - curTimestamp;
+                alterInfo[alterIndex].time = alterInfo[alterIndex].time + frontLen;
+                alterInfo[alterIndex].lastFrontTimestamp = trimmedResp[i].timestamp;
+                alterInfo[alterIndex].lastFrontAmount = frontLen
             }
             prevTimestamp = curTimestamp;
         }
-
+        
+        for (let i = 0; i < alterInfo.length; i++) { //for convenience, we calculate the usable time here too~ remove in prod
+            let frontTime = alterInfo[i].time
+            alterInfo[i].frontDays = Math.round(frontTime/(1000*60*60*24));
+            alterInfo[i].frontHours = Math.round(frontTime/(1000*60*60)) - alterInfo[i].frontDays*24;
+        }
 
         //if we're at the end, we want to get it exactly to however many days - whoever was last fronting gets that extra time added
-        let extraTime = daysAgoAmount-(frontersInfo[0].memberTime+frontersInfo[1].memberTime+frontersInfo[2].memberTime);
-        for (let i = 0; i < sysMembers.length; i++) {
-            if (trimmedResp[trimmedResp.length-1].members[0] === sysMembers[0]) {
-                frontersInfo[i].memberTime = frontersInfo[i].memberTime+extraTime;
+        let totalTime = 0;
+        alterInfo.forEach(alter => {
+            totalTime = totalTime+alter.time;
+        });
+
+        //finding who's currently fronting + adding in their extra time~
+        //this is also where we add in names c:
+        let frontingAlterIndex;
+        let timeToCurrent = daysAgoAmount;
+        for (let i = 0; i < alterInfo.length; i++) {
+            let timeToCurrentFromAlter = now - new Date(alterInfo[i].lastFrontTimestamp).getTime();
+            if (timeToCurrent > timeToCurrentFromAlter) {
+                timeToCurrent = timeToCurrentFromAlter;
+                frontingAlterIndex = i;
             }
         }
-        let totalTime = frontersInfo[0].memberTime+frontersInfo[1].memberTime+frontersInfo[2].memberTime+frontersInfo[3].memberTime;
 
+        alterInfo = alterInfo.map(alter => ({ //adding in names
+            name: sysMembers[alter.alterId]? sysMembers[alter.alterId] : '(no fronter)',
+            ...alter
+        }));
 
-        for (let i = 0; i < sysMembers.length; i++) {
-            frontersInfo[i].memberPercent = Math.round((frontersInfo[i].memberTime/totalTime)*100);
+        let extraTime = daysAgoAmount-totalTime;
+        alterInfo[frontingAlterIndex].fronting = true;
+        alterInfo[frontingAlterIndex].time = alterInfo[frontingAlterIndex].time+extraTime; //now that time is locked in, we can finally calculate frontpercent
 
-            let foundMember = false;
-            let memberInt = 0;
-            while (memberInt < trimmedResp.length && !foundMember) {
-                if (trimmedResp[memberInt].members[0] == sysMembers[i]) {
-                    let nextTimestamp;
-                    try {
-                        nextTimestamp = Date.parse(trimmedResp[memberInt-1].timestamp);
-                        frontersInfo[i].isFronting = false;
-                    } catch {
-                        nextTimestamp = Date.now(); //if there's not a next timestamp, the member must be currently fronting
-                        frontersInfo[i].isFronting = true;
-                    }
-                    frontersInfo[i].lastFrontTimestamp = trimmedResp[memberInt].timestamp;
-                    frontersInfo[i].lastFrontAmount = nextTimestamp-Date.parse(trimmedResp[memberInt].timestamp);
-                    foundMember = true;
-                }
-                memberInt++;
-            }
+        let total = 0;
+        for (let i = 0; i < alterInfo.length; i++) {
+            alterInfo[i].frontpercent = Math.round((alterInfo[i].time/daysAgoAmount)*100);
+            total = total+alterInfo[i].time;
         }
-        res.send(frontersInfo);
+        console.log(total);
+
+        res.send(alterInfo);
     } catch (err) {
         console.log(err.message);
+        res.send(err.message);
     }
 });
