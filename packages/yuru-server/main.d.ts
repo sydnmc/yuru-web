@@ -4,12 +4,14 @@ declare global {
         id: string;
         fronting: boolean;
         totalFrontTime: number;
-        lastFrontTime: number;
-        lastFrontTimestamp: Date;
+        lastFrontTime?: number;
+        lastFrontTimestamp?: Date;
         percent: number;
 
         lastFrontTimes?: alterTimes;
         totalFrontTimes?: alterTimes;
+
+        frontHistory?: frontHistory[];
     }
 
     interface alterTimes {
@@ -17,6 +19,11 @@ declare global {
         hours: number;
         minutes: number;
     }
+
+    interface frontHistory {
+        timestamp: Date;
+        length: number;
+    }
 }
 
-export { alter, alterTimes }
+export { alter, alterTimes, frontHistory }

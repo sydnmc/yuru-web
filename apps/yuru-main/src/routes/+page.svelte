@@ -24,7 +24,7 @@
     import type { alter } from '@repo/yuru-server';
 
 	onMount(async () => {
-		const frontList = await fetchFromApi(`fronter`);
+		const frontList = await fetchFromApi(`recentFronts`);
         processPkInfo(frontList as alter[]);
 
         locale.subscribe(() => {
@@ -100,7 +100,6 @@
         sleepyAlters = [];
         for (let i = 0; i < frontList.length; i++) {
             let sysdex = sysmembers.findIndex(e => e.name  === frontList[i].name);
-            console.log(sysdex);
             if (sysdex === -1) continue;
 
             sysmembers[sysdex].fronting = frontList[i].fronting;
