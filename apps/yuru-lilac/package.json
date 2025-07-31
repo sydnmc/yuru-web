@@ -22,6 +22,7 @@
   "dependencies": {
     "@repo/yuru-assets": "workspace:*",
     "@repo/yuru-static":"workspace:*",
+    "@repo/yuru-server":"workspace:*",
     "@repo/i18n": "workspace:*"
   }
 }

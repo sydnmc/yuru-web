@@ -15,7 +15,8 @@
     "dotenv": "^17.0.1",
     "express": "^5.1.0",
     "multer": "^2.0.1",
-    "osu-colourizer": "^1.0.4"
+    "osu-colourizer": "^1.0.4",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

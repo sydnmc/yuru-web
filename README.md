@@ -17,3 +17,10 @@ since this project now utilizes sveltekit as its framework, installation and dev
 note: because of how individual servers are run for each web page (due to turborepo), you must make sure you have ports `1414` through `1417` open before running.
 
 despite using sveltekit, we prefer not using the built in server functionality and, instead, have a single `main.js` in `src/lib/server` which you must also run to have a local backend~ this also assumes that you have all of the necessary .json files to serve, which can be fetched from [here](https://api.yuru.ca/sets), [here](https://api.yuru.ca/gds?person=lilac), and [here](https://api.yuru.ca/gds?person=sydney). it also expects a `.env` with a [last.fm](https://www.last.fm/api/account/create) key, but basic functionality is still maintained without having a `.env` file in the server folder.
+
+### .env
+in the server folder, there's a 
+LAST_FM_KEY=
+OSU_KEY=meow
+UPDATE_LAST=
+UPDATE_EVERY=

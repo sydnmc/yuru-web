@@ -4,22 +4,75 @@ import fs from 'node:fs';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { parse } from 'node:path';
-import { totalmem } from 'node:os';
+import WebSocket, { WebSocketServer } from 'ws';
+
+import { grabSongInfo, updateAllMaps } from './mapupdate';
 
 dotenv.config();
 
-const osuApi = "https://osu.ppy.sh/api/get_beatmaps";
-//will add back autoupdating later ^^
 const app = express();
 
 app.listen(3333, () => {
     console.log(`\x1b[45myuru.ca server\x1b[0m - currently listening on port 3333~`);
-})
+    initialize();
+});
 app.use(cors());
 app.use(express.json());
 app.use(express.static('page/assets/')); //serves the assets for the api page ^-^
 app.use(express.urlencoded({ extended: true }));
+
+const wsPort = 7676;
+const yurubridge = new WebSocketServer({ host: '127.0.0.1', port: wsPort }); //binds the ws connection to localhost, since everything is run locally on yuyuko~
+
+yurubridge.on('error: ', console.error);
+
+yurubridge.on('connection', connection => { //this connection information is needed for communication~
+  console.log(`looks like mrrpbot connected on port ${wsPort}, how lovely~`);
+
+  connection.on('message', async(message) => {
+    let mapInfo = JSON.parse(message);
+    let data;
+    switch (mapInfo.type) {
+      case "diff":
+        /* https://osu.ppy.sh/beatmapsets/beatmapsetId#mode/beatmapId */
+        let beatmapId = mapInfo.link.split('/')[5]; //gives us the beatmap id if it exists
+        if (!beatmapId) { //if we don't have a beatmapId, then we go to the set instead
+          let beatmapsetId = mapInfo.link.split('/')[4].split('#')[0]; //we probably won't have a #mode after, but this just makes absolute certain :3
+          data = await grabSongInfo(beatmapsetId, "beatmapset");
+        } else {
+          data = await grabSongInfo(beatmapId, "beatmap");
+        }
+        break;
+      case "set":
+        break;
+      case "acceptMap":
+        break;
+      case "editDiff":
+        break;
+      case "editSet":
+        break;
+    }
+    connection.send(JSON.stringify(data));
+  });
+});
+
+var mapStatusSydney;
+var mapStatusLilac;
+function refreshMapStatuses() {
+    mapStatusSydney = JSON.parse(fs.readFileSync('sydneygds.json', 'utf8'));
+    mapStatusLilac = JSON.parse(fs.readFileSync('lilacgds.json', 'utf8'));
+}
+
+refreshMapStatuses(); //initializes map statuses, in this case~
+
+let refreshInterval = process.env.UPDATE_EVERY? parseInt(process.env.UPDATE_EVERY) : 12;
+async function initialize() {
+    setInterval(async () => {
+        console.log(`Automatically updating all maps...`);
+        await updateAllMaps('sydney', mapStatusSydney);
+        await updateAllMaps('lilac', mapStatusLilac);
+    }, refreshInterval*1000*60*60); //autoupdateEvery is in hours, so we're converting to ms for setInterval to be happy
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -25,29 +25,6 @@ declare global {
         status: string;
     }
 
-    interface gd {
-        bgLink: string;
-        title: string;
-        artist: string;
-        creator: string;
-        mapId: string;
-        status: string;
-        isForRank: boolean;
-        bns: string[];
-        maps: beatmap[];
-    }
-
-    interface beatmap {
-        url: string;
-        id: string;
-        diffname: string;
-        amountMapped: string;
-        sr: number;
-        dateFinished: string;
-
-        diffColour?: string;
-    }
-
     interface description {
         type: string;
         content: any;
@@ -62,4 +39,4 @@ declare global {
     }
 }
 
-export { sysmember, beatmapset, gd, beatmap, description, hover }
+export { sysmember, beatmapset, description, hover }

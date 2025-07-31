@@ -24,6 +24,31 @@ declare global {
         timestamp: Date;
         length: number;
     }
+
+    interface gd {
+        bgLink: string;
+        title: string;
+        titleUnicode?: string;
+        artist: string;
+        artistUnicode?: string;
+        creator: string;
+        mapId: string;
+        status: string;
+        isForRank: boolean;
+        bns: string[];
+        maps: beatmap[];
+    }
+
+    interface beatmap {
+        url: string;
+        id: string;
+        diffname: string;
+        amountMapped: string;
+        sr: number;
+        dateFinished: string;
+
+        diffColour?: string;
+    }
 }
 
-export { alter, alterTimes, frontHistory }
+export { alter, alterTimes, frontHistory, gd, beatmap }
