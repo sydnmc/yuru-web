@@ -21,9 +21,11 @@
     import { onMount } from 'svelte';
     import { Locale } from '@repo/yuru-assets';
 
+    import type { alter } from '@repo/yuru-server';
+
 	onMount(async () => {
-		const frontList = await fetchFromApi(`pkInfo`);
-        processPkInfo(frontList);
+		const frontList = await fetchFromApi(`fronter`);
+        processPkInfo(frontList as alter[]);
 
         locale.subscribe(() => {
             processPkInfo(frontList);
@@ -58,7 +60,7 @@
     }
 
     async function lastFmUpdate() {
-        const songInfo = await fetchFromApi('songInfo');
+        const songInfo = await fetchFromApi('lastfm');
         let isPlaying: boolean;
 
         try {
@@ -94,21 +96,25 @@
     });
 
     let pkInfoAru = $state(false);
-    function processPkInfo(frontList: any) {
+    function processPkInfo(frontList: alter[]) {
         sleepyAlters = [];
-        for (let i = 0; i < sysmembers.length; i++) {
-            sysmembers[i].fronting = frontList[i].isFronting;
-            sysmembers[i].percent = frontList[i].memberPercent;
+        for (let i = 0; i < frontList.length; i++) {
+            let sysdex = sysmembers.findIndex(e => e.name  === frontList[i].name);
+            console.log(sysdex);
+            if (sysdex === -1) continue;
 
-            let days = Math.floor(frontList[i].memberTime/1000/60/60/24);
-            let hours = Math.round((frontList[i].memberTime/1000/60/60)-days*24);
-            sysmembers[i].tooltip = `${days} days, ${hours} hours | ${sysmembers[i].percent}%`;
+            sysmembers[sysdex].fronting = frontList[i].fronting;
+            sysmembers[sysdex].percent = frontList[i].percent;
 
-            sysmembers[i].text = dateParser(frontList[i].lastFrontAmount, frontList[i].isFronting, frontList[i].lastFrontTimestamp);
-            if (frontList[i].isFronting) {
-                main = sysmembers[i];
+            let days = Math.floor(frontList[i].totalFrontTime/1000/60/60/24);
+            let hours = Math.round((frontList[i].totalFrontTime/1000/60/60)-days*24);
+            sysmembers[sysdex].tooltip = `${days} days, ${hours} hours | ${sysmembers[sysdex].percent}%`;
+
+            sysmembers[sysdex].text = dateParser(frontList[i].lastFrontTime, frontList[i].fronting, frontList[i].lastFrontTimestamp as string);
+            if (frontList[i].fronting) {
+                main = sysmembers[sysdex];
             } else {
-                sleepyAlters.push(sysmembers[i]);
+                sleepyAlters.push(sysmembers[sysdex]);
             }
         }
         pkInfoAru = true;

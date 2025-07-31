@@ -67,6 +67,9 @@ importers:
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      '@repo/yuru-server':
+        specifier: workspace:*
+        version: link:../../packages/yuru-server
       '@sveltejs/adapter-auto':
         specifier: ^6.0.0
         version: 6.0.1(@sveltejs/kit@2.25.1(@sveltejs/vite-plugin-svelte@5.1.0(svelte@5.36.12)(vite@6.3.5(@types/node@24.1.0)))(svelte@5.36.12)(vite@6.3.5(@types/node@24.1.0)))
