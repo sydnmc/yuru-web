@@ -94,6 +94,11 @@ export async function updateAllMaps(person: string, mapStatus: gd[]) {
             console.log(`updating \x1b[36m${mapStatus[i].artist} - ${mapStatus[i].title} | [${mapStatus[i].maps[j].diffname}]\x1b[0m`);
             let curSongInfo = await grabSongInfo(parseInt(mapStatus[i].maps[j].id), 'updateBeatmap');
 
+            if (!curSongInfo[0]) {
+              console.log(`somehow didn't seem to find a beatmap associated with this >_<;;`)
+              continue;
+            }
+
             if (j === 0) { //just doing it on the first pass so we don't waste resources reassigning it each time~
                 Object.assign(mapStatus[i], {
                     title: curSongInfo[0].title,
