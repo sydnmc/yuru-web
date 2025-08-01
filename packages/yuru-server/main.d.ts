@@ -21,7 +21,7 @@ declare global {
     }
 
     interface frontHistory {
-        timestamp: Date;
+        timestamp: number;
         length: number;
     }
 

@@ -152,7 +152,7 @@ function constructAlterInfo(apiData: any, imaTs: number, limitTs: number, isHist
                     fronting: false,
                     totalFrontTime: frontDuration,
                     percent: -1,
-                    frontHistory: [{timestamp: new Date(apiData[i].timestamp), length: frontDuration}]
+                    frontHistory: [{timestamp: currentFrontTs, length: frontDuration}]
                 });
             }
             totalTotal = totalTotal + frontDuration;
@@ -164,7 +164,7 @@ function constructAlterInfo(apiData: any, imaTs: number, limitTs: number, isHist
                 alterInfo[alterIndex].totalFrontTime = alterInfo[alterIndex].totalFrontTime + (imaTs - limitTs - totalTotal); //extra time to limit
             }
             if (isHistory) {
-                alterInfo[alterIndex].frontHistory.push({timestamp: new Date(apiData[i].timestamp), length: frontDuration});
+                alterInfo[alterIndex].frontHistory!.push({timestamp: currentFrontTs, length: frontDuration});
             }
         }
 
@@ -176,7 +176,7 @@ function constructAlterInfo(apiData: any, imaTs: number, limitTs: number, isHist
 
     for (let i = 0; i < alterInfo.length; i++) {
         alterInfo[i].percent = Math.round(alterInfo[i].totalFrontTime/(imaTs-limitTs)*100);
-        if (!isHistory) { alterInfo[i].lastFrontTimes = parseDate(alterInfo[i].lastFrontTime); }
+        if (!isHistory) { alterInfo[i].lastFrontTimes = parseDate(alterInfo[i].lastFrontTime!); }
         alterInfo[i].totalFrontTimes = parseDate(alterInfo[i].totalFrontTime);
     }
 
@@ -220,12 +220,6 @@ app.get('/frontData', async(req, res) => {
     let startPeriod = new Date().getTime();
     let endPeriod = new Date(frontData[frontData.length-1].timestamp).getTime();
     let alterInfo = constructAlterInfo(frontData, startPeriod, endPeriod, true);
-    
-    alterInfo = {
-        startPeriod,
-        endPeriod,
-        ...alterInfo
-    }
     
     res.send(alterInfo);
 });
