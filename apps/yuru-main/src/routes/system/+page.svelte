@@ -14,12 +14,42 @@
     import hazelPfp from '@repo/yuru-static/assets/hazelpfp.jpg';
     import mayPfp from '@repo/yuru-static/assets/maypfp.png';
 
-    import { _, locale, time } from '@repo/i18n';
+    import { _, locale } from '@repo/i18n';
 
-    const alters = ['sydney', 'lilac', 'hazel', 'may'];
-    const startTime = 1728337870591; //when our system had its first recorded front :3
+    let systemId = $state();
+
+    let systemIdInput: HTMLInputElement;
+    function changeSystem(keyPressed: string) {
+        if (keyPressed === 'Enter') {
+            systemId = systemIdInput.value;
+            alterInfo = getAlterInfo();
+        }
+    }
+
     const endTime = new Date().getTime(); //the end time will always be ima
-    const margin = endTime - startTime;
+    let alterInfo = $state(getAlterInfo());
+    let startTime = endTime;
+    async function getAlterInfo() {
+        let data;
+        if (!systemId) {
+            data = await fetchFromApi(`frontData`);
+        } else {
+            data = await fetchFromApi(`frontData?id=${systemId}`);
+        }
+
+        setStartTime(data);
+        return data;
+    }
+
+    function setStartTime(info: alter[]) {
+        let earliestAppearance = endTime;
+        for (let i = 0; i < info.length; i++) {
+            if (earliestAppearance > info[i].firstAppearance!) {
+                earliestAppearance = info[i].firstAppearance;
+            }
+        }
+        startTime = earliestAppearance;
+    }
 
     function makeDate(timestamp: Date) {
         let date = new Date(timestamp);
@@ -47,14 +77,12 @@
     }
 
     function getFrontLengthPercent(frontLen: string) {
-        return `${(parseInt(frontLen)*100)/margin}%`; //*100 turns it into a percentage
+        let margin = endTime - startTime;
+        return `${(parseInt(frontLen)*100)/margin}%`;
     }
-
     function getPosition(timestamp: string) {
-        let parsedTimestamp = parseInt(timestamp);
-        let timeInRange = parsedTimestamp - startTime;
-
-        return `${(timeInRange/margin)*100}%`;
+        let margin = endTime - startTime;
+        return `${((parseInt(timestamp)-startTime)/margin)*100}%`;
     }
 </script>
 
@@ -62,8 +90,12 @@
 <div class="divider">
     <h1><a href={getPageRoot('yurukyan')}>yurukyan△</a></h1>
     <h2>system info ❀</h2>
+    <div id="system-input">
+        <span>system id: </span>
+        <input type="text" bind:this={systemIdInput} onkeydown={keyType => changeSystem(keyType.key)}/>
+    </div>
 </div>
-{#await fetchFromApi(`frontData`)}
+{#await alterInfo}
     <p>gathering front data...</p>
 {:then frontData}
     <div id="front-history">
@@ -72,7 +104,7 @@
             <div class="alter-row">
                 <div class="front-container">
                     {#each alter.frontHistory as front}
-                        <div style="background-color: var(--{alter.name}-main); 
+                        <div style="background-color: {systemId? '#ffffff' : `var(--${alter.name}-main)`}; 
                         width: {getFrontLengthPercent(front.length)};
                         left: {getPosition(front.timestamp)}"></div>
                     {/each}
@@ -135,6 +167,18 @@
     } .divider h2 {
         margin-top: 5px;
         font-weight: normal;
+    }
+
+    #system-input {
+        display: flex;
+        margin-right: auto;
+    } #system-input input {
+        background: transparent;
+        color: white;
+        border: 2px solid var(--main);
+        border-radius: 5px;
+    }  #system-input input:focus {
+        outline: 2px solid var(--accent);
     }
 
     #front-history {

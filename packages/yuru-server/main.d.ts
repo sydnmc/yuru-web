@@ -7,11 +7,13 @@ declare global {
         lastFrontTime?: number;
         lastFrontTimestamp?: Date;
         percent: number;
+        firstAppearance?: number;
 
         lastFrontTimes?: alterTimes;
         totalFrontTimes?: alterTimes;
 
         frontHistory?: frontHistory[];
+        pfpLink?: string;
     }
 
     interface alterTimes {
