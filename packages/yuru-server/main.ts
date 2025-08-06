@@ -4,9 +4,8 @@ import fs from 'node:fs';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import WebSocket, { WebSocketServer } from 'ws';
 
-import { grabSongInfo, updateAllMaps } from './mapupdate';
+import { grabSongInfo, modifySets, modifyDiffs, updateAllMaps } from './mapupdate';
 
 dotenv.config();
 
@@ -20,41 +19,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('page/assets/')); //serves the assets for the api page ^-^
 app.use(express.urlencoded({ extended: true }));
-
-const wsPort = 7676;
-const yurubridge = new WebSocketServer({ host: '127.0.0.1', port: wsPort }); //binds the ws connection to localhost, since everything is run locally on yuyuko~
-
-yurubridge.on('error: ', console.error);
-
-yurubridge.on('connection', connection => { //this connection information is needed for communication~
-  console.log(`looks like mrrpbot connected on port ${wsPort}, how lovely~`);
-
-  connection.on('message', async(message) => {
-    let mapInfo = JSON.parse(message);
-    let data;
-    switch (mapInfo.type) {
-      case "diff":
-        /* https://osu.ppy.sh/beatmapsets/beatmapsetId#mode/beatmapId */
-        let beatmapId = mapInfo.link.split('/')[5]; //gives us the beatmap id if it exists
-        if (!beatmapId) { //if we don't have a beatmapId, then we go to the set instead
-          let beatmapsetId = mapInfo.link.split('/')[4].split('#')[0]; //we probably won't have a #mode after, but this just makes absolute certain :3
-          data = await grabSongInfo(beatmapsetId, "beatmapset");
-        } else {
-          data = await grabSongInfo(beatmapId, "beatmap");
-        }
-        break;
-      case "set":
-        break;
-      case "acceptMap":
-        break;
-      case "editDiff":
-        break;
-      case "editSet":
-        break;
-    }
-    connection.send(JSON.stringify(data));
-  });
-});
 
 var mapStatusSydney;
 var mapStatusLilac;
@@ -84,9 +48,9 @@ app.get('/gds', (req, res) => { //sends back the gd info we have stored
     let person = req.query.person;
 
     if (person === 'sydney' || person === 'syd') {
-        res.send(fs.readFileSync('./sydneygds.json', 'utf-8'));
+        res.send(JSON.parse(fs.readFileSync('./sydneygds.json', 'utf-8')));
     } else if (person === 'lilac') {
-        res.send(fs.readFileSync('./lilacgds.json', 'utf-8'));
+        res.send(JSON.parse(fs.readFileSync('./lilacgds.json', 'utf-8')));
     } else {
         res.send('no person specified >_<;;');
     }
@@ -103,6 +67,47 @@ app.get('/lastfm', async(req, res) => {
     } catch (err) {
         console.log(err.message);
         res.send(err.message);
+    }
+});
+
+app.get('/newMapData', async(req, res) => {
+    let beatmapId = req.query.beatmapId;
+    let beatmapsetId = req.query.beatmapsetId;
+
+    if (beatmapId && !beatmapsetId) {
+        let songInfo = await grabSongInfo(beatmapId, "beatmap");
+        res.send(songInfo);
+    } else if (!beatmapId && beatmapsetId) {
+        let songInfo = await grabSongInfo(beatmapsetId, "beatmapset");
+        res.send(songInfo);
+    } else {
+        res.send('invalid beatmap or beatmapset id provided >_<;;')
+    }
+});
+
+/* this route requires yuru.ca authentication */
+app.post('/changeInfo', async(req, res) => {
+    let key = req.headers["authorization"];
+    let type = req.query.type;
+    let data = req.body;
+
+    if (key === process.env.VALID_ACCESS_KEY) {
+        switch (type) {
+            case 'setadd':
+                modifySets(data, true);
+                break;
+            case 'diffadd':
+                let person = req.query.person;
+                modifyDiffs(data, true, person);
+                break;
+            case 'setedit':
+                modifySets(data, false);
+                break;
+            case 'diffedit':
+                let person = req.query.person;
+                modifyDiffs(data, false, person);
+                break;
+        }
     }
 });
 

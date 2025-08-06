@@ -11,20 +11,6 @@ declare global {
         tooltip?: string
     }
 
-	interface beatmapset {
-        isIncomplete: boolean;
-        bgLink: string;
-        title: string;
-        artist: string;
-        url: string;
-        mapId: string;
-        description?: description[];
-        creator: string;
-    	dateFinished: string;
-        personCreator: string;
-        status: string;
-    }
-
     interface description {
         type: string;
         content: any;
@@ -39,4 +25,4 @@ declare global {
     }
 }
 
-export { sysmember, beatmapset, description, hover }
+export { sysmember, description, hover }

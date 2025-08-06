@@ -51,6 +51,21 @@ declare global {
 
         diffColour?: string;
     }
+
+    interface beatmapset {
+        isIncomplete: boolean;
+        bgLink: string;
+        title: string;
+        artist: string;
+        url: string;
+        mapId: string;
+        description?: description[];
+        creator: string;
+    	dateFinished: string;
+        personCreator: string;
+        status: string;
+    }
+    
 }
 
-export { alter, alterTimes, frontHistory, gd, beatmap }
+export { alter, alterTimes, frontHistory, gd, beatmap, beatmapset }

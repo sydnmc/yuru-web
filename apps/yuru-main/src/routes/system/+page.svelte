@@ -33,6 +33,7 @@
         let data;
         if (!systemId) {
             data = await fetchFromApi(`frontData`);
+            //data.sort((a, b) => a.localeCompare(b));
         } else {
             data = await fetchFromApi(`frontData?id=${systemId}`);
         }
@@ -51,7 +52,7 @@
         startTime = earliestAppearance;
     }
 
-    function makeDate(timestamp: Date) {
+    function makeDate(timestamp: number) {
         let date = new Date(timestamp);
         let dateFormat = {
             year: "numeric",
@@ -63,8 +64,9 @@
     }
 
     let pfpAlt = $state('');
-    function assignPfp(alter: string) {
-        switch (alter) {
+    let yurukyanMembers = ['sydney', 'lilac', 'hazel', 'may'];
+    function assignPfp(alter: alter) {
+        switch (alter.name) {
             case "sydney":
                 return sydneyPfp;
             case "lilac":
@@ -74,6 +76,10 @@
             case "may":
                 return mayPfp;
         }
+        
+        console.log(alter);
+        console.log(alter.pfpLink);
+        return alter.pfpLink;
     }
 
     function getFrontLengthPercent(frontLen: string) {
@@ -91,6 +97,9 @@
     <h1><a href={getPageRoot('yurukyan')}>yurukyan△</a></h1>
     <h2>system info ❀</h2>
     <div id="system-input">
+        <select>
+
+        </select>
         <span>system id: </span>
         <input type="text" bind:this={systemIdInput} onkeydown={keyType => changeSystem(keyType.key)}/>
     </div>
@@ -109,9 +118,8 @@
                         left: {getPosition(front.timestamp)}"></div>
                     {/each}
                 </div>
-                <div class="name-section">
+                <div class="name-section" style="background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%), url({assignPfp(alter)});">
                     <span>{alter.name}</span>
-                    <img src={assignPfp(alter.name)} alt={pfpAlt} />
                 </div>
             </div>
             {/if}
@@ -145,6 +153,7 @@
     }
 
     .divider {
+        position: relative;
         text-align: right;
         padding-top: 20px;
         padding-right: 20px;
@@ -170,8 +179,9 @@
     }
 
     #system-input {
-        display: flex;
-        margin-right: auto;
+        position: absolute;
+        bottom: 10px;
+        left: 5px;
     } #system-input input {
         background: transparent;
         color: white;
@@ -184,33 +194,39 @@
     #front-history {
         display: flex;
         flex-direction: column;
-        backdrop-filter: brightness(0.8);
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 20px;
+        border: 3px solid var(--main);
+        border-radius: 15px;
+        backdrop-filter: brightness(0.6);
     }
 
     .alter-row {
         display: flex;
         align-items: center;
-        height: 100px;
-        border-top: 1px solid white;
-        border-bottom: 1px solid white;
+        height: 120px;
     }
 
     .front-container {
         position: relative;
         height: 100%;
-        width: 88%;
-        border-right: 1px solid white;
+        width: 100%;
     } .front-container div {
         position: absolute;
         height: 100%;
     }
 
     .name-section {
-        margin-left: auto;
-        margin-right: 10px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: right;
+        width: 120px;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
     } .name-section span {
-        font-family: Kyokasho, sans-serif;
-        font-size: 30px;
+        font-size: 28px;
         color: white;
         margin-right: 5px;
     } .name-section img {

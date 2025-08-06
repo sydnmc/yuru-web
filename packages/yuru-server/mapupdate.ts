@@ -42,9 +42,29 @@ function findStatus(statusNum: string) {
   return status;
 }
 
+function findMode(modeNum: string) {
+  let mode;
+  switch (modeNum) {
+    case "0":
+      mode = 'osu';
+      break;
+    case "1":
+      mode = 'taiko';
+      break;
+    case "2":
+      mode = 'fruits';
+      break;
+    case "3":
+      mode = 'mania';
+      break;
+  }
+  
+  return mode;
+}
+
 export async function grabSongInfo(id: number, type: string) {
   let apiResponse;
-  let mapInfo: any = {};
+  let mapInfo: gd = {} as gd;
   let apiUrl;
   if (type === "beatmapset") {
     apiUrl = osuURL+`?k=${process.env.OSU_KEY}&s=${id}`
@@ -60,24 +80,76 @@ export async function grabSongInfo(id: number, type: string) {
 
   if (type === "updateBeatmap") {
     return apiResponse;
+  } else if (type === "beatmap") {
+      Object.assign(mapInfo, {
+        bgLink: `https://assets.ppy.sh/beatmaps/${apiResponse[0].beatmapset_id}/covers/cover.jpg`,
+        title: apiResponse[0].title,
+        titleUnicode: apiResponse[0].title_unicode,
+        artist: apiResponse[0].artist,
+        artistUnicode: apiResponse[0].artist_unicode,
+        creator: apiResponse[0].creator,
+        mapId: apiResponse[0].beatmapset_id,
+        status: findStatus(apiResponse[0].approved),
+        bns: [],
+        maps: [{
+          url: `https://osu.ppy.sh/beatmapsets/${apiResponse[0].beatmapset_id}#${findMode(apiResponse[0].mode)}/${apiResponse[0].beatmap_id}`,
+          id: apiResponse[0].beatmap_id,
+          diffname: apiResponse[0].version,
+          sr: Math.round(apiResponse[0].difficultyrating * 100) / 100,
+        }]
+      });
+
+    //we aren't adding in isForRank, amountMapped, and dateFinished here - we'll need to get those from the user
+    return mapInfo;
+  } else if (type === "beatmapset") {
+      Object.assign(mapInfo, {
+        bgLink: `https://assets.ppy.sh/beatmaps/${apiResponse[0].beatmapset_id}/covers/cover.jpg`,
+        title: apiResponse[0].title,
+        titleUnicode: apiResponse[0].title_unicode,
+        artist: apiResponse[0].artist,
+        artistUnicode: apiResponse[0].artist_unicode,
+        url: `https://osu.ppy.sh/beatmapsets/${apiResponse[0].beatmapset_id}`,
+        id: apiResponse[0].beatmapset_id,
+        status: findStatus(apiResponse[0].approved)
+      });
+
+      //similarly, we aren't getting a lot of things here - description, creator (since this is always yurukyan), dateFinished, and personCreator
+      return mapInfo;
+  }
+}
+
+export function modifySets(newSet: beatmapset, isNew: boolean) {
+  let currentSets = JSON.parse(fs.readFileSync('./sets.json', 'utf-8'));
+  if (isNew) { //if it's new, we can just append the new set since we automatically sort complete/incomplete on the frontend~
+    currentSets.push(newSet);
+  } else {
+    let setIndex = currentSets.findIndex(set => set.mapId === newSet.mapId);
+    currentSets[setIndex] = newSet;
   }
 
-  //mrrpbot stuff
-  mapInfo.status = findStatus(apiResponse[0].approved)
-  mapInfo.title_unicode = apiResponse[0].title_unicode;
-  mapInfo.artist_unicode = apiResponse[0].artist_unicode;
-  mapInfo.title = apiResponse[0].title;
-  mapInfo.artist = apiResponse[0].artist;
-  mapInfo.bgLink = `https://assets.ppy.sh/beatmaps/${apiResponse[0].beatmapset_id}/covers/raw.jpg`;
-  mapInfo.mapper = apiResponse[0].creator;
+  fs.writeFileSync('./sets.json', JSON.stringify(currentSets, null, 2));
+}
 
-  if (type === "beatmap") {
-    mapInfo.diffname = apiResponse[0].version;
-    mapInfo.sr = Math.round(apiResponse[0].difficultyrating * 100) / 100;
-    mapInfo.colour = colourizeHex(mapInfo.sr);
+export function modifyDiffs(newDiff: gd, isNew: boolean, person: string) {
+  let currentDiffs = JSON.parse(fs.readFileSync(`./${person}gds.json`, 'utf-8'));
+  if (newDiff.status === 'wip' && isNew) { //new wip gds can simply be appended to the bottom~
+    currentDiffs.push(newDiff);
+  } else {
+    let numWipDiffs = findWipCount(currentDiffs);
+    if (isNew) { //if it's new and not wip, we can append before the wip diffs~
+      currentDiffs.splice(currentDiffs.length-numWipDiffs, 1, newDiff);
+    } else {
+      let mapIndex = currentDiffs.findIndex(diff => diff.mapId === newDiff.mapId);
+      if (currentDiffs[mapIndex].status === 'wip' && newDiff.status !== 'wip') { //if this update changes the diff status
+        currentDiffs.splice(mapIndex, 1);
+        currentDiffs.splice(currentDiffs.length-numWipDiffs, 0, newDiff);
+      } else {
+        currentDiffs[mapIndex] = newDiff;
+      }
+    }
   }
 
-  return mapInfo;
+  fs.writeFileSync(`./${person}gds.json`, JSON.stringify(currentDiffs, null, 2));
 }
 
 export async function updateAllMaps(person: string, mapStatus: gd[]) {
