@@ -6,7 +6,7 @@
 
 <script lang="ts">
     import { Header } from "@repo/yuru-assets";
-    import type { beatmapset } from "@repo/yuru-assets";
+    import type { beatmapset } from "@repo/yuru-server";
     import { _ } from "@repo/i18n";
     import "@repo/yuru-static/assets/base.css";
     import osugds from "@repo/yuru-static/assets/osugds.png";

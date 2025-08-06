@@ -26,12 +26,15 @@
     <section id="page">
       <h1 style="display: inline-block"><a id="title" href="https://yuru.ca">yurukyan△</a></h1><h2 id="api-text">api</h2>
       <div class="section-divide"></div>
-      <h1>endpoints</h1>
+      <h1>ꕤ endpoints</h1>
       <div>
-        <p><code>/gds</code> - returns the osu! guest difficulties list for lilac or sydney, requires <code>person=STRING</code> option</p>
+        <p><code>/gds</code> - returns the osu! guest difficulties list for lilac or sydney, requires <code>person</code> option</p>
         <p><code>/sets</code> - returns the list of osu! beatmapsets that both of us have done</p>
-        <p><code>/songInfo</code> - using last.fm, returns the song last listened to, or the song we're currently listening to</p>
-        <p><code>/pkInfo</code> - using pluralkit, returns information about the last front each alter had, as well as a percentage that each alter has fronted in that timeframe</p>
+        <p><code>/lastfm</code> - using last.fm, returns the song last listened to, or the song we're currently listening to</p>
+        <p><code>/recentFronts</code> - using pluralkit, returns information about the last front each alter had, as well as a percentage that each alter has fronted in that timeframe</p>
+        <p><code>/frontData</code> - using pluralkit, returns historical front information for our system</p>
+        <p><code>/newMapData</code> - allows you to see the basic info about an osu! map in the format that they're servered on our website. requires <code>beatmapId</code> or <code>beatmapsetId</code> options</p>
+        <p><code>/changeInfo</code> - accepts new set or gd information. requires a yuru.ca api access token</p>
       </div>
       <div class="section-divide"></div>
       <div id="footer">

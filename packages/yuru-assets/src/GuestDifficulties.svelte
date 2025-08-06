@@ -4,7 +4,7 @@
 
     import { colourizeHex } from "osu-colourizer";
     import { _ } from "svelte-i18n";
-    import type { gd } from "./index.d";
+    import type { gd } from "@repo/yuru-server";
     import AudioPlayer from "./components/AudioPlayer.svelte";
     import AudioVolume from "./components/AudioVolume.svelte";
     import { fetchFromApi } from "./pageHelper";

@@ -140,20 +140,17 @@
             rgba(0, 0, 0, 0) 40%,
             rgba(0, 0, 0, 0.6) 100%
         );
-    }
-    .divider h1 {
+    } .divider h1 {
         margin-top: 0;
         margin-bottom: 0;
-    }
-    .divider h1 a {
+    } .divider h1 a {
         font-family: Kyokasho, sans-serif;
         font-weight: normal;
         text-align: center;
         color: var(--tent);
         font-size: 52px;
         text-decoration: none;
-    }
-    .divider h2 {
+    } .divider h2 {
         margin-top: 5px;
         font-weight: normal;
     }

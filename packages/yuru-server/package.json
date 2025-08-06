@@ -1,9 +1,14 @@
 {
   "name": "@repo/yuru-server",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./main.d.ts"
+    }
+  },
   "scripts": {
-    "dev": "node main.js"
+    "dev": "npx tsx main.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
