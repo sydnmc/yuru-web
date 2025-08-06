@@ -90,6 +90,7 @@ app.post('/changeInfo', async(req, res) => {
     let key = req.headers["authorization"];
     let type = req.query.type;
     let data = req.body;
+    let person;
 
     if (key === process.env.VALID_ACCESS_KEY) {
         switch (type) {
@@ -97,14 +98,14 @@ app.post('/changeInfo', async(req, res) => {
                 modifySets(data, true);
                 break;
             case 'diffadd':
-                let person = req.query.person;
+                person = req.query.person;
                 modifyDiffs(data, true, person);
                 break;
             case 'setedit':
                 modifySets(data, false);
                 break;
             case 'diffedit':
-                let person = req.query.person;
+                person = req.query.person;
                 modifyDiffs(data, false, person);
                 break;
         }
