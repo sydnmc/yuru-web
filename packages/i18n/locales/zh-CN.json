@@ -1,0 +1,76 @@
+{
+    "yurukyan":{
+        "home":{
+            "loadingFront":"正在加载主控信息…",
+            "loadingSong":"正在检索歌曲信息…",
+            "sydney":"sydney",
+            "lilac":"lilac",
+            "hazel":"hazel",
+            "may":"may",
+            "frontedFor":"❀ 上次主控了 ❀<br> {hours} 小时{minutes}分钟",
+            "frontedOn":"❀ 上次主控还在 ❀<br> {year}-{month}-{day}",
+            "fronting":"主控了{hours}小时{minutes}分钟",
+            "frontingLong":"主持了{days}日{hours}小时",
+            "lastFmListening":"正在听",
+            "lastFmListened":"上次听了",
+            "bio":"19 | she/her | 日本語もOK | 🍁",
+            "healing":"ৎ˗ˏˋ ♡ ˎˊ˗.ᐟ doing our best to heal together"
+        }
+    },
+    "sydney":{
+        "header":{
+            "pfpAlt":"sydney的志摩凜头像",
+            "music":"音乐"
+        }
+    },
+    "lilac":{
+        "header":{
+            "pfpAlt":"lilac的kyu kurarin头像",
+            "whoAmI":"我是谁？"
+        },
+        "home":{
+          "osugdsDescTop":"虽然现在还没发布,",
+          "osugdsDescMiddle":"这是我主要负责的一个网站～",
+          "osugdsDescBottom":"这是一个平台，你可以在上面找到能为你自己的地图制作GD（Guest Difficulty）的人，也可以找到新的、令人兴奋的地图来制作你自己的GD！我希望当我们最终完成它的时候，很多人都会喜欢使用它～",
+          "osuMapping":"‧₊˚❀ osu! 做图",
+          "osuMappingDescTop":"在osu!上，我在做图方面尝试过一些各种各样的东西，目前只有这张图是已排名的：",
+          "osuMappingDescBottom":"不过，作图确实很吸引我，我很乐意在取得更多成就分享出来～！",
+          "mochi":"momone chinoi - mochi",
+          "mochiCreator":"由yuiyamu谱面",
+          "whoAmI":"‧₊˚❀ 我是谁？",
+          "whoAmIDesc":"如果您好奇我是谁，或者想了解更多关于“系统”的知识，请点击下方链接！我存在于一个DID (Dissociative Identity Disorder)系统之内，所以对我们所有人来说，身份认同确实有些复杂～"
+        }
+    },
+    "may":{
+        "header":{
+            "pfpAlt":"may的东云惠那头像"
+        },
+        "home":{
+            "hi":"嗨！ o/",
+            "intro":"我跟lilac很像，也是这里的新人。目前为止，我主要负责<strong>网站的整体改版</strong>，并协助维护我们其他的项目。",
+            "intro1":"我大概是接替了sydney 的职位，但我喜欢保持低调， <strong>不过这不代表你不能过来跟我打招呼哦～ c:</strong>",
+            "platform":"(e)"
+        }
+    },
+    "common":{
+        "header":{
+            "ourSets":"我们的图集",
+            "myGds":"我的GD"
+        },
+        "gds":{
+          "loading":"正在加载GD…",
+          "gds":"guest difficulties ❀",
+          "finished":"总完成",
+          "collabs":"合作的",
+          "wip":"在制品",
+          "notForRank":"表示不求排名的GD",
+          "status":"状态",
+          "host":"主持者",
+          "stars":"难度",
+          "amount":"完成了",
+          "dateFinished":"完成日期",
+          "bns":"bns",
+          "error":"哎哟，出了问题了… :c"
+        }
+    }
+}

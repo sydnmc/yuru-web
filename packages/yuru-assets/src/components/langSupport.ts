@@ -1,16 +1,16 @@
 //sydney's page isn't in here since,, deprecated :3
 export const pageLocales = {
     yurukyan: {
-        home: ["en-CA", "he-IL", "ja-JP"],
+        home: ["en-CA", "he-IL", "ja-JP", "zh-CN"],
         sets: ["en-CA"]
     },
     lilac: {
-        home: ["en-CA", "ja-JP"],
-        gds: ["en-CA", "ja-JP"],
+        home: ["en-CA", "ja-JP", "zh-CN"],
+        gds: ["en-CA", "ja-JP", "zh-CN"],
         whoAmI: ["en-CA"]
     },
     may: {
-        home: ["en-CA", "ja-JP"]
+        home: ["en-CA", "ja-JP", "zh-CN"]
     }
 };
 
@@ -26,5 +26,9 @@ export const localeInfo = {
     "he-IL":{
       flag: "https://osu.ppy.sh/assets/images/flags/1f1ee-1f1f1.svg",
       name: "עברית"
-    }
+    },
+    "zh-CN":{
+      flag: "https://osu.ppy.sh/assets/images/flags/1f1e8-1f1f3.svg",
+      name: "简体中文"
+    },
 }
