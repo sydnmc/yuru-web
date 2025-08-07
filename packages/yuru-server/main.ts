@@ -86,7 +86,7 @@ app.get('/newMapData', async(req, res) => {
 });
 
 /* this route requires yuru.ca authentication */
-app.post('/changeInfo', async(req, res) => {
+app.post('/changeInfo', (req, res) => {
     let key = req.headers["authorization"];
     let type = req.query.type;
     let data = req.body;
@@ -109,6 +109,9 @@ app.post('/changeInfo', async(req, res) => {
                 modifyDiffs(data, false, person);
                 break;
         }
+        res.send('successfully changed info~');
+    } else {
+        res.send(`invalid key!! this likely means you aren't supposed to be messing with this... >_<;;`);
     }
 });
 
@@ -215,6 +218,24 @@ app.get('/recentFronts', async(req, res) => {
         }
 
         let alterInfo = constructAlterInfo(parsedResp, imaTs, limitTs, memberMap, false);
+
+        for (const [alterId, alterName] of memberMap) { //checking to see if any of our core members haven't fronted in the last 30 days
+            let alterIndex = alterInfo.findIndex(alter => alter.name === alterName);
+            if (alterIndex === -1) { //if we encounter an alter that isn't there (:OO)
+                let frontData = JSON.parse(fs.readFileSync('switches.json', 'utf-8'));
+                let lastFrontIndex = frontData.findIndex(front => front.members[0] === alterId);
+
+                alterInfo.push({
+                    name: alterName,
+                    id: alterId,
+                    fronting: false,
+                    totalFrontTime: 0,
+                    lastFrontTime: 0,
+                    lastFrontTimestamp: new Date(frontData[lastFrontIndex].timestamp),
+                    percent: 0 //zettai 0%, since they have no fronts in the past 30 days
+                })
+            }
+        }
 
         res.send(alterInfo);
     } catch (err) {

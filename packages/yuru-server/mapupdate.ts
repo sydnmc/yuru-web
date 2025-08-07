@@ -137,12 +137,13 @@ export function modifyDiffs(newDiff: gd, isNew: boolean, person: string) {
   } else {
     let numWipDiffs = findWipCount(currentDiffs);
     if (isNew) { //if it's new and not wip, we can append before the wip diffs~
-      currentDiffs.splice(currentDiffs.length-numWipDiffs, 1, newDiff);
+      currentDiffs.splice(currentDiffs.length-numWipDiffs, 0, newDiff);
     } else {
       let mapIndex = currentDiffs.findIndex(diff => diff.mapId === newDiff.mapId);
       if (currentDiffs[mapIndex].status === 'wip' && newDiff.status !== 'wip') { //if this update changes the diff status
+        console.log('changing diff order~');
         currentDiffs.splice(mapIndex, 1);
-        currentDiffs.splice(currentDiffs.length-numWipDiffs, 0, newDiff);
+        currentDiffs.splice((currentDiffs.length+1)-numWipDiffs, 0, newDiff);
       } else {
         currentDiffs[mapIndex] = newDiff;
       }
