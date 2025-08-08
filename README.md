@@ -15,6 +15,8 @@ our system (mostly lilac) is currently working on translating every page on our 
 
 > mandarin: also every page except for `lilac/whoami` and `yurukyan/sets` (maintained by [pearl](https://github.com/pearlwrap))
 
+> mandarin: also every page except for `lilac/whoami` and `yurukyan/sets` (maintained by [glitchy](https://github.com/Walker37712))
+
 ## dev notes
 since this project now utilizes sveltekit as its framework, installation and development are relatively simple. just go to the root of the project, run `pnpm install` to install all of the dev dependencies, then `pnpm run dev` to start a local server.
 
