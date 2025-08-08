@@ -1,0 +1,76 @@
+{
+    "yurukyan":{
+        "home":{
+            "loadingFront":"đang tải nhân cách",
+            "loadingSong":"đang tải thông tin về nhạc...",
+            "sydney":"sydney",
+            "lilac":"lilac",
+            "hazel":"hazel",
+            "may":"may",
+            "frontedFor":"❀ lần cuối front ❀<br> {hours} tiếng, {minutes} phút trước",
+            "frontedOn":"❀ lần cuối front ❀<br> vào ngày {month}/{day}/{year}",
+            "fronting":"đang front được {hours} tiếng, {minutes} phút",
+            "frontingLong":"đang front {days} ngày, {hours} tiếng",
+            "lastFmListening":"hiện giờ đang nghe bài",
+            "lastFmListened":"đã nghe bài",
+            "bio":"19 | nừ | 日本語もOK | 🍁",
+            "healing":"۶ৎ˗ˏˋ ♡ ˎˊ˗.ᐟ cùng cố gắng hỗ trợ nhau"
+        }
+    },
+    "sydney":{
+        "header":{
+            "pfpAlt":"sydney's shima rin pfp",
+            "music":"music"
+        }
+    },
+    "lilac":{
+        "header":{
+            "pfpAlt":"lilac's kyu kurarin pfp",
+            "whoAmI":"bạn là ai vậy?"
+        },
+        "home":{
+          "osugdsDescTop":"mặc dù chưa ra mắt chính thức,",
+          "osugdsDescMiddle":"là trang web chính mà mình đang phát triển ~",
+          "osugdsDescBottom":"nó là một nền tảng để giúp bạn tìm mapper cho các guest difficulties cho map của bạn, cũng như tìm những map thú vị của các mapper khác để bạn tạo guest difficulty cho! mình hi vọng sẽ nhiều người dùng trang này khi bọn mình hoàn thành nó ~~",
+          "osuMapping":"‧₊˚❀ osu! mapping",
+          "osuMappingDescTop":"mình đã sáng tạo khá nhiều khi nói về tạo map trong osu!, hiện tại thì mình chỉ có 1 map đã được xếp hạng:",
+          "osuMappingDescBottom":"dù vậy, mình vẫn có sự hứng thú đối với mapping, và mình muốn có thể chia sẻ nhiều thành tựu của bản thân hơn~!!",
+          "mochi":"momone chinoi - mochi",
+          "mochiCreator":"mapped by yuiyamu",
+          "whoAmI":"‧₊˚❀ bạn là ai vậy?",
+          "whoAmIDesc":"nếu bạn muồn tìm hiểu về mình, hay bạn chỉ muốn được biết về 'hệ thống' của một người đa nhân cách, thì hãy click nút dưới đây! mình có hội chứng rối loạn đa nhân cách, nên mỗi khi nói về nhân cách thì nó sẽ rất phức tạp đấy~"
+        }
+    },
+    "may":{
+        "header":{
+            "pfpAlt":"may's ena shinonome pfp"
+        },
+        "home":{
+            "hi":"hi! o/",
+            "intro":"giống như lilac, mình khá mới. mình chủ yếu làm việc liên quan đến <strong>redesign toàn trang web</strong> này + hỗ trợ một số dự án của bọn mình.",
+            "intro1":"có thể coi mình như nhân cách đã thay thế sydney, nhưng mình muốn dược đóng vai trò kín đáo hơn c: <strong>nếu muốn thì bạn cũng có thể nói chuyện với mình!</strong>",
+            "platform":"(nền tảng duy nhất mình dùng)"
+        }
+    },
+    "common":{
+        "header":{
+            "ourSets":"sets của bọn mình",
+            "myGds":"gds của mình"
+        },
+        "gds":{
+          "loading":"đang tải gds...",
+          "gds":"guest difficulties ❀",
+          "finished":"đã hoàn thành",
+          "collabs":"collabs",
+          "wip":"wip",
+          "notForRank":"gds không xếp hạng",
+          "status":"tình trạng",
+          "host":"host",
+          "stars":"stars",
+          "amount":"mapped",
+          "dateFinished":"ngày hoàn thành",
+          "bns":"bns",
+          "error":"trang web đã gặp lỗi rồi! huhu :c"
+        }
+    }
+}
