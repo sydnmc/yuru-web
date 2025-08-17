@@ -467,6 +467,12 @@
         margin-right: 12px;
         margin-left: 2px;
     }
+    .ja-JP .no-front-alter .alter-name {
+        font-size: 20px;
+    }
+    .de-DE .no-front-alter .alter-name {
+        font-size: 24px;
+    }
 
     .alter-text {
         font-size: 14px;
@@ -477,7 +483,7 @@
         margin-right: 10px;
     }
     .no-front-alter .alter-text {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     #front-percent-container {
