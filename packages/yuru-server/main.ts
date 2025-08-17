@@ -322,8 +322,9 @@ app.get('/frontData', async(req, res) => {
             alterInfo = constructAlterInfo(frontData, startPeriod, endPeriod, memberMap, true);
             for (let i = 0; i < alterInfo.length; i++) {
                 if (otherMemberData.get(alterInfo[i].id)) { //isn't defined when we have no fronter - for whatever reason, only this seems to really work :p
-                    alterInfo[i].pfpLink =  otherMemberData.get(alterInfo[i].id).pfp;
-                    alterInfo[i].colour = otherMemberData.get(alterInfo[i].id).colour;
+                    alterInfo[i].pfpLink =  otherMemberData.get(alterInfo[i].id).pfp; //would make sense to have a default pfp... but i think it's fine
+                    alterInfo[i].colour = otherMemberData.get(alterInfo[i].id).colour ?? 'ffffff'; //sets it to white if none
+                    console.log(alterInfo[i]);
                 }
             }
         }

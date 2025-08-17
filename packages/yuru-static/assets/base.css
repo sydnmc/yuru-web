@@ -16,13 +16,6 @@
     --background: rgb(40 40 40);
     --offwhite: rgb(222, 224, 237);
     --transparent: #fff 0 0;
-    --shine: linear-gradient(
-        to right,
-        #FF498C 20%,
-        #FF732D 30%,
-        #FF4953 70%,
-        #FF4482 80%
-    );
 }
 
 body {

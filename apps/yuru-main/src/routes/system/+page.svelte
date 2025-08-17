@@ -131,7 +131,7 @@
 </div>
 <div id="info-box">
     <h2>o/ welcome to our system page~!</h2>
-    <p>we made the historical graph below to give a much better visual picture of what things our like in our system - how long each of us usually front, who's considered our "main" alters, etc.</p>
+    <p>we made this historical graph below to give a much better visual picture of what things our like in our system - how long each of us usually front, who's considered our "main" alters, etc.</p>
     <p>if you're part of a system that uses pluralkit, there's also an option to see this for your own system! input your system id in the box above and wait for it to load~ it may take a while if you have a lot of switches.. (,,&gt;﹏&lt;,,)</p>
     <p>if you're confused about all of this system talk, then feel free to read up on anything you may be confused about <a href={getPageRoot('lilac')+"whoami"}>here</a>.</p>
     <p>(˵ •̀ ᴗ - ˵ ) ✧</p>
