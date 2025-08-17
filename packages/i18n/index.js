@@ -10,6 +10,7 @@ register("ja-JP", () => import("./locales/ja-JP.json"));
 register("he-IL", () => import("./locales/he-IL.json"));
 register("zh-CN", () => import("./locales/zh-CN.json"));
 register("vi-VI", () => import("./locales/vi-VI.json"));
+register("de-DE", () => import("./locales/de-DE.json"));
 
 init({
   fallbackLocale: defaultLocale,

@@ -5,7 +5,7 @@ yurukyan△ system personal website~
 ![yuru-web](https://yui.yuru.ca/trn0rcd3o2.png)
 
 ## localization
-our system (mostly lilac) is currently working on translating every page on our site into japanese - and, thanks to the help of our lovely girlfriend, work for hebrew translations is also currently underway! however, this does not apply to sydney's pages, as those are no longer being maintained.
+our system (mostly lilac) is currently working on translating every page on our site into japanese, as well as a ton of other people maintaining translations into various different translations, shown below. however, none of these translations will include any of sydney's pages, as those are no longer being maintained.
 
 > english: 100% | pages are translated from english~
 
@@ -13,9 +13,11 @@ our system (mostly lilac) is currently working on translating every page on our 
 
 > hebrew: only `yurukyan/home` and the error page (maintained by anne)
 
-> mandarin: also every page except for `lilac/whoami` and `yurukyan/sets` (maintained by [pearl](https://github.com/pearlwrap))
+> mandarin: same completion as japanese (maintained by [pearl](https://github.com/pearlwrap))
 
-> mandarin: also every page except for `lilac/whoami` and `yurukyan/sets` (maintained by [glitchy](https://github.com/Walker37712))
+> vietnamese: same completion as japanese (maintained by [glitchy](https://github.com/Walker37712))
+
+> mandarin: every page except for `yurukyan/sets` (maintained by toki/yesoyai)
 
 ## dev notes
 since this project now utilizes sveltekit as its framework, installation and development are relatively simple. just go to the root of the project, run `pnpm install` to install all of the dev dependencies, then `pnpm run dev` to start a local server.

@@ -86,6 +86,7 @@
     ]);
     let main: sysmember = $state({} as sysmember);
     let sleepyAlters: sysmember[] = $state([]);
+    let noFronterAlter = $state({} as sysmember);
 
     sysmembers.forEach(member => {
         if (member.main) {
@@ -98,16 +99,23 @@
     let pkInfoAru = $state(false);
     function processPkInfo(frontList: alter[]) {
         sleepyAlters = [];
+        main = null; //default behavior is to wait for page load and have lilac show up - but in case nobody's fronting, this should be the value of main after
+        console.log(frontList);
         for (let i = 0; i < frontList.length; i++) {
+            let days = Math.floor(frontList[i].totalFrontTime/1000/60/60/24);
+            let hours = Math.round((frontList[i].totalFrontTime/1000/60/60)-days*24);
+            let tooltip = `${days} days, ${hours} hours | ${frontList[i].percent}%`;
+
             let sysdex = sysmembers.findIndex(e => e.name  === frontList[i].name);
-            if (sysdex === -1) continue;
+            if (sysdex === -1) {
+                noFronterAlter.percent = frontList[i].percent;
+                noFronterAlter.tooltip = tooltip;
+                continue;
+            }
 
             sysmembers[sysdex].fronting = frontList[i].fronting;
             sysmembers[sysdex].percent = frontList[i].percent;
-
-            let days = Math.floor(frontList[i].totalFrontTime/1000/60/60/24);
-            let hours = Math.round((frontList[i].totalFrontTime/1000/60/60)-days*24);
-            sysmembers[sysdex].tooltip = `${days} days, ${hours} hours | ${sysmembers[sysdex].percent}%`;
+            sysmembers[sysdex].tooltip = tooltip;
 
             sysmembers[sysdex].text = dateParser(frontList[i].lastFrontTime, frontList[i].fronting, frontList[i].lastFrontTimestamp as string);
             if (frontList[i].fronting) {
@@ -115,6 +123,7 @@
             } else {
                 sleepyAlters.push(sysmembers[sysdex]);
             }
+            console.log(noFronterAlter);
         }
         pkInfoAru = true;
     }
@@ -141,6 +150,7 @@
         <Locale mode="home" person="yurukyan" page="home"/>
     </div>
     <h1><a id="title" href={getPageRoot('yurukyan')}>yurukyan△</a></h1>
+    {#if main}
     <a class="fronter" href={main.link}>
         <div class="fronter-img">
             <img alt="{main.name}'s profile pic" src={main.img}>
@@ -154,10 +164,13 @@
             {/if}
         </div>
     </a>
+    {:else}
+        <span id="nobody-text">{$_('yurukyan.home.noFronter')}</span>
+    {/if}
 
     <div id="alter-container">
         {#each sleepyAlters as person}
-        <a class="alter" href={person.link}>
+        <a class="alter {!main? 'no-front-alter' : ''}" href={person.link}>
             <div class="alter-img">
               <img alt="{person.name}'s profile pic" src={person.img}>
             </div>
@@ -178,6 +191,9 @@
                 <span class="front-percent-hover">{person.name}<br>{person.tooltip}</span>
             </div>
             {/each}
+            <div class="front-percent-person" style="width: {noFronterAlter.percent}%; background-color: grey;">
+                <span class="front-percent-hover">(no fronter)<br>{noFronterAlter.tooltip}</span>
+            </div>
         </div>
       </div>
 
@@ -398,6 +414,18 @@
         margin: 0px;
     }
 
+    #nobody-text {
+        font-size: 17px;
+    }
+
+    #alter-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
     .alter {
         display: flex;
         align-items: center;
@@ -415,6 +443,8 @@
     .alter:hover {
         box-shadow: -2px 8px 20px 16px rgba(0, 0, 0, 0.3); /* increases the spread when you hover over */
         transform: rotate(2deg) scale(1.03);
+    } .no-front-alter {
+        width: 24%;
     }
 
     .alter-img {
@@ -446,13 +476,8 @@
         text-align: right;
         margin-right: 10px;
     }
-
-    #alter-container {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 15px;
-        margin-left: 25px;
-        margin-right: 25px;
+    .no-front-alter .alter-text {
+        font-size: 13px;
     }
 
     #front-percent-container {
