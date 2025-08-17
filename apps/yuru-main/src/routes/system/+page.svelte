@@ -18,6 +18,8 @@
 
     let systemId = $state();
 
+    let isCombined = $state(false);
+
     let systemIdInput: HTMLInputElement;
     function changeSystem(keyPressed: string) {
         if (keyPressed === 'Enter') {
@@ -28,12 +30,11 @@
 
     const endTime = new Date().getTime(); //the end time will always be ima
     let alterInfo = $state(getAlterInfo());
-    let startTime = endTime;
+    let startTime = $state(endTime);
     async function getAlterInfo() {
         let data;
         if (!systemId) {
             data = await fetchFromApi(`frontData`);
-            //data.sort((a, b) => a.localeCompare(b));
         } else {
             data = await fetchFromApi(`frontData?id=${systemId}`);
         }
@@ -46,25 +47,30 @@
         let earliestAppearance = endTime;
         for (let i = 0; i < info.length; i++) {
             if (earliestAppearance > info[i].firstAppearance!) {
-                earliestAppearance = info[i].firstAppearance;
+                earliestAppearance = info[i].firstAppearance!;
             }
         }
         startTime = earliestAppearance;
     }
 
-    function makeDate(timestamp: number) {
+    function makeDate(timestamp: number, requiresFullDate: boolean) {
         let date = new Date(timestamp);
-        let dateFormat = {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        };
+        let dateFormat;
+        if (requiresFullDate) {
+            dateFormat = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            };
+        } else if (new Date(timestamp).getUTCMonth() === 0) {
+            dateFormat = { year: "numeric" }
+        } else {
+            dateFormat = { month: "long" }
+        }
 
         return date.toLocaleDateString(locale, dateFormat);
     }
 
-    let pfpAlt = $state('');
-    let yurukyanMembers = ['sydney', 'lilac', 'hazel', 'may'];
     function assignPfp(alter: alter) {
         switch (alter.name) {
             case "sydney":
@@ -77,8 +83,6 @@
                 return mayPfp;
         }
         
-        console.log(alter);
-        console.log(alter.pfpLink);
         return alter.pfpLink;
     }
 
@@ -90,6 +94,32 @@
         let margin = endTime - startTime;
         return `${((parseInt(timestamp)-startTime)/margin)*100}%`;
     }
+
+    function createSensibleDateIntverals(startTime: number) {
+        let intervals = [];
+        let margin = endTime - startTime;
+        let startTimestamp = new Date(startTime);
+
+        let nextFullMonth =  new Date(startTimestamp.getUTCFullYear(), startTimestamp.getUTCMonth()+1, 1).getTime();
+        let position = (((nextFullMonth - startTime)/margin) * 100) * 0.94; //actual timeline is only 94%;
+        intervals.push({timestamp: nextFullMonth, position, importance: 'full'});
+
+        let curMonthTimestamp = nextFullMonth;
+        while (curMonthTimestamp < endTime) {
+            let currentTimestamp = new Date(intervals[intervals.length-1].timestamp);
+            curMonthTimestamp = new Date(currentTimestamp.getUTCFullYear(), currentTimestamp.getUTCMonth()+1, 1).getTime();
+            position = ((((curMonthTimestamp - startTime)/margin) * 100) * 0.94);
+            let importance = 'month';
+            if (currentTimestamp.getUTCMonth() === 11) {
+                importance = 'year';
+            }
+
+            intervals.push({timestamp: curMonthTimestamp, position, importance});
+        }
+
+        intervals.pop(); //cannot be bothered :p just removes the last one since we already have a current date
+        return intervals;
+    }
 </script>
 
 <div id="background"></div>
@@ -97,23 +127,26 @@
     <h1><a href={getPageRoot('yurukyan')}>yurukyan△</a></h1>
     <h2>system info ❀</h2>
     <div id="system-input">
-        <select>
-
-        </select>
         <span>system id: </span>
         <input type="text" bind:this={systemIdInput} onkeydown={keyType => changeSystem(keyType.key)}/>
+        <br>
+        <select bind:value={isCombined}>
+            <option value={false}>separate rows</option>
+            <option value={true}>combined</option>
+        </select>
     </div>
 </div>
 {#await alterInfo}
     <p>gathering front data...</p>
 {:then frontData}
+<div id="front-history-container">
     <div id="front-history">
         {#each frontData as alter}
             {#if alter.name !== "(no fronter)"}
             <div class="alter-row">
                 <div class="front-container">
                     {#each alter.frontHistory as front}
-                        <div style="background-color: {systemId? '#ffffff' : `var(--${alter.name}-main)`}; 
+                        <div style="background-color: {systemId? `#${alter.colour}` : `var(--${alter.name}-main)`}; 
                         width: {getFrontLengthPercent(front.length)};
                         left: {getPosition(front.timestamp)}"></div>
                     {/each}
@@ -125,8 +158,16 @@
             {/if}
         {/each}
     </div>
-    <p>{makeDate(startTime)}</p>
-    <p>{makeDate(endTime)}</p>
+    <div id="time-row">
+        <span class="full-date-timestamp">{makeDate(startTime, true)}</span>
+        {#each createSensibleDateIntverals(startTime) as interval}
+        <div style="left: {interval.position}%" class="date-line-container">
+            <div class={interval.importance === 'year'? 'date-divider-major' : 'date-divider'}></div>
+            <span class={interval.importance === 'year'? 'major-date' : ''}>{makeDate(interval.timestamp, false)}</span>
+        </div>
+        {/each}
+    </div>
+</div>
 {:catch}
     <p>an error occured!</p>
 {/await}
@@ -180,6 +221,7 @@
 
     #system-input {
         position: absolute;
+        text-align: left;
         bottom: 10px;
         left: 5px;
     } #system-input input {
@@ -189,17 +231,28 @@
         border-radius: 5px;
     }  #system-input input:focus {
         outline: 2px solid var(--accent);
+    } #system-input select {
+        margin-top: 10px;
+        background: transparent;
+        color: white;
+        border: 2px solid var(--main);
+        border-radius: 5px;
+    }
+
+    #front-history-container {
+        position: relative;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 20px;
     }
 
     #front-history {
         display: flex;
         flex-direction: column;
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 20px;
         border: 3px solid var(--main);
         border-radius: 15px;
         backdrop-filter: brightness(0.6);
+        overflow: clip;
     }
 
     .alter-row {
@@ -211,7 +264,7 @@
     .front-container {
         position: relative;
         height: 100%;
-        width: 100%;
+        width: 94%;
     } .front-container div {
         position: absolute;
         height: 100%;
@@ -221,7 +274,7 @@
         display: flex;
         align-items: flex-end;
         justify-content: right;
-        width: 120px;
+        width: 6%;
         height: 100%;
         background-position: center;
         background-size: cover;
@@ -229,8 +282,35 @@
         font-size: 28px;
         color: white;
         margin-right: 5px;
-    } .name-section img {
-        width: 70px;
-        border-radius: 10px;
+    }
+
+    .date-divider-major {
+        height: 100%;
+        margin-left: 50%;
+        margin-right: 50%;
+        background-color: white;
+        width: 1px;
+    } .date-divider {
+        height: 100%;
+        margin-left: 50%;
+        margin-right: 50%;
+        background-color: grey;
+        width: 1px;
+    }
+
+    .date-line-container {
+        top: 0;
+        position: absolute;
+        height: 100%;
+    }
+
+    .full-date-timestamp {
+        position: absolute;
+        font-size: 12px;
+    }
+
+    .major-date {
+        color: white;
+        font-size: 18px;
     }
 </style>

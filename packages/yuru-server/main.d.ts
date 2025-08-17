@@ -14,6 +14,7 @@ declare global {
 
         frontHistory?: frontHistory[];
         pfpLink?: string;
+        colour?: string;
     }
 
     interface alterTimes {

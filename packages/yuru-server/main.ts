@@ -90,6 +90,7 @@ app.post('/changeInfo', async(req, res) => {
     let key = req.headers["authorization"];
     let type = req.query.type;
     let data = req.body;
+    let person;
 
     if (key === process.env.VALID_ACCESS_KEY) {
         switch (type) {
@@ -97,14 +98,14 @@ app.post('/changeInfo', async(req, res) => {
                 modifySets(data, true);
                 break;
             case 'diffadd':
-                let person = req.query.person;
+                person = req.query.person;
                 modifyDiffs(data, true, person);
                 break;
             case 'setedit':
                 modifySets(data, false);
                 break;
             case 'diffedit':
-                let person = req.query.person;
+                person = req.query.person;
                 modifyDiffs(data, false, person);
                 break;
         }
@@ -291,15 +292,18 @@ app.get('/frontData', async(req, res) => {
             let memberData = await apiResp.json();
 
             memberMap = new Map([]);
-            let memberPfps = new Map([]);
+            let otherMemberData = new Map([]);
             for (let i = 0; i < memberData.length; i++) {
                 memberMap.set(memberData[i].id, memberData[i].name);
-                memberPfps.set(memberData[i].id, memberData[i].avatar_url);
+                otherMemberData.set(memberData[i].id, {pfp: memberData[i].avatar_url, colour: memberData[i].color});
             }
 
             alterInfo = constructAlterInfo(frontData, startPeriod, endPeriod, memberMap, true);
             for (let i = 0; i < alterInfo.length; i++) {
-                alterInfo[i].pfpLink =  memberPfps.get(alterInfo[i].id);
+                if (otherMemberData.get(alterInfo[i].id)) { //isn't defined when we have no fronter - for whatever reason, only this seems to really work :p
+                    alterInfo[i].pfpLink =  otherMemberData.get(alterInfo[i].id).pfp;
+                    alterInfo[i].colour = otherMemberData.get(alterInfo[i].id).colour;
+                }
             }
         }
 
