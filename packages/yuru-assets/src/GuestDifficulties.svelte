@@ -20,8 +20,14 @@
         fetchPerson = "sydney";
     }
 
-    async function populateRow() {
-        let mapStatus: gd[] = await fetchFromApi(`gds?person=${fetchPerson}`); //since we fetch mapdata in this function, it's best to populate everything we need for other parts of the page as well~
+    async function populateRow(searchTerm?: string) {
+        let mapStatus: gd[];
+        if (searchTerm) {
+            mapStatus = await fetchFromApi(`gds?person=${fetchPerson}&search=${searchTerm}`);
+            console.log(mapStatus);
+        } else {
+            mapStatus = await fetchFromApi(`gds?person=${fetchPerson}`); //since we fetch mapdata in this function, it's best to populate everything we need for other parts of the page as well~
+        }
 
         for (let i = 0; i < mapStatus.length; i++) {
             let set: gd = mapStatus[i];
@@ -94,12 +100,24 @@
             }
         }
     }
+
+    let searchInput: HTMLInputElement;
+    let searchTerm = ''; //need to convert this to runes mode Lowkey
+    function search(keyPressed: string) {
+        if (keyPressed === 'Enter') {
+            searchTerm = searchInput.value;
+        }
+    }
 </script>
 
 <div class="divider">
-    <div id="rank-checkbox-container">
+    <div id="info-container">
         <input type="checkbox" bind:checked={showUnserious} />
         <span>{$_("common.gds.notForRank")}</span>
+        <div id="search-bar">
+            <i class="fa fa-search"></i>
+            <input type="text" bind:this={searchInput} onkeydown={keyType => search(keyType.key)}>
+        </div>
     </div>
     <h2>{$_("common.gds.gds")}</h2>
     <p>{$_("common.gds.finished")} <span>{totalCount}</span></p>
@@ -107,7 +125,7 @@
     <p>{$_("common.gds.wip")} <span>{wipCount}</span></p>
 </div>
 <div>
-    {#await populateRow()}
+    {#await populateRow(searchTerm)}
         <h1 class="loading-text">{$_("common.gds.loading")}</h1>
     {:then maps}
         {#each maps as gd}
@@ -173,10 +191,30 @@
         text-align: center;
     }
 
-    #rank-checkbox-container {
+    #info-container {
+        text-align: left;
         position: absolute;
         bottom: 15px;
         left: 15px;
+    }
+
+    #search-bar {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+    } input[type="text"] {
+        background-color: transparent;
+        color: white;
+        border: transparent;
+        font-size: 16px;
+        margin-left: 5px;
+    } input[type="text"]:focus {
+        outline: none;
+    }
+
+    .fa-search {
+        color: white;
+        margin-left: 4px;
     }
 
     .gd {

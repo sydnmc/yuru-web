@@ -199,11 +199,11 @@
 
       <div class="socials-bar socials-bar-big hidden-link">
         <strong>
-            <a href="https://twitter.com/sydnmc_"><img src={twitter} alt="twitter logo"> twitter</a>
+            <a href="https://twitter.com/yuiyamuu"><img src={twitter} alt="twitter logo"> twitter</a>
             <span class="social-divide">|</span>
             <a href="https://osu.ppy.sh/users/14829744"><img src={osu} alt="osu logo"> osu!</a>
             <span class="social-divide">|</span>
-            <a href="discord://-/users/226885796739678229"><img src={discord} alt="discord logo"> discord</a>
+            <a href="discord://-/users/245588170903781377"><img src={discord} alt="discord logo"> discord</a>
         </strong>
       </div>
 

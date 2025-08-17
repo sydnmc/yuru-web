@@ -44,20 +44,62 @@ app.get('/', (req, res) => { //serves the basic api webpage~
     res.sendFile(__dirname+'/page/index.html');
 });
 
+function filterSearchResults(data: any, query: string, type: string) { //this could be a gd or a map
+    let filteredData;
+    
+    if (type === 'gd') {
+        //gds should filter by title, diffname, host, and bns
+        //bns was too buggy for now, so i removed it >_>
+        //(map.bns.findIndex((bn) => bn.includes(query)) !== -1)
+        filteredData = data.filter((map) => 
+            map.title.toLowerCase().includes(query) 
+        || map.artist.toLowerCase().includes(query) 
+        || map.maps.some((diff) => diff.diffname.toLowerCase().includes(query))
+        || map.creator.toLowerCase().includes(query));
+    } else {
+        //sets should filter by title and creator (that's all that really is practical)
+        filteredData = data.filter((map) => 
+            map.title.toLowerCase().includes(query) 
+        || map.artist.toLowerCase().includes(query)
+        || map.creator.toLowerCase().includes(query));
+    }
+    
+    return filteredData;
+}
+
 app.get('/gds', (req, res) => { //sends back the gd info we have stored
     let person = req.query.person;
+    let query = req.query.search;
+    let gdInfo;
 
     if (person === 'sydney' || person === 'syd') {
-        res.send(JSON.parse(fs.readFileSync('./sydneygds.json', 'utf-8')));
+        gdInfo = JSON.parse(fs.readFileSync('./sydneygds.json', 'utf-8'));
+        if (query) {
+            res.send(filterSearchResults(gdInfo, query, 'gd'));
+        } else {
+            res.send(gdInfo);
+        }
     } else if (person === 'lilac') {
-        res.send(JSON.parse(fs.readFileSync('./lilacgds.json', 'utf-8')));
+        gdInfo = JSON.parse(fs.readFileSync('./lilacgds.json', 'utf-8'))
+        if (query) {
+            res.send(filterSearchResults(gdInfo, query, 'gd'));
+        } else {
+            res.send(gdInfo);
+        }
     } else {
         res.send('no person specified >_<;;');
     }
 });
 
 app.get('/sets', (req, res) => { //sends back set info we have stored c:
-    res.send(JSON.parse(fs.readFileSync('./sets.json', 'utf-8')));
+    let query = req.query.search;
+    let sets = JSON.parse(fs.readFileSync('./sets.json', 'utf-8'));
+
+    if (query) {
+        res.send(filterSearchResults(sets, query, 'set'));
+    } else {
+        res.send(sets);
+    }
 });
 
 app.get('/lastfm', async(req, res) => {
@@ -324,7 +366,6 @@ app.get('/frontData', async(req, res) => {
                 if (otherMemberData.get(alterInfo[i].id)) { //isn't defined when we have no fronter - for whatever reason, only this seems to really work :p
                     alterInfo[i].pfpLink =  otherMemberData.get(alterInfo[i].id).pfp; //would make sense to have a default pfp... but i think it's fine
                     alterInfo[i].colour = otherMemberData.get(alterInfo[i].id).colour ?? 'ffffff'; //sets it to white if none
-                    console.log(alterInfo[i]);
                 }
             }
         }

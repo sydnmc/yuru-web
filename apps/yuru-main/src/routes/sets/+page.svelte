@@ -6,25 +6,34 @@
 
 <script lang="ts">
     import "@repo/yuru-static/assets/base.css";
-    import { getPageRoot } from "@repo/yuru-assets";
+    import { getPageRoot, fetchFromApi } from "@repo/yuru-assets";
     import { AudioPlayer, AudioVolume } from "@repo/yuru-assets";
 
-    export let data;
-    let { setInfo } = data; //loads setInfo before the page can completely load - useful since that's the main point of the page :p
+    //since setInfo can change now, we wanna load it in here~
+    async function loadSetData(search?: string) {
+        let setInfo: beatmapset[];
+        if (search) {
+            setInfo = await fetchFromApi(`sets?search=${search}`);
+        } else {
+            setInfo = await fetchFromApi('sets');
+        }
+        
+        let curId = 0;
+        for (let i = 0; i < setInfo.length; i++) {
+            for (let j = 0; j < setInfo[i].description!.length; j++) {
+                if (setInfo[i].description![j].type === "hover") {
+                    setInfo[i].description![j].content.id = curId;
+                    curId++;
+                }
+            }
+        }
+
+        return setInfo;
+    }
 
     let reachedUnfinishedSets = false;
     function setUnfinished() {
         reachedUnfinishedSets = true;
-    }
-
-    let curId = 0;
-    for (let i = 0; i < setInfo.length; i++) {
-        for (let j = 0; j < setInfo[i].description.length; j++) {
-            if (setInfo[i].description[j].type === "hover") {
-                setInfo[i].description[j].content.id = curId;
-                curId++;
-            }
-        }
     }
 
     function findStatus(status: string) {
@@ -50,13 +59,27 @@
     function removeHover() {
         curUserHover = -1;
     }
+
+    let searchInput: HTMLInputElement;
+    let searchTerm = ''; //need to convert this to runes mode Lowkey
+    function search(keyPressed: string) {
+        if (keyPressed === 'Enter') {
+            searchTerm = searchInput.value;
+        }
+    }
 </script>
 
 <div id="background"></div>
 <div class="divider">
     <h1><a href={getPageRoot('yurukyan')}>yurukyan△</a></h1>
     <h2>finished sets ❀</h2>
+    <div id="search-bar">
+        <i class="fa fa-search"></i>
+        <input type="text" bind:this={searchInput} onkeydown={keyType => search(keyType.key)}>
+    </div>
 </div>
+{#await loadSetData(searchTerm)}
+{:then setInfo} 
 <div class="set-container" id="set-container">
     {#each setInfo as set}
     {#if !reachedUnfinishedSets && set.isIncomplete}
@@ -107,6 +130,7 @@
         </div>
         {/each}
 </div>
+{/await}
 <AudioVolume person={'sydney'}/>
 
 <style>
@@ -131,6 +155,7 @@
     }
 
     .divider {
+        position: relative;
         text-align: right;
         padding-top: 20px;
         padding-right: 20px;
@@ -153,6 +178,29 @@
     } .divider h2 {
         margin-top: 5px;
         font-weight: normal;
+    }
+
+    #search-bar {
+        position: absolute;
+        bottom: 0;
+        left: 10px;
+        display: flex;
+        align-items: center;
+    } input[type="text"] {
+        background-color: transparent;
+        color: white;
+        border: transparent;
+        font-size: 20px;
+        margin-left: 15px;
+        border-bottom: 1px solid var(--text);
+    } input[type="text"]:focus {
+        outline: none;
+    }
+
+    .fa-search {
+        font-size: 20px;
+        color: white;
+        margin-left: 4px;
     }
 
     .set {
