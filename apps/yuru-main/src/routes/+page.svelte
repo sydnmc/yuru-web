@@ -150,6 +150,7 @@
         <Locale mode="home" person="yurukyan" page="home"/>
     </div>
     <h1><a id="title" href="/system">yurukyan△</a></h1>
+    {#if main}
     <a class="fronter" href={main.link}>
         <div class="fronter-img">
             <img alt="{main.name}'s profile pic" src={main.img}>
