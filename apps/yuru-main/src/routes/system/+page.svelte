@@ -18,8 +18,6 @@
 
     let systemId = $state();
 
-    let isCombined = $state(false);
-
     let systemIdInput: HTMLInputElement;
     function changeSystem(keyPressed: string) {
         if (keyPressed === 'Enter') {
@@ -129,15 +127,17 @@
     <div id="system-input">
         <span>system id: </span>
         <input type="text" bind:this={systemIdInput} onkeydown={keyType => changeSystem(keyType.key)}/>
-        <br>
-        <select bind:value={isCombined}>
-            <option value={false}>separate rows</option>
-            <option value={true}>combined</option>
-        </select>
     </div>
 </div>
+<div id="info-box">
+    <h2>o/ welcome to our system page~!</h2>
+    <p>we made the historical graph below to give a much better visual picture of what things our like in our system - how long each of us usually front, who's considered our "main" alters, etc.</p>
+    <p>if you're part of a system that uses pluralkit, there's also an option to see this for your own system! input your system id in the box above and wait for it to load~ it may take a while if you have a lot of switches.. (,,&gt;﹏&lt;,,)</p>
+    <p>if you're confused about all of this system talk, then feel free to read up on anything you may be confused about <a href={getPageRoot('lilac')+"whoami"}>here</a>.</p>
+    <p>(˵ •̀ ᴗ - ˵ ) ✧</p>
+</div>
 {#await alterInfo}
-    <p>gathering front data...</p>
+    <h1 class="loading-text">ꕤ gathering front data...</h1>
 {:then frontData}
 <div id="front-history-container">
     <div id="front-history">
@@ -169,7 +169,7 @@
     </div>
 </div>
 {:catch}
-    <p>an error occured!</p>
+    <h1 class="loading-text">ꕤ an error occured! &gt;_&lt;;;</h1>
 {/await}
 
 <style>
@@ -189,7 +189,7 @@
         background-image: url("/bg.jpg");
         background-size: cover;
         background-position: center;
-        filter: blur(12.5px) brightness(0.9);
+        filter: blur(12.5px) brightness(0.8);
         z-index: -1;
     }
 
@@ -231,19 +231,33 @@
         border-radius: 5px;
     }  #system-input input:focus {
         outline: 2px solid var(--accent);
-    } #system-input select {
-        margin-top: 10px;
-        background: transparent;
+    }
+
+    #info-box {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 40px;
+    } #info-box h2 {
         color: white;
-        border: 2px solid var(--main);
-        border-radius: 5px;
+        font-size: 22px;
+    } #info-box p {
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .loading-text {
+        text-align: center;
     }
 
     #front-history-container {
         position: relative;
         margin-left: 10px;
         margin-right: 10px;
-        margin-top: 20px;
     }
 
     #front-history {
@@ -312,5 +326,21 @@
     .major-date {
         color: white;
         font-size: 18px;
+    }
+
+    @media only screen and (max-device-width: 768px) {
+        #system-input {
+            position: relative;
+            margin-left: auto;
+            width: auto;
+        } #system-input span {
+            margin-left: auto;
+        }
+
+        #front-history-container {
+            overflow-x: scroll;
+            overflow-y: visible;
+            width: 300%;
+        }
     }
 </style>
