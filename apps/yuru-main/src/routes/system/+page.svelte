@@ -139,6 +139,7 @@
 {#await alterInfo}
     <h1 class="loading-text">ꕤ gathering front data...</h1>
 {:then frontData}
+<div id="front-history-scroll">
 <div id="front-history-container">
     <div id="front-history">
         {#each frontData as alter}
@@ -167,6 +168,7 @@
         </div>
         {/each}
     </div>
+</div>
 </div>
 {:catch}
     <h1 class="loading-text">ꕤ an error occured! &gt;_&lt;;;</h1>
@@ -328,19 +330,33 @@
         font-size: 18px;
     }
 
-    @media only screen and (max-device-width: 768px) {
+    @media only screen and (max-device-width: 768px) { 
         #system-input {
             position: relative;
-            margin-left: auto;
-            width: auto;
+            bottom: auto;
+            left: auto;
+            text-align: right;
+            margin-bottom: 15px;
         } #system-input span {
             margin-left: auto;
         }
 
-        #front-history-container {
+        #info-box {
+            margin-left: 10px;
+            margin-right: 10px;
+        } #info-box h2 {
+            font-size: 22px;
+        } #info-box p {
+            font-size: 14px;
+        }
+
+        #front-history-scroll {
             overflow-x: scroll;
             overflow-y: visible;
-            width: 300%;
+        }
+
+        #front-history-container {
+            width: 350%;
         }
     }
 </style>
