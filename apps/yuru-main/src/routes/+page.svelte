@@ -149,8 +149,7 @@
         <a class="fa fa-github hidden-link" style="color: white; font-size: 23px;" href="https://github.com/sydnmc/yuru-web" aria-label="github link"></a>
         <Locale mode="home" person="yurukyan" page="home"/>
     </div>
-    <h1><a id="title" href={getPageRoot('yurukyan')}>yurukyan△</a></h1>
-    {#if main}
+    <h1><a id="title" href="/system">yurukyan△</a></h1>
     <a class="fronter" href={main.link}>
         <div class="fronter-img">
             <img alt="{main.name}'s profile pic" src={main.img}>
