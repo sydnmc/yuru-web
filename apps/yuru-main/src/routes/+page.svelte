@@ -274,7 +274,6 @@
         background-image: url("/bg.jpg");
         background-size: cover;
         background-position: center;
-        filter: blur(12.5px) brightness(0.9);
         z-index: -1;
     }
 
@@ -590,7 +589,8 @@
     }
 
     #shima-img {
-        background-image: url("/shima.png");
+        background-image: url("/shima.jpg");
+        background-size: cover;
         height: 230px;
         margin-top: 20px;
         border: 3px solid #79b8d4;

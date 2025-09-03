@@ -191,7 +191,6 @@
         background-image: url("/bg.jpg");
         background-size: cover;
         background-position: center;
-        filter: blur(12.5px) brightness(0.8);
         z-index: -1;
     }
 
