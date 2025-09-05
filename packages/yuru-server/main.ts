@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { grabSongInfo, modifySets, modifyDiffs, updateAllMaps } from './mapupdate';
+import { grabSongInfo, modifySets, modifyDiffs, updateAllMaps } from './mapupdate.js';
 
 dotenv.config();
 

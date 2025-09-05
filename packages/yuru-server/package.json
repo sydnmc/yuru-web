@@ -1,6 +1,6 @@
 {
   "name": "@repo/yuru-server",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "exports": {
     ".": {
@@ -8,7 +8,8 @@
     }
   },
   "scripts": {
-    "dev": "npx tsx main.ts"
+    "dev": "npx tsx main.ts",
+    "build": "tsc || true && cp lilacgds.json sets.json switches.json sydneygds.json .env dist/"
   },
   "dependencies": {
     "cors": "^2.8.5",
